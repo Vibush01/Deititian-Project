@@ -1,5 +1,10 @@
 // ===== CAREERS DATA =====
 
+export const careersHero = {
+  title: "Your search for the best workplace ends here.",
+  ctaText: "Explore Roles",
+}
+
 export const companyValues = [
   {
     number: "01",
@@ -18,7 +23,7 @@ export const companyValues = [
   },
   {
     number: "04",
-    title: "Act like owner",
+    title: "Act Like Owner",
     description: "Be self-driven and push yourself to new limits. We don't have an appetite for credit so own your action and get the center stage.",
   },
   {
@@ -28,18 +33,26 @@ export const companyValues = [
   },
   {
     number: "06",
-    title: "Flexible at work",
+    title: "Flexible at Work",
     description: "Be adaptable to a dynamic work environment and make your mark with epic work.",
   },
 ]
 
 export const jobPositions = [
-  "Dietitian / Nutritionist",
   "Sales Executive",
-  "HR Manager",
+  "Clinical Dietitian / Nutritionist",
+  "Human Resources (HR)",
+  "IT / Technical Support (Please specify)",
+  "Graphic Designer",
   "Marketing Executive",
   "Content Writer",
-  "Graphic Designer",
   "Operations Manager",
   "Other",
+]
+
+export const teamImages = [
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=350&fit=crop",
+  "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=350&fit=crop",
+  "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=350&fit=crop",
+  "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=350&h=300&fit=crop",
 ]

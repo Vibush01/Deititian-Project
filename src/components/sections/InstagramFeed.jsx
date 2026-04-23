@@ -15,7 +15,7 @@ const instagramImages = [
   'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=300&fit=crop',
   'https://images.unsplash.com/photo-1547592180-85f173990554?w=300&h=300&fit=crop',
   'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=300&h=300&fit=crop',
-  'https://images.unsplash.com/photo-1505576399279-0d309cb28838?w=300&h=300&fit=crop',
+  'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=300&h=300&fit=crop',
   'https://images.unsplash.com/photo-1494390248081-4e521a5940db?w=300&h=300&fit=crop',
 ]
 
