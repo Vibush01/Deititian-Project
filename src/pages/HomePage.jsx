@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { FaArrowRight } from 'react-icons/fa'
 import SectionHeading from '../components/ui/SectionHeading'
 import Button from '../components/ui/Button'
-import HeroSection from '../components/sections/HeroSection'
+import HomeHero from '../components/sections/HomeHero'
 import StatsCounter from '../components/sections/StatsCounter'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
 import InstagramFeed from '../components/sections/InstagramFeed'
@@ -14,26 +14,6 @@ import { homeExpertiseCards } from '../data/servicesData'
 /* =========================================================
    Home-Page-Only Sections
    ========================================================= */
-
-/* --- Quick-link pills (PCOD | Thyroid | Diabetes | Explore) --- */
-const QuickLinks = () => (
-  <div className="flex flex-wrap justify-center gap-3 mt-8">
-    {[
-      { label: 'PCOD', to: '/service/pcod-pcos' },
-      { label: 'Thyroid', to: '/service/thyroid' },
-      { label: 'Diabetes', to: '/service/diabetes' },
-      { label: 'Explore All', to: '/service/disease-management' },
-    ].map((link) => (
-      <Link
-        key={link.label}
-        to={link.to}
-        className="px-5 py-2 rounded-full border-2 border-primary text-primary text-sm font-semibold hover:bg-primary hover:text-white transition-all duration-300"
-      >
-        {link.label}
-      </Link>
-    ))}
-  </div>
-)
 
 /* --- Expertise / "Our Diet Clinic Chain" grid --- */
 const ExpertiseSection = () => (
@@ -160,21 +140,8 @@ const MediaSpotlight = () => (
 const HomePage = () => {
   return (
     <div>
-      {/* 1. Hero Section */}
-      <HeroSection
-        title={
-          <>
-            India&apos;s <span className="text-primary">#1</span> Medical Diet Clinic Chain
-          </>
-        }
-        subtitle="Evidence before trends. Beyond calorie counting. Personalized diet plans for PCOD, thyroid, diabetes & sustainable weight loss."
-        ctaText="Book a session"
-        ctaLink="/contact-us"
-        image="https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=600&h=700&fit=crop"
-        bgColor="bg-primary-lighter"
-      >
-        <QuickLinks />
-      </HeroSection>
+      {/* 1. Hero Section — Full-width carousel style matching original */}
+      <HomeHero />
 
       {/* 2. Stats Counter */}
       <StatsCounter />
