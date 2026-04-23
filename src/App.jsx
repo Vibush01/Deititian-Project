@@ -1,7 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
 import ScrollToTop from './components/common/ScrollToTop'
+import Navbar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
 
-// Page imports (placeholder components for now, will be built in later phases)
+// Page imports
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import ServicePage from './pages/ServicePage'
@@ -20,22 +22,29 @@ function App() {
   return (
     <>
       <ScrollToTop />
-      <Routes>
-        {/* Main Pages */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about-us" element={<AboutPage />} />
-        <Route path="/service" element={<ServicePage />} />
-        <Route path="/careers" element={<CareersPage />} />
-        <Route path="/contact-us" element={<ContactPage />} />
+      <Navbar />
 
-        {/* Service Sub-Pages */}
-        <Route path="/service/weight-management" element={<WeightManagementPage />} />
-        <Route path="/service/disease-management" element={<DiseaseManagementPage />} />
-        <Route path="/service/pcod-pcos" element={<PcodPcosPage />} />
-        <Route path="/service/thyroid" element={<ThyroidPage />} />
-        <Route path="/service/diabetes" element={<DiabetesPage />} />
-        <Route path="/service/lifestyle-management" element={<LifestyleManagementPage />} />
-      </Routes>
+      {/* Main content with top padding to account for fixed navbar */}
+      <main className="pt-16 md:pt-20">
+        <Routes>
+          {/* Main Pages */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about-us" element={<AboutPage />} />
+          <Route path="/service" element={<ServicePage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/contact-us" element={<ContactPage />} />
+
+          {/* Service Sub-Pages */}
+          <Route path="/service/weight-management" element={<WeightManagementPage />} />
+          <Route path="/service/disease-management" element={<DiseaseManagementPage />} />
+          <Route path="/service/pcod-pcos" element={<PcodPcosPage />} />
+          <Route path="/service/thyroid" element={<ThyroidPage />} />
+          <Route path="/service/diabetes" element={<DiabetesPage />} />
+          <Route path="/service/lifestyle-management" element={<LifestyleManagementPage />} />
+        </Routes>
+      </main>
+
+      <Footer />
     </>
   )
 }
