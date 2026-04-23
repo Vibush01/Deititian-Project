@@ -7,16 +7,9 @@ import Footer from './components/layout/Footer'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import ServicePage from './pages/ServicePage'
+import ServiceSubPage from './pages/ServiceSubPage'
 import CareersPage from './pages/CareersPage'
 import ContactPage from './pages/ContactPage'
-
-// Service sub-page imports
-import WeightManagementPage from './pages/services/WeightManagementPage'
-import DiseaseManagementPage from './pages/services/DiseaseManagementPage'
-import PcodPcosPage from './pages/services/PcodPcosPage'
-import ThyroidPage from './pages/services/ThyroidPage'
-import DiabetesPage from './pages/services/DiabetesPage'
-import LifestyleManagementPage from './pages/services/LifestyleManagementPage'
 
 function App() {
   return (
@@ -34,13 +27,8 @@ function App() {
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact-us" element={<ContactPage />} />
 
-          {/* Service Sub-Pages */}
-          <Route path="/service/weight-management" element={<WeightManagementPage />} />
-          <Route path="/service/disease-management" element={<DiseaseManagementPage />} />
-          <Route path="/service/pcod-pcos" element={<PcodPcosPage />} />
-          <Route path="/service/thyroid" element={<ThyroidPage />} />
-          <Route path="/service/diabetes" element={<DiabetesPage />} />
-          <Route path="/service/lifestyle-management" element={<LifestyleManagementPage />} />
+          {/* Service Sub-Pages — single dynamic route */}
+          <Route path="/service/:slug" element={<ServiceSubPage />} />
         </Routes>
       </main>
 

@@ -33,7 +33,7 @@ export const coreServices = [
     number: 1,
     title: "Clinical Disease Management & Reversal",
     description: "Specialized, award-winning protocols for chronic conditions including Type 1 & Type 2 Diabetes, PCOD/PCOS, Thyroid disorders, Cardiac health, Nephrology (CKD), Cancer nutrition, and Liver disorders.",
-    image: "https://images.unsplash.com/photo-1505576399279-0d309cb28838?w=500&h=350&fit=crop",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=350&fit=crop",
   },
   {
     number: 2,
@@ -51,7 +51,7 @@ export const coreServices = [
     number: 4,
     title: "Dietitian Shreya Academy",
     description: "NSDC-aligned training center for aspiring health professionals to become certified clinical dietitians with 20 years of curriculum expertise.",
-    image: "https://images.unsplash.com/photo-1523050854058-8df90110c476?w=500&h=350&fit=crop",
+    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=500&h=350&fit=crop",
   },
 ]
 
