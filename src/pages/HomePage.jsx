@@ -15,6 +15,75 @@ import { homeExpertiseCards } from '../data/servicesData'
    Home-Page-Only Sections
    ========================================================= */
 
+/* --- Quick-link icon cards (PCOD | Thyroid | Diabetes | Explore) --- */
+const quickLinks = [
+  {
+    label: 'PCOD',
+    to: '/service/pcod-pcos',
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" className="w-14 h-14 mx-auto">
+        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <path d="M32 18c-4 0-7 3-7 7s3 7 7 7 7-3 7-7-3-7-7-7zm-10 14c-3 0-5.5 2.5-5.5 5.5S19 43 22 43s5.5-2.5 5.5-5.5S25 32 22 32zm20 0c-3 0-5.5 2.5-5.5 5.5S39 43 42 43s5.5-2.5 5.5-5.5S45 32 42 32z" fill="#E91E63"/>
+      </svg>
+    ),
+  },
+  {
+    label: 'Thyroid',
+    to: '/service/thyroid',
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" className="w-14 h-14 mx-auto">
+        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <path d="M32 16c-2 0-3 1-3 3v6c-4 1-7 5-7 9 0 6 4 10 10 14 6-4 10-8 10-14 0-4-3-8-7-9v-6c0-2-1-3-3-3z" fill="#E91E63"/>
+      </svg>
+    ),
+  },
+  {
+    label: 'Diabetes',
+    to: '/service/diabetes',
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" className="w-14 h-14 mx-auto">
+        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <path d="M32 14l-2 4h-6l2 6-4 4 6 2v6h4v-6l6-2-4-4 2-6h-6l2-4z" fill="#E91E63"/>
+        <circle cx="32" cy="36" r="5" fill="#C2185B" opacity="0.6"/>
+      </svg>
+    ),
+  },
+  {
+    label: 'Explore All',
+    to: '/service',
+    icon: (
+      <svg viewBox="0 0 64 64" fill="none" className="w-14 h-14 mx-auto">
+        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <path d="M24 22h16v4H24zM22 30h20v4H22zM26 38h12v4H26z" fill="#E91E63"/>
+        <path d="M38 42l6 6" stroke="#E91E63" strokeWidth="2.5" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+]
+
+const QuickLinkCards = () => (
+  <section className="py-8 md:py-10 bg-white">
+    <div className="container-custom">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        {quickLinks.map((link) => (
+          <Link
+            key={link.label}
+            to={link.to}
+            className="group flex flex-col items-center p-6 md:p-8 bg-white rounded-2xl border border-gray-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300"
+          >
+            <div className="mb-3 group-hover:scale-110 transition-transform duration-300">
+              {link.icon}
+            </div>
+            <span className="text-sm md:text-base font-bold text-primary">
+              {link.label}
+            </span>
+          </Link>
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
 /* --- Expertise / "Our Diet Clinic Chain" grid --- */
 const ExpertiseSection = () => (
   <section className="section-padding bg-gray-light">
@@ -146,7 +215,10 @@ const HomePage = () => {
       {/* 2. Stats Counter */}
       <StatsCounter />
 
-      {/* 3. Expertise / Diet Clinic Chain */}
+      {/* 3. Quick-link icon cards (PCOD, Thyroid, Diabetes, Explore) */}
+      <QuickLinkCards />
+
+      {/* 4. Expertise / Diet Clinic Chain */}
       <ExpertiseSection />
 
       {/* 4. Client Spotlight */}
