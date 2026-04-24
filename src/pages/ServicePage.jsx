@@ -113,47 +113,50 @@ const ServiceCategoryCards = () => (
    Detailed Category Sections
    ========================================================= */
 const CategoryDetailSections = () => (
-  <section className="section-padding bg-gray-light">
-    <div className="container-custom space-y-16">
-      {serviceCategories.map((category, i) => (
+  <section className="section-padding" style={{ background: 'linear-gradient(180deg, #eef2f7 0%, #f0f4f8 100%)' }}>
+    <div className="container-custom space-y-12">
+      {serviceCategories.map((category) => (
         <div
           key={category.id}
-          className={`flex flex-col ${
-            i % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'
-          } items-center gap-8 lg:gap-12 bg-white rounded-3xl p-6 md:p-10 shadow-[var(--shadow-card)]`}
+          className="bg-white rounded-2xl border border-gray-border overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
         >
-          {/* Image */}
-          <div className="flex-1">
-            <img
-              src={category.image}
-              alt={category.title}
-              className="w-full rounded-2xl shadow-md object-cover max-h-72 lg:max-h-80"
-            />
-          </div>
-
-          {/* Text */}
-          <div className="flex-1">
-            <h3 className="text-xl md:text-2xl font-bold text-primary mb-3">
-              {category.heroTitle}
-            </h3>
-            <p className="text-base text-gray-text leading-relaxed mb-4">
-              {category.heroDescription}
-            </p>
-            {/* Sub-services list */}
-            <div className="space-y-2 mb-5">
-              {category.services.map((service) => (
-                <div key={service.id} className="flex items-start gap-2">
-                  <span className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                  <div>
-                    <span className="font-semibold text-dark text-sm">{service.title}</span>
-                    <span className="text-gray-text text-sm"> — {service.description}</span>
-                  </div>
-                </div>
-              ))}
+          <div className="flex flex-col lg:flex-row">
+            {/* Image — left side */}
+            <div className="lg:w-[45%] flex-shrink-0">
+              <img
+                src={category.image}
+                alt={category.title}
+                className="w-full h-64 lg:h-full object-cover"
+              />
             </div>
-            <Button to={category.path} size="sm">
-              Explore {category.title}
-            </Button>
+
+            {/* Text — right side */}
+            <div className="p-6 md:p-8 lg:p-10 flex-1 flex flex-col justify-center">
+              <h3 className="text-xl md:text-2xl lg:text-[1.6rem] font-bold text-primary italic leading-snug mb-4">
+                {category.heroTitle}
+              </h3>
+              <p className="text-sm md:text-base text-gray-text leading-relaxed text-justify mb-6">
+                {category.heroDescription}
+              </p>
+
+              {/* Sub-services as compact tags */}
+              <div className="flex flex-wrap gap-2 mb-5">
+                {category.services.slice(0, 6).map((service) => (
+                  <span
+                    key={service.id}
+                    className="inline-block bg-primary-lighter text-primary text-xs font-semibold px-3 py-1.5 rounded-full"
+                  >
+                    {service.title}
+                  </span>
+                ))}
+              </div>
+
+              <div>
+                <Button to={category.path} size="sm">
+                  Explore {category.title} <FaArrowRight className="inline ml-1 text-xs" />
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       ))}

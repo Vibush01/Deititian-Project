@@ -162,14 +162,6 @@ const MediaSpotlight = () => (
       <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-dark-soft leading-snug max-w-4xl mx-auto -mt-4">
         Featured in Hindustan Times, Chandigarh Tribune &amp; Yugmarg for outstanding contributions to clinical nutrition and wellness education.
       </h3>
-      <p className="mt-4 text-gray-text text-base max-w-2xl mx-auto">
-        Want to join them? Reach out to our diet expert now to chart the best weight loss journey to your fitness goals!
-      </p>
-      <div className="mt-6">
-        <Button to="/contact-us" size="md">
-          Join now
-        </Button>
-      </div>
     </div>
   </section>
 )
