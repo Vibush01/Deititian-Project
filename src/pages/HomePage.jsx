@@ -86,7 +86,7 @@ const QuickLinkCards = () => (
 
 /* --- Expertise / "Our Diet Clinic Chain" grid --- */
 const ExpertiseSection = () => (
-  <section className="section-padding bg-gray-light">
+  <section className="section-padding" style={{ background: 'linear-gradient(180deg, #eef2f7 0%, #f0f4f8 100%)' }}>
     <div className="container-custom">
       <SectionHeading
         label="Our Diet Clinic Chain"
@@ -94,23 +94,27 @@ const ExpertiseSection = () => (
         subtitle="Our medical diet clinic in India specializes in medical nutrition science that heals from the root. We focus on personalized diet plans using real Indian food and millet based diets, never shortcuts."
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 mt-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-14 mt-12">
         {homeExpertiseCards.map((card, i) => (
-          <div
-            key={i}
-            className="group bg-white rounded-2xl overflow-hidden shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300"
-          >
-            <div className="overflow-hidden h-56 md:h-64">
+          <div key={i} className="group">
+            {/* Image — tall, rounded corners */}
+            <div className="overflow-hidden rounded-xl mb-5">
               <img
                 src={card.image}
                 alt={card.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="w-full h-64 md:h-72 lg:h-80 object-cover group-hover:scale-105 transition-transform duration-500"
               />
             </div>
-            <div className="p-5 md:p-6">
-              <h3 className="text-lg md:text-xl font-bold text-primary mb-2">{card.title}</h3>
-              <p className="text-sm text-gray-text leading-relaxed">{card.description}</p>
-            </div>
+
+            {/* Title — centered, large, pink, bold */}
+            <h3 className="text-xl md:text-2xl lg:text-[1.65rem] font-bold text-primary text-center leading-snug mb-3">
+              {card.title}
+            </h3>
+
+            {/* Description — justified text */}
+            <p className="text-sm md:text-base text-gray-text leading-relaxed text-justify">
+              {card.description}
+            </p>
           </div>
         ))}
       </div>
@@ -120,60 +124,27 @@ const ExpertiseSection = () => (
 
 /* --- Client Spotlight / Success Stories --- */
 const ClientSpotlight = () => {
-  const transformations = [
-    { name: 'Rahul', lost: '14.3 KG', duration: '2 Months', imgBefore: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=200&h=200&fit=crop', imgAfter: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=200&fit=crop' },
-    { name: 'Gurpreet', lost: '55 KG', duration: '5 Months', imgBefore: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop', imgAfter: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop' },
-    { name: 'Priya', lost: '37 KG', duration: '7 Months', imgBefore: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop', imgAfter: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop' },
-  ]
-
   return (
     <section className="section-padding bg-white">
       <div className="container-custom">
-        <SectionHeading
-          label="Client Spotlight"
-          title="Our Weight Loss Success Stories"
-          subtitle="Real people. Real transformations. Every personalized diet plan we design at our medical diet clinic in India is rooted in everyday Indian food and medical nutrition science."
-        />
+        {/* Split heading: title left, description right */}
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-16">
+          {/* Left: label + heading */}
+          <div className="lg:max-w-md flex-shrink-0">
+            <span className="section-label">Client Spotlight</span>
+            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold text-dark leading-tight mt-2">
+              Our Weight Loss
+              <br />
+              Success Stories
+            </h2>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
-          {transformations.map((t, i) => (
-            <div
-              key={i}
-              className="relative bg-gradient-to-b from-primary/5 to-primary/10 rounded-2xl p-6 text-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
-            >
-              {/* Before & After images */}
-              <div className="flex justify-center gap-3 mb-4">
-                <div className="relative">
-                  <img
-                    src={t.imgBefore}
-                    alt={`${t.name} before`}
-                    className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-3 border-white shadow-md"
-                  />
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-gray-text text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                    Before
-                  </span>
-                </div>
-                <div className="relative">
-                  <img
-                    src={t.imgAfter}
-                    alt={`${t.name} after`}
-                    className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-3 border-primary shadow-md"
-                  />
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
-                    After
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-text italic mb-2">{t.name}</p>
-              <p className="text-2xl md:text-3xl font-extrabold text-primary leading-tight">
-                Lost {t.lost}
-              </p>
-              <p className="text-sm font-semibold text-dark mt-1">
-                in <span className="text-primary">{t.duration}</span>
-              </p>
-            </div>
-          ))}
+          {/* Right: description text */}
+          <div className="lg:max-w-lg lg:pt-8">
+            <p className="text-base md:text-lg text-gray-text leading-relaxed text-justify">
+              Real people. Real transformations. Every personalized diet plan we design at our medical diet clinic in India is rooted in everyday Indian food and medical nutrition science. Whether you need a PCOD diet plan, diabetes management, or a millet based diet plan, our mindful coaching ensures your results don&apos;t just come—they stay.
+            </p>
+          </div>
         </div>
       </div>
     </section>
