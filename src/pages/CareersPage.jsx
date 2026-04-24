@@ -17,7 +17,7 @@ const CareersHero = () => (
       <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
         {/* Text */}
         <div className="flex-1 text-center lg:text-left">
-          <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold text-primary leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold text-dark leading-tight">
             {careersHero.title}
           </h1>
           <div className="mt-8">
@@ -27,25 +27,37 @@ const CareersHero = () => (
           </div>
         </div>
 
-        {/* Team photo collage */}
-        <div className="flex-1">
+        {/* Staggered team photo collage */}
+        <div className="flex-1 lg:flex-[1.3]">
           <div className="grid grid-cols-2 gap-3 md:gap-4">
-            {teamImages.map((img, i) => (
-              <div
-                key={i}
-                className={`rounded-2xl overflow-hidden shadow-lg ${
-                  i === 0 ? 'row-span-1' : ''
-                } ${i === 1 ? 'translate-y-4' : ''} ${
-                  i === 2 ? '-translate-y-2' : ''
-                } ${i === 3 ? 'translate-y-2' : ''}`}
-              >
-                <img
-                  src={img}
-                  alt={`Team photo ${i + 1}`}
-                  className="w-full h-40 md:h-48 object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-            ))}
+            <div className="rounded-2xl overflow-hidden shadow-lg">
+              <img
+                src={teamImages[0]}
+                alt="Team photo 1"
+                className="w-full h-44 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-lg translate-y-6">
+              <img
+                src={teamImages[1]}
+                alt="Team photo 2"
+                className="w-full h-44 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-lg -translate-y-4">
+              <img
+                src={teamImages[2]}
+                alt="Team photo 3"
+                className="w-full h-44 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-lg translate-y-3">
+              <img
+                src={teamImages[3]}
+                alt="Team photo 4"
+                className="w-full h-44 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
           </div>
         </div>
       </div>

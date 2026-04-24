@@ -4,7 +4,7 @@ import { siteInfo, socialLinks, footerLinks } from '../../data/siteData'
 
 const Footer = () => {
   return (
-    <footer className="bg-dark text-white">
+    <footer style={{ background: 'linear-gradient(180deg, #fce4ec 0%, #fff0f5 50%, #fce4ec 100%)' }}>
       {/* Main Footer Content */}
       <div className="container-custom py-12 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
@@ -16,13 +16,13 @@ const Footer = () => {
                 <span className="text-xl font-extrabold text-primary leading-tight">
                   Dietitian Shreya&apos;s<sup className="text-xs">®</sup>
                 </span>
-                <span className="text-sm font-semibold text-white/80 leading-tight">
+                <span className="text-sm font-semibold text-dark-soft leading-tight">
                   Family <span className="text-primary">Diet</span> Clinic
                 </span>
               </div>
             </Link>
 
-            <p className="text-sm text-white/60 leading-relaxed mb-6 max-w-xs">
+            <p className="text-sm text-gray-text leading-relaxed mb-6 max-w-xs">
               {siteInfo.tagline}
             </p>
 
@@ -32,7 +32,7 @@ const Footer = () => {
                 href={socialLinks.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors duration-300"
+                className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-colors duration-300"
                 aria-label="Facebook"
               >
                 <FaFacebookF className="text-sm" />
@@ -41,7 +41,7 @@ const Footer = () => {
                 href={socialLinks.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors duration-300"
+                className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-colors duration-300"
                 aria-label="YouTube"
               >
                 <FaYoutube className="text-sm" />
@@ -50,7 +50,7 @@ const Footer = () => {
                 href={socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors duration-300"
+                className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <FaInstagram className="text-sm" />
@@ -60,16 +60,16 @@ const Footer = () => {
 
           {/* Column 2: Company */}
           <div>
-            <h3 className="text-base font-bold mb-4 text-white">Company</h3>
+            <h3 className="text-base font-bold mb-4 text-dark">Company</h3>
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
                   {link.path.startsWith('#') ? (
-                    <span className="text-sm text-white/50 cursor-default">{link.label}</span>
+                    <span className="text-sm text-gray-text cursor-default">{link.label}</span>
                   ) : (
                     <Link
                       to={link.path}
-                      className="text-sm text-white/60 hover:text-primary transition-colors duration-200"
+                      className="text-sm text-gray-text hover:text-primary transition-colors duration-200"
                     >
                       {link.label}
                     </Link>
@@ -81,13 +81,13 @@ const Footer = () => {
 
           {/* Column 3: Wellness Programs */}
           <div>
-            <h3 className="text-base font-bold mb-4 text-white">Wellness Programs</h3>
+            <h3 className="text-base font-bold mb-4 text-dark">Wellness Programs</h3>
             <ul className="space-y-2.5">
               {footerLinks.wellnessPrograms.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.path}
-                    className="text-sm text-white/60 hover:text-primary transition-colors duration-200"
+                    className="text-sm text-gray-text hover:text-primary transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -98,16 +98,16 @@ const Footer = () => {
 
           {/* Column 4: Explore */}
           <div>
-            <h3 className="text-base font-bold mb-4 text-white">Explore</h3>
+            <h3 className="text-base font-bold mb-4 text-dark">Explore</h3>
             <ul className="space-y-2.5">
               {footerLinks.explore.map((link) => (
                 <li key={link.label}>
                   {link.path.startsWith('#') ? (
-                    <span className="text-sm text-white/50 cursor-default">{link.label}</span>
+                    <span className="text-sm text-gray-text cursor-default">{link.label}</span>
                   ) : (
                     <Link
                       to={link.path}
-                      className="text-sm text-white/60 hover:text-primary transition-colors duration-200"
+                      className="text-sm text-gray-text hover:text-primary transition-colors duration-200"
                     >
                       {link.label}
                     </Link>
@@ -120,9 +120,9 @@ const Footer = () => {
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-white/10">
+      <div className="border-t border-primary/10">
         <div className="container-custom py-5 text-center">
-          <p className="text-xs text-white/40">
+          <p className="text-xs text-gray-text">
             {siteInfo.copyright}
           </p>
         </div>
