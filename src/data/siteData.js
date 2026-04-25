@@ -18,7 +18,7 @@ export const socialLinks = {
 
 export const navLinks = [
   { label: "Home", path: "/" },
-  { label: "About-Us", path: "/about-us" },
+  { label: "About", path: "/about-us" },
   {
     label: "Service",
     path: "/service",
@@ -28,14 +28,14 @@ export const navLinks = [
         label: "Disease Management",
         path: "/service/disease-management",
         subItems: [
-          { label: "PCOD / PCOS", path: "/service/pcod-pcos" },
+          { label: "Pcod Pcos", path: "/service/pcod-pcos" },
         ],
       },
       { label: "Lifestyle Management", path: "/service/lifestyle-management" },
     ],
   },
-  { label: "Careers", path: "/careers" },
-  { label: "Contact-Us", path: "/contact-us" },
+  { label: "Review", path: "#review" },
+  { label: "Contact Us", path: "/contact-us" },
 ]
 
 export const footerLinks = {
