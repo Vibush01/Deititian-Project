@@ -151,7 +151,7 @@ const Navbar = () => {
 
         {/* Desktop CTA + Mobile Toggle */}
         <div className="flex items-center gap-3">
-          <Button to="/contact-us" size="sm" className="hidden lg:inline-flex">
+          <Button to="/contact-us" size="sm" className="hidden lg:inline-flex animate-pulse-glow">
             Book a session
           </Button>
 
@@ -227,7 +227,7 @@ const Navbar = () => {
 
             {/* Mobile CTA */}
             <div className="mt-4 pt-4 border-t border-gray-border">
-              <Button to="/contact-us" className="w-full">
+              <Button to="/contact-us" className="w-full animate-pulse-glow">
                 Book a session
               </Button>
             </div>

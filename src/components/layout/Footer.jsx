@@ -4,7 +4,7 @@ import { siteInfo, socialLinks, footerLinks } from '../../data/siteData'
 
 const Footer = () => {
   return (
-    <footer style={{ background: 'linear-gradient(180deg, #fce4ec 0%, #fff0f5 50%, #fce4ec 100%)' }}>
+    <footer className="bg-primary-lighter">
       {/* Main Footer Content */}
       <div className="container-custom py-12 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
