@@ -17,8 +17,8 @@ function App() {
       <ScrollToTop />
       <Navbar />
 
-      {/* Main content with top padding to account for fixed navbar */}
-      <main className="pt-16 md:pt-20">
+      {/* Main content */}
+      <main>
         <Routes>
           {/* Main Pages */}
           <Route path="/" element={<HomePage />} />

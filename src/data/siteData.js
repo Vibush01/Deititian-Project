@@ -17,25 +17,50 @@ export const socialLinks = {
 }
 
 export const navLinks = [
-  { label: "Home", path: "/" },
-  { label: "About", path: "/about-us" },
+  { label: "HOME", path: "/" },
+  { label: "ABOUT-US", path: "/about-us" },
   {
-    label: "Service",
+    label: "SERVICE",
     path: "/service",
-    dropdown: [
-      { label: "Weight Management", path: "/service/weight-management" },
-      {
-        label: "Disease Management",
-        path: "/service/disease-management",
-        subItems: [
-          { label: "Pcod Pcos", path: "/service/pcod-pcos" },
+    megaMenu: {
+      column1: {
+        title: "Disease Management",
+        items: [
+          { label: "PCOD / PCOS", path: "/service/pcod-pcos", desc: "Our personalized nutrition and lifestyle programs help balance hormones, manage weight, and improve overall well-being." },
+          { label: "Thyroid", path: "/service/thyroid", desc: "Manage thyroid effectively with personalized nutrition and lifestyle plans to boost metabolism, balance hormones and enhance energy." },
+          { label: "Diabetes", path: "/service/diabetes", desc: "Our expert-guided approach helps control blood sugar, maintain insulin balance, healthy weight and improve overall energy." },
         ],
+        action: { label: "Plan Overview", path: "/service" }
       },
-      { label: "Lifestyle Management", path: "/service/lifestyle-management" },
-    ],
+      column2: [
+        {
+          title: "Weight Management",
+          items: [
+            { label: "Weight Loss", path: "/service/weight-management", desc: "Achieve sustainable weight loss with our experts who help boost metabolism, burn fat, maintain energy, and improve overall health for long-term results." },
+            { label: "Weight Gain", path: "/service/weight-management", desc: "Our expert-guided approach focuses on muscle building, balanced diet, and sustainable habits to help you gain strength and energy." }
+          ]
+        },
+        {
+          title: "Lifestyle Management",
+          items: [
+            { label: "Healthy Lifestyle", path: "/service/lifestyle-management", desc: "Adopt a healthy lifestyle with personalized nutrition to boost energy, immunity, fitness, and overall well-being for a balanced, sustainable life." }
+          ]
+        }
+      ],
+      column3: {
+        title: "Success Stories",
+        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&h=400&fit=crop", // placeholder
+        buttons: [
+          { label: "Weight Lose Success", path: "#", type: "pink" },
+          { label: "Story Success", path: "#", type: "green" }
+        ],
+        storyTitle: "Weight Loss Success Story",
+        storyDesc: "Discover how our personalized nutrition plans helped achieve remarkable transformation results and improved overall health..."
+      }
+    }
   },
-  { label: "Review", path: "#review" },
-  { label: "Contact Us", path: "/contact-us" },
+  { label: "CAREERS", path: "/careers" },
+  { label: "CONTACT-US", path: "/contact-us" },
 ]
 
 export const footerLinks = {

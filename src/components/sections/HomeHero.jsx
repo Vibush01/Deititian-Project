@@ -34,7 +34,7 @@ const banners = [
 
 const HomeHero = () => {
   return (
-    <section className="w-full relative mt-[80px] md:mt-[96px] z-0">
+    <section className="w-full relative z-0">
       <Swiper
         modules={[Navigation, Autoplay]}
         navigation={true}
