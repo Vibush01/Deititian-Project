@@ -80,13 +80,13 @@ const Navbar = () => {
 
         {/* Center Column (Navigation) */}
         <div className="hidden lg:flex flex-1 justify-center items-center">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-10">
             {navLinks.map((link) => (
               <div key={link.label} className="relative">
                 {link.megaMenu ? (
                   /* Dropdown trigger */
                   <button
-                    className={`flex items-center gap-1 py-6 text-[15px] font-bold rounded transition-colors duration-200 cursor-pointer ${
+                    className={`flex items-center gap-1 py-6 text-[17px] font-bold rounded transition-colors duration-200 cursor-pointer ${
                       isActiveLink(link.path)
                         ? 'text-[#D61F69]'
                         : 'text-gray-700 hover:text-[#D61F69]'
@@ -101,7 +101,7 @@ const Navbar = () => {
                   link.path.startsWith('#') ? (
                     <a
                       href={link.path}
-                      className="py-6 text-[15px] font-bold text-gray-700 hover:text-[#D61F69] rounded transition-colors duration-200 block"
+                      className="py-6 text-[17px] text-gray-700 hover:text-[#D61F69] rounded transition-colors duration-200 block"
                     >
                       {link.label}
                     </a>
@@ -109,7 +109,7 @@ const Navbar = () => {
                     <NavLink
                       to={link.path}
                       className={({ isActive }) =>
-                        `py-6 text-[15px] font-bold rounded transition-colors duration-200 block ${
+                        `py-6 text-[17px] font-bold rounded transition-colors duration-200 block ${
                           isActive ? 'text-[#D61F69]' : 'text-gray-700 hover:text-[#D61F69]'
                         }`
                       }
