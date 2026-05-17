@@ -212,8 +212,9 @@ const Navbar = () => {
           <Link 
             to="/contact-us" 
             className="hidden lg:flex items-center gap-2 bg-primary text-white border-2 border-primary px-5 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-primary-dark hover:border-primary-dark transition-all duration-300 shadow-[0_4px_14px_rgba(46,125,50,0.39)] whitespace-nowrap"
+            style={{ color: '#fff' }}
           >
-            <FaCalendarWeek className="text-base text-white" />
+            <FaCalendarWeek className="text-base" />
             Book a session
           </Link>
 

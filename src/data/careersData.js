@@ -51,8 +51,8 @@ export const jobPositions = [
 ]
 
 export const teamImages = [
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=350&fit=crop",
-  "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400&h=350&fit=crop",
-  "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&h=350&fit=crop",
-  "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=350&h=300&fit=crop",
+  new URL('../assets/images/fitjeeva-clinical.jpg', import.meta.url).href,
+  new URL('../assets/images/fitjeeva-banner.jpg', import.meta.url).href,
+  new URL('../assets/images/fitjeeva-dietitian.jpg', import.meta.url).href,
+  new URL('../assets/images/fitjeeva-millet.jpg', import.meta.url).href,
 ]

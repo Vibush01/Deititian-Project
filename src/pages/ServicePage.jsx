@@ -114,7 +114,7 @@ const ServiceCategoryCards = () => (
    Detailed Category Sections
    ========================================================= */
 const CategoryDetailSections = () => (
-  <section className="section-padding" style={{ background: 'linear-gradient(180deg, #eef2f7 0%, #f0f4f8 100%)' }}>
+  <section className="section-padding" style={{ background: 'linear-gradient(180deg, #f1f8e9 0%, #f5faf5 100%)' }}>
     <div className="container-custom space-y-12">
       {serviceCategories.map((category) => (
         <div
