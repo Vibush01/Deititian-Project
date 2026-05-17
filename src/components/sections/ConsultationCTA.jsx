@@ -1,4 +1,6 @@
 import Button from '../ui/Button'
+import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
+import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.jpg'
 
 /**
  * Pink gradient CTA banner — "Book a Diet Consultation for Life-Changing Results"
@@ -16,7 +18,7 @@ const ConsultationCTA = ({ className = '' }) => {
             <div className="flex gap-4 flex-shrink-0">
               <div className="relative">
                 <img
-                  src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=200&h=280&fit=crop"
+                  src={fitjeevaDietitian}
                   alt="Before transformation"
                   className="w-36 md:w-44 h-48 md:h-60 object-cover rounded-2xl shadow-lg"
                 />
@@ -26,7 +28,7 @@ const ConsultationCTA = ({ className = '' }) => {
               </div>
               <div className="relative mt-6">
                 <img
-                  src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=200&h=280&fit=crop"
+                  src={fitjeevaClinical}
                   alt="After transformation"
                   className="w-36 md:w-44 h-48 md:h-60 object-cover rounded-2xl shadow-lg"
                 />

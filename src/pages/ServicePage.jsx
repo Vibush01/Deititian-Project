@@ -9,6 +9,7 @@ import ContactCTA from '../components/sections/ContactCTA'
 import ConsultationForm from '../components/sections/ConsultationForm'
 import { serviceCategories } from '../data/servicesData'
 import { siteInfo } from '../data/siteData'
+import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
 
 /* Category icons lookup */
 const categoryIcons = {
@@ -48,7 +49,7 @@ const ServiceHero = () => (
           <div className="relative">
             <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full bg-primary overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=500&h=500&fit=crop"
+                src={fitjeevaDietitian}
                 alt="Expert Clinical Diet Plans"
                 className="w-full h-full object-cover"
               />

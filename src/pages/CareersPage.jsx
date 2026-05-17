@@ -7,6 +7,8 @@ import ConsultationCTA from '../components/sections/ConsultationCTA'
 import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
 import { careersHero, companyValues, jobPositions, teamImages } from '../data/careersData'
+import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
+import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
 
 /* =========================================================
    Careers Hero — Team collage + headline
@@ -74,14 +76,14 @@ const AwardsSection = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         <div className="rounded-2xl overflow-hidden shadow-[var(--shadow-card)] border border-gray-border">
           <img
-            src="https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?w=600&h=400&fit=crop"
+            src={fitjeevaClinical}
             alt="Award recognition"
             className="w-full h-56 md:h-72 object-cover"
           />
         </div>
         <div className="rounded-2xl overflow-hidden shadow-[var(--shadow-card)] border border-gray-border">
           <img
-            src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=600&h=400&fit=crop"
+            src={fitjeevaBanner}
             alt="Certificate of honour"
             className="w-full h-56 md:h-72 object-cover"
           />

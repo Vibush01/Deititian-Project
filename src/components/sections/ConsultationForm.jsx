@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { FaUserMd, FaClipboardList, FaHeadset } from 'react-icons/fa'
 import SectionHeading from '../ui/SectionHeading'
 import Button from '../ui/Button'
+import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
 
 /**
  * Consultation booking form — split layout with left image + right form.
@@ -80,7 +81,7 @@ const ConsultationForm = ({ className = '' }) => {
 
             <div className="relative mt-6">
               <img
-                src="https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=500&h=600&fit=crop"
+                src={fitjeevaDietitian}
                 alt="Transform Your Health"
                 className="w-full max-w-md rounded-3xl shadow-lg object-cover"
               />

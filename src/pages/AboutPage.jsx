@@ -8,6 +8,11 @@ import ContactCTA from '../components/sections/ContactCTA'
 import ConsultationForm from '../components/sections/ConsultationForm'
 import { aboutIntro, philosophySections, coreServices } from '../data/aboutData'
 import { siteInfo } from '../data/siteData'
+import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
+import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
+import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.jpg'
+import fitjeevaMillet from '../assets/images/fitjeeva-millet.jpg'
+import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
 
 /* =========================================================
    About Page — Hero Section
@@ -43,7 +48,7 @@ const AboutHero = () => (
           <div className="relative">
             <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full bg-primary overflow-hidden shadow-xl">
               <img
-                src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&h=500&fit=crop"
+                src={fitjeevaDietitian}
                 alt="FitJeeva Team"
                 className="w-full h-full object-cover"
               />
@@ -78,11 +83,11 @@ const SubtitleIntro = () => (
    Philosophy Sections (1–5 numbered, alternating layout)
    ========================================================= */
 const philosophyImages = [
-  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1547592180-85f173990554?w=500&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=500&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=400&fit=crop',
+  fitjeevaClinical,
+  fitjeevaMillet,
+  fitjeevaHomevisit,
+  fitjeevaBanner,
+  fitjeevaDietitian,
 ]
 
 const PhilosophySection = () => (
@@ -200,7 +205,7 @@ const JoinMissionCTA = () => (
         {/* Image */}
         <div className="flex-1">
           <img
-            src="https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=500&h=400&fit=crop"
+            src={fitjeevaHomevisit}
             alt="Join our team"
             className="w-full rounded-2xl shadow-lg object-cover max-h-72 lg:max-h-80"
           />

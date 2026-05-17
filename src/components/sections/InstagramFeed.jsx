@@ -1,6 +1,11 @@
 import { FaInstagram } from 'react-icons/fa'
 import SectionHeading from '../ui/SectionHeading'
 import { socialLinks } from '../../data/siteData'
+import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
+import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.jpg'
+import fitjeevaHomevisit from '../../assets/images/fitjeeva-homevisit.jpg'
+import fitjeevaMillet from '../../assets/images/fitjeeva-millet.jpg'
+import fitjeevaBanner from '../../assets/images/fitjeeva-banner.jpg'
 
 /**
  * Instagram feed section with static image grid styled like IG posts.
@@ -10,13 +15,13 @@ import { socialLinks } from '../../data/siteData'
  */
 
 // Placeholder images styled to look like Instagram posts
-const instagramImages = [
-  'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=300&h=300&fit=crop',
-  'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&h=300&fit=crop',
-  'https://images.unsplash.com/photo-1547592180-85f173990554?w=300&h=300&fit=crop',
-  'https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=300&h=300&fit=crop',
-  'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=300&h=300&fit=crop',
-  'https://images.unsplash.com/photo-1494390248081-4e521a5940db?w=300&h=300&fit=crop',
+const feedImages = [
+  fitjeevaDietitian,
+  fitjeevaClinical,
+  fitjeevaMillet,
+  fitjeevaHomevisit,
+  fitjeevaBanner,
+  fitjeevaDietitian,
 ]
 
 const InstagramFeed = ({ className = '' }) => {
@@ -44,7 +49,7 @@ const InstagramFeed = ({ className = '' }) => {
 
         {/* Image Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-4 mt-8">
-          {instagramImages.map((img, index) => (
+          {feedImages.map((img, index) => (
             <a
               key={index}
               href={socialLinks.instagram}
