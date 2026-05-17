@@ -50,9 +50,9 @@ export const navLinks = [
       ],
       column3: {
         title: "Success Stories",
-        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&h=400&fit=crop", // placeholder
+        image: new URL('../assets/images/fitjeeva-homevisit.jpg', import.meta.url).href, // FitJeeva image
         buttons: [
-          { label: "Weight Lose Success", path: "#", type: "pink" },
+          { label: "Weight Lose Success", path: "#", type: "primary" },
           { label: "Story Success", path: "#", type: "green" }
         ],
         storyTitle: "Weight Loss Success Story",

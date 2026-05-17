@@ -189,7 +189,7 @@ const Navbar = () => {
                           </div>
                           <div className="flex gap-3 mb-6">
                             {link.megaMenu.column3.buttons.map(btn => (
-                              <Link key={btn.label} to={btn.path} className={`text-xs font-bold px-4 py-2 rounded-md text-white transition-opacity hover:opacity-90 ${btn.type === 'pink' ? 'bg-primary' : 'bg-green-600'}`}>
+                              <Link key={btn.label} to={btn.path} className={`text-xs font-bold px-4 py-2 rounded-md text-white transition-opacity hover:opacity-90 ${btn.type === 'primary' ? 'bg-primary' : 'bg-green-600'}`}>
                                 {btn.label}
                               </Link>
                             ))}

@@ -3,7 +3,7 @@ import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
 import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.jpg'
 
 /**
- * Pink gradient CTA banner — "Book a Diet Consultation for Life-Changing Results"
+ * Green gradient CTA banner — "Book a Diet Consultation for Life-Changing Results"
  * Appears on almost every page of the original site.
  *
  * @param {string} className - Additional wrapper classes

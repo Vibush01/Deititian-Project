@@ -53,7 +53,7 @@ const AboutHero = () => (
                 className="w-full h-full object-cover"
               />
             </div>
-            {/* Decorative pink dots */}
+            {/* Decorative green dots */}
             <div className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-primary/30" />
             <div className="absolute -bottom-2 -left-6 w-12 h-12 rounded-full bg-primary/20" />
           </div>

@@ -76,7 +76,7 @@ const InstagramFeed = ({ className = '' }) => {
             href={socialLinks.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 text-white font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-green-600 via-emerald-500 to-teal-500 text-white font-semibold hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
           >
             <FaInstagram className="text-lg" />
             Follow {socialLinks.instagramHandle}

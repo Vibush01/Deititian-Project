@@ -10,7 +10,7 @@ import ClinicLocations from '../components/sections/ClinicLocations'
    Contact Hero — Centered quote card
    ========================================================= */
 const ContactHero = () => (
-  <section className="bg-gradient-to-b from-blue-50 via-white to-white">
+  <section className="bg-gradient-to-b from-green-50 via-white to-white">
     <div className="container-custom py-12 md:py-16">
       <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-[var(--shadow-card)] border border-gray-border p-8 md:p-12 lg:p-16">
         <p className="text-xl md:text-2xl lg:text-[1.7rem] text-gray-600 font-medium leading-relaxed text-center italic">
