@@ -1,6 +1,6 @@
 /**
  * Reusable section heading with optional pink label tag and subtitle.
- * Matches the pattern used across all pages on dietitianshreya.com.
+ * Matches the pattern used across all pages on the FitJeeva site.
  *
  * @param {string} label - Pink uppercase tag text (e.g. "OUR DIET CLINIC CHAIN")
  * @param {string} title - Large bold heading

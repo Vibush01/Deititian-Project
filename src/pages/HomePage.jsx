@@ -56,10 +56,10 @@ const quickLinks = [
     to: "/service/pcod-pcos",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" className="w-10 h-10">
-        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
         <path
           d="M32 18c-4 0-7 3-7 7s3 7 7 7 7-3 7-7-3-7-7-7zm-10 14c-3 0-5.5 2.5-5.5 5.5S19 43 22 43s5.5-2.5 5.5-5.5S25 32 22 32zm20 0c-3 0-5.5 2.5-5.5 5.5S39 43 42 43s5.5-2.5 5.5-5.5S45 32 42 32z"
-          fill="#E91E63"
+          fill="#2E7D32"
         />
       </svg>
     ),
@@ -70,10 +70,10 @@ const quickLinks = [
     to: "/service/thyroid",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" className="w-10 h-10">
-        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
         <path
           d="M32 16c-2 0-3 1-3 3v6c-4 1-7 5-7 9 0 6 4 10 10 14 6-4 10-8 10-14 0-4-3-8-7-9v-6c0-2-1-3-3-3z"
-          fill="#E91E63"
+          fill="#2E7D32"
         />
       </svg>
     ),
@@ -84,12 +84,12 @@ const quickLinks = [
     to: "/service/diabetes",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" className="w-10 h-10">
-        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
         <path
           d="M32 14l-2 4h-6l2 6-4 4 6 2v6h4v-6l6-2-4-4 2-6h-6l2-4z"
-          fill="#E91E63"
+          fill="#2E7D32"
         />
-        <circle cx="32" cy="36" r="5" fill="#C2185B" opacity="0.6" />
+        <circle cx="32" cy="36" r="5" fill="#1B5E20" opacity="0.6" />
       </svg>
     ),
   },
@@ -99,14 +99,14 @@ const quickLinks = [
     to: "/service",
     icon: (
       <svg viewBox="0 0 64 64" fill="none" className="w-10 h-10">
-        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
         <path
           d="M24 22h16v4H24zM22 30h20v4H22zM26 38h12v4H26z"
-          fill="#E91E63"
+          fill="#2E7D32"
         />
         <path
           d="M38 42l6 6"
-          stroke="#E91E63"
+          stroke="#2E7D32"
           strokeWidth="2.5"
           strokeLinecap="round"
         />
@@ -161,7 +161,7 @@ const ExpertiseSection = () => (
       <div className="reveal">
         <SectionHeading
           label="Our Diet Clinic Chain"
-          title="Dietitian Shreya: India's Top Medical Diet Clinic"
+          title="FitJeeva: Your Trusted Medical Nutrition Clinic"
           subtitle="Our medical diet clinic in India specializes in medical nutrition science that heals from the root. We focus on personalized diet plans using real Indian food and millet based diets, never shortcuts."
         />
       </div>
@@ -279,7 +279,7 @@ const ClientSpotlight = () => {
                 </div>
               </div>
               <p className="text-sm text-gray-text leading-relaxed italic">
-                &ldquo;Lost 18 kg in 4 months with Dietitian Shreya&apos;s
+                &ldquo;Lost 18 kg in 4 months with FitJeeva&apos;s
                 personalized plan. The diet was entirely home-cooked Indian food.
                 No supplements, no shortcuts!&rdquo;
               </p>

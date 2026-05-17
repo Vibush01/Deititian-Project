@@ -1,19 +1,20 @@
 // ===== SITE-WIDE DATA =====
 
 export const siteInfo = {
-  name: "Dietitian Shreya's Family Diet Clinic",
-  tagline: "Guiding modern lifestyles toward mindful nourishment. Balanced plans, uplifting coaching, measurable progress.",
-  phone: "+91 73073 03835",
-  whatsapp: "919875955806",
-  email: "info@dietitianshreya.com",
-  copyright: `© ${new Date().getFullYear()} Shreya Nutrition. All rights reserved.`,
+  name: "FitJeeva",
+  tagline: "Nourish | Transform | Thrive. We are a Medical Nutrition Clinic dedicated to your well-being.",
+  phone: "+91 70912 89342",
+  whatsapp: "917091289342",
+  email: "info@fitjeeva.com",
+  website: "www.fitjeeva.com",
+  copyright: `© ${new Date().getFullYear()} FitJeeva Nutrition. All rights reserved.`,
 }
 
 export const socialLinks = {
-  facebook: "https://www.facebook.com/DietitianShreya",
-  youtube: "https://www.youtube.com/@dietitianshreya7982",
-  instagram: "https://www.instagram.com/dietitianshreya",
-  instagramHandle: "@dietitian_shreya",
+  facebook: "https://www.facebook.com/fitjeeva",
+  youtube: "https://www.youtube.com/@fitjeeva",
+  instagram: "https://www.instagram.com/fitjeeva",
+  instagramHandle: "@fitjeeva",
 }
 
 export const navLinks = [

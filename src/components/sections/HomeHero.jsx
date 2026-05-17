@@ -5,7 +5,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
 
 /**
- * Exact replica of the Dietitian Shreya Home Hero slider.
+ * FitJeeva Home Hero slider.
  * Uses Swiper to cycle through the image banners.
  */
 
@@ -13,22 +13,22 @@ const banners = [
   {
     desktop: 'https://dietitianshreya.com/wp-content/uploads/2026/02/Dietitian-shreya-banner-1-scaled.webp',
     mobile: 'https://dietitianshreya.com/wp-content/uploads/2026/02/Dietitian-shreya-banner-1MV-scaled.webp',
-    alt: 'Dietitian Shreya banner 1',
+    alt: 'FitJeeva banner 1',
   },
   {
     desktop: 'https://dietitianshreya.com/wp-content/uploads/2026/02/Dietitian-shreya-banner-2-scaled.webp',
     mobile: 'https://dietitianshreya.com/wp-content/uploads/2026/02/Dietitian-shreya-banner-2MV-scaled.webp',
-    alt: 'Dietitian Shreya banner 2',
+    alt: 'FitJeeva banner 2',
   },
   {
     desktop: 'https://dietitianshreya.com/wp-content/uploads/2026/02/Dietitian-shreya-banner-3-scaled.webp',
     mobile: 'https://dietitianshreya.com/wp-content/uploads/2026/02/Dietitian-shreya-banner-3MV-scaled.webp',
-    alt: 'Dietitian Shreya banner 3',
+    alt: 'FitJeeva banner 3',
   },
   {
     desktop: 'https://dietitianshreya.com/wp-content/uploads/2026/02/Dietitian-shreya-banner-4-scaled.webp',
     mobile: 'https://dietitianshreya.com/wp-content/uploads/2026/02/Dietitian-shreya-banner-4MV-scaled.webp',
-    alt: 'Dietitian Shreya banner 4',
+    alt: 'FitJeeva banner 4',
   },
 ];
 

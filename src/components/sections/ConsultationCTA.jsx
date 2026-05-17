@@ -43,7 +43,7 @@ const ConsultationCTA = ({ className = '' }) => {
               </h2>
               <p className="mt-4 text-white/80 text-base md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0">
                 <span className="font-bold text-white">35,000+</span> people have
-                transformed their weight loss journeys with Dietitian Shreya.
+                transformed their weight loss journeys with FitJeeva.
               </p>
               <div className="mt-6">
                 <Button to="/contact-us" variant="white" size="lg">

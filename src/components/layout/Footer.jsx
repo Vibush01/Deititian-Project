@@ -4,7 +4,7 @@ import { siteInfo, socialLinks, footerLinks } from '../../data/siteData'
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-lighter">
+    <footer style={{ background: 'linear-gradient(180deg, #E8F5E9 0%, #F1F8E9 50%, #E8F5E9 100%)' }}>
       {/* Main Footer Content */}
       <div className="container-custom py-12 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
@@ -12,13 +12,16 @@ const Footer = () => {
           {/* Column 1: Logo + Tagline + Socials */}
           <div className="sm:col-span-2 lg:col-span-1">
             <Link to="/" className="inline-block mb-4">
-              <div className="flex flex-col">
-                <span className="text-xl font-extrabold text-primary leading-tight">
-                  Dietitian Shreya&apos;s<sup className="text-xs">®</sup>
-                </span>
-                <span className="text-sm font-semibold text-dark-soft leading-tight">
-                  Family <span className="text-primary">Diet</span> Clinic
-                </span>
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🌿</span>
+                <div className="flex flex-col">
+                  <span className="text-xl font-extrabold text-primary leading-tight tracking-tight">
+                    FitJeeva
+                  </span>
+                  <span className="text-[10px] font-semibold text-gray-text leading-tight tracking-wider uppercase">
+                    Nourish | Transform | Thrive
+                  </span>
+                </div>
               </div>
             </Link>
 

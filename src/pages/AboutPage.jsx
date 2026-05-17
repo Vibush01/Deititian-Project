@@ -22,10 +22,10 @@ const AboutHero = () => (
             {aboutIntro.title}
           </h1>
           <p className="mt-5 text-base md:text-lg text-gray-text leading-relaxed max-w-xl mx-auto lg:mx-0">
-            As a premier clinical nutrition expert and the renowned Millet Girl Dietitian, Shreya Goel brings over 20 years of experience to the forefront of global wellness. Recognized as a leading clinical dietitian in India, she has dedicated her career to disease management and lifestyle transformation through a signature farm-to-plate nutrition philosophy.
+            As a premier clinical nutrition practice, FitJeeva brings expert guidance to the forefront of global wellness. We are a Medical Nutrition Clinic dedicated to your well-being, specializing in disease management and lifestyle transformation through a signature farm-to-plate nutrition philosophy.
           </p>
           <p className="mt-4 text-base md:text-lg text-gray-text leading-relaxed max-w-xl mx-auto lg:mx-0">
-            She is the visionary founder behind India&apos;s most trusted nutrition clinic chain, boasting 20+ centers across India and Dubai. Her approach is defined by an ethical, medicine-free diet and kitchen-based nutrition expert care, proving that true healing begins at home.
+            FitJeeva is the trusted name behind a growing nutrition clinic chain across India. Our approach is defined by an ethical, medicine-free diet and kitchen-based nutrition expert care, proving that true healing begins at home.
           </p>
           <div className="mt-6">
             <Button
@@ -44,7 +44,7 @@ const AboutHero = () => (
             <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full bg-primary overflow-hidden shadow-xl">
               <img
                 src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&h=500&fit=crop"
-                alt="Dietitian Shreya Goel"
+                alt="FitJeeva Team"
                 className="w-full h-full object-cover"
               />
             </div>

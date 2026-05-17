@@ -15,7 +15,7 @@ const ContactHero = () => (
       <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-[var(--shadow-card)] border border-gray-border p-8 md:p-12 lg:p-16">
         <p className="text-xl md:text-2xl lg:text-[1.7rem] text-gray-600 font-medium leading-relaxed text-center italic">
           We&apos;re here to help you start your health journey with the right
-          guidance. Contact Dietitian Shreya team for appointments or support.
+          guidance. Contact the FitJeeva team for appointments or support.
         </p>
       </div>
     </div>

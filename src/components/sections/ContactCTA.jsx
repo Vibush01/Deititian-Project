@@ -38,7 +38,7 @@ const ContactCTA = ({ className = '' }) => {
     <section className={`section-padding bg-gray-light ${className}`}>
       <div className="container-custom">
         <SectionHeading
-          title="Start Your Transformation: Contact Dietitian Shreya for Expert Guidance"
+          title="Start Your Transformation: Contact FitJeeva for Expert Guidance"
           subtitle="The first step to a healthier you starts here. Book a diet consultation and talk to a diet expert now to begin your transformation. Connect with our team through the channel you love — our responses are always personalised and judgment-free."
           align="left"
         />

@@ -5,12 +5,12 @@ import { navLinks } from '../../data/siteData'
 
 // Helper for mapping titles to icons
 const getIcon = (title) => {
-  if (title.includes('PCOD')) return <FaHeartbeat className="text-[#D61F69] text-xl" />
-  if (title.includes('Thyroid')) return <FaStethoscope className="text-[#D61F69] text-xl" />
-  if (title.includes('Diabetes')) return <FaPills className="text-[#D61F69] text-xl" />
-  if (title.includes('Weight')) return <FaWeight className="text-[#D61F69] text-xl" />
-  if (title.includes('Lifestyle')) return <FaRunning className="text-[#D61F69] text-xl" />
-  return <FaHeartbeat className="text-[#D61F69] text-xl" />
+  if (title.includes('PCOD')) return <FaHeartbeat className="text-primary text-xl" />
+  if (title.includes('Thyroid')) return <FaStethoscope className="text-primary text-xl" />
+  if (title.includes('Diabetes')) return <FaPills className="text-primary text-xl" />
+  if (title.includes('Weight')) return <FaWeight className="text-primary text-xl" />
+  if (title.includes('Lifestyle')) return <FaRunning className="text-primary text-xl" />
+  return <FaHeartbeat className="text-primary text-xl" />
 }
 
 const Navbar = () => {
@@ -66,13 +66,14 @@ const Navbar = () => {
         
         {/* Left Column (Logo) */}
         <div className="w-1/4 flex-shrink-0 flex items-center">
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center gap-2">
+            <span className="text-2xl">🌿</span>
             <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-extrabold text-[#D61F69] leading-none">
-                Dietitian Shreya&apos;s<sup className="text-xs">®</sup>
+              <span className="text-xl md:text-2xl font-extrabold text-primary leading-none tracking-tight">
+                FitJeeva
               </span>
-              <span className="text-sm font-semibold text-gray-800 leading-tight">
-                Family <span className="text-[#D61F69]">Diet</span> Clinic
+              <span className="text-[10px] md:text-xs font-semibold text-gray-text leading-tight tracking-wider uppercase">
+                Nourish | Transform | Thrive
               </span>
             </div>
           </Link>
@@ -88,8 +89,8 @@ const Navbar = () => {
                   <button
                     className={`flex items-center gap-1 py-6 text-[17px] font-bold rounded transition-colors duration-200 cursor-pointer ${
                       isActiveLink(link.path)
-                        ? 'text-[#D61F69]'
-                        : 'text-gray-700 hover:text-[#D61F69]'
+                        ? 'text-primary'
+                        : 'text-gray-700 hover:text-primary'
                     }`}
                     onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
                     onMouseEnter={() => setOpenDropdown(link.label)}
@@ -101,7 +102,7 @@ const Navbar = () => {
                   link.path.startsWith('#') ? (
                     <a
                       href={link.path}
-                      className="py-6 text-[17px] text-gray-700 hover:text-[#D61F69] rounded transition-colors duration-200 block"
+                      className="py-6 text-[17px] text-gray-700 hover:text-primary rounded transition-colors duration-200 block"
                     >
                       {link.label}
                     </a>
@@ -110,7 +111,7 @@ const Navbar = () => {
                       to={link.path}
                       className={({ isActive }) =>
                         `py-6 text-[17px] font-bold rounded transition-colors duration-200 block ${
-                          isActive ? 'text-[#D61F69]' : 'text-gray-700 hover:text-[#D61F69]'
+                          isActive ? 'text-primary' : 'text-gray-700 hover:text-primary'
                         }`
                       }
                     >
@@ -131,23 +132,23 @@ const Navbar = () => {
                         {/* Column 1 */}
                         <div>
                           <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-2">
-                            <FaHeartbeat className="text-[#D61F69] text-2xl" />
+                            <FaHeartbeat className="text-primary text-2xl" />
                             <h3 className="text-xl font-bold text-gray-800">{link.megaMenu.column1.title}</h3>
                           </div>
                           <div className="flex flex-col gap-6">
                             {link.megaMenu.column1.items.map(item => (
                               <Link key={item.label} to={item.path} className="group flex gap-4 hover:bg-gray-50 p-2 rounded-lg transition-colors -ml-2">
-                                <div className="w-12 h-12 bg-pink-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-pink-100 transition-colors">
+                                <div className="w-12 h-12 bg-primary-light rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary-lighter transition-colors">
                                   {getIcon(item.label)}
                                 </div>
                                 <div>
-                                  <h4 className="font-bold text-gray-800 text-[15px] mb-1 group-hover:text-[#D61F69] transition-colors">{item.label}</h4>
+                                  <h4 className="font-bold text-gray-800 text-[15px] mb-1 group-hover:text-primary transition-colors">{item.label}</h4>
                                   <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
                                 </div>
                               </Link>
                             ))}
                           </div>
-                          <Link to={link.megaMenu.column1.action.path} className="inline-block mt-6 bg-[#FFF0F5] text-[#D61F69] font-bold px-6 py-2.5 rounded-md hover:bg-[#FFE4EE] transition-colors text-sm">
+                          <Link to={link.megaMenu.column1.action.path} className="inline-block mt-6 bg-primary-light text-primary font-bold px-6 py-2.5 rounded-md hover:bg-primary-lighter transition-colors text-sm">
                             {link.megaMenu.column1.action.label}
                           </Link>
                         </div>
@@ -157,17 +158,17 @@ const Navbar = () => {
                           {link.megaMenu.column2.map((section, idx) => (
                             <div key={section.title} className={idx > 0 ? "mt-10" : ""}>
                               <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-2">
-                                {idx === 0 ? <FaWeight className="text-[#D61F69] text-2xl" /> : <FaHeartbeat className="text-[#D61F69] text-2xl" />}
+                                {idx === 0 ? <FaWeight className="text-primary text-2xl" /> : <FaHeartbeat className="text-primary text-2xl" />}
                                 <h3 className="text-xl font-bold text-gray-800">{section.title}</h3>
                               </div>
                               <div className="flex flex-col gap-6">
                                 {section.items.map(item => (
                                   <Link key={item.label} to={item.path} className="group flex gap-4 hover:bg-gray-50 p-2 rounded-lg transition-colors -ml-2">
-                                    <div className="w-12 h-12 bg-pink-50 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-pink-100 transition-colors">
+                                    <div className="w-12 h-12 bg-primary-light rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary-lighter transition-colors">
                                       {getIcon(item.label)}
                                     </div>
                                     <div>
-                                      <h4 className="font-bold text-gray-800 text-[15px] mb-1 group-hover:text-[#D61F69] transition-colors">{item.label}</h4>
+                                      <h4 className="font-bold text-gray-800 text-[15px] mb-1 group-hover:text-primary transition-colors">{item.label}</h4>
                                       <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
                                     </div>
                                   </Link>
@@ -180,7 +181,7 @@ const Navbar = () => {
                         {/* Column 3 */}
                         <div>
                           <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-2">
-                            <FaStethoscope className="text-[#D61F69] text-2xl" />
+                            <FaStethoscope className="text-primary text-2xl" />
                             <h3 className="text-xl font-bold text-gray-800">{link.megaMenu.column3.title}</h3>
                           </div>
                           <div className="rounded-2xl overflow-hidden mb-6 shadow-md border border-gray-100">
@@ -188,7 +189,7 @@ const Navbar = () => {
                           </div>
                           <div className="flex gap-3 mb-6">
                             {link.megaMenu.column3.buttons.map(btn => (
-                              <Link key={btn.label} to={btn.path} className={`text-xs font-bold px-4 py-2 rounded-md text-white transition-opacity hover:opacity-90 ${btn.type === 'pink' ? 'bg-[#D61F69]' : 'bg-green-600'}`}>
+                              <Link key={btn.label} to={btn.path} className={`text-xs font-bold px-4 py-2 rounded-md text-white transition-opacity hover:opacity-90 ${btn.type === 'pink' ? 'bg-primary' : 'bg-green-600'}`}>
                                 {btn.label}
                               </Link>
                             ))}
@@ -210,7 +211,7 @@ const Navbar = () => {
         <div className="w-1/4 flex justify-end items-center gap-3">
           <Link 
             to="/contact-us" 
-            className="hidden lg:flex items-center gap-2 bg-[#D61F69] text-white border-2 border-[#D61F69] px-6 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-white hover:text-[#D61F69] transition-all duration-300 shadow-[0_4px_14px_rgba(214,31,105,0.39)]"
+            className="hidden lg:flex items-center gap-2 bg-primary text-white border-2 border-primary px-6 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-white hover:text-primary transition-all duration-300 shadow-[0_4px_14px_rgba(46,125,50,0.39)]"
           >
             <FaCalendarWeek className="text-base" />
             Book a session
@@ -247,7 +248,7 @@ const Navbar = () => {
                       <div className="bg-gray-50 flex flex-col border-b border-gray-100 p-4 gap-6">
                         {/* Simple mobile mapping of mega menu items */}
                         <div>
-                          <h3 className="font-bold text-[#D61F69] mb-3">{link.megaMenu.column1.title}</h3>
+                          <h3 className="font-bold text-primary mb-3">{link.megaMenu.column1.title}</h3>
                           {link.megaMenu.column1.items.map(item => (
                             <Link key={item.label} to={item.path} className="block py-2 text-sm text-gray-600 font-medium border-b border-gray-200 last:border-0" onClick={() => setIsMobileOpen(false)}>
                               {item.label}
@@ -256,7 +257,7 @@ const Navbar = () => {
                         </div>
                         {link.megaMenu.column2.map(section => (
                           <div key={section.title}>
-                            <h3 className="font-bold text-[#D61F69] mb-3">{section.title}</h3>
+                            <h3 className="font-bold text-primary mb-3">{section.title}</h3>
                             {section.items.map(item => (
                               <Link key={item.label} to={item.path} className="block py-2 text-sm text-gray-600 font-medium border-b border-gray-200 last:border-0" onClick={() => setIsMobileOpen(false)}>
                                 {item.label}
@@ -282,7 +283,7 @@ const Navbar = () => {
                       onClick={() => setIsMobileOpen(false)}
                       className={({ isActive }) =>
                         `block py-3 px-4 text-base font-bold border-b border-gray-100 ${
-                          isActive ? 'text-[#D61F69]' : 'text-gray-800'
+                          isActive ? 'text-primary' : 'text-gray-800'
                         }`
                       }
                     >
@@ -296,7 +297,7 @@ const Navbar = () => {
                <Link 
                 to="/contact-us" 
                 onClick={() => setIsMobileOpen(false)}
-                className="w-full flex items-center justify-center gap-2 bg-[#D61F69] text-white py-3 rounded-full text-base font-bold tracking-wide"
+                className="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-full text-base font-bold tracking-wide"
               >
                 Book a session
               </Link>

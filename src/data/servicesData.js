@@ -116,7 +116,7 @@ export const serviceSubPages = {
   "weight-management": {
     title: "Weight Management",
     heroTitle: "Expert Clinical Diet Plans Personalized for Your Weight Goals",
-    heroSubtitle: "Achieve your ideal weight with personalized diet plans that identify the root cause of weight issues through expert nutrition and lifestyle corrections provided by India's premier online diet service.",
+    heroSubtitle: "Achieve your ideal weight with personalized diet plans that identify the root cause of weight issues through expert nutrition and lifestyle corrections provided by FitJeeva's premier online diet service.",
     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=500&fit=crop",
     sections: [
       {
@@ -274,22 +274,22 @@ export const serviceSubPages = {
 export const homeExpertiseCards = [
   {
     title: "Our Medical Expertise in Clinical Nutrition",
-    description: "As a premier medical diet clinic in India, we provide personalized diet plans for PCOD, thyroid, and diabetes management.",
+    description: "As a premier medical nutrition clinic, we provide personalized diet plans for PCOD, thyroid, and diabetes management. Our weight loss dietitians and thyroid diet experts utilize millet based diet plans and online diet consultation to deliver science-backed health transformations.",
     image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop",
   },
   {
-    title: "Dietitian Shreya Academy: Nutrition Education",
-    description: "Empowering future weight loss dietitians through professional education at the Dietitian Shreya Academy.",
+    title: "FitJeeva Academy: Nutrition Education",
+    description: "Empowering future weight loss dietitians through professional education at the FitJeeva Academy. We offer career-focused training on building personalized diet plans and mastering online diet consultation.",
     image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=300&fit=crop",
   },
   {
     title: "Healthy Kitchen & Millet Based Diet Plans",
-    description: "Shreya promotes farm-to-plate eating using Indian staples and home-grown produce for sustainable weight loss.",
+    description: "FitJeeva promotes farm-to-plate eating using Indian staples and home-grown produce. Our medical nutrition clinic integrates these traditional grains into millet based diet plans for sustainable weight loss and clinical wellness.",
     image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop",
   },
   {
     title: "Client Transformations: Real Weight Loss Success Stories",
-    description: "1,00,000+ lives transformed through expert online diet consultation and clinical nutrition.",
+    description: "1,00,000+ lives transformed through expert online diet consultation and clinical nutrition. Our science-backed personalized diet plans deliver real health results through food.",
     image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
   },
 ]
