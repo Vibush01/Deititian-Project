@@ -81,13 +81,13 @@ const Navbar = () => {
 
         {/* Center Column (Navigation) */}
         <div className="hidden lg:flex flex-1 justify-center items-center">
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-6 xl:gap-10">
             {navLinks.map((link) => (
               <div key={link.label} className="relative">
                 {link.megaMenu ? (
                   /* Dropdown trigger */
                   <button
-                    className={`flex items-center gap-1 py-6 text-[17px] font-bold rounded transition-colors duration-200 cursor-pointer ${
+                    className={`flex items-center gap-1 py-6 text-[15px] xl:text-[17px] font-bold rounded transition-colors duration-200 cursor-pointer whitespace-nowrap ${
                       isActiveLink(link.path)
                         ? 'text-primary'
                         : 'text-gray-700 hover:text-primary'
@@ -102,7 +102,7 @@ const Navbar = () => {
                   link.path.startsWith('#') ? (
                     <a
                       href={link.path}
-                      className="py-6 text-[17px] text-gray-700 hover:text-primary rounded transition-colors duration-200 block"
+                      className="py-6 text-[15px] xl:text-[17px] text-gray-700 hover:text-primary rounded transition-colors duration-200 block whitespace-nowrap"
                     >
                       {link.label}
                     </a>
@@ -110,7 +110,7 @@ const Navbar = () => {
                     <NavLink
                       to={link.path}
                       className={({ isActive }) =>
-                        `py-6 text-[17px] font-bold rounded transition-colors duration-200 block ${
+                        `py-6 text-[15px] xl:text-[17px] font-bold rounded transition-colors duration-200 block whitespace-nowrap ${
                           isActive ? 'text-primary' : 'text-gray-700 hover:text-primary'
                         }`
                       }
@@ -211,9 +211,9 @@ const Navbar = () => {
         <div className="w-1/4 flex justify-end items-center gap-3">
           <Link 
             to="/contact-us" 
-            className="hidden lg:flex items-center gap-2 bg-primary text-white border-2 border-primary px-6 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-white hover:text-primary transition-all duration-300 shadow-[0_4px_14px_rgba(46,125,50,0.39)]"
+            className="hidden lg:flex items-center gap-2 bg-primary text-white border-2 border-primary px-5 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-primary-dark hover:border-primary-dark transition-all duration-300 shadow-[0_4px_14px_rgba(46,125,50,0.39)] whitespace-nowrap"
           >
-            <FaCalendarWeek className="text-base" />
+            <FaCalendarWeek className="text-base text-white" />
             Book a session
           </Link>
 

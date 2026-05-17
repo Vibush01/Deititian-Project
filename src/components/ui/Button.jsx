@@ -36,7 +36,7 @@ const Button = ({
     primary: 'bg-primary text-white hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5',
     secondary: 'bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white',
     ghost: 'bg-transparent text-primary hover:bg-primary-light',
-    white: 'bg-white text-primary hover:bg-primary-lighter hover:shadow-lg hover:-translate-y-0.5',
+    white: 'bg-white text-primary font-bold hover:bg-primary-lighter hover:shadow-lg hover:-translate-y-0.5 shadow-md',
   }
 
   const combinedStyles = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`

@@ -40,10 +40,9 @@ const ContactCTA = ({ className = '' }) => {
         <SectionHeading
           title="Start Your Transformation: Contact FitJeeva for Expert Guidance"
           subtitle="The first step to a healthier you starts here. Book a diet consultation and talk to a diet expert now to begin your transformation. Connect with our team through the channel you love — our responses are always personalised and judgment-free."
-          align="left"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           {contactMethods.map((method, index) => (
             <ContactMethodCard
               key={index}

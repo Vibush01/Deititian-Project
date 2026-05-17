@@ -10,7 +10,7 @@ import { FaMapMarkerAlt, FaPhone, FaDirections } from 'react-icons/fa'
  */
 const LocationCard = ({ city, address, phone, mapLink }) => {
   return (
-    <div className="bg-white rounded-xl p-5 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 hover:-translate-y-1">
+    <div className="bg-white rounded-xl p-5 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 hover:-translate-y-1 border border-gray-border/50 h-full">
       {/* City header */}
       <div className="flex items-center gap-2 mb-3">
         <FaMapMarkerAlt className="text-primary text-lg flex-shrink-0" />

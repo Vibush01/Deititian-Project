@@ -10,11 +10,11 @@ import { statsData } from '../../data/siteData'
  */
 const StatsCounter = ({ stats = statsData, className = '' }) => {
   return (
-    <section className={`bg-white py-8 md:py-12 ${className}`}>
+    <section className={`bg-white py-6 md:py-10 border-b border-gray-border/50 ${className}`}>
       <div className="container-custom">
-        <div className="flex flex-wrap justify-center items-center gap-4 md:gap-0 divide-y md:divide-y-0 md:divide-x divide-gray-border">
+        <div className="flex flex-wrap justify-center items-stretch gap-0 divide-x divide-gray-border">
           {stats.map((stat, index) => (
-            <div key={index} className="flex-1 min-w-[140px] md:min-w-[160px]">
+            <div key={index} className="flex-1 min-w-[140px] md:min-w-[160px] px-4 md:px-6">
               <CounterCard
                 number={stat.number}
                 suffix={stat.suffix}
