@@ -59,41 +59,41 @@ const HomeHero = () => {
       >
         {banners.map((banner, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-[420px] sm:h-[480px] md:h-[540px] lg:h-[600px] overflow-hidden">
-              {/* Background Image */}
+            <div className="relative w-full h-[350px] sm:h-[450px] md:h-[540px] lg:h-[600px] overflow-hidden">
+              {/* Background Image — positioned to show non-text area of image */}
               <img
                 src={banner.image}
                 alt={banner.alt}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover object-right sm:object-center"
                 loading={index === 0 ? 'eager' : 'lazy'}
                 decoding="async"
               />
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+              {/* Gradient Overlay — bottom-up on mobile, left-right on desktop */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/10 sm:bg-gradient-to-r sm:from-black/75 sm:via-black/45 sm:to-transparent" />
               
-              {/* Text Content */}
-              <div className="absolute inset-0 flex items-center">
-                <div className="container-custom w-full">
+              {/* Text Content — bottom-aligned on mobile, center-aligned on desktop */}
+              <div className="absolute inset-0 flex items-end sm:items-center pb-10 sm:pb-0">
+                <div className="container-custom w-full px-5 sm:px-6">
                   <div className="max-w-xl lg:max-w-2xl">
-                    <span className="inline-block bg-primary/90 text-white text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full mb-4 tracking-wider uppercase">
+                    <span className="inline-block bg-primary/90 text-white text-[10px] sm:text-sm font-bold px-3 sm:px-4 py-1 sm:py-1.5 rounded-full mb-3 sm:mb-4 tracking-wider uppercase">
                       {banner.subtitle}
                     </span>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-4 drop-shadow-lg">
+                    <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-2 sm:mb-4 drop-shadow-lg">
                       {banner.title}
                     </h1>
-                    <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed mb-6 max-w-lg drop-shadow">
+                    <p className="hidden sm:block text-white/90 text-base md:text-lg leading-relaxed mb-6 max-w-lg drop-shadow">
                       {banner.description}
                     </p>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="flex flex-wrap gap-2 sm:gap-3">
                       <a
                         href="/contact-us"
-                        className="inline-flex items-center px-6 py-3 bg-primary text-white font-bold rounded-full hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-sm sm:text-base"
+                        className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-primary text-white font-bold rounded-full hover:bg-primary-dark transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5 text-xs sm:text-base"
                       >
                         Book Consultation
                       </a>
                       <a
                         href="/service"
-                        className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm text-white font-bold rounded-full hover:bg-white/30 transition-all duration-300 border border-white/30 text-sm sm:text-base"
+                        className="inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 bg-white/20 backdrop-blur-sm text-white font-bold rounded-full hover:bg-white/30 transition-all duration-300 border border-white/30 text-xs sm:text-base"
                       >
                         Our Services
                       </a>

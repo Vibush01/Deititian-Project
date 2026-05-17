@@ -587,6 +587,7 @@ input[type="time"] {
 
   .quick-link-card {
     border-radius: 1rem;
+    padding: 1.5rem 1rem;
   }
 
   .quick-link-icon {
@@ -597,6 +598,10 @@ input[type="time"] {
 
   .expertise-card-body {
     padding: 1.25rem;
+  }
+
+  .expertise-card-image img {
+    height: 200px;
   }
 
   .spotlight-stat {
@@ -611,6 +616,11 @@ input[type="time"] {
     width: 48px;
     height: 3px;
   }
+
+  .media-badge {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.7rem;
+  }
 }
 
 /* Small mobile fixes */
@@ -619,5 +629,19 @@ input[type="time"] {
     flex-direction: column;
     text-align: center;
     gap: 0.25rem;
+  }
+
+  .quick-link-card {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .quick-link-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .media-badge {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.65rem;
   }
 }

@@ -65,7 +65,7 @@ const Navbar = () => {
       <nav className="container-custom flex items-center h-20 md:h-24" ref={dropdownRef}>
         
         {/* Left Column (Logo) */}
-        <div className="w-1/4 flex-shrink-0 flex items-center">
+        <div className="flex-shrink-0 flex items-center">
           <Link to="/" className="flex items-center gap-2">
             <span className="text-2xl">🌿</span>
             <div className="flex flex-col">
@@ -208,7 +208,7 @@ const Navbar = () => {
         </div>
 
         {/* Right Column (Button) */}
-        <div className="w-1/4 flex justify-end items-center gap-3">
+        <div className="flex-shrink-0 flex justify-end items-center gap-3 ml-auto">
           <Link 
             to="/contact-us" 
             className="hidden lg:flex items-center gap-2 bg-primary text-white border-2 border-primary px-5 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-primary-dark hover:border-primary-dark transition-all duration-300 shadow-[0_4px_14px_rgba(46,125,50,0.39)] whitespace-nowrap"
@@ -298,7 +298,8 @@ const Navbar = () => {
                <Link 
                 to="/contact-us" 
                 onClick={() => setIsMobileOpen(false)}
-                className="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-full text-base font-bold tracking-wide"
+                className="w-full flex items-center justify-center gap-2 bg-primary py-3 rounded-full text-base font-bold tracking-wide"
+                style={{ color: '#fff' }}
               >
                 Book a session
               </Link>

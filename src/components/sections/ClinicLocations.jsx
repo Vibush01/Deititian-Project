@@ -50,7 +50,7 @@ const ClinicLocations = ({ className = '', showMap = true }) => {
           {/* Google Map Embed */}
           {showMap && (
             <div className="sticky top-24 h-fit">
-              <div className="bg-gray-light rounded-2xl overflow-hidden shadow-[var(--shadow-card)] h-[400px] lg:h-[500px]">
+              <div className="bg-gray-light rounded-2xl overflow-hidden shadow-[var(--shadow-card)] h-[300px] sm:h-[400px] lg:h-[500px]">
                 <iframe
                   title="Clinic Location Map"
                   src={mapEmbedUrl}

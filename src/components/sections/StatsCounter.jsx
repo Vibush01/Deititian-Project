@@ -12,9 +12,9 @@ const StatsCounter = ({ stats = statsData, className = '' }) => {
   return (
     <section className={`bg-white py-6 md:py-10 border-b border-gray-border/50 ${className}`}>
       <div className="container-custom">
-        <div className="flex flex-wrap justify-center items-stretch gap-0 divide-x divide-gray-border">
+        <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center md:items-stretch md:gap-0 md:divide-x md:divide-gray-border gap-4">
           {stats.map((stat, index) => (
-            <div key={index} className="flex-1 min-w-[140px] md:min-w-[160px] px-4 md:px-6">
+            <div key={index} className="md:flex-1 md:min-w-[160px] md:px-6">
               <CounterCard
                 number={stat.number}
                 suffix={stat.suffix}

@@ -42,7 +42,7 @@ const ContactCTA = ({ className = '' }) => {
           subtitle="The first step to a healthier you starts here. Book a diet consultation and talk to a diet expert now to begin your transformation. Connect with our team through the channel you love — our responses are always personalised and judgment-free."
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
           {contactMethods.map((method, index) => (
             <ContactMethodCard
               key={index}
