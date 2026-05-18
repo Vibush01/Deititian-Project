@@ -10,7 +10,7 @@ import { statsData } from '../../data/siteData'
  */
 const StatsCounter = ({ stats = statsData, className = '' }) => {
   return (
-    <section className={`bg-white py-6 md:py-10 border-b border-gray-border/50 ${className}`}>
+    <section className={`bg-white py-16 md:py-20 border-y border-gray-border/50 ${className}`}>
       <div className="container-custom">
         <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center md:items-stretch md:gap-0 md:divide-x md:divide-gray-border gap-4">
           {stats.map((stat, index) => (

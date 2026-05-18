@@ -116,23 +116,23 @@ const quickLinks = [
 ];
 
 const QuickLinkCards = () => (
-  <section className="py-12 md:py-16 bg-white">
+  <section className="py-20 md:py-28 bg-[#f5faf5]">
     <div className="container-custom">
       {/* Section micro-heading */}
-      <div className="text-center mb-8 md:mb-10 reveal">
+      <div className="text-center mb-16 md:mb-20 reveal">
         <span className="section-label">Quick Access</span>
-        <h2 className="text-2xl md:text-3xl font-bold text-dark mt-2">
+        <h2 className="text-2xl md:text-3xl font-bold text-dark mt-3">
           Explore Our Specializations
         </h2>
         <div className="section-divider mt-4"></div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 stagger-children">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 stagger-children">
         {quickLinks.map((link, index) => (
           <Link
             key={link.label}
             to={link.to}
-            className="quick-link-card reveal flex flex-col items-center justify-center gap-3 py-8 px-4 md:py-10 md:px-6"
+            className="quick-link-card reveal flex flex-col items-center justify-center gap-4 py-10 px-6 md:py-12 md:px-8"
             style={{ "--child-index": index }}
           >
             <div className="quick-link-icon">{link.icon}</div>
@@ -140,7 +140,7 @@ const QuickLinkCards = () => (
               <span className="block text-sm md:text-base font-bold text-dark">
                 {link.label}
               </span>
-              <span className="block text-xs text-gray-text mt-0.5">
+              <span className="block text-xs text-gray-text mt-1">
                 {link.sublabel}
               </span>
             </div>
@@ -342,8 +342,8 @@ const HomePage = () => {
   const pageRef = useScrollReveal();
 
   return (
-    <div ref={pageRef}>
-      {/* 1. Hero Section — Full-width carousel style matching original */}
+    <div ref={pageRef} className="flex flex-col">
+      {/* 1. Hero Section — Image carousel */}
       <HomeHero />
 
       {/* 2. Stats Counter */}

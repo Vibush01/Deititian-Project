@@ -62,7 +62,7 @@ const Navbar = () => {
         isScrolled ? 'shadow-md' : ''
       }`}
     >
-      <nav className="container-custom flex items-center h-20 md:h-24" ref={dropdownRef}>
+      <nav className="container-custom flex items-center h-14 md:h-16" ref={dropdownRef}>
         
         {/* Left Column (Logo) */}
         <div className="flex-shrink-0 flex items-center">
@@ -123,7 +123,7 @@ const Navbar = () => {
                 {/* Mega Menu Dropdown */}
                 {link.megaMenu && openDropdown === link.label && (
                   <div
-                    className="fixed left-0 top-[80px] md:top-[96px] w-full bg-white shadow-[0_10px_40px_rgb(0,0,0,0.1)] border-t-[1px] border-gray-100 animate-fade-in z-50 overflow-y-auto max-h-[calc(100vh-96px)]"
+                    className="fixed left-0 top-[56px] md:top-[64px] w-full bg-white shadow-[0_10px_40px_rgb(0,0,0,0.1)] border-t-[1px] border-gray-100 animate-fade-in z-50 overflow-y-auto max-h-[calc(100vh-64px)]"
                     onMouseLeave={() => setOpenDropdown(null)}
                   >
                     <div className="container-custom py-10">
@@ -211,7 +211,7 @@ const Navbar = () => {
         <div className="flex-shrink-0 flex justify-end items-center gap-3 ml-auto">
           <Link 
             to="/contact-us" 
-            className="hidden lg:flex items-center gap-2 bg-primary text-white border-2 border-primary px-5 py-2.5 rounded-full text-sm font-bold tracking-wide hover:bg-primary-dark hover:border-primary-dark transition-all duration-300 shadow-[0_4px_14px_rgba(46,125,50,0.39)] whitespace-nowrap"
+            className="hidden lg:flex items-center gap-2 bg-primary text-white border-2 border-primary px-7 py-3 rounded-full text-sm font-bold tracking-wide hover:bg-primary-dark hover:border-primary-dark transition-all duration-300 shadow-[0_4px_14px_rgba(46,125,50,0.39)] whitespace-nowrap"
             style={{ color: '#fff' }}
           >
             <FaCalendarWeek className="text-base" />
@@ -231,7 +231,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isMobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-[80px] bg-white z-40 overflow-y-auto animate-fade-in">
+        <div className="lg:hidden fixed inset-0 top-[56px] bg-white z-40 overflow-y-auto animate-fade-in">
           <div className="p-4 flex flex-col gap-1">
             {navLinks.map((link) => (
               <div key={link.label}>

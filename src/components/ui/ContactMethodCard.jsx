@@ -27,7 +27,7 @@ const ContactMethodCard = ({ icon, title, description, ctaText, ctaLink }) => {
         href={ctaLink}
         target={ctaLink.startsWith('http') || ctaLink.startsWith('tel') ? '_blank' : '_self'}
         rel="noopener noreferrer"
-        className="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-all duration-300 hover:-translate-y-0.5 mt-auto"
+        className="inline-flex items-center justify-center px-7 py-3 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary-dark transition-all duration-300 hover:-translate-y-0.5 mt-auto"
       >
         {ctaText}
       </a>
