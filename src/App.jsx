@@ -10,6 +10,12 @@ import ServicePage from './pages/ServicePage'
 import ServiceSubPage from './pages/ServiceSubPage'
 import CareersPage from './pages/CareersPage'
 import ContactPage from './pages/ContactPage'
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
+import BmiCalculatorPage from './pages/BmiCalculatorPage'
+import SuccessStoriesPage from './pages/SuccessStoriesPage'
+import RecipesPage from './pages/RecipesPage'
+import ExpertsPage from './pages/ExpertsPage'
+import TeamPage from './pages/TeamPage'
 
 function App() {
   return (
@@ -26,6 +32,14 @@ function App() {
           <Route path="/service" element={<ServicePage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact-us" element={<ContactPage />} />
+          
+          {/* Newly Added Pages */}
+          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/bmi-calculator" element={<BmiCalculatorPage />} />
+          <Route path="/success-stories" element={<SuccessStoriesPage />} />
+          <Route path="/recipes" element={<RecipesPage />} />
+          <Route path="/experts" element={<ExpertsPage />} />
+          <Route path="/team" element={<TeamPage />} />
 
           {/* Service Sub-Pages — single dynamic route */}
           <Route path="/service/:slug" element={<ServiceSubPage />} />

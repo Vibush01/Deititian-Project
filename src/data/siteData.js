@@ -50,10 +50,10 @@ export const navLinks = [
       ],
       column3: {
         title: "Success Stories",
-        image: new URL('../assets/images/fitjeeva-homevisit.jpg', import.meta.url).href, // FitJeeva image
+        image: new URL('../assets/images/fitjeeva-homevisit.jpg', import.meta.url).href,
         buttons: [
-          { label: "Weight Lose Success", path: "#", type: "primary" },
-          { label: "Story Success", path: "#", type: "green" }
+          { label: "Weight Lose Success", path: "/success-stories", type: "primary" },
+          { label: "Story Success", path: "/success-stories", type: "green" }
         ],
         storyTitle: "Weight Loss Success Story",
         storyDesc: "Discover how our personalized nutrition plans helped achieve remarkable transformation results and improved overall health..."
@@ -67,8 +67,8 @@ export const navLinks = [
 export const footerLinks = {
   company: [
     { label: "About Us", path: "/about-us" },
-    { label: "Our Experts", path: "#" },
-    { label: "Team", path: "#" },
+    { label: "Our Experts", path: "/experts" },
+    { label: "Team", path: "/team" },
     { label: "Careers", path: "/careers" },
     { label: "Contact Us", path: "/contact-us" },
   ],
@@ -80,11 +80,11 @@ export const footerLinks = {
     { label: "Diabetes Care", path: "/service/diabetes" },
   ],
   explore: [
-    { label: "Success Stories", path: "#" },
-    { label: "BMI Calculator", path: "#" },
+    { label: "Success Stories", path: "/success-stories" },
+    { label: "BMI Calculator", path: "/bmi-calculator" },
     { label: "Lifestyle Quiz", path: "/service/lifestyle-management" },
-    { label: "Recipes", path: "#" },
-    { label: "Privacy Policy", path: "#" },
+    { label: "Recipes", path: "/recipes" },
+    { label: "Privacy Policy", path: "/privacy-policy" },
   ],
 }
 
