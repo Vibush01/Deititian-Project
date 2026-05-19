@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import ScrollToTop from './components/common/ScrollToTop'
+import BackToTop from './components/common/BackToTop'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 
@@ -47,6 +48,7 @@ function App() {
       </main>
 
       <Footer />
+      <BackToTop />
     </>
   )
 }
