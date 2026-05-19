@@ -1,16 +1,18 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { FaBars, FaTimes, FaChevronDown, FaCalendarWeek, FaHeartbeat, FaStethoscope, FaPills, FaWeight, FaRunning } from 'react-icons/fa'
+import { FaBars, FaTimes, FaChevronDown, FaHeartbeat, FaStethoscope, FaPills, FaWeight, FaRunning, FaCalendarWeek, FaFireAlt } from 'react-icons/fa'
 import { navLinks } from '../../data/siteData'
+import Button from '../ui/Button'
 
 // Helper for mapping titles to icons
 const getIcon = (title) => {
-  if (title.includes('PCOD')) return <FaHeartbeat className="text-primary text-xl" />
-  if (title.includes('Thyroid')) return <FaStethoscope className="text-primary text-xl" />
-  if (title.includes('Diabetes')) return <FaPills className="text-primary text-xl" />
-  if (title.includes('Weight')) return <FaWeight className="text-primary text-xl" />
-  if (title.includes('Lifestyle')) return <FaRunning className="text-primary text-xl" />
-  return <FaHeartbeat className="text-primary text-xl" />
+  if (title.includes('PCOD')) return <FaHeartbeat className="text-[#D81B60] text-xl" />
+  if (title.includes('Thyroid')) return <FaStethoscope className="text-[#D81B60] text-xl" />
+  if (title.includes('Diabetes')) return <FaPills className="text-[#D81B60] text-xl" />
+  if (title.includes('Weight Loss')) return <FaWeight className="text-[#D81B60] text-xl" />
+  if (title.includes('Weight Gain')) return <FaWeight className="text-[#D81B60] text-xl" />
+  if (title.includes('Lifestyle')) return <FaRunning className="text-[#D81B60] text-xl" />
+  return <FaHeartbeat className="text-[#D81B60] text-xl" />
 }
 
 const Navbar = () => {
@@ -20,12 +22,6 @@ const Navbar = () => {
   const dropdownRef = useRef(null)
   const location = useLocation()
 
-  // Close mobile menu on route change
-  useEffect(() => {
-    setIsMobileOpen(false)
-    setOpenDropdown(null)
-  }, [location.pathname])
-
   // Scroll shadow effect
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -33,22 +29,10 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close dropdown on outside click
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setOpenDropdown(null)
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
-
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    document.body.style.overflow = isMobileOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
-  }, [isMobileOpen])
+    setIsMobileOpen(false)
+    setOpenDropdown(null)
+  }, [location.pathname])
 
   const isActiveLink = (path) => {
     if (path === '/') return location.pathname === '/'
@@ -57,172 +41,148 @@ const Navbar = () => {
   }
 
   return (
-    <header
-      className={`sticky top-0 z-50 bg-white transition-all duration-300 ${
-        isScrolled ? 'shadow-md' : ''
-      }`}
-    >
-      <nav className="container-custom flex items-center h-14 md:h-16" ref={dropdownRef}>
-        
+    <header className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
+      <nav ref={dropdownRef} className="container-custom flex items-center justify-between h-16 md:h-20">
         {/* Left Column (Logo) */}
-        <div className="flex-shrink-0 flex items-center">
+        <div className="flex-shrink-0">
           <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl">🌿</span>
+            <span className="text-2xl md:text-3xl">🌿</span>
             <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-extrabold text-primary leading-none tracking-tight">
+              <span className="text-xl md:text-2xl font-extrabold text-[#D81B60] leading-none tracking-tight">
                 FitJeeva
               </span>
-              <span className="text-[10px] md:text-xs font-semibold text-gray-text leading-tight tracking-wider uppercase">
+              <span className="text-[10px] md:text-[11px] font-bold text-gray-500 tracking-widest uppercase mt-0.5">
                 Nourish | Transform | Thrive
               </span>
             </div>
           </Link>
         </div>
 
-        {/* Center Column (Navigation) */}
-        <div className="hidden lg:flex flex-1 justify-center items-center">
-          <div className="flex items-center gap-6 xl:gap-10">
-            {navLinks.map((link) => (
-              <div key={link.label} className="relative">
-                {link.megaMenu ? (
-                  /* Dropdown trigger */
-                  <button
-                    className={`flex items-center gap-1 py-6 text-[15px] xl:text-[17px] font-bold rounded transition-colors duration-200 cursor-pointer whitespace-nowrap ${
-                      isActiveLink(link.path)
-                        ? 'text-primary'
-                        : 'text-gray-700 hover:text-primary'
-                    }`}
-                    onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
-                    onMouseEnter={() => setOpenDropdown(link.label)}
-                  >
-                    {link.label}
-                    <FaChevronDown className="text-[10px]" />
-                  </button>
-                ) : (
-                  link.path.startsWith('#') ? (
-                    <a
-                      href={link.path}
-                      className="py-6 text-[15px] xl:text-[17px] text-gray-700 hover:text-primary rounded transition-colors duration-200 block whitespace-nowrap"
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <NavLink
-                      to={link.path}
-                      className={({ isActive }) =>
-                        `py-6 text-[15px] xl:text-[17px] font-bold rounded transition-colors duration-200 block whitespace-nowrap ${
-                          isActive ? 'text-primary' : 'text-gray-700 hover:text-primary'
-                        }`
-                      }
-                    >
-                      {link.label}
-                    </NavLink>
-                  )
-                )}
+        {/* Center Column (Navigation - Desktop) */}
+        <div className="hidden lg:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <div key={link.label} className="relative group">
+              {link.megaMenu ? (
+                <button 
+                  onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                  className={`flex items-center gap-1.5 text-sm font-bold transition-colors py-8 ${isActiveLink(link.path) ? 'text-[#D81B60]' : 'text-gray-700 hover:text-[#D81B60]'}`}
+                >
+                  {link.label}
+                  <FaChevronDown className="text-[10px] mt-0.5" />
+                </button>
+              ) : link.path.startsWith('#') ? (
+                <a href={link.path} className="text-sm font-bold text-gray-700 hover:text-[#D81B60] transition-colors py-8 block">
+                  {link.label}
+                </a>
+              ) : (
+                <NavLink 
+                  to={link.path} 
+                  className={({isActive}) => `text-sm font-bold transition-colors py-8 block ${isActive ? 'text-[#D81B60]' : 'text-gray-700 hover:text-[#D81B60]'}`}
+                >
+                  {link.label}
+                </NavLink>
+              )}
 
-                {/* Mega Menu Dropdown */}
-                {link.megaMenu && openDropdown === link.label && (
-                  <div
-                    className="fixed left-0 top-[56px] md:top-[64px] w-full bg-white shadow-[0_10px_40px_rgb(0,0,0,0.1)] border-t-[1px] border-gray-100 animate-fade-in z-50 overflow-y-auto max-h-[calc(100vh-64px)]"
-                    onMouseLeave={() => setOpenDropdown(null)}
-                  >
-                    <div className="container-custom py-10">
-                      <div className="grid grid-cols-3 gap-12">
-                        
-                        {/* Column 1 */}
-                        <div>
-                          <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-2">
-                            <FaHeartbeat className="text-primary text-2xl" />
-                            <h3 className="text-xl font-bold text-gray-800">{link.megaMenu.column1.title}</h3>
-                          </div>
-                          <div className="flex flex-col gap-6">
-                            {link.megaMenu.column1.items.map(item => (
-                              <Link key={item.label} to={item.path} className="group flex gap-4 hover:bg-gray-50 p-2 rounded-lg transition-colors -ml-2">
-                                <div className="w-12 h-12 bg-primary-light rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary-lighter transition-colors">
-                                  {getIcon(item.label)}
-                                </div>
-                                <div>
-                                  <h4 className="font-bold text-gray-800 text-[15px] mb-1 group-hover:text-primary transition-colors">{item.label}</h4>
-                                  <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
-                                </div>
-                              </Link>
-                            ))}
-                          </div>
-                          <Link to={link.megaMenu.column1.action.path} className="inline-block mt-6 bg-primary-light text-primary font-bold px-6 py-2.5 rounded-md hover:bg-primary-lighter transition-colors text-sm">
-                            {link.megaMenu.column1.action.label}
-                          </Link>
-                        </div>
-
-                        {/* Column 2 */}
-                        <div className="border-l border-r border-gray-100 px-12">
-                          {link.megaMenu.column2.map((section, idx) => (
-                            <div key={section.title} className={idx > 0 ? "mt-10" : ""}>
-                              <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-2">
-                                {idx === 0 ? <FaWeight className="text-primary text-2xl" /> : <FaHeartbeat className="text-primary text-2xl" />}
-                                <h3 className="text-xl font-bold text-gray-800">{section.title}</h3>
+              {/* Mega Menu Dropdown */}
+              {link.megaMenu && openDropdown === link.label && (
+                <div className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[1000px] bg-white shadow-2xl border border-gray-100 rounded-xl p-8 z-50">
+                  <div className="grid grid-cols-3 gap-8">
+                    
+                    {/* Column 1: Disease Management */}
+                    <div className="border-r border-gray-100 pr-6">
+                      <h3 className="font-bold text-lg text-gray-700 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
+                        <FaHeartbeat className="text-[#D81B60]" /> {link.megaMenu.column1.title}
+                      </h3>
+                      <ul className="space-y-6">
+                        {link.megaMenu.column1.items.map(item => (
+                          <li key={item.label}>
+                            <Link to={item.path} className="flex items-start gap-3 group/item">
+                              <div className="w-10 h-10 rounded-lg bg-[#FCE4EC] flex items-center justify-center shrink-0 group-hover/item:bg-[#F8BBD0] transition-colors">
+                                {getIcon(item.label)}
                               </div>
-                              <div className="flex flex-col gap-6">
-                                {section.items.map(item => (
-                                  <Link key={item.label} to={item.path} className="group flex gap-4 hover:bg-gray-50 p-2 rounded-lg transition-colors -ml-2">
-                                    <div className="w-12 h-12 bg-primary-light rounded-xl flex items-center justify-center flex-shrink-0 group-hover:bg-primary-lighter transition-colors">
-                                      {getIcon(item.label)}
-                                    </div>
-                                    <div>
-                                      <h4 className="font-bold text-gray-800 text-[15px] mb-1 group-hover:text-primary transition-colors">{item.label}</h4>
-                                      <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
-                                    </div>
-                                  </Link>
-                                ))}
+                              <div>
+                                <span className="block font-bold text-gray-800 text-sm mb-1">{item.label}</span>
+                                <span className="text-xs text-gray-500 leading-tight block">{item.desc}</span>
                               </div>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* Column 3 */}
-                        <div>
-                          <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-2">
-                            <FaStethoscope className="text-primary text-2xl" />
-                            <h3 className="text-xl font-bold text-gray-800">{link.megaMenu.column3.title}</h3>
-                          </div>
-                          <div className="rounded-2xl overflow-hidden mb-6 shadow-md border border-gray-100">
-                            <img src={link.megaMenu.column3.image} alt="Success Stories" className="w-full h-48 object-cover" />
-                          </div>
-                          <div className="flex gap-3 mb-6">
-                            {link.megaMenu.column3.buttons.map(btn => (
-                              <Link key={btn.label} to={btn.path} className={`text-xs font-bold px-4 py-2 rounded-md text-white transition-opacity hover:opacity-90 ${btn.type === 'primary' ? 'bg-primary' : 'bg-green-600'}`}>
-                                {btn.label}
-                              </Link>
-                            ))}
-                          </div>
-                          <h4 className="font-bold text-gray-800 text-[16px] mb-2">{link.megaMenu.column3.storyTitle}</h4>
-                          <p className="text-sm text-gray-500 leading-relaxed">{link.megaMenu.column3.storyDesc}</p>
-                        </div>
-
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="mt-6">
+                        <Link to={link.megaMenu.column1.action.path} className="inline-block bg-[#FCE4EC] text-[#D81B60] font-bold text-sm px-6 py-2 rounded-lg hover:bg-[#F8BBD0] transition-colors">
+                          {link.megaMenu.column1.action.label}
+                        </Link>
                       </div>
                     </div>
+
+                    {/* Column 2: Weight & Lifestyle Management */}
+                    <div className="border-r border-gray-100 pr-6">
+                      {link.megaMenu.column2.map((section, idx) => (
+                        <div key={idx} className={idx > 0 ? "mt-8" : ""}>
+                          <h3 className="font-bold text-lg text-gray-700 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
+                            {idx === 0 ? <FaFireAlt className="text-[#D81B60]" /> : <FaHeartbeat className="text-[#D81B60]" />}
+                            {section.title}
+                          </h3>
+                          <ul className="space-y-6">
+                            {section.items.map(item => (
+                              <li key={item.label}>
+                                <Link to={item.path} className="flex items-start gap-3 group/item">
+                                  <div className="w-10 h-10 rounded-lg bg-[#FCE4EC] flex items-center justify-center shrink-0 group-hover/item:bg-[#F8BBD0] transition-colors">
+                                    {getIcon(item.label)}
+                                  </div>
+                                  <div>
+                                    <span className="block font-bold text-gray-800 text-sm mb-1">{item.label}</span>
+                                    <span className="text-xs text-gray-500 leading-tight block">{item.desc}</span>
+                                  </div>
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Column 3: Success Stories */}
+                    <div>
+                      <h3 className="font-bold text-lg text-gray-700 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
+                        <FaStethoscope className="text-[#D81B60]" /> {link.megaMenu.column3.title}
+                      </h3>
+                      <div className="rounded-xl overflow-hidden mb-4 border border-gray-200">
+                        <img src={link.megaMenu.column3.image} alt="Success Story" className="w-full h-40 object-cover" />
+                      </div>
+                      <div className="flex gap-2 mb-4">
+                        {link.megaMenu.column3.buttons.map((btn, idx) => (
+                          <Link 
+                            key={idx} 
+                            to={btn.path} 
+                            className={`flex-1 text-center text-xs font-bold py-2 rounded-lg transition-colors ${btn.type === 'primary' ? 'bg-[#D81B60] text-white hover:bg-[#C2185B]' : 'bg-[#2E7D32] text-white hover:bg-[#1B5E20]'}`}
+                          >
+                            {btn.label}
+                          </Link>
+                        ))}
+                      </div>
+                      <h4 className="font-bold text-sm text-gray-900 mb-1">{link.megaMenu.column3.storyTitle}</h4>
+                      <p className="text-xs text-gray-500 leading-relaxed">{link.megaMenu.column3.storyDesc}</p>
+                    </div>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* Right Column (Button) */}
-        <div className="flex-shrink-0 flex justify-end items-center gap-3 ml-auto">
-          <Link 
-            to="/contact-us" 
-            className="hidden lg:flex items-center gap-2 bg-primary text-white border-2 border-primary px-7 py-3 rounded-full text-sm font-bold tracking-wide hover:bg-primary-dark hover:border-primary-dark transition-all duration-300 shadow-[0_4px_14px_rgba(46,125,50,0.39)] whitespace-nowrap"
-            style={{ color: '#fff' }}
-          >
-            <FaCalendarWeek className="text-base" />
-            Book a session
-          </Link>
-
-          {/* Mobile hamburger */}
-          <button
-            className="lg:hidden p-2 text-gray-800 text-2xl cursor-pointer ml-auto"
+        {/* Right Column (Button & Mobile Toggle) */}
+        <div className="flex items-center gap-4">
+          <div className="hidden lg:block">
+            <Link to="/contact-us" className="inline-flex items-center gap-2 bg-[#D81B60] text-white font-bold text-sm px-6 py-2.5 rounded-full hover:bg-[#C2185B] transition-colors shadow-md">
+              <FaCalendarWeek />
+              Book a session
+            </Link>
+          </div>
+          
+          <button 
+            className="lg:hidden text-2xl text-gray-800 p-2"
             onClick={() => setIsMobileOpen(!isMobileOpen)}
-            aria-label="Toggle menu"
           >
             {isMobileOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -231,76 +191,22 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isMobileOpen && (
-        <div className="lg:hidden fixed inset-0 top-[56px] bg-white z-40 overflow-y-auto animate-fade-in">
-          <div className="p-4 flex flex-col gap-1">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 p-4 max-h-[calc(100vh-64px)] overflow-y-auto">
+          <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
-              <div key={link.label}>
-                {link.megaMenu ? (
-                  <>
-                    <button
-                      className="w-full flex items-center justify-between py-3 px-4 text-base font-bold text-gray-800 border-b border-gray-100 cursor-pointer"
-                      onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
-                    >
-                      {link.label}
-                      <FaChevronDown className={`text-sm transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
-                    </button>
-
-                    {openDropdown === link.label && (
-                      <div className="bg-gray-50 flex flex-col border-b border-gray-100 p-4 gap-6">
-                        {/* Simple mobile mapping of mega menu items */}
-                        <div>
-                          <h3 className="font-bold text-primary mb-3">{link.megaMenu.column1.title}</h3>
-                          {link.megaMenu.column1.items.map(item => (
-                            <Link key={item.label} to={item.path} className="block py-2 text-sm text-gray-600 font-medium border-b border-gray-200 last:border-0" onClick={() => setIsMobileOpen(false)}>
-                              {item.label}
-                            </Link>
-                          ))}
-                        </div>
-                        {link.megaMenu.column2.map(section => (
-                          <div key={section.title}>
-                            <h3 className="font-bold text-primary mb-3">{section.title}</h3>
-                            {section.items.map(item => (
-                              <Link key={item.label} to={item.path} className="block py-2 text-sm text-gray-600 font-medium border-b border-gray-200 last:border-0" onClick={() => setIsMobileOpen(false)}>
-                                {item.label}
-                              </Link>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  link.path.startsWith('#') ? (
-                    <a
-                      href={link.path}
-                      className="block py-3 px-4 text-base font-bold text-gray-800 border-b border-gray-100"
-                      onClick={() => setIsMobileOpen(false)}
-                    >
-                      {link.label}
-                    </a>
-                  ) : (
-                    <NavLink
-                      to={link.path}
-                      onClick={() => setIsMobileOpen(false)}
-                      className={({ isActive }) =>
-                        `block py-3 px-4 text-base font-bold border-b border-gray-100 ${
-                          isActive ? 'text-primary' : 'text-gray-800'
-                        }`
-                      }
-                    >
-                      {link.label}
-                    </NavLink>
-                  )
-                )}
+              <div key={link.label} className="border-b border-gray-100 last:border-0 pb-2">
+                <Link 
+                  to={link.path || '#'} 
+                  onClick={() => setIsMobileOpen(false)}
+                  className="block font-bold text-gray-800 py-3 px-2 hover:text-[#D81B60] hover:bg-gray-50 rounded"
+                >
+                  {link.label}
+                </Link>
               </div>
             ))}
-            <div className="p-4 mt-4">
-               <Link 
-                to="/contact-us" 
-                onClick={() => setIsMobileOpen(false)}
-                className="w-full flex items-center justify-center gap-2 bg-primary py-3 rounded-full text-base font-bold tracking-wide"
-                style={{ color: '#fff' }}
-              >
+            <div className="pt-4">
+              <Link to="/contact-us" onClick={() => setIsMobileOpen(false)} className="flex items-center justify-center gap-2 bg-[#D81B60] text-white font-bold text-sm px-6 py-3 rounded-full hover:bg-[#C2185B] transition-colors shadow-md w-full">
+                <FaCalendarWeek />
                 Book a session
               </Link>
             </div>

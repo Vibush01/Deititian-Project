@@ -3,20 +3,13 @@ import SectionHeading from '../ui/SectionHeading'
 import LocationCard from '../ui/LocationCard'
 import { clinicLocations } from '../../data/locationsData'
 
-/**
- * Clinic locations section with location cards and embedded Google Map.
- *
- * @param {string} className - Additional wrapper classes
- * @param {boolean} showMap - Whether to show the Google Map embed
- */
 const ClinicLocations = ({ className = '', showMap = true }) => {
   const [selectedCity, setSelectedCity] = useState(clinicLocations[0])
 
-  // Google Maps embed URL for the selected location
   const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(selectedCity.address)}&output=embed`
 
   return (
-    <section className={`section-padding bg-white ${className}`}>
+    <section className={`py-16 md:py-24 bg-white ${className}`}>
       <div className="container-custom">
         <SectionHeading
           label="Our Clinics"
@@ -24,43 +17,38 @@ const ClinicLocations = ({ className = '', showMap = true }) => {
           subtitle="We have clinics across major cities to serve you better. Find the nearest location and book your consultation today."
         />
 
-        <div className={`mt-8 ${showMap ? 'grid grid-cols-1 lg:grid-cols-2 gap-8' : ''}`}>
+        <div className="mt-12 md:mt-16 flex flex-col lg:flex-row gap-8 lg:gap-12">
           {/* Location Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 content-start">
-            {clinicLocations.map((location, index) => (
-              <div
-                key={index}
-                className={`cursor-pointer transition-all duration-200 rounded-xl ${
-                  selectedCity.city === location.city && showMap
-                    ? 'ring-2 ring-primary'
-                    : ''
-                }`}
-                onClick={() => setSelectedCity(location)}
-              >
-                <LocationCard
-                  city={location.city}
-                  address={location.address}
-                  phone={location.phone}
-                  mapLink={location.mapLink}
-                />
-              </div>
-            ))}
+          <div className="w-full lg:w-1/2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar pb-4">
+              {clinicLocations.map((location, index) => (
+                <div
+                  key={index}
+                  onClick={() => setSelectedCity(location)}
+                  className={`cursor-pointer transition-transform duration-300 ${selectedCity.city === location.city ? 'ring-2 ring-[#2E7D32] rounded-2xl shadow-md scale-[1.02]' : 'hover:scale-[1.02]'}`}
+                >
+                  <LocationCard
+                    city={location.city}
+                    address={location.address}
+                    phone={location.phone}
+                    mapLink={location.mapLink}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Google Map Embed */}
           {showMap && (
-            <div className="sticky top-24 h-fit">
-              <div className="bg-gray-light rounded-2xl overflow-hidden shadow-[var(--shadow-card)] h-[300px] sm:h-[400px] lg:h-[500px]">
+            <div className="w-full lg:w-1/2 h-[400px] lg:h-auto min-h-[400px]">
+              <div className="w-full h-full rounded-3xl overflow-hidden shadow-xl border-4 border-white bg-gray-100 relative">
                 <iframe
                   title="Clinic Location Map"
                   src={mapEmbedUrl}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
+                  className="absolute inset-0 w-full h-full border-0"
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  className="w-full h-full"
                 />
               </div>
             </div>

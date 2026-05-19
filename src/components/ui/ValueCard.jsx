@@ -10,18 +10,18 @@ import Card from './Card'
  */
 const ValueCard = ({ number, title, description }) => {
   return (
-    <Card className="relative overflow-hidden group">
+    <Card>
       {/* Large faded number in background */}
-      <span className="absolute top-2 right-4 text-6xl font-extrabold text-primary/8 group-hover:text-primary/15 transition-colors duration-300 select-none">
+      <span>
         {number}
       </span>
 
-      <div className="relative z-10">
-        <span className="inline-block text-sm font-bold text-primary bg-primary-light rounded-full px-3 py-1 mb-3">
+      <div>
+        <span>
           {number}
         </span>
-        <h3 className="text-lg font-bold text-dark mb-2">{title}</h3>
-        <p className="text-sm text-gray-text leading-relaxed">{description}</p>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </div>
     </Card>
   )

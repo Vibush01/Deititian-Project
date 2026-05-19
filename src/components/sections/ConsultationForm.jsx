@@ -4,46 +4,21 @@ import SectionHeading from '../ui/SectionHeading'
 import Button from '../ui/Button'
 import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
 
-/**
- * Consultation booking form — split layout with left image + right form.
- * "Transform Your Health Journey" section.
- *
- * @param {string} className - Additional wrapper classes
- */
-
 const featureBadges = [
-  { icon: <FaUserMd />, label: 'Expert Nutritionists' },
-  { icon: <FaClipboardList />, label: 'Personalized Plans' },
-  { icon: <FaHeadset />, label: '24/7 Support' },
+  { icon: <FaUserMd className="text-xl" />, label: 'Expert Nutritionists' },
+  { icon: <FaClipboardList className="text-xl" />, label: 'Personalized Plans' },
+  { icon: <FaHeadset className="text-xl" />, label: '24/7 Support' },
 ]
 
 const initialFormState = {
-  name: '',
-  email: '',
-  phone: '',
-  whatsapp: '',
-  age: '',
-  gender: '',
-  weight: '',
-  height: '',
-  hasConcern: 'no',
-  medicalConcern: '',
-  location: '',
-  clinicLocation: '',
-  consultationDate: '',
-  consultationTime: '',
+  name: '', email: '', phone: '', whatsapp: '', age: '', gender: '',
+  weight: '', height: '', hasConcern: 'no', medicalConcern: '',
+  location: '', clinicLocation: '', consultationDate: '', consultationTime: '',
 }
 
 const clinicOptions = [
-  'Chandigarh',
-  'Mohali',
-  'Amritsar',
-  'Jalandhar',
-  'Ludhiana',
-  'Patiala',
-  'New Delhi',
-  'Dubai',
-  'Mumbai',
+  'Chandigarh', 'Mohali', 'Amritsar', 'Jalandhar', 'Ludhiana',
+  'Patiala', 'New Delhi', 'Dubai', 'Mumbai',
 ]
 
 const ConsultationForm = ({ className = '' }) => {
@@ -56,22 +31,20 @@ const ConsultationForm = ({ className = '' }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Form submission will be integrated with external service later
-    console.log('Form submitted:', formData)
     alert('Thank you! Your consultation request has been submitted. We will contact you shortly.')
     setFormData(initialFormState)
   }
 
-  const inputClasses = 'w-full px-4 py-3 rounded-xl border border-gray-border bg-white text-dark text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200'
-  const labelClasses = 'block text-sm font-semibold text-dark mb-1.5'
+  const inputClasses = 'w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/30 focus:border-[#2E7D32] transition-all duration-200'
+  const labelClasses = 'block text-sm font-bold text-gray-700 mb-1.5'
 
   return (
-    <section id="contact" className={`section-padding bg-gray-light ${className}`}>
+    <section id="contact" className={`py-16 md:py-24 bg-white ${className}`}>
       <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center lg:items-start">
+          
           {/* Left Side — Image + Badges */}
-          <div className="hidden lg:block">
+          <div className="w-full lg:w-1/2 flex flex-col hidden lg:block">
             <SectionHeading
               label="Get Started"
               title="Transform Your Health Journey"
@@ -79,98 +52,66 @@ const ConsultationForm = ({ className = '' }) => {
               align="left"
             />
 
-            <div className="relative mt-6">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl mb-8 group">
               <img
                 src={fitjeevaDietitian}
                 alt="Transform Your Health"
-                className="w-full max-w-md rounded-3xl shadow-lg object-cover"
+                className="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700"
               />
-            </div>
-
-            {/* Feature Badges */}
-            <div className="flex flex-wrap gap-3 mt-6">
-              {featureBadges.map((badge, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-2 bg-white rounded-full px-4 py-2 shadow-sm"
-                >
-                  <span className="text-primary text-sm">{badge.icon}</span>
-                  <span className="text-xs font-semibold text-dark">{badge.label}</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+              
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex flex-col gap-4">
+                  {featureBadges.map((badge, index) => (
+                    <div key={index} className="flex items-center gap-4 text-white">
+                      <div className="w-10 h-10 rounded-full bg-[#2E7D32] flex items-center justify-center shrink-0 shadow-lg">
+                        {badge.icon}
+                      </div>
+                      <span className="font-bold tracking-wide">{badge.label}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
 
           {/* Right Side — Form */}
-          <div className="bg-white rounded-2xl p-6 md:p-8 shadow-[var(--shadow-card)]">
-            {/* Mobile-only heading */}
-            <div className="lg:hidden mb-6">
-              <SectionHeading
-                label="Get Started"
-                title="Transform Your Health Journey"
-                subtitle="Book a consultation with our experts."
-                align="center"
-              />
+          <div className="w-full lg:w-1/2 bg-white rounded-3xl shadow-[0_0_40px_rgba(0,0,0,0.05)] border border-gray-100 p-6 md:p-10 lg:p-12">
+            <div className="lg:hidden mb-8 text-center">
+              <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest mb-3">
+                Get Started
+              </span>
+              <h2 className="text-3xl font-extrabold text-gray-900 mb-2">Transform Your Health</h2>
+              <p className="text-gray-600 text-sm">Book a consultation with our experts.</p>
             </div>
 
-            <h3 className="text-lg font-bold text-dark mb-1 hidden lg:block">
-              One change today. A healthier you tomorrow
-            </h3>
-            <p className="text-sm text-gray-text mb-6 hidden lg:block">
-              Book a consultation with our experts.
-            </p>
+            <div className="hidden lg:block mb-8">
+              <h3 className="text-2xl font-extrabold text-gray-900 mb-2">Book Your Session</h3>
+              <p className="text-gray-500">One change today. A healthier you tomorrow.</p>
+            </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Row 1: Name + Email */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Row 1 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClasses}>Name *</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your full name"
-                    className={inputClasses}
-                    required
-                  />
+                  <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Your full name" className={inputClasses} required />
                 </div>
                 <div>
                   <label className={labelClasses}>Email</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="your@email.com"
-                    className={inputClasses}
-                  />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="your@email.com" className={inputClasses} />
                 </div>
               </div>
 
-              {/* Row 2: Age + Gender */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Row 2 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClasses}>Age</label>
-                  <input
-                    type="number"
-                    name="age"
-                    value={formData.age}
-                    onChange={handleChange}
-                    placeholder="Age"
-                    min="1"
-                    max="120"
-                    className={inputClasses}
-                  />
+                  <input type="number" name="age" value={formData.age} onChange={handleChange} placeholder="Age" min="1" max="120" className={inputClasses} />
                 </div>
                 <div>
                   <label className={labelClasses}>Gender</label>
-                  <select
-                    name="gender"
-                    value={formData.gender}
-                    onChange={handleChange}
-                    className={inputClasses}
-                  >
+                  <select name="gender" value={formData.gender} onChange={handleChange} className={inputClasses}>
                     <option value="">Select Gender</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -179,124 +120,62 @@ const ConsultationForm = ({ className = '' }) => {
                 </div>
               </div>
 
-              {/* Row 3: Weight + Height */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Row 3 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClasses}>Weight (kg)</label>
-                  <input
-                    type="number"
-                    name="weight"
-                    value={formData.weight}
-                    onChange={handleChange}
-                    placeholder="Weight in kg"
-                    className={inputClasses}
-                  />
+                  <input type="number" name="weight" value={formData.weight} onChange={handleChange} placeholder="Weight in kg" className={inputClasses} />
                 </div>
                 <div>
                   <label className={labelClasses}>Height (cm)</label>
-                  <input
-                    type="number"
-                    name="height"
-                    value={formData.height}
-                    onChange={handleChange}
-                    placeholder="Height in cm"
-                    className={inputClasses}
-                  />
+                  <input type="number" name="height" value={formData.height} onChange={handleChange} placeholder="Height in cm" className={inputClasses} />
                 </div>
               </div>
 
-              {/* Row 4: Concern */}
-              <div>
-                <label className={labelClasses}>Any Concern?</label>
-                <div className="flex gap-4">
+              {/* Row 4 */}
+              <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                <label className={labelClasses}>Any Medical Concern?</label>
+                <div className="flex gap-6 mt-2">
                   <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="hasConcern"
-                      value="yes"
-                      checked={formData.hasConcern === 'yes'}
-                      onChange={handleChange}
-                      className="accent-primary"
-                    />
-                    <span className="text-sm text-dark">Yes</span>
+                    <input type="radio" name="hasConcern" value="yes" checked={formData.hasConcern === 'yes'} onChange={handleChange} className="w-4 h-4 text-[#2E7D32]" />
+                    <span className="text-sm font-semibold text-gray-700">Yes</span>
                   </label>
                   <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                      type="radio"
-                      name="hasConcern"
-                      value="no"
-                      checked={formData.hasConcern === 'no'}
-                      onChange={handleChange}
-                      className="accent-primary"
-                    />
-                    <span className="text-sm text-dark">No</span>
+                    <input type="radio" name="hasConcern" value="no" checked={formData.hasConcern === 'no'} onChange={handleChange} className="w-4 h-4 text-[#2E7D32]" />
+                    <span className="text-sm font-semibold text-gray-700">No</span>
                   </label>
                 </div>
               </div>
 
               {formData.hasConcern === 'yes' && (
                 <div>
-                  <label className={labelClasses}>Medical Concern</label>
-                  <textarea
-                    name="medicalConcern"
-                    value={formData.medicalConcern}
-                    onChange={handleChange}
-                    placeholder="Describe your medical concern..."
-                    rows={3}
-                    className={`${inputClasses} resize-none`}
-                  />
+                  <label className={labelClasses}>Describe Concern</label>
+                  <textarea name="medicalConcern" value={formData.medicalConcern} onChange={handleChange} placeholder="Describe your medical concern..." rows={3} className={`${inputClasses} resize-none`} />
                 </div>
               )}
 
-              {/* Row 5: Phone + WhatsApp */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Row 5 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClasses}>Contact Number *</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+91 XXXXX XXXXX"
-                    className={inputClasses}
-                    required
-                  />
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="+91 XXXXX XXXXX" className={inputClasses} required />
                 </div>
                 <div>
                   <label className={labelClasses}>WhatsApp Number</label>
-                  <input
-                    type="tel"
-                    name="whatsapp"
-                    value={formData.whatsapp}
-                    onChange={handleChange}
-                    placeholder="+91 XXXXX XXXXX"
-                    className={inputClasses}
-                  />
+                  <input type="tel" name="whatsapp" value={formData.whatsapp} onChange={handleChange} placeholder="+91 XXXXX XXXXX" className={inputClasses} />
                 </div>
               </div>
 
-              {/* Row 6: Location + Clinic */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Row 6 */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className={labelClasses}>Your Location</label>
-                  <input
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    placeholder="City / Area"
-                    className={inputClasses}
-                  />
+                  <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="City / Area" className={inputClasses} />
                 </div>
                 <div>
                   <label className={labelClasses}>Select Clinic</label>
-                  <select
-                    name="clinicLocation"
-                    value={formData.clinicLocation}
-                    onChange={handleChange}
-                    className={inputClasses}
-                  >
-                    <option value="">Select Clinic Location</option>
+                  <select name="clinicLocation" value={formData.clinicLocation} onChange={handleChange} className={inputClasses}>
+                    <option value="">Online / Virtual</option>
                     {clinicOptions.map((clinic) => (
                       <option key={clinic} value={clinic}>{clinic}</option>
                     ))}
@@ -304,34 +183,12 @@ const ConsultationForm = ({ className = '' }) => {
                 </div>
               </div>
 
-              {/* Row 7: Date + Time */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className={labelClasses}>Consultation Date</label>
-                  <input
-                    type="date"
-                    name="consultationDate"
-                    value={formData.consultationDate}
-                    onChange={handleChange}
-                    className={inputClasses}
-                  />
-                </div>
-                <div>
-                  <label className={labelClasses}>Consultation Time</label>
-                  <input
-                    type="time"
-                    name="consultationTime"
-                    value={formData.consultationTime}
-                    onChange={handleChange}
-                    className={inputClasses}
-                  />
-                </div>
-              </div>
-
               {/* Submit Button */}
-              <Button type="submit" className="w-full mt-2" size="lg">
-                Book a Consultation Now
-              </Button>
+              <div className="pt-4">
+                <Button type="submit" className="w-full text-lg py-4 shadow-lg shadow-[#2E7D32]/30 hover:shadow-[#2E7D32]/50">
+                  Book Consultation Now
+                </Button>
+              </div>
             </form>
           </div>
         </div>

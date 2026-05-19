@@ -11,63 +11,48 @@ import { serviceCategories } from '../data/servicesData'
 import { siteInfo } from '../data/siteData'
 import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
 
-/* Category icons lookup */
 const categoryIcons = {
-  heart: <FaHeartbeat className="text-3xl" />,
-  dumbbell: <FaDumbbell className="text-3xl" />,
-  'heart-pulse': <FaSpa className="text-3xl" />,
+  heart: <FaHeartbeat />,
+  dumbbell: <FaDumbbell />,
+  'heart-pulse': <FaSpa />,
 }
 
-/* =========================================================
-   Service Hero
-   ========================================================= */
 const ServiceHero = () => (
-  <section className="bg-primary-lighter overflow-hidden">
-    <div className="container-custom py-12 md:py-20">
-      <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-        {/* Text */}
-        <div className="flex-1 text-center lg:text-left">
-          <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold text-primary leading-tight">
+  <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
+    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FCE4EC]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
+    <div className="container-custom relative z-10">
+      <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+        <div className="w-full lg:w-1/2">
+          <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
+            Our Services
+          </span>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
             Expert Clinical Diet Plans Personalized for Your Health Revolution
           </h1>
-          <p className="mt-5 text-base md:text-lg text-gray-text leading-relaxed max-w-xl mx-auto lg:mx-0">
-            Achieve your health goals with personalized diet plans that identify the root cause of weight gain through expert nutrition and lifestyle corrections provided by India&apos;s premier online diet service.
+          <p className="text-base md:text-lg text-gray-600 mb-8 leading-relaxed">
+            Achieve your health goals with personalized diet plans that identify the root cause of weight gain through expert nutrition and lifestyle corrections provided by India's premier online diet service.
           </p>
-          <div className="mt-6">
-            <Button
-              href={`tel:${siteInfo.phone.replace(/\s/g, '')}`}
-              icon={<FaPhoneAlt />}
-              size="lg"
-            >
+          <div>
+            <Button href={`tel:${siteInfo.phone.replace(/\s/g, '')}`} icon={<FaPhoneAlt />} className="bg-[#D81B60] hover:bg-[#C2185B]">
               Talk to us
             </Button>
           </div>
         </div>
 
-        {/* Image */}
-        <div className="flex-1 flex justify-center lg:justify-end">
-          <div className="relative">
-            <div className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-full bg-primary overflow-hidden shadow-xl">
-              <img
-                src={fitjeevaDietitian}
-                alt="Expert Clinical Diet Plans"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="absolute -top-4 -right-4 w-8 h-8 rounded-full bg-primary/30" />
-            <div className="absolute -bottom-2 -left-6 w-12 h-12 rounded-full bg-primary/20" />
+        <div className="w-full lg:w-1/2 relative">
+          <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white z-10">
+            <img src={fitjeevaDietitian} alt="Expert Clinical Diet Plans" className="w-full h-auto object-cover" />
           </div>
+          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#F8BBD0] rounded-full blur-2xl -z-10"></div>
+          <div className="absolute -top-6 -right-6 w-40 h-40 bg-[#A5D6A7] rounded-full blur-3xl -z-10"></div>
         </div>
       </div>
     </div>
   </section>
 )
 
-/* =========================================================
-   Service Category Cards
-   ========================================================= */
 const ServiceCategoryCards = () => (
-  <section className="section-padding bg-white">
+  <section className="py-12 md:py-20 bg-white">
     <div className="container-custom">
       <SectionHeading
         label="Our Services"
@@ -75,33 +60,22 @@ const ServiceCategoryCards = () => (
         subtitle="We offer specialized nutrition programs across three key areas to address your unique health needs with personalized, science-backed solutions."
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {serviceCategories.map((category) => (
-          <Link
-            key={category.id}
-            to={category.path}
-            className="group bg-white rounded-2xl overflow-hidden border border-gray-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-2 transition-all duration-300"
-          >
-            <div className="overflow-hidden h-48 md:h-56">
-              <img
-                src={category.image}
-                alt={category.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
+          <Link key={category.id} to={category.path} className="group bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+            <div className="h-48 overflow-hidden relative">
+              <img src={category.image} alt={category.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
-            <div className="p-5 md:p-6">
-              <div className="w-14 h-14 rounded-xl bg-primary-lighter flex items-center justify-center text-primary mb-4">
+            <div className="p-6 md:p-8 flex flex-col flex-grow relative bg-white">
+              <div className="absolute -top-6 right-6 w-12 h-12 bg-[#D81B60] text-white rounded-xl flex items-center justify-center text-xl shadow-lg transform group-hover:rotate-12 transition-transform">
                 {categoryIcons[category.icon]}
               </div>
-              <h3 className="text-xl font-bold text-dark mb-2 group-hover:text-primary transition-colors">
-                {category.title}
-              </h3>
-              <p className="text-sm text-gray-text leading-relaxed mb-4">
-                {category.heroDescription.slice(0, 150)}...
-              </p>
-              <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all">
-                Learn more <FaArrowRight className="text-xs" />
-              </span>
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#D81B60] transition-colors">{category.title}</h3>
+              <p className="text-sm text-gray-600 leading-relaxed mb-6 flex-grow">{category.heroDescription.slice(0, 150)}...</p>
+              <div className="mt-auto flex items-center text-[#D81B60] font-bold text-sm group-hover:gap-2 transition-all">
+                Learn more <FaArrowRight className="ml-1 text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
             </div>
           </Link>
         ))}
@@ -110,53 +84,30 @@ const ServiceCategoryCards = () => (
   </section>
 )
 
-/* =========================================================
-   Detailed Category Sections
-   ========================================================= */
 const CategoryDetailSections = () => (
-  <section className="section-padding" style={{ background: 'linear-gradient(180deg, #f1f8e9 0%, #f5faf5 100%)' }}>
-    <div className="container-custom space-y-12">
-      {serviceCategories.map((category) => (
-        <div
-          key={category.id}
-          className="bg-white rounded-2xl border border-gray-border overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
-        >
-          <div className="flex flex-col lg:flex-row">
-            {/* Image — left side */}
-            <div className="lg:w-[45%] flex-shrink-0">
-              <img
-                src={category.image}
-                alt={category.title}
-                className="w-full h-64 lg:h-full object-cover"
-              />
+  <section className="py-12 md:py-20 bg-gray-50 border-t border-gray-100">
+    <div className="container-custom space-y-16 md:space-y-24">
+      {serviceCategories.map((category, idx) => (
+        <div key={category.id} className={`flex flex-col ${idx % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16`}>
+          <div className="w-full md:w-1/2">
+            <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white transform transition-transform hover:scale-105 duration-500">
+              <img src={category.image} alt={category.title} className="w-full h-[300px] md:h-[400px] object-cover" />
             </div>
-
-            {/* Text — right side */}
-            <div className="p-6 md:p-8 lg:p-10 flex-1 flex flex-col justify-center">
-              <h3 className="text-xl md:text-2xl lg:text-[1.6rem] font-bold text-primary italic leading-snug mb-4">
-                {category.heroTitle}
-              </h3>
-              <p className="text-sm md:text-base text-gray-text leading-relaxed text-justify mb-6">
-                {category.heroDescription}
-              </p>
-
-              {/* Sub-services as compact tags */}
-              <div className="flex flex-wrap gap-2 mb-5">
-                {category.services.slice(0, 6).map((service) => (
-                  <span
-                    key={service.id}
-                    className="inline-block bg-primary-lighter text-primary text-xs font-semibold px-3 py-1.5 rounded-full"
-                  >
-                    {service.title}
-                  </span>
-                ))}
-              </div>
-
-              <div>
-                <Button to={category.path} size="sm">
-                  Explore {category.title} <FaArrowRight className="inline ml-1 text-xs" />
-                </Button>
-              </div>
+          </div>
+          <div className="w-full md:w-1/2">
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">{category.heroTitle}</h3>
+            <p className="text-base text-gray-600 leading-relaxed mb-6">{category.heroDescription}</p>
+            <div className="flex flex-wrap gap-2 mb-8">
+              {category.services.slice(0, 6).map((service) => (
+                <span key={service.id} className="bg-white border border-gray-200 text-gray-700 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">
+                  {service.title}
+                </span>
+              ))}
+            </div>
+            <div>
+              <Button to={category.path} size="sm" className="bg-[#D81B60] hover:bg-[#C2185B]">
+                Explore {category.title}
+              </Button>
             </div>
           </div>
         </div>
@@ -165,34 +116,16 @@ const CategoryDetailSections = () => (
   </section>
 )
 
-/* =========================================================
-   Service Page — Full Composition
-   ========================================================= */
 const ServicePage = () => {
   return (
-    <div>
-      {/* 1. Hero */}
+    <div className="flex flex-col bg-white overflow-hidden">
       <ServiceHero />
-
-      {/* 2. Stats */}
       <StatsCounter />
-
-      {/* 3. Category Cards */}
       <ServiceCategoryCards />
-
-      {/* 4. Detailed Category Sections */}
       <CategoryDetailSections />
-
-      {/* 5. Consultation Form */}
       <ConsultationForm />
-
-      {/* 6. Consultation CTA */}
       <ConsultationCTA />
-
-      {/* 7. Instagram Feed */}
       <InstagramFeed />
-
-      {/* 8. Contact CTA */}
       <ContactCTA />
     </div>
   )

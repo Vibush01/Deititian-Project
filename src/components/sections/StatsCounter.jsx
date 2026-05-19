@@ -1,20 +1,13 @@
 import CounterCard from '../ui/CounterCard'
 import { statsData } from '../../data/siteData'
 
-/**
- * Stats counter row displaying animated metrics.
- * Renders a horizontal row of CounterCards driven by siteData.
- *
- * @param {Array} stats - Override default stats (optional)
- * @param {string} className - Additional wrapper classes
- */
 const StatsCounter = ({ stats = statsData, className = '' }) => {
   return (
-    <section className={`bg-white py-16 md:py-20 border-y border-gray-border/50 ${className}`}>
+    <section className={`py-12 md:py-16 bg-white border-b border-gray-100 ${className}`}>
       <div className="container-custom">
-        <div className="grid grid-cols-2 md:flex md:flex-wrap md:justify-center md:items-stretch md:gap-0 md:divide-x md:divide-gray-border gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 divide-x divide-gray-100">
           {stats.map((stat, index) => (
-            <div key={index} className="md:flex-1 md:min-w-[160px] md:px-6">
+            <div key={index} className="flex justify-center">
               <CounterCard
                 number={stat.number}
                 suffix={stat.suffix}

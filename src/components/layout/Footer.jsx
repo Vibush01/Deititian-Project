@@ -4,76 +4,77 @@ import { siteInfo, socialLinks, footerLinks } from '../../data/siteData'
 
 const Footer = () => {
   return (
-    <footer style={{ background: 'linear-gradient(180deg, #E8F5E9 0%, #F1F8E9 50%, #E8F5E9 100%)' }}>
+    <footer className="bg-gray-900 text-white pt-16 md:pt-24 border-t-4 border-[#2E7D32]">
       {/* Main Footer Content */}
-      <div className="container-custom py-12 md:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+      <div className="container-custom">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-gray-800">
 
           {/* Column 1: Logo + Tagline + Socials */}
-          <div className="sm:col-span-2 lg:col-span-1">
-            <Link to="/" className="inline-block mb-4">
+          <div className="flex flex-col">
+            <Link to="/" className="inline-block mb-6">
               <div className="flex items-center gap-2">
-                <span className="text-2xl">🌿</span>
+                <span className="text-3xl">🌿</span>
                 <div className="flex flex-col">
-                  <span className="text-xl font-extrabold text-primary leading-tight tracking-tight">
+                  <span className="text-2xl font-extrabold text-[#4CAF50] leading-none tracking-tight">
                     FitJeeva
                   </span>
-                  <span className="text-[10px] font-semibold text-gray-text leading-tight tracking-wider uppercase">
+                  <span className="text-[10px] font-bold text-gray-400 tracking-widest uppercase mt-0.5">
                     Nourish | Transform | Thrive
                   </span>
                 </div>
               </div>
             </Link>
 
-            <p className="text-sm text-gray-text leading-relaxed mb-6 max-w-xs">
+            <p className="text-gray-400 text-sm leading-relaxed mb-8 pr-4">
               {siteInfo.tagline}
             </p>
 
             {/* Social Icons */}
-            <div className="flex items-center gap-3">
+            <div className="flex gap-4">
               <a
                 href={socialLinks.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-colors duration-300"
                 aria-label="Facebook"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-[#4CAF50] hover:text-white transition-all duration-300 hover:-translate-y-1"
               >
-                <FaFacebookF className="text-sm" />
+                <FaFacebookF />
               </a>
               <a
                 href={socialLinks.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-colors duration-300"
                 aria-label="YouTube"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-red-500 hover:text-white transition-all duration-300 hover:-translate-y-1"
               >
-                <FaYoutube className="text-sm" />
+                <FaYoutube />
               </a>
               <a
                 href={socialLinks.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white text-primary transition-colors duration-300"
                 aria-label="Instagram"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-pink-500 hover:text-white transition-all duration-300 hover:-translate-y-1"
               >
-                <FaInstagram className="text-sm" />
+                <FaInstagram />
               </a>
             </div>
           </div>
 
           {/* Column 2: Company */}
           <div>
-            <h3 className="text-base font-bold mb-4 text-dark">Company</h3>
-            <ul className="space-y-2.5">
+            <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-wider relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-12 after:h-1 after:bg-[#4CAF50] after:rounded-full">Company</h3>
+            <ul className="flex flex-col gap-4">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
                   {link.path.startsWith('#') ? (
-                    <span className="text-sm text-gray-text cursor-default">{link.label}</span>
+                    <span className="text-gray-400 hover:text-white transition-colors cursor-not-allowed">{link.label}</span>
                   ) : (
                     <Link
                       to={link.path}
-                      className="text-sm text-gray-text hover:text-primary transition-colors duration-200"
+                      className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
                     >
+                      <span className="w-1 h-1 rounded-full bg-[#4CAF50] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                       {link.label}
                     </Link>
                   )}
@@ -84,14 +85,15 @@ const Footer = () => {
 
           {/* Column 3: Wellness Programs */}
           <div>
-            <h3 className="text-base font-bold mb-4 text-dark">Wellness Programs</h3>
-            <ul className="space-y-2.5">
+            <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-wider relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-12 after:h-1 after:bg-[#4CAF50] after:rounded-full">Wellness Programs</h3>
+            <ul className="flex flex-col gap-4">
               {footerLinks.wellnessPrograms.map((link) => (
                 <li key={link.label}>
                   <Link
                     to={link.path}
-                    className="text-sm text-gray-text hover:text-primary transition-colors duration-200"
+                    className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
                   >
+                    <span className="w-1 h-1 rounded-full bg-[#4CAF50] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                     {link.label}
                   </Link>
                 </li>
@@ -101,17 +103,18 @@ const Footer = () => {
 
           {/* Column 4: Explore */}
           <div>
-            <h3 className="text-base font-bold mb-4 text-dark">Explore</h3>
-            <ul className="space-y-2.5">
+            <h3 className="text-lg font-bold text-white mb-6 uppercase tracking-wider relative inline-block after:content-[''] after:absolute after:-bottom-2 after:left-0 after:w-12 after:h-1 after:bg-[#4CAF50] after:rounded-full">Explore</h3>
+            <ul className="flex flex-col gap-4">
               {footerLinks.explore.map((link) => (
                 <li key={link.label}>
                   {link.path.startsWith('#') ? (
-                    <span className="text-sm text-gray-text cursor-default">{link.label}</span>
+                    <span className="text-gray-400 hover:text-white transition-colors cursor-not-allowed">{link.label}</span>
                   ) : (
                     <Link
                       to={link.path}
-                      className="text-sm text-gray-text hover:text-primary transition-colors duration-200"
+                      className="text-gray-400 hover:text-white transition-colors flex items-center gap-2 group"
                     >
+                      <span className="w-1 h-1 rounded-full bg-[#4CAF50] opacity-0 group-hover:opacity-100 transition-opacity"></span>
                       {link.label}
                     </Link>
                   )}
@@ -123,9 +126,9 @@ const Footer = () => {
       </div>
 
       {/* Copyright Bar */}
-      <div className="border-t border-primary/10">
-        <div className="container-custom py-5 text-center">
-          <p className="text-xs text-gray-text">
+      <div className="bg-[#111] py-6">
+        <div className="container-custom">
+          <p className="text-center text-gray-500 text-sm font-medium">
             {siteInfo.copyright}
           </p>
         </div>

@@ -3,12 +3,6 @@ import SectionHeading from '../ui/SectionHeading'
 import ContactMethodCard from '../ui/ContactMethodCard'
 import { siteInfo } from '../../data/siteData'
 
-/**
- * "Start Your Transformation" contact CTA section with 3 contact method cards.
- * WhatsApp, Call, and Book Appointment.
- *
- * @param {string} className - Additional wrapper classes
- */
 const ContactCTA = ({ className = '' }) => {
   const contactMethods = [
     {
@@ -35,14 +29,14 @@ const ContactCTA = ({ className = '' }) => {
   ]
 
   return (
-    <section className={`section-padding bg-gray-light ${className}`}>
+    <section className={`py-16 md:py-24 bg-gray-50 border-t border-gray-100 ${className}`}>
       <div className="container-custom">
         <SectionHeading
           title="Start Your Transformation: Contact FitJeeva for Expert Guidance"
           subtitle="The first step to a healthier you starts here. Book a diet consultation and talk to a diet expert now to begin your transformation. Connect with our team through the channel you love — our responses are always personalised and judgment-free."
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 md:mt-16 max-w-6xl mx-auto">
           {contactMethods.map((method, index) => (
             <ContactMethodCard
               key={index}

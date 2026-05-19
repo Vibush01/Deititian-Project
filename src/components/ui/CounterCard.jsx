@@ -1,14 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 
-/**
- * Animated counter card that counts up when scrolled into view.
- *
- * @param {number} number - Target number to count to
- * @param {string} suffix - Text after the number (e.g. "+", "%", " Lakh+")
- * @param {string} label - Description text below the number
- * @param {number} decimals - Decimal places (default 0)
- * @param {number} duration - Animation duration in ms (default 2000)
- */
 const CounterCard = ({
   number,
   suffix = '',
@@ -40,7 +31,6 @@ const CounterCard = ({
     const step = (currentTime) => {
       const elapsed = currentTime - startTime
       const progress = Math.min(elapsed / duration, 1)
-      // Ease-out cubic for smooth deceleration
       const eased = 1 - Math.pow(1 - progress, 3)
       setCount(eased * number)
       if (progress < 1) {
@@ -58,12 +48,12 @@ const CounterCard = ({
   }
 
   return (
-    <div ref={ref} className="text-center px-4 py-3">
-      <div className="text-3xl md:text-4xl font-extrabold text-primary leading-none">
+    <div ref={ref} className="flex flex-col items-center justify-center p-6 text-center group">
+      <div className="text-3xl md:text-4xl lg:text-5xl font-black text-[#2E7D32] mb-2 tracking-tight group-hover:scale-110 transition-transform duration-300">
         {formatNumber(count)}
-        <span className="text-2xl md:text-3xl">{suffix}</span>
+        <span className="text-[#4CAF50]">{suffix}</span>
       </div>
-      <p className="mt-2 text-sm md:text-base text-gray-text font-medium">{label}</p>
+      <p className="text-sm md:text-base font-bold text-gray-700 uppercase tracking-wider">{label}</p>
     </div>
   )
 }

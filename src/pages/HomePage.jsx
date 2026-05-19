@@ -55,11 +55,11 @@ const quickLinks = [
     sublabel: "Hormonal Balance",
     to: "/service/pcod-pcos",
     icon: (
-      <svg viewBox="0 0 64 64" fill="none" className="w-10 h-10">
-        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
+      <svg viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
         <path
           d="M32 18c-4 0-7 3-7 7s3 7 7 7 7-3 7-7-3-7-7-7zm-10 14c-3 0-5.5 2.5-5.5 5.5S19 43 22 43s5.5-2.5 5.5-5.5S25 32 22 32zm20 0c-3 0-5.5 2.5-5.5 5.5S39 43 42 43s5.5-2.5 5.5-5.5S45 32 42 32z"
-          fill="#2E7D32"
+          fill="#D81B60"
         />
       </svg>
     ),
@@ -69,11 +69,11 @@ const quickLinks = [
     sublabel: "Metabolism Care",
     to: "/service/thyroid",
     icon: (
-      <svg viewBox="0 0 64 64" fill="none" className="w-10 h-10">
-        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
+      <svg viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
         <path
           d="M32 16c-2 0-3 1-3 3v6c-4 1-7 5-7 9 0 6 4 10 10 14 6-4 10-8 10-14 0-4-3-8-7-9v-6c0-2-1-3-3-3z"
-          fill="#2E7D32"
+          fill="#D81B60"
         />
       </svg>
     ),
@@ -83,13 +83,13 @@ const quickLinks = [
     sublabel: "Sugar Control",
     to: "/service/diabetes",
     icon: (
-      <svg viewBox="0 0 64 64" fill="none" className="w-10 h-10">
-        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
+      <svg viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
         <path
           d="M32 14l-2 4h-6l2 6-4 4 6 2v6h4v-6l6-2-4-4 2-6h-6l2-4z"
-          fill="#2E7D32"
+          fill="#D81B60"
         />
-        <circle cx="32" cy="36" r="5" fill="#1B5E20" opacity="0.6" />
+        <circle cx="32" cy="36" r="5" fill="#880E4F" opacity="0.6" />
       </svg>
     ),
   },
@@ -98,15 +98,15 @@ const quickLinks = [
     sublabel: "View Services",
     to: "/service",
     icon: (
-      <svg viewBox="0 0 64 64" fill="none" className="w-10 h-10">
-        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
+      <svg viewBox="0 0 64 64" fill="none">
+        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
         <path
           d="M24 22h16v4H24zM22 30h20v4H22zM26 38h12v4H26z"
-          fill="#2E7D32"
+          fill="#D81B60"
         />
         <path
           d="M38 42l6 6"
-          stroke="#2E7D32"
+          stroke="#D81B60"
           strokeWidth="2.5"
           strokeLinecap="round"
         />
@@ -116,37 +116,35 @@ const quickLinks = [
 ];
 
 const QuickLinkCards = () => (
-  <section className="py-20 md:py-28 bg-[#f5faf5]">
-    <div className="container-custom">
-      {/* Section micro-heading */}
-      <div className="text-center mb-16 md:mb-20 reveal">
-        <span className="section-label">Quick Access</span>
-        <h2 className="text-2xl md:text-3xl font-bold text-dark mt-3">
+  <section className="py-8 md:py-12 bg-white relative">
+    <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-[#FCE4EC]/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+    <div className="container-custom relative z-10">
+      <div className="text-center mb-8 md:mb-10">
+        <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
+          Quick Access
+        </span>
+        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight">
           Explore Our Specializations
         </h2>
-        <div className="section-divider mt-4"></div>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 md:gap-8 stagger-children">
-        {quickLinks.map((link, index) => (
-          <Link
-            key={link.label}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {quickLinks.map((link, idx) => (
+          <Link 
+            key={idx} 
             to={link.to}
-            className="quick-link-card reveal flex flex-col items-center justify-center gap-4 py-10 px-6 md:py-12 md:px-8"
-            style={{ "--child-index": index }}
+            className="group relative flex flex-col items-center text-center bg-white border border-gray-100 rounded-xl p-5 md:p-6 hover:shadow-lg hover:-translate-y-1 hover:border-[#D81B60]/20 transition-all duration-300"
           >
-            <div className="quick-link-icon">{link.icon}</div>
-            <div className="text-center">
-              <span className="block text-sm md:text-base font-bold text-dark">
-                {link.label}
-              </span>
-              <span className="block text-xs text-gray-text mt-1">
-                {link.sublabel}
-              </span>
+            <div className="w-14 h-14 md:w-16 md:h-16 bg-[#FCE4EC] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm">
+              {link.icon}
             </div>
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-primary opacity-0 group-hover:opacity-100 transition-opacity mt-1">
-              <FaArrowRight className="text-[10px]" />
-            </span>
+            <div className="flex-grow flex flex-col justify-center">
+              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-1">{link.label}</h3>
+              <p className="text-xs text-gray-500 font-medium">{link.sublabel}</p>
+            </div>
+            <div className="mt-4 text-[#D81B60] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center w-8 h-8 rounded-full bg-[#FCE4EC]">
+              <FaArrowRight className="text-sm" />
+            </div>
           </Link>
         ))}
       </div>
@@ -154,47 +152,44 @@ const QuickLinkCards = () => (
   </section>
 );
 
-/* --- Expertise / "Our Diet Clinic Chain" grid --- */
 const ExpertiseSection = () => (
-  <section className="section-padding bg-gray-light/50">
+  <section className="py-12 md:py-16 bg-gray-50/50 border-y border-gray-100">
     <div className="container-custom">
-      <div className="reveal">
-        <SectionHeading
-          label="Our Diet Clinic Chain"
-          title="FitJeeva: Your Trusted Medical Nutrition Clinic"
-          subtitle="Our medical diet clinic in India specializes in medical nutrition science that heals from the root. We focus on personalized diet plans using real Indian food and millet based diets, never shortcuts."
-        />
+      <div className="flex flex-col items-center text-center mb-10 md:mb-12">
+        <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
+          Our Diet Clinic Chain
+        </span>
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight">
+          Your Trusted <br className="hidden md:block" /> Medical Nutrition Clinic
+        </h2>
+        <p className="mt-4 text-sm md:text-base text-gray-600 max-w-2xl leading-relaxed">
+          Our medical diet clinic in India specializes in medical nutrition science that heals from the root. We focus on personalized diet plans using real Indian food and millet based diets, never shortcuts.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8 mt-10 md:mt-14 stagger-children">
-        {homeExpertiseCards.map((card, i) => (
-          <div
-            key={i}
-            className="expertise-card reveal"
-            style={{ "--child-index": i }}
-          >
-            {/* Image with number badge */}
-            <div className="expertise-card-image">
-              <span className="expertise-card-number">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <img
-                src={card.image}
-                alt={card.title}
-                className="w-full h-56 md:h-64 lg:h-72 object-cover"
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+        {homeExpertiseCards.map((card, index) => (
+          <div key={index} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full hover:-translate-y-1">
+            <div className="relative h-40 md:h-48 overflow-hidden">
+              <div className="absolute top-3 left-3 bg-white text-[#D81B60] w-8 h-8 rounded-full flex items-center justify-center font-black text-xs z-10 shadow-md">
+                0{index + 1}
+              </div>
+              <img 
+                src={card.image} 
+                alt={card.title} 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
-
-            {/* Card Body */}
-            <div className="expertise-card-body">
-              <h3 className="text-lg md:text-xl font-bold text-dark leading-snug mb-2">
+            <div className="p-5 flex flex-col flex-grow bg-white">
+              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 group-hover:text-[#D81B60] transition-colors line-clamp-2">
                 {card.title}
               </h3>
-              <p className="text-sm md:text-base text-gray-text leading-relaxed">
+              <p className="text-xs text-gray-600 leading-relaxed line-clamp-3 mb-4">
                 {card.description}
               </p>
-              <div className="mt-4 flex items-center gap-2 text-primary text-sm font-semibold cursor-pointer hover:gap-3 transition-all duration-300">
-                Learn More <FaArrowRight className="text-xs" />
+              <div className="mt-auto flex items-center text-[#D81B60] text-xs font-bold group-hover:gap-2 transition-all">
+                Learn More <FaArrowRight className="ml-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </div>
           </div>
@@ -204,176 +199,119 @@ const ExpertiseSection = () => (
   </section>
 );
 
-/* --- Client Spotlight / Success Stories --- */
-const spotlightStats = [
-  { number: "1,00,000+", label: "Lives Transformed" },
-  { number: "35,000+", label: "Weight Loss Journeys" },
-  { number: "9+", label: "Clinic Locations" },
-];
-
 const ClientSpotlight = () => {
+  const spotlightStats = [
+    { number: "1,00,000+", label: "Lives Transformed" },
+    { number: "35,000+", label: "Weight Loss Journeys" },
+    { number: "9+", label: "Clinic Locations" },
+  ];
+
   return (
-    <section className="section-padding spotlight-gradient">
-      <div className="container-custom">
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-16">
-          {/* Left: label + heading */}
-          <div className="lg:max-w-md flex-shrink-0 reveal-left">
-            <span className="section-label">Client Spotlight</span>
-            <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold text-dark leading-tight mt-2">
-              Our Weight Loss
-              <br />
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+    <section className="py-12 md:py-16 bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d] text-white overflow-hidden relative">
+      <div className="absolute top-0 right-0 w-80 h-80 bg-[#D81B60]/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#4CAF50]/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+      
+      <div className="container-custom relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          
+          {/* Left Column */}
+          <div>
+            <span className="inline-block bg-white/10 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-5 border border-white/20 backdrop-blur-sm">
+              Client Spotlight
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-6">
+              Our Weight Loss<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D81B60] to-[#F48FB1]">
                 Success Stories
               </span>
             </h2>
-
-            {/* Stats Cards */}
-            <div className="flex flex-col gap-3 mt-8">
+            
+            <div className="flex flex-col gap-3 border-l-2 border-[#D81B60]/50 pl-5">
               {spotlightStats.map((stat, index) => (
-                <div
-                  key={index}
-                  className="spotlight-stat reveal"
-                  style={{ "--child-index": index + 1 }}
-                >
-                  <span className="spotlight-stat-number">{stat.number}</span>
-                  <span className="text-sm text-gray-text font-medium">
-                    {stat.label}
-                  </span>
+                <div key={index} className="flex flex-col">
+                  <span className="text-xl md:text-2xl font-black text-white">{stat.number}</span>
+                  <span className="text-xs md:text-sm text-gray-400 font-medium">{stat.label}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right: description text + quote */}
-          <div className="lg:max-w-lg lg:pt-6 reveal-right">
-            <div className="relative">
-              <FaQuoteLeft className="text-primary/10 text-5xl absolute -top-2 -left-2" />
-              <p className="text-base md:text-lg text-gray-text leading-relaxed text-justify relative z-10 pl-6 lg:pl-8">
-                Real people. Real transformations. Every personalized diet plan
-                we design at our medical diet clinic in India is rooted in
-                everyday Indian food and medical nutrition science. Whether you
-                need a PCOD diet plan, diabetes management, or a millet based
-                diet plan, our mindful coaching ensures your results don&apos;t
-                just come—they stay.
+          {/* Right Column */}
+          <div className="lg:pl-6">
+            <div className="relative mb-8">
+              <FaQuoteLeft className="absolute -top-3 -left-3 text-4xl text-white/5" />
+              <p className="text-sm md:text-base text-gray-300 leading-relaxed relative z-10 font-medium">
+                Real people. Real transformations. Every personalized diet plan we design at our medical diet clinic in India is rooted in everyday Indian food and medical nutrition science. Whether you need a PCOD diet plan, diabetes management, or a millet based diet plan, our mindful coaching ensures your results don't just come—they stay.
               </p>
             </div>
-
-            {/* Testimonial highlight */}
-            <div className="mt-8 p-5 bg-white rounded-2xl shadow-sm border border-gray-border/50 reveal">
+            
+            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 md:p-6 mb-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center">
-                  <span className="text-primary font-bold text-sm">S</span>
+                <div className="w-10 h-10 bg-[#D81B60] rounded-full flex items-center justify-center text-white font-bold text-base shadow-md">
+                  S
                 </div>
                 <div>
-                  <span className="block text-sm font-bold text-dark">
-                    Simran K.
-                  </span>
-                  <div className="flex gap-0.5">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar
-                        key={i}
-                        className="text-yellow-400 text-xs"
-                      />
-                    ))}
+                  <span className="block font-bold text-base text-white">Simran K.</span>
+                  <div className="flex gap-1 text-yellow-400 text-xs mt-0.5">
+                    {[...Array(5)].map((_, i) => <FaStar key={i} />)}
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-gray-text leading-relaxed italic">
-                &ldquo;Lost 18 kg in 4 months with FitJeeva&apos;s
-                personalized plan. The diet was entirely home-cooked Indian food.
-                No supplements, no shortcuts!&rdquo;
+              <p className="text-gray-300 italic leading-relaxed text-xs md:text-sm">
+                “Lost 18 kg in 4 months with FitJeeva's personalized plan. The diet was entirely home-cooked Indian food. No supplements, no shortcuts!”
               </p>
             </div>
-
-            <div className="mt-6 reveal">
-              <Button to="/service" icon={<FaArrowRight />}>
+            
+            <div>
+              <Button to="/service" icon={<FaArrowRight />} variant="white" className="text-sm py-2.5 px-6">
                 View All Success Stories
               </Button>
             </div>
           </div>
+          
         </div>
       </div>
     </section>
   );
 };
 
-/* --- Media Spotlight --- */
-const mediaPublications = [
-  { name: "Hindustan Times", icon: <FaNewspaper /> },
-  { name: "Chandigarh Tribune", icon: <FaNewspaper /> },
-  { name: "Yugmarg", icon: <FaNewspaper /> },
-];
-
-const MediaSpotlight = () => (
-  <section className="section-padding bg-white">
-    <div className="container-custom text-center">
-      <div className="reveal">
-        <SectionHeading label="Media Spotlight" title="" />
-        <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-dark-soft leading-snug max-w-4xl mx-auto -mt-4">
-          Featured in leading publications for outstanding contributions to
-          clinical nutrition and wellness education.
-        </h3>
-      </div>
-
-      {/* Media Badges */}
-      <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mt-8 stagger-children">
-        {mediaPublications.map((pub, index) => (
-          <div
-            key={pub.name}
-            className="media-badge reveal"
-            style={{ "--child-index": index }}
-          >
-            <span className="media-badge-icon">{pub.icon}</span>
-            {pub.name}
-          </div>
-        ))}
-      </div>
-
-      {/* Decorative divider */}
-      <div className="section-divider mt-10 reveal"></div>
-    </div>
-  </section>
-);
-
-/* =========================================================
-   HomePage — Full Composition
-   ========================================================= */
 const HomePage = () => {
   const pageRef = useScrollReveal();
 
   return (
-    <div ref={pageRef} className="flex flex-col">
-      {/* 1. Hero Section — Image carousel */}
+    <div ref={pageRef} className="flex flex-col bg-white overflow-hidden">
       <HomeHero />
-
-      {/* 2. Stats Counter */}
       <StatsCounter />
-
-      {/* 3. Quick-link icon cards (PCOD, Thyroid, Diabetes, Explore) */}
       <QuickLinkCards />
-
-      {/* 4. Expertise / Diet Clinic Chain */}
       <ExpertiseSection />
-
-      {/* 5. Client Spotlight */}
       <ClientSpotlight />
-
-      {/* 6. Consultation Form */}
       <ConsultationForm />
+      
+      <section className="py-12 md:py-16 bg-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-[#FCE4EC]/30 opacity-50"></div>
+        <div className="container-custom relative z-10">
+          <div className="text-center mb-8">
+            <SectionHeading label="Media Spotlight" title="" />
+            <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold text-gray-900 leading-snug max-w-3xl mx-auto -mt-3">
+              Featured in leading publications for outstanding contributions to clinical nutrition and wellness education.
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 items-center justify-items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+            {["The Times of India", "Hindustan Times", "Health Magazine", "Wellness Daily"].map((media, i) => (
+              <div key={i} className="flex items-center justify-center p-3 border border-gray-200 rounded-xl w-full h-20 hover:border-[#D81B60]/30 hover:bg-[#FCE4EC] transition-all duration-300 cursor-default">
+                <span className="font-black text-gray-400 uppercase tracking-widest text-[10px] md:text-xs text-center">
+                  {media}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* 7. Media Spotlight */}
-      <MediaSpotlight />
-
-      {/* 8. Consultation CTA Banner */}
       <ConsultationCTA />
-
-      {/* 9. Instagram Feed */}
       <InstagramFeed />
-
-      {/* 10. Contact CTA */}
       <ContactCTA />
-
-      {/* 11. Clinic Locations */}
       <ClinicLocations />
     </div>
   );

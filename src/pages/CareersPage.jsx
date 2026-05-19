@@ -10,56 +10,32 @@ import { careersHero, companyValues, jobPositions, teamImages } from '../data/ca
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
 import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
 
-/* =========================================================
-   Careers Hero — Team collage + headline
-   ========================================================= */
 const CareersHero = () => (
-  <section className="bg-primary-lighter overflow-hidden">
-    <div className="container-custom py-12 md:py-20">
-      <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-        {/* Text */}
-        <div className="flex-1 text-center lg:text-left">
-          <h1 className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold text-dark leading-tight">
+  <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
+    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FCE4EC]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
+    <div className="container-custom relative z-10">
+      <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+        <div className="w-full lg:w-1/2">
+          <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
+            Careers
+          </span>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
             {careersHero.title}
           </h1>
-          <div className="mt-8">
-            <Button href="#apply-form" icon={<FaBriefcase />} size="lg">
+          <div>
+            <Button href="#apply-form" icon={<FaBriefcase />} className="bg-[#D81B60] hover:bg-[#C2185B]">
               {careersHero.ctaText}
             </Button>
           </div>
         </div>
 
-        {/* Staggered team photo collage */}
-        <div className="flex-1 lg:flex-[1.3]">
-          <div className="grid grid-cols-2 gap-3 md:gap-4">
-            <div className="rounded-2xl overflow-hidden shadow-lg">
-              <img
-                src={teamImages[0]}
-                alt="Team photo 1"
-                className="w-full h-44 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg translate-y-6">
-              <img
-                src={teamImages[1]}
-                alt="Team photo 2"
-                className="w-full h-44 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg -translate-y-4">
-              <img
-                src={teamImages[2]}
-                alt="Team photo 3"
-                className="w-full h-44 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg translate-y-3">
-              <img
-                src={teamImages[3]}
-                alt="Team photo 4"
-                className="w-full h-44 md:h-56 object-cover hover:scale-105 transition-transform duration-500"
-              />
-            </div>
+        <div className="w-full lg:w-1/2">
+          <div className="grid grid-cols-2 gap-4">
+            {teamImages.slice(0,4).map((img, i) => (
+              <div key={i} className={`rounded-3xl overflow-hidden shadow-lg border-4 border-white ${i % 2 === 1 ? 'mt-8' : ''}`}>
+                <img src={img} alt={`Team photo ${i+1}`} className="w-full h-40 md:h-56 object-cover hover:scale-110 transition-transform duration-500" />
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -67,55 +43,46 @@ const CareersHero = () => (
   </section>
 )
 
-/* =========================================================
-   Awards Section
-   ========================================================= */
 const AwardsSection = () => (
-  <section className="section-padding bg-white">
+  <section className="py-12 md:py-16 bg-white border-y border-gray-100">
     <div className="container-custom">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        <div className="rounded-2xl overflow-hidden shadow-[var(--shadow-card)] border border-gray-border">
-          <img
-            src={fitjeevaClinical}
-            alt="Award recognition"
-            className="w-full h-56 md:h-72 object-cover"
-          />
+      <div className="text-center mb-10">
+        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Recognized Excellence</h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
+        <div className="rounded-3xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-all">
+          <img src={fitjeevaClinical} alt="Award recognition" className="w-full h-64 object-cover" />
         </div>
-        <div className="rounded-2xl overflow-hidden shadow-[var(--shadow-card)] border border-gray-border">
-          <img
-            src={fitjeevaBanner}
-            alt="Certificate of honour"
-            className="w-full h-56 md:h-72 object-cover"
-          />
+        <div className="rounded-3xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-all">
+          <img src={fitjeevaBanner} alt="Certificate of honour" className="w-full h-64 object-cover" />
         </div>
       </div>
     </div>
   </section>
 )
 
-/* =========================================================
-   "We See You As Someone Who" — Company Values
-   ========================================================= */
 const CompanyValuesSection = () => (
-  <section className="section-padding bg-gray-light">
+  <section className="py-12 md:py-20 bg-gray-50">
     <div className="container-custom">
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary mb-10 text-center lg:text-left">
-        We See You As Someone Who
-      </h2>
+      <div className="text-center mb-12">
+        <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
+          Our Culture
+        </span>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+          We See You As Someone Who
+        </h2>
+      </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         {companyValues.map((value) => (
-          <div
-            key={value.number}
-            className="bg-primary rounded-2xl p-6 text-white shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-          >
-            <span className="text-3xl md:text-4xl font-extrabold text-white/30 block mb-2">
+          <div key={value.number} className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
+            <span className="inline-block bg-[#FCE4EC] text-[#D81B60] font-black text-xl w-12 h-12 flex items-center justify-center rounded-2xl mb-6">
               {value.number}
             </span>
-            <h3 className="text-lg md:text-xl font-bold mb-2">
+            <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">
               {value.title}
             </h3>
-            <p className="text-sm text-white/85 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               {value.description}
             </p>
           </div>
@@ -125,16 +92,9 @@ const CompanyValuesSection = () => (
   </section>
 )
 
-/* =========================================================
-   Career Application Form
-   ========================================================= */
 const CareerApplicationForm = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    position: '',
-    message: '',
+    fullName: '', email: '', phone: '', position: '', message: '',
   })
 
   const handleChange = (e) => {
@@ -144,161 +104,80 @@ const CareerApplicationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // External service integration placeholder
-    console.log('Career application submitted:', formData)
     alert('Thank you for applying! Our team will review your application.')
     setFormData({ fullName: '', email: '', phone: '', position: '', message: '' })
   }
 
-  const inputClasses =
-    'w-full px-4 py-3 rounded-full border border-gray-border bg-white text-dark placeholder:text-gray-text/60 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors text-sm'
+  const inputClasses = 'w-full px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D81B60]/30 focus:border-[#D81B60] focus:bg-white transition-all text-sm'
 
   return (
-    <section id="apply-form" className="section-padding bg-gray-light">
-      <div className="container-custom max-w-3xl">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-primary mb-2">
-          Apply for a Position
-        </h2>
-        <p className="text-gray-text text-base mb-8">
-          Fill in your details and our team will get in touch if your profile matches our requirements.
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Full Name */}
-          <div>
-            <label className="block text-sm font-semibold text-dark mb-1.5">
-              Full Name <span className="text-primary">*</span>
-            </label>
-            <input
-              type="text"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              placeholder="Enter your full name"
-              required
-              className={inputClasses}
-            />
+    <section id="apply-form" className="py-12 md:py-20 bg-white">
+      <div className="container-custom">
+        <div className="max-w-3xl mx-auto bg-gray-50 p-8 md:p-12 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FCE4EC]/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 z-0"></div>
+          
+          <div className="relative z-10 text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Apply for a Position</h2>
+            <p className="text-gray-600">Fill in your details and our team will get in touch if your profile matches our requirements.</p>
           </div>
 
-          {/* Email */}
-          <div>
-            <label className="block text-sm font-semibold text-dark mb-1.5">
-              Email Address <span className="text-primary">*</span>
-            </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="Enter your email address"
-              required
-              className={inputClasses}
-            />
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label className="block text-sm font-semibold text-dark mb-1.5">
-              Phone Number <span className="text-primary">*</span>
-            </label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Enter your contact number"
-              required
-              className={inputClasses}
-            />
-          </div>
-
-          {/* Position Applied For — Radio Buttons */}
-          <div>
-            <label className="block text-sm font-semibold text-dark mb-3">
-              Position Applied For <span className="text-primary">*</span>
-            </label>
-            <div className="space-y-2.5">
-              {jobPositions.map((position) => (
-                <label
-                  key={position}
-                  className="flex items-center gap-3 cursor-pointer group"
-                >
-                  <input
-                    type="radio"
-                    name="position"
-                    value={position}
-                    checked={formData.position === position}
-                    onChange={handleChange}
-                    required
-                    className="w-4 h-4 text-primary border-gray-border focus:ring-primary/40 accent-primary"
-                  />
-                  <span className="text-sm text-dark group-hover:text-primary transition-colors">
-                    {position}
-                  </span>
-                </label>
-              ))}
+          <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-2">Full Name <span className="text-red-500">*</span></label>
+                <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Enter your full name" required className={inputClasses} />
+              </div>
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-2">Email Address <span className="text-red-500">*</span></label>
+                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter your email address" required className={inputClasses} />
+              </div>
             </div>
-          </div>
 
-          {/* Message */}
-          <div>
-            <label className="block text-sm font-semibold text-dark mb-1.5">
-              Why do you want to join us?
-            </label>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              placeholder="Tell us about yourself and why you'd be a great fit..."
-              rows={4}
-              className="w-full px-4 py-3 rounded-2xl border border-gray-border bg-white text-dark placeholder:text-gray-text/60 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition-colors text-sm resize-none"
-            />
-          </div>
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number <span className="text-red-500">*</span></label>
+              <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Enter your contact number" required className={inputClasses} />
+            </div>
 
-          {/* Submit */}
-          <div className="pt-2">
-            <Button type="submit" size="lg" className="w-full sm:w-auto">
-              Submit Application
-            </Button>
-          </div>
-        </form>
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-3">Position Applied For <span className="text-red-500">*</span></label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {jobPositions.map((position) => (
+                  <label key={position} className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${formData.position === position ? 'bg-[#FCE4EC] border-[#D81B60] text-[#D81B60]' : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300'}`}>
+                    <input type="radio" name="position" value={position} checked={formData.position === position} onChange={handleChange} required className="hidden" />
+                    <span className="font-bold text-sm">{position}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-bold text-gray-700 mb-2">Why do you want to join us?</label>
+              <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about yourself and why you'd be a great fit..." rows={4} className={`${inputClasses} resize-none`} />
+            </div>
+
+            <div className="pt-4">
+              <Button type="submit" className="w-full bg-[#D81B60] hover:bg-[#C2185B] py-3.5">
+                Submit Application
+              </Button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   )
 }
 
-/* =========================================================
-   Careers Page — Full Composition
-   ========================================================= */
 const CareersPage = () => {
   return (
-    <div>
-      {/* 1. Hero */}
+    <div className="flex flex-col bg-white overflow-hidden">
       <CareersHero />
-
-      {/* 2. Stats */}
       <StatsCounter />
-
-      {/* 3. Awards */}
       <AwardsSection />
-
-      {/* 4. Company Values */}
       <CompanyValuesSection />
-
-      {/* 5. Consultation CTA */}
-      <ConsultationCTA />
-
-      {/* 6. Instagram Feed */}
-      <InstagramFeed />
-
-      {/* 7. Contact CTA */}
-      <ContactCTA />
-
-      {/* 8. Career Application Form */}
       <CareerApplicationForm />
-
-      {/* 9. Instagram Feed (second instance like original) */}
+      <ConsultationCTA />
       <InstagramFeed />
+      <ContactCTA />
     </div>
   )
 }

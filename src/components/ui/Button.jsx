@@ -1,63 +1,36 @@
 import { Link } from 'react-router-dom'
 
-/**
- * Reusable Button component with multiple variants.
- * 
- * @param {string} variant - 'primary' | 'secondary' | 'ghost' | 'white'
- * @param {string} href - External link (renders <a>)
- * @param {string} to - Internal route (renders <Link>)
- * @param {function} onClick - Click handler (renders <button>)
- * @param {string} className - Additional classes
- * @param {React.ReactNode} icon - Optional icon element
- * @param {React.ReactNode} children - Button text/content
- * @param {string} size - 'sm' | 'md' | 'lg'
- */
 const Button = ({
   children,
   variant = 'primary',
   href,
   to,
   onClick,
-  className = '',
   icon,
-  size = 'md',
   type = 'button',
+  className = '',
   ...props
 }) => {
-  const baseStyles = 'inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all duration-300 cursor-pointer border-none'
-
-  const sizeStyles = {
-    sm: 'px-5 py-2.5 text-sm',
-    md: 'px-8 py-3.5 text-base',
-    lg: 'px-10 py-4 text-lg',
+  const baseStyles = "inline-flex items-center justify-center gap-2 font-bold rounded-full transition-all duration-300 px-6 py-3 md:px-8 md:py-3.5 text-sm md:text-base cursor-pointer"
+  
+  const variants = {
+    primary: "bg-[#2E7D32] text-white hover:bg-[#1B5E20] hover:shadow-lg hover:-translate-y-0.5",
+    secondary: "bg-transparent text-[#2E7D32] border-2 border-[#2E7D32] hover:bg-[#2E7D32] hover:text-white",
+    ghost: "bg-transparent text-[#2E7D32] hover:bg-[#E8F5E9]",
+    white: "bg-white text-[#2E7D32] hover:bg-[#F1F8E9] shadow-md hover:shadow-lg hover:-translate-y-0.5"
   }
 
-  const variantStyles = {
-    primary: 'bg-primary text-white hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5',
-    secondary: 'bg-transparent text-primary border-2 border-primary hover:bg-primary hover:text-white',
-    ghost: 'bg-transparent text-primary hover:bg-primary-light',
-    white: 'bg-white text-primary font-bold hover:bg-primary-lighter hover:shadow-lg hover:-translate-y-0.5 shadow-md',
-  }
+  const combinedStyles = `${baseStyles} ${variants[variant]} ${className}`
 
-  const combinedStyles = `${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`
-
-  // External link
   if (href) {
     return (
-      <a
-        href={href}
-        className={combinedStyles}
-        target="_blank"
-        rel="noopener noreferrer"
-        {...props}
-      >
+      <a href={href} target="_blank" rel="noopener noreferrer" className={combinedStyles} {...props}>
         {icon && <span className="text-lg">{icon}</span>}
         {children}
       </a>
     )
   }
 
-  // Internal route
   if (to) {
     return (
       <Link to={to} className={combinedStyles} {...props}>
@@ -67,14 +40,8 @@ const Button = ({
     )
   }
 
-  // Regular button
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={combinedStyles}
-      {...props}
-    >
+    <button type={type} onClick={onClick} className={combinedStyles} {...props}>
       {icon && <span className="text-lg">{icon}</span>}
       {children}
     </button>

@@ -14,12 +14,6 @@ const Card = ({
 }) => {
   return (
     <div
-      className={`
-        bg-white rounded-2xl shadow-[var(--shadow-card)]
-        ${padding}
-        ${hover ? 'hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-1 transition-all duration-300' : ''}
-        ${className}
-      `}
     >
       {children}
     </div>

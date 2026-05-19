@@ -25,24 +25,24 @@ const banners = [
 
 const HomeHero = () => {
   return (
-    <section className="w-full relative z-0">
+    <section className="w-full relative bg-gray-50">
       <Swiper
+        className="hero-swiper w-full h-[40vh] md:h-[60vh] lg:h-[80vh] xl:h-[90vh]"
         modules={[Navigation, Autoplay, Pagination]}
         navigation={true}
         pagination={{ clickable: true }}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         loop={true}
-        className="w-full hero-swiper"
       >
         {banners.map((banner, index) => (
-          <SwiperSlide key={index}>
-            <div className="w-full h-[55vh] sm:h-[60vh] md:h-[70vh] lg:h-[75vh] max-h-[750px] bg-gray-100">
+          <SwiperSlide key={index} className="w-full h-full">
+            <div className="w-full h-full relative">
               <img
                 src={banner.image}
                 alt={banner.alt}
-                className="w-full h-full object-cover object-center"
                 loading={index === 0 ? 'eager' : 'lazy'}
                 decoding="async"
+                className="w-full h-full object-cover object-center"
               />
             </div>
           </SwiperSlide>
