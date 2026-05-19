@@ -16,12 +16,12 @@ import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
 
 const AboutHero = () => (
   <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FCE4EC]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
+    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E8F5E9]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
     <div className="container-custom relative z-10">
       <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
         {/* Text */}
         <div className="w-full lg:w-1/2">
-          <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
+          <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
             About Us
           </span>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
@@ -37,7 +37,7 @@ const AboutHero = () => (
             <Button
               to="/contact-us"
               icon={<FaPhoneAlt />}
-              className="bg-[#D81B60] hover:bg-[#C2185B]"
+              className="bg-[#2E7D32] hover:bg-[#1B5E20]"
             >
               Talk to us
             </Button>
@@ -53,7 +53,7 @@ const AboutHero = () => (
               className="w-full h-auto object-cover"
             />
           </div>
-          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#F8BBD0] rounded-full blur-2xl -z-10"></div>
+          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#C8E6C9] rounded-full blur-2xl -z-10"></div>
           <div className="absolute -top-6 -right-6 w-40 h-40 bg-[#A5D6A7] rounded-full blur-3xl -z-10"></div>
         </div>
       </div>
@@ -64,7 +64,7 @@ const AboutHero = () => (
 const SubtitleIntro = () => (
   <section className="py-12 md:py-16 bg-white">
     <div className="container-custom max-w-4xl text-center">
-      <h2 className="text-2xl md:text-3xl font-extrabold text-[#D81B60] mb-6 leading-tight">
+      <h2 className="text-2xl md:text-3xl font-extrabold text-[#2E7D32] mb-6 leading-tight">
         {aboutIntro.subtitle}
       </h2>
       <p className="text-base md:text-lg text-gray-600 leading-relaxed font-medium">
@@ -124,16 +124,16 @@ const CoreServicesSection = () => (
           <div key={service.number} className="bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col group hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
             <div className="h-48 md:h-56 overflow-hidden relative">
               <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-[#D81B60] font-black w-10 h-10 rounded-full flex items-center justify-center shadow-md">
+              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur text-[#2E7D32] font-black w-10 h-10 rounded-full flex items-center justify-center shadow-md">
                 {service.number}
               </div>
             </div>
             <div className="p-6 md:p-8 flex flex-col flex-grow">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#D81B60] transition-colors">{service.title}</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#2E7D32] transition-colors">{service.title}</h3>
               <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-6 flex-grow">{service.description}</p>
               {service.number === '04' && (
                 <div className="mt-auto">
-                  <Button to="/careers" size="sm" className="bg-[#D81B60] hover:bg-[#C2185B]">Join now</Button>
+                  <Button to="/careers" size="sm" className="bg-[#2E7D32] hover:bg-[#1B5E20]">Join now</Button>
                 </div>
               )}
             </div>
@@ -145,7 +145,7 @@ const CoreServicesSection = () => (
 )
 
 const JoinMissionCTA = () => (
-  <section className="py-12 md:py-20 bg-[#D81B60] text-white">
+  <section className="py-12 md:py-20 bg-[#2E7D32] text-white">
     <div className="container-custom">
       <div className="flex flex-col md:flex-row items-center gap-10 lg:gap-16">
         <div className="w-full md:w-1/2">
@@ -155,7 +155,7 @@ const JoinMissionCTA = () => (
           <p className="text-white/90 text-lg mb-8 leading-relaxed max-w-lg">
             Join our mission to help the world lead happier, healthier lives through good habits and better nutrition.
           </p>
-          <Button to="/careers" variant="white" className="text-[#D81B60]">
+          <Button to="/careers" variant="white" className="text-[#2E7D32]">
             Apply Now
           </Button>
         </div>
@@ -172,14 +172,14 @@ const JoinMissionCTA = () => (
 const MediaSpotlight = () => (
   <section className="py-12 md:py-16 bg-gray-50 text-center">
     <div className="container-custom max-w-4xl">
-      <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-6">Media Spotlight</span>
+      <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-6">Media Spotlight</span>
       <h3 className="text-2xl md:text-3xl font-extrabold text-gray-900 mb-6 leading-tight">
         Featured in Hindustan Times, Chandigarh Tribune & Yugmarg for outstanding contributions to clinical nutrition and wellness education.
       </h3>
       <p className="text-gray-600 mb-8 max-w-2xl mx-auto text-base md:text-lg">
         Want to join them? Reach out to our diet expert now to chart the best weight loss journey to your fitness goals!
       </p>
-      <Button to="/contact-us" className="bg-[#D81B60] hover:bg-[#C2185B]">Join now</Button>
+      <Button to="/contact-us" className="bg-[#2E7D32] hover:bg-[#1B5E20]">Join now</Button>
     </div>
   </section>
 )

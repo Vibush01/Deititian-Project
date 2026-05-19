@@ -56,10 +56,10 @@ const quickLinks = [
     to: "/service/pcod-pcos",
     icon: (
       <svg viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
         <path
           d="M32 18c-4 0-7 3-7 7s3 7 7 7 7-3 7-7-3-7-7-7zm-10 14c-3 0-5.5 2.5-5.5 5.5S19 43 22 43s5.5-2.5 5.5-5.5S25 32 22 32zm20 0c-3 0-5.5 2.5-5.5 5.5S39 43 42 43s5.5-2.5 5.5-5.5S45 32 42 32z"
-          fill="#D81B60"
+          fill="#2E7D32"
         />
       </svg>
     ),
@@ -70,10 +70,10 @@ const quickLinks = [
     to: "/service/thyroid",
     icon: (
       <svg viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
         <path
           d="M32 16c-2 0-3 1-3 3v6c-4 1-7 5-7 9 0 6 4 10 10 14 6-4 10-8 10-14 0-4-3-8-7-9v-6c0-2-1-3-3-3z"
-          fill="#D81B60"
+          fill="#2E7D32"
         />
       </svg>
     ),
@@ -84,12 +84,12 @@ const quickLinks = [
     to: "/service/diabetes",
     icon: (
       <svg viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
         <path
           d="M32 14l-2 4h-6l2 6-4 4 6 2v6h4v-6l6-2-4-4 2-6h-6l2-4z"
-          fill="#D81B60"
+          fill="#2E7D32"
         />
-        <circle cx="32" cy="36" r="5" fill="#880E4F" opacity="0.6" />
+        <circle cx="32" cy="36" r="5" fill="#1B5E20" opacity="0.6" />
       </svg>
     ),
   },
@@ -99,14 +99,14 @@ const quickLinks = [
     to: "/service",
     icon: (
       <svg viewBox="0 0 64 64" fill="none">
-        <circle cx="32" cy="32" r="28" fill="#FCE4EC" />
+        <circle cx="32" cy="32" r="28" fill="#E8F5E9" />
         <path
           d="M24 22h16v4H24zM22 30h20v4H22zM26 38h12v4H26z"
-          fill="#D81B60"
+          fill="#2E7D32"
         />
         <path
           d="M38 42l6 6"
-          stroke="#D81B60"
+          stroke="#2E7D32"
           strokeWidth="2.5"
           strokeLinecap="round"
         />
@@ -117,10 +117,10 @@ const quickLinks = [
 
 const QuickLinkCards = () => (
   <section className="py-8 md:py-12 bg-white relative">
-    <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-[#FCE4EC]/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+    <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-[#E8F5E9]/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
     <div className="container-custom relative z-10">
       <div className="text-center mb-8 md:mb-10">
-        <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
+        <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
           Quick Access
         </span>
         <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight">
@@ -133,16 +133,16 @@ const QuickLinkCards = () => (
           <Link 
             key={idx} 
             to={link.to}
-            className="group relative flex flex-col items-center text-center bg-white border border-gray-100 rounded-xl p-5 md:p-6 hover:shadow-lg hover:-translate-y-1 hover:border-[#D81B60]/20 transition-all duration-300"
+            className="group relative flex flex-col items-center text-center bg-white border border-gray-100 rounded-xl p-5 md:p-6 hover:shadow-lg hover:-translate-y-1 hover:border-[#2E7D32]/20 transition-all duration-300"
           >
-            <div className="w-14 h-14 md:w-16 md:h-16 bg-[#FCE4EC] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm">
+            <div className="w-14 h-14 md:w-16 md:h-16 bg-[#E8F5E9] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300 shadow-sm">
               {link.icon}
             </div>
             <div className="flex-grow flex flex-col justify-center">
               <h3 className="text-base md:text-lg font-bold text-gray-900 mb-1">{link.label}</h3>
               <p className="text-xs text-gray-500 font-medium">{link.sublabel}</p>
             </div>
-            <div className="mt-4 text-[#D81B60] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center w-8 h-8 rounded-full bg-[#FCE4EC]">
+            <div className="mt-4 text-[#2E7D32] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center w-8 h-8 rounded-full bg-[#E8F5E9]">
               <FaArrowRight className="text-sm" />
             </div>
           </Link>
@@ -156,7 +156,7 @@ const ExpertiseSection = () => (
   <section className="py-12 md:py-16 bg-gray-50/50 border-y border-gray-100">
     <div className="container-custom">
       <div className="flex flex-col items-center text-center mb-10 md:mb-12">
-        <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
+        <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-3">
           Our Diet Clinic Chain
         </span>
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-gray-900 leading-tight">
@@ -171,7 +171,7 @@ const ExpertiseSection = () => (
         {homeExpertiseCards.map((card, index) => (
           <div key={index} className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col h-full hover:-translate-y-1">
             <div className="relative h-40 md:h-48 overflow-hidden">
-              <div className="absolute top-3 left-3 bg-white text-[#D81B60] w-8 h-8 rounded-full flex items-center justify-center font-black text-xs z-10 shadow-md">
+              <div className="absolute top-3 left-3 bg-white text-[#2E7D32] w-8 h-8 rounded-full flex items-center justify-center font-black text-xs z-10 shadow-md">
                 0{index + 1}
               </div>
               <img 
@@ -182,13 +182,13 @@ const ExpertiseSection = () => (
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div className="p-5 flex flex-col flex-grow bg-white">
-              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 group-hover:text-[#D81B60] transition-colors line-clamp-2">
+              <h3 className="text-base md:text-lg font-bold text-gray-900 mb-2 group-hover:text-[#2E7D32] transition-colors line-clamp-2">
                 {card.title}
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed line-clamp-3 mb-4">
                 {card.description}
               </p>
-              <div className="mt-auto flex items-center text-[#D81B60] text-xs font-bold group-hover:gap-2 transition-all">
+              <div className="mt-auto flex items-center text-[#2E7D32] text-xs font-bold group-hover:gap-2 transition-all">
                 Learn More <FaArrowRight className="ml-1 text-[10px] opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </div>
@@ -208,7 +208,7 @@ const ClientSpotlight = () => {
 
   return (
     <section className="py-12 md:py-16 bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d] text-white overflow-hidden relative">
-      <div className="absolute top-0 right-0 w-80 h-80 bg-[#D81B60]/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+      <div className="absolute top-0 right-0 w-80 h-80 bg-[#2E7D32]/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#4CAF50]/10 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
       
       <div className="container-custom relative z-10">
@@ -221,12 +221,12 @@ const ClientSpotlight = () => {
             </span>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight mb-6">
               Our Weight Loss<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D81B60] to-[#F48FB1]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2E7D32] to-[#F48FB1]">
                 Success Stories
               </span>
             </h2>
             
-            <div className="flex flex-col gap-3 border-l-2 border-[#D81B60]/50 pl-5">
+            <div className="flex flex-col gap-3 border-l-2 border-[#2E7D32]/50 pl-5">
               {spotlightStats.map((stat, index) => (
                 <div key={index} className="flex flex-col">
                   <span className="text-xl md:text-2xl font-black text-white">{stat.number}</span>
@@ -247,7 +247,7 @@ const ClientSpotlight = () => {
             
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 md:p-6 mb-6">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-[#D81B60] rounded-full flex items-center justify-center text-white font-bold text-base shadow-md">
+                <div className="w-10 h-10 bg-[#2E7D32] rounded-full flex items-center justify-center text-white font-bold text-base shadow-md">
                   S
                 </div>
                 <div>
@@ -288,7 +288,7 @@ const HomePage = () => {
       <ConsultationForm />
       
       <section className="py-12 md:py-16 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[#FCE4EC]/30 opacity-50"></div>
+        <div className="absolute inset-0 bg-[#E8F5E9]/30 opacity-50"></div>
         <div className="container-custom relative z-10">
           <div className="text-center mb-8">
             <SectionHeading label="Media Spotlight" title="" />
@@ -299,7 +299,7 @@ const HomePage = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 items-center justify-items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
             {["The Times of India", "Hindustan Times", "Health Magazine", "Wellness Daily"].map((media, i) => (
-              <div key={i} className="flex items-center justify-center p-3 border border-gray-200 rounded-xl w-full h-20 hover:border-[#D81B60]/30 hover:bg-[#FCE4EC] transition-all duration-300 cursor-default">
+              <div key={i} className="flex items-center justify-center p-3 border border-gray-200 rounded-xl w-full h-20 hover:border-[#2E7D32]/30 hover:bg-[#E8F5E9] transition-all duration-300 cursor-default">
                 <span className="font-black text-gray-400 uppercase tracking-widest text-[10px] md:text-xs text-center">
                   {media}
                 </span>

@@ -6,13 +6,13 @@ import Button from '../ui/Button'
 
 // Helper for mapping titles to icons
 const getIcon = (title) => {
-  if (title.includes('PCOD')) return <FaHeartbeat className="text-[#D81B60] text-xl" />
-  if (title.includes('Thyroid')) return <FaStethoscope className="text-[#D81B60] text-xl" />
-  if (title.includes('Diabetes')) return <FaPills className="text-[#D81B60] text-xl" />
-  if (title.includes('Weight Loss')) return <FaWeight className="text-[#D81B60] text-xl" />
-  if (title.includes('Weight Gain')) return <FaWeight className="text-[#D81B60] text-xl" />
-  if (title.includes('Lifestyle')) return <FaRunning className="text-[#D81B60] text-xl" />
-  return <FaHeartbeat className="text-[#D81B60] text-xl" />
+  if (title.includes('PCOD')) return <FaHeartbeat className="text-[#2E7D32] text-xl" />
+  if (title.includes('Thyroid')) return <FaStethoscope className="text-[#2E7D32] text-xl" />
+  if (title.includes('Diabetes')) return <FaPills className="text-[#2E7D32] text-xl" />
+  if (title.includes('Weight Loss')) return <FaWeight className="text-[#2E7D32] text-xl" />
+  if (title.includes('Weight Gain')) return <FaWeight className="text-[#2E7D32] text-xl" />
+  if (title.includes('Lifestyle')) return <FaRunning className="text-[#2E7D32] text-xl" />
+  return <FaHeartbeat className="text-[#2E7D32] text-xl" />
 }
 
 const Navbar = () => {
@@ -48,7 +48,7 @@ const Navbar = () => {
           <Link to="/" className="flex items-center gap-2">
             <span className="text-2xl md:text-3xl">🌿</span>
             <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-extrabold text-[#D81B60] leading-none tracking-tight">
+              <span className="text-xl md:text-2xl font-extrabold text-[#2E7D32] leading-none tracking-tight">
                 FitJeeva
               </span>
               <span className="text-[10px] md:text-[11px] font-bold text-gray-500 tracking-widest uppercase mt-0.5">
@@ -61,23 +61,28 @@ const Navbar = () => {
         {/* Center Column (Navigation - Desktop) */}
         <div className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
-            <div key={link.label} className="relative group">
+            <div 
+              key={link.label} 
+              className="relative group"
+              onMouseEnter={() => setOpenDropdown(link.label)}
+              onMouseLeave={() => setOpenDropdown(null)}
+            >
               {link.megaMenu ? (
-                <button 
-                  onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
-                  className={`flex items-center gap-1.5 text-sm font-bold transition-colors py-8 ${isActiveLink(link.path) ? 'text-[#D81B60]' : 'text-gray-700 hover:text-[#D81B60]'}`}
+                <Link 
+                  to={link.path}
+                  className={`flex items-center gap-1.5 text-sm font-bold transition-colors py-8 ${isActiveLink(link.path) || openDropdown === link.label ? 'text-[#2E7D32]' : 'text-gray-700 group-hover:text-[#2E7D32]'}`}
                 >
                   {link.label}
-                  <FaChevronDown className="text-[10px] mt-0.5" />
-                </button>
+                  <FaChevronDown className={`text-[10px] mt-0.5 transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
+                </Link>
               ) : link.path.startsWith('#') ? (
-                <a href={link.path} className="text-sm font-bold text-gray-700 hover:text-[#D81B60] transition-colors py-8 block">
+                <a href={link.path} className="text-sm font-bold text-gray-700 hover:text-[#2E7D32] transition-colors py-8 block">
                   {link.label}
                 </a>
               ) : (
                 <NavLink 
                   to={link.path} 
-                  className={({isActive}) => `text-sm font-bold transition-colors py-8 block ${isActive ? 'text-[#D81B60]' : 'text-gray-700 hover:text-[#D81B60]'}`}
+                  className={({isActive}) => `text-sm font-bold transition-colors py-8 block ${isActive ? 'text-[#2E7D32]' : 'text-gray-700 hover:text-[#2E7D32]'}`}
                 >
                   {link.label}
                 </NavLink>
@@ -91,13 +96,13 @@ const Navbar = () => {
                     {/* Column 1: Disease Management */}
                     <div className="border-r border-gray-100 pr-6">
                       <h3 className="font-bold text-lg text-gray-700 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
-                        <FaHeartbeat className="text-[#D81B60]" /> {link.megaMenu.column1.title}
+                        <FaHeartbeat className="text-[#2E7D32]" /> {link.megaMenu.column1.title}
                       </h3>
                       <ul className="space-y-6">
                         {link.megaMenu.column1.items.map(item => (
                           <li key={item.label}>
                             <Link to={item.path} className="flex items-start gap-3 group/item">
-                              <div className="w-10 h-10 rounded-lg bg-[#FCE4EC] flex items-center justify-center shrink-0 group-hover/item:bg-[#F8BBD0] transition-colors">
+                              <div className="w-10 h-10 rounded-lg bg-[#E8F5E9] flex items-center justify-center shrink-0 group-hover/item:bg-[#C8E6C9] transition-colors">
                                 {getIcon(item.label)}
                               </div>
                               <div>
@@ -109,7 +114,7 @@ const Navbar = () => {
                         ))}
                       </ul>
                       <div className="mt-6">
-                        <Link to={link.megaMenu.column1.action.path} className="inline-block bg-[#FCE4EC] text-[#D81B60] font-bold text-sm px-6 py-2 rounded-lg hover:bg-[#F8BBD0] transition-colors">
+                        <Link to={link.megaMenu.column1.action.path} className="inline-block bg-[#E8F5E9] text-[#2E7D32] font-bold text-sm px-6 py-2 rounded-lg hover:bg-[#C8E6C9] transition-colors">
                           {link.megaMenu.column1.action.label}
                         </Link>
                       </div>
@@ -120,14 +125,14 @@ const Navbar = () => {
                       {link.megaMenu.column2.map((section, idx) => (
                         <div key={idx} className={idx > 0 ? "mt-8" : ""}>
                           <h3 className="font-bold text-lg text-gray-700 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
-                            {idx === 0 ? <FaFireAlt className="text-[#D81B60]" /> : <FaHeartbeat className="text-[#D81B60]" />}
+                            {idx === 0 ? <FaFireAlt className="text-[#2E7D32]" /> : <FaHeartbeat className="text-[#2E7D32]" />}
                             {section.title}
                           </h3>
                           <ul className="space-y-6">
                             {section.items.map(item => (
                               <li key={item.label}>
                                 <Link to={item.path} className="flex items-start gap-3 group/item">
-                                  <div className="w-10 h-10 rounded-lg bg-[#FCE4EC] flex items-center justify-center shrink-0 group-hover/item:bg-[#F8BBD0] transition-colors">
+                                  <div className="w-10 h-10 rounded-lg bg-[#E8F5E9] flex items-center justify-center shrink-0 group-hover/item:bg-[#C8E6C9] transition-colors">
                                     {getIcon(item.label)}
                                   </div>
                                   <div>
@@ -145,7 +150,7 @@ const Navbar = () => {
                     {/* Column 3: Success Stories */}
                     <div>
                       <h3 className="font-bold text-lg text-gray-700 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
-                        <FaStethoscope className="text-[#D81B60]" /> {link.megaMenu.column3.title}
+                        <FaStethoscope className="text-[#2E7D32]" /> {link.megaMenu.column3.title}
                       </h3>
                       <div className="rounded-xl overflow-hidden mb-4 border border-gray-200">
                         <img src={link.megaMenu.column3.image} alt="Success Story" className="w-full h-40 object-cover" />
@@ -155,7 +160,7 @@ const Navbar = () => {
                           <Link 
                             key={idx} 
                             to={btn.path} 
-                            className={`flex-1 text-center text-xs font-bold py-2 rounded-lg transition-colors ${btn.type === 'primary' ? 'bg-[#D81B60] text-white hover:bg-[#C2185B]' : 'bg-[#2E7D32] text-white hover:bg-[#1B5E20]'}`}
+                            className={`flex-1 text-center text-xs font-bold py-2 rounded-lg transition-colors ${btn.type === 'primary' ? 'bg-[#2E7D32] text-white hover:bg-[#1B5E20]' : 'bg-[#2E7D32] text-white hover:bg-[#1B5E20]'}`}
                           >
                             {btn.label}
                           </Link>
@@ -174,7 +179,7 @@ const Navbar = () => {
         {/* Right Column (Button & Mobile Toggle) */}
         <div className="flex items-center gap-4">
           <div className="hidden lg:block">
-            <Link to="/contact-us" className="inline-flex items-center gap-2 bg-[#D81B60] text-white font-bold text-sm px-6 py-2.5 rounded-full hover:bg-[#C2185B] transition-colors shadow-md">
+            <Link to="/contact-us" className="inline-flex items-center gap-2 bg-[#2E7D32] text-white font-bold text-sm px-6 py-2.5 rounded-full hover:bg-[#1B5E20] transition-colors shadow-md">
               <FaCalendarWeek />
               Book a session
             </Link>
@@ -195,17 +200,55 @@ const Navbar = () => {
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <div key={link.label} className="border-b border-gray-100 last:border-0 pb-2">
-                <Link 
-                  to={link.path || '#'} 
-                  onClick={() => setIsMobileOpen(false)}
-                  className="block font-bold text-gray-800 py-3 px-2 hover:text-[#D81B60] hover:bg-gray-50 rounded"
-                >
-                  {link.label}
-                </Link>
+                <div className="flex items-center justify-between">
+                  <Link 
+                    to={link.path || '#'} 
+                    onClick={() => setIsMobileOpen(false)}
+                    className="block flex-grow font-bold text-gray-800 py-3 px-2 hover:text-[#2E7D32] hover:bg-gray-50 rounded"
+                  >
+                    {link.label}
+                  </Link>
+                  {link.megaMenu && (
+                    <button 
+                      onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+                      className="p-3 text-gray-500 hover:text-[#2E7D32]"
+                    >
+                      <FaChevronDown className={`transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
+                    </button>
+                  )}
+                </div>
+                
+                {/* Mobile Subservices Accordion */}
+                {link.megaMenu && openDropdown === link.label && (
+                  <div className="pl-4 pb-3 space-y-4 bg-gray-50 p-3 rounded-lg mb-2">
+                    <div>
+                      <h4 className="font-bold text-sm text-[#2E7D32] mb-2">{link.megaMenu.column1.title}</h4>
+                      <ul className="space-y-2 pl-2">
+                        {link.megaMenu.column1.items.map(item => (
+                          <li key={item.label}>
+                            <Link to={item.path} onClick={() => setIsMobileOpen(false)} className="text-sm text-gray-600 hover:text-[#2E7D32] block py-1">{item.label}</Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    {link.megaMenu.column2.map((section, idx) => (
+                      <div key={idx}>
+                        <h4 className="font-bold text-sm text-[#2E7D32] mb-2">{section.title}</h4>
+                        <ul className="space-y-2 pl-2">
+                          {section.items.map(item => (
+                            <li key={item.label}>
+                              <Link to={item.path} onClick={() => setIsMobileOpen(false)} className="text-sm text-gray-600 hover:text-[#2E7D32] block py-1">{item.label}</Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
             <div className="pt-4">
-              <Link to="/contact-us" onClick={() => setIsMobileOpen(false)} className="flex items-center justify-center gap-2 bg-[#D81B60] text-white font-bold text-sm px-6 py-3 rounded-full hover:bg-[#C2185B] transition-colors shadow-md w-full">
+              <Link to="/contact-us" onClick={() => setIsMobileOpen(false)} className="flex items-center justify-center gap-2 bg-[#2E7D32] text-white font-bold text-sm px-6 py-3 rounded-full hover:bg-[#1B5E20] transition-colors shadow-md w-full">
                 <FaCalendarWeek />
                 Book a session
               </Link>

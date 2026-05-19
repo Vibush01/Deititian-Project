@@ -7,7 +7,7 @@ import ContactCTA from '../components/sections/ContactCTA'
 import ClinicLocations from '../components/sections/ClinicLocations'
 
 const ContactHero = () => (
-  <section className="py-12 md:py-20 bg-[#D81B60] text-white relative overflow-hidden">
+  <section className="py-12 md:py-20 bg-[#2E7D32] text-white relative overflow-hidden">
     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
     <div className="container-custom relative z-10 text-center max-w-4xl mx-auto">
       <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
@@ -40,16 +40,16 @@ const ContactForm = () => {
     setFormData({ name: '', email: '', phone: '', service: '', message: '' })
   }
 
-  const inputClasses = 'w-full px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D81B60]/30 focus:border-[#D81B60] focus:bg-white transition-all text-sm'
+  const inputClasses = 'w-full px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/30 focus:border-[#2E7D32] focus:bg-white transition-all text-sm'
 
   return (
     <section className="py-12 md:py-20 bg-white">
       <div className="container-custom">
         <div className="max-w-3xl mx-auto bg-gray-50 p-8 md:p-12 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FCE4EC]/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 z-0"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8F5E9]/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 z-0"></div>
           
           <div className="relative z-10 text-center mb-10">
-            <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
+            <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
               Get in Touch
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Fill out the form</h2>
@@ -90,7 +90,7 @@ const ContactForm = () => {
             </div>
 
             <div className="pt-4 flex justify-center">
-              <Button type="submit" className="w-full md:w-auto px-10 bg-[#D81B60] hover:bg-[#C2185B] py-3.5">
+              <Button type="submit" className="w-full md:w-auto px-10 bg-[#2E7D32] hover:bg-[#1B5E20] py-3.5">
                 Send Message
               </Button>
             </div>

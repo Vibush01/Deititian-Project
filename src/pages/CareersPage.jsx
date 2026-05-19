@@ -12,18 +12,18 @@ import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
 
 const CareersHero = () => (
   <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FCE4EC]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
+    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E8F5E9]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
     <div className="container-custom relative z-10">
       <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
         <div className="w-full lg:w-1/2">
-          <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
+          <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
             Careers
           </span>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
             {careersHero.title}
           </h1>
           <div>
-            <Button href="#apply-form" icon={<FaBriefcase />} className="bg-[#D81B60] hover:bg-[#C2185B]">
+            <Button href="#apply-form" icon={<FaBriefcase />} className="bg-[#2E7D32] hover:bg-[#1B5E20]">
               {careersHero.ctaText}
             </Button>
           </div>
@@ -65,7 +65,7 @@ const CompanyValuesSection = () => (
   <section className="py-12 md:py-20 bg-gray-50">
     <div className="container-custom">
       <div className="text-center mb-12">
-        <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
+        <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
           Our Culture
         </span>
         <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
@@ -76,7 +76,7 @@ const CompanyValuesSection = () => (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
         {companyValues.map((value) => (
           <div key={value.number} className="bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-gray-100 hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
-            <span className="inline-block bg-[#FCE4EC] text-[#D81B60] font-black text-xl w-12 h-12 flex items-center justify-center rounded-2xl mb-6">
+            <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] font-black text-xl w-12 h-12 flex items-center justify-center rounded-2xl mb-6">
               {value.number}
             </span>
             <h3 className="text-lg md:text-xl font-bold text-gray-900 mb-3">
@@ -108,13 +108,13 @@ const CareerApplicationForm = () => {
     setFormData({ fullName: '', email: '', phone: '', position: '', message: '' })
   }
 
-  const inputClasses = 'w-full px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#D81B60]/30 focus:border-[#D81B60] focus:bg-white transition-all text-sm'
+  const inputClasses = 'w-full px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/30 focus:border-[#2E7D32] focus:bg-white transition-all text-sm'
 
   return (
     <section id="apply-form" className="py-12 md:py-20 bg-white">
       <div className="container-custom">
         <div className="max-w-3xl mx-auto bg-gray-50 p-8 md:p-12 rounded-3xl border border-gray-100 shadow-sm relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#FCE4EC]/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 z-0"></div>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#E8F5E9]/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 z-0"></div>
           
           <div className="relative z-10 text-center mb-10">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">Apply for a Position</h2>
@@ -142,7 +142,7 @@ const CareerApplicationForm = () => {
               <label className="block text-sm font-bold text-gray-700 mb-3">Position Applied For <span className="text-red-500">*</span></label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {jobPositions.map((position) => (
-                  <label key={position} className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${formData.position === position ? 'bg-[#FCE4EC] border-[#D81B60] text-[#D81B60]' : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300'}`}>
+                  <label key={position} className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${formData.position === position ? 'bg-[#E8F5E9] border-[#2E7D32] text-[#2E7D32]' : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300'}`}>
                     <input type="radio" name="position" value={position} checked={formData.position === position} onChange={handleChange} required className="hidden" />
                     <span className="font-bold text-sm">{position}</span>
                   </label>
@@ -156,7 +156,7 @@ const CareerApplicationForm = () => {
             </div>
 
             <div className="pt-4">
-              <Button type="submit" className="w-full bg-[#D81B60] hover:bg-[#C2185B] py-3.5">
+              <Button type="submit" className="w-full bg-[#2E7D32] hover:bg-[#1B5E20] py-3.5">
                 Submit Application
               </Button>
             </div>

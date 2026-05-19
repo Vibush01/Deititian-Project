@@ -19,11 +19,11 @@ const categoryIcons = {
 
 const ServiceHero = () => (
   <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FCE4EC]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
+    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E8F5E9]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
     <div className="container-custom relative z-10">
       <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
         <div className="w-full lg:w-1/2">
-          <span className="inline-block bg-[#FCE4EC] text-[#D81B60] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
+          <span className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">
             Our Services
           </span>
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight mb-6">
@@ -33,7 +33,7 @@ const ServiceHero = () => (
             Achieve your health goals with personalized diet plans that identify the root cause of weight gain through expert nutrition and lifestyle corrections provided by India's premier online diet service.
           </p>
           <div>
-            <Button href={`tel:${siteInfo.phone.replace(/\s/g, '')}`} icon={<FaPhoneAlt />} className="bg-[#D81B60] hover:bg-[#C2185B]">
+            <Button href={`tel:${siteInfo.phone.replace(/\s/g, '')}`} icon={<FaPhoneAlt />} className="bg-[#2E7D32] hover:bg-[#1B5E20]">
               Talk to us
             </Button>
           </div>
@@ -43,7 +43,7 @@ const ServiceHero = () => (
           <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white z-10">
             <img src={fitjeevaDietitian} alt="Expert Clinical Diet Plans" className="w-full h-auto object-cover" />
           </div>
-          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#F8BBD0] rounded-full blur-2xl -z-10"></div>
+          <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#C8E6C9] rounded-full blur-2xl -z-10"></div>
           <div className="absolute -top-6 -right-6 w-40 h-40 bg-[#A5D6A7] rounded-full blur-3xl -z-10"></div>
         </div>
       </div>
@@ -68,12 +68,12 @@ const ServiceCategoryCards = () => (
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div className="p-6 md:p-8 flex flex-col flex-grow relative bg-white">
-              <div className="absolute -top-6 right-6 w-12 h-12 bg-[#D81B60] text-white rounded-xl flex items-center justify-center text-xl shadow-lg transform group-hover:rotate-12 transition-transform">
+              <div className="absolute -top-6 right-6 w-12 h-12 bg-[#2E7D32] text-white rounded-xl flex items-center justify-center text-xl shadow-lg transform group-hover:rotate-12 transition-transform">
                 {categoryIcons[category.icon]}
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#D81B60] transition-colors">{category.title}</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#2E7D32] transition-colors">{category.title}</h3>
               <p className="text-sm text-gray-600 leading-relaxed mb-6 flex-grow">{category.heroDescription.slice(0, 150)}...</p>
-              <div className="mt-auto flex items-center text-[#D81B60] font-bold text-sm group-hover:gap-2 transition-all">
+              <div className="mt-auto flex items-center text-[#2E7D32] font-bold text-sm group-hover:gap-2 transition-all">
                 Learn more <FaArrowRight className="ml-1 text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
             </div>
@@ -105,7 +105,7 @@ const CategoryDetailSections = () => (
               ))}
             </div>
             <div>
-              <Button to={category.path} size="sm" className="bg-[#D81B60] hover:bg-[#C2185B]">
+              <Button to={category.path} size="sm" className="bg-[#2E7D32] hover:bg-[#1B5E20]">
                 Explore {category.title}
               </Button>
             </div>

@@ -18,7 +18,7 @@ const ServiceSubPage = () => {
       <div className="min-h-[60vh] flex flex-col items-center justify-center bg-gray-50 text-center px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Service Not Found</h1>
         <p className="text-gray-600 mb-8 text-lg">The service you're looking for doesn't exist.</p>
-        <Button to="/service" className="bg-[#D81B60] hover:bg-[#C2185B]">View All Services</Button>
+        <Button to="/service" className="bg-[#2E7D32] hover:bg-[#1B5E20]">View All Services</Button>
       </div>
     )
   }
@@ -31,7 +31,7 @@ const ServiceSubPage = () => {
   return (
     <div className="flex flex-col bg-white overflow-hidden">
       <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FCE4EC]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E8F5E9]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
         <div className="container-custom relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
             <div className="w-full lg:w-1/2">
@@ -42,7 +42,7 @@ const ServiceSubPage = () => {
                 {page.heroSubtitle}
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button href={`tel:${siteInfo.phone.replace(/\s/g, '')}`} icon={<FaPhoneAlt />} className="bg-[#D81B60] hover:bg-[#C2185B]">
+                <Button href={`tel:${siteInfo.phone.replace(/\s/g, '')}`} icon={<FaPhoneAlt />} className="bg-[#2E7D32] hover:bg-[#1B5E20]">
                   Talk to us
                 </Button>
                 <Button to="/contact-us" variant="outline">
@@ -54,7 +54,7 @@ const ServiceSubPage = () => {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white z-10">
                 <img src={page.image} alt={page.title} className="w-full h-auto object-cover" />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#F8BBD0] rounded-full blur-2xl -z-10"></div>
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#C8E6C9] rounded-full blur-2xl -z-10"></div>
               <div className="absolute -top-6 -right-6 w-40 h-40 bg-[#A5D6A7] rounded-full blur-3xl -z-10"></div>
             </div>
           </div>
@@ -92,7 +92,7 @@ const ServiceSubPage = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10">
             {page.benefits.map((benefit, i) => (
               <div key={i} className="flex items-start gap-4 bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-                <span className="w-8 h-8 rounded-full bg-[#FCE4EC] text-[#D81B60] flex items-center justify-center shrink-0 mt-0.5">
+                <span className="w-8 h-8 rounded-full bg-[#E8F5E9] text-[#2E7D32] flex items-center justify-center shrink-0 mt-0.5">
                   <FaCheck className="text-xs" />
                 </span>
                 <p className="text-gray-700 font-medium leading-relaxed">{benefit}</p>
@@ -112,14 +112,14 @@ const ServiceSubPage = () => {
             />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-10">
               {relatedServices.map((service) => (
-                <Link key={service.id} to={service.path} className="group flex flex-col bg-gray-50 p-6 rounded-3xl border border-gray-100 hover:border-[#D81B60]/30 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-[#D81B60] transition-colors">
+                <Link key={service.id} to={service.path} className="group flex flex-col bg-gray-50 p-6 rounded-3xl border border-gray-100 hover:border-[#2E7D32]/30 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-[#2E7D32] transition-colors">
                     {service.title}
                   </h3>
                   <p className="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
                     {service.description}
                   </p>
-                  <span className="text-[#D81B60] font-bold text-sm flex items-center gap-1">
+                  <span className="text-[#2E7D32] font-bold text-sm flex items-center gap-1">
                     Learn more <FaArrowRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
                   </span>
                 </Link>
