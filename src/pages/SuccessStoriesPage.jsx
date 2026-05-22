@@ -1,31 +1,39 @@
 import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
 import useDocumentMeta from '../hooks/useDocumentMeta'
-import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.jpg'
-import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
-import fitjeevaMillet from '../assets/images/fitjeeva-millet.jpg'
+import ss1 from '../assets/images/SS1.JPG'
+import ss2 from '../assets/images/SS2.JPG'
+import ss3 from '../assets/images/SS3.JPG'
+import ss4 from '../assets/images/SS4.JPG'
 
-const dummyStories = [
+const stories = [
   {
     id: 1,
-    name: 'Aarti S.',
-    achievement: 'Lost 15kg in 6 months',
-    image: fitjeevaHomevisit,
-    story: 'Before joining FitJeeva, I struggled with my weight and low energy levels. The personalized diet plan and constant support from the experts completely transformed my lifestyle. I feel healthier and more confident than ever!'
+    name: 'Incredible Transformation',
+    achievement: 'Massive Weight Loss',
+    image: ss1,
+    story: 'Struggling with weight was a constant battle until I found FitJeeva. Through a customized, easy-to-follow diet plan, I have completely transformed my health, energy levels, and confidence!'
   },
   {
     id: 2,
-    name: 'Rahul V.',
-    achievement: 'Reversed Type 2 Diabetes',
-    image: fitjeevaClinical,
-    story: 'I was diagnosed with early-stage diabetes and was prescribed medication. FitJeeva showed me how to manage my condition purely through diet and lifestyle changes. My HbA1c is now normal without any medication.'
+    name: 'Muskan',
+    achievement: 'Lost 28 Kgs',
+    image: ss2,
+    story: 'Going from 93 Kgs to 65 Kgs felt impossible, but FitJeeva made it a reality. Their constant support and personalized nutrition approach helped me shed 28 Kgs safely and naturally.'
   },
   {
     id: 3,
-    name: 'Priya M.',
-    achievement: 'Managed PCOS & Lost 8kg',
-    image: fitjeevaMillet,
-    story: 'Dealing with PCOS was extremely frustrating until I found FitJeeva. Their holistic approach helped balance my hormones, clear my skin, and safely lose the stubborn weight I had been fighting for years.'
+    name: 'Health Reclaimed',
+    achievement: 'Significant Fat Loss',
+    image: ss3,
+    story: 'I had almost given up on losing weight. Thanks to the expert dietitians at FitJeeva, I learned how to eat right without starving myself. The results have been absolutely life-changing.'
+  },
+  {
+    id: 4,
+    name: 'A New Lifestyle',
+    achievement: 'Sustainable Weight Management',
+    image: ss4,
+    story: 'It’s not just about losing weight; it’s about maintaining it. FitJeeva taught me how to balance my meals and enjoy my food while still achieving incredible fitness goals.'
   }
 ]
 
@@ -50,11 +58,11 @@ const SuccessStoriesPage = () => {
 
       <section className="py-16 md:py-24">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {dummyStories.map((story) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {stories.map((story) => (
               <div key={story.id} className="bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden hover:-translate-y-2 transition-transform duration-300">
-                <div className="h-56 overflow-hidden">
-                  <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
+                <div className="h-72 bg-gray-50 flex items-center justify-center p-4">
+                  <img src={story.image} alt={story.name} className="w-full h-full object-contain rounded-xl shadow-sm" />
                 </div>
                 <div className="p-8">
                   <h3 className="text-xl font-bold text-gray-900 mb-1">{story.name}</h3>
