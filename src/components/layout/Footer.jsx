@@ -127,9 +127,12 @@ const Footer = () => {
 
       {/* Copyright Bar */}
       <div className="bg-[#111] py-6">
-        <div className="container-custom">
-          <p className="text-center text-gray-500 text-sm font-medium">
+        <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-center md:text-left text-gray-500 text-sm font-medium">
             {siteInfo.copyright}
+          </p>
+          <p className="text-center md:text-right text-gray-500 text-sm font-medium">
+            Developed by <a href="https://vibush01.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-[#4CAF50] hover:text-white transition-colors">Vivek Kumar</a>
           </p>
         </div>
       </div>
