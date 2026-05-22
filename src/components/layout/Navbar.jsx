@@ -145,8 +145,8 @@ const Navbar = () => {
                       <h3 className="font-bold text-lg text-gray-700 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
                         <FaStethoscope className="text-[#2E7D32]" /> {link.megaMenu.column3.title}
                       </h3>
-                      <div className="rounded-xl overflow-hidden mb-4 border border-gray-200">
-                        <img src={link.megaMenu.column3.image} alt="Success Story" className="w-full h-40 object-cover" />
+                      <div className="rounded-xl overflow-hidden mb-4 border border-gray-200 bg-gray-50 flex items-center justify-center h-48 p-2">
+                        <img src={link.megaMenu.column3.image} alt="Success Story" className="w-full h-full object-contain rounded-lg shadow-sm" />
                       </div>
                       <div className="flex gap-2 mb-4">
                         {link.megaMenu.column3.buttons.map((btn, idx) => (
