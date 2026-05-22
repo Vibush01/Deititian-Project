@@ -12,8 +12,8 @@ export const siteInfo = {
 
 export const socialLinks = {
   facebook: "https://www.facebook.com/fitjeeva",
-  youtube: "https://www.youtube.com/@fitjeeva",
-  instagram: "https://www.instagram.com/fitjeeva",
+  youtube: "https://www.youtube.com/",
+  instagram: "https://www.instagram.com/",
   instagramHandle: "@fitjeeva",
 }
 
@@ -89,9 +89,9 @@ export const footerLinks = {
 }
 
 export const statsData = [
-  { number: 800, suffix: "+", label: "Coaches" },
+  { number: 10, suffix: "+", label: "Coaches" },
   { number: 99.3, suffix: "%", label: "Satisfaction Rate", decimals: 1 },
-  { number: 2, suffix: " Lakh+", label: "Users globally" },
-  { number: 70, suffix: "+", label: "Countries Served Globally" },
-  { number: 1.2, suffix: " Cr+", label: "Lives Impacted", decimals: 1 },
+  { number: 340, suffix: "+", label: "Users globally" },
+  { number: 4, suffix: "+", label: "Countries Served Globally" },
+  { number: 1200, suffix: "+", label: "Lives Impacted" },
 ]

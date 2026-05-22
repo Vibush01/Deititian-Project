@@ -1,16 +1,15 @@
 import { FaInstagram } from 'react-icons/fa'
 import SectionHeading from '../ui/SectionHeading'
 import { socialLinks } from '../../data/siteData'
-import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
-import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.jpg'
-import fitjeevaHomevisit from '../../assets/images/fitjeeva-homevisit.jpg'
-import fitjeevaMillet from '../../assets/images/fitjeeva-millet.jpg'
-import fitjeevaBanner from '../../assets/images/fitjeeva-banner.jpg'
+import ip1 from '../../assets/images/IP1.png'
+import ip2 from '../../assets/images/IP2.png'
+import ip3 from '../../assets/images/IP3.png'
+import ip4 from '../../assets/images/IP4.png'
+import ip5 from '../../assets/images/IP5.png'
+import ip6 from '../../assets/images/IP6.png'
 
-const feedImages = [
-  fitjeevaDietitian, fitjeevaClinical, fitjeevaMillet,
-  fitjeevaHomevisit, fitjeevaBanner, fitjeevaDietitian,
-]
+const feedImages = [ip1, ip2, ip3, ip4, ip5, ip6]
+
 
 const InstagramFeed = ({ className = '' }) => {
   return (
