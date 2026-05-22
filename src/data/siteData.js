@@ -12,7 +12,7 @@ export const siteInfo = {
 
 export const socialLinks = {
   facebook: "https://www.facebook.com/fitjeeva",
-  youtube: "https://www.youtube.com/",
+  youtube: "https://www.youtube.com/@fitjeeva",
   instagram: "https://www.instagram.com/",
   instagramHandle: "@fitjeeva",
 }
