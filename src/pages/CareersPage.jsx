@@ -7,6 +7,7 @@ import ConsultationCTA from '../components/sections/ConsultationCTA'
 import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
 import { careersHero, companyValues, jobPositions, teamImages } from '../data/careersData'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
 import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
 
@@ -168,6 +169,12 @@ const CareerApplicationForm = () => {
 }
 
 const CareersPage = () => {
+  useDocumentMeta({
+    title: 'Careers – Join Our Team of Clinical Nutrition Experts',
+    description: 'Join FitJeeva and make a difference in clinical nutrition. Explore career opportunities for dietitians, nutrition coaches, and health professionals. Apply now!',
+    canonical: '/careers',
+  })
+
   return (
     <div className="flex flex-col bg-white overflow-hidden">
       <CareersHero />

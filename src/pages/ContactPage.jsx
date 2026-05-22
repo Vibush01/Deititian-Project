@@ -5,6 +5,7 @@ import ConsultationCTA from '../components/sections/ConsultationCTA'
 import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
 import ClinicLocations from '../components/sections/ClinicLocations'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 
 const ContactHero = () => (
   <section className="py-12 md:py-20 bg-[#2E7D32] text-white relative overflow-hidden">
@@ -102,6 +103,12 @@ const ContactForm = () => {
 }
 
 const ContactPage = () => {
+  useDocumentMeta({
+    title: 'Contact Us – Book Your Nutrition Consultation',
+    description: 'Get in touch with FitJeeva for personalized nutrition consultations. Contact our expert dietitians in Chandigarh, India for PCOD, thyroid, diabetes & weight loss diet plans. Call +91 70912 89342.',
+    canonical: '/contact-us',
+  })
+
   return (
     <div className="flex flex-col bg-white overflow-hidden">
       <ContactHero />

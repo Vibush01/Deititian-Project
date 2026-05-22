@@ -11,6 +11,7 @@ import ContactCTA from "../components/sections/ContactCTA";
 import ClinicLocations from "../components/sections/ClinicLocations";
 import ConsultationForm from "../components/sections/ConsultationForm";
 import { homeExpertiseCards } from "../data/servicesData";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 
 /* =========================================================
    Scroll-reveal Hook — IntersectionObserver
@@ -277,6 +278,12 @@ const ClientSpotlight = () => {
 
 const HomePage = () => {
   const pageRef = useScrollReveal();
+
+  useDocumentMeta({
+    title: 'Best Dietitian & Medical Nutrition Clinic in Chandigarh',
+    description: 'FitJeeva – India\'s trusted Medical Nutrition Clinic in Chandigarh. Expert diet plans for PCOD, thyroid, diabetes & weight loss. Personalized clinical nutrition using Indian food. Book your free consultation today!',
+    canonical: '/',
+  });
 
   return (
     <div ref={pageRef} className="flex flex-col bg-white overflow-hidden">

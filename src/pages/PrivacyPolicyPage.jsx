@@ -1,7 +1,14 @@
 import SectionHeading from '../components/ui/SectionHeading'
 import { siteInfo } from '../data/siteData'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 
 const PrivacyPolicyPage = () => {
+  useDocumentMeta({
+    title: 'Privacy Policy',
+    description: 'Read FitJeeva\'s Privacy Policy. Learn how we collect, use, and protect your personal and medical information when using our nutrition services.',
+    canonical: '/privacy-policy',
+  })
+
   return (
     <div className="flex flex-col bg-white overflow-hidden pb-20">
       {/* Header */}

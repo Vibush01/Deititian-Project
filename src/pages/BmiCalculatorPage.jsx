@@ -2,12 +2,19 @@ import { useState } from 'react'
 import SectionHeading from '../components/ui/SectionHeading'
 import Button from '../components/ui/Button'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 
 const BmiCalculatorPage = () => {
   const [weight, setWeight] = useState('')
   const [height, setHeight] = useState('')
   const [bmi, setBmi] = useState(null)
   const [category, setCategory] = useState('')
+
+  useDocumentMeta({
+    title: 'BMI Calculator – Check Your Body Mass Index',
+    description: 'Use FitJeeva\'s free BMI Calculator to check your Body Mass Index. Understand your health status and get personalized nutrition guidance from expert dietitians.',
+    canonical: '/bmi-calculator',
+  })
 
   const calculateBmi = (e) => {
     e.preventDefault()

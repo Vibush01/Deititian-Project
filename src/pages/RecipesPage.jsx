@@ -1,5 +1,6 @@
 import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaMillet from '../assets/images/fitjeeva-millet.jpg'
 
 const dummyRecipes = [
@@ -33,6 +34,12 @@ const dummyRecipes = [
 ]
 
 const RecipesPage = () => {
+  useDocumentMeta({
+    title: 'Healthy Recipes – Millet, Indian & Diet-Friendly Recipes',
+    description: 'Explore healthy, delicious recipes curated by FitJeeva dietitians. Millet khichdi, lentil soups & more for diabetes, PCOS, thyroid & weight loss management.',
+    canonical: '/recipes',
+  })
+
   return (
     <div className="flex flex-col bg-white overflow-hidden pb-10">
       <section className="py-12 md:py-20 bg-[#E8F5E9] relative overflow-hidden">

@@ -1,5 +1,6 @@
 import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.jpg'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
 import fitjeevaMillet from '../assets/images/fitjeeva-millet.jpg'
@@ -29,6 +30,12 @@ const dummyStories = [
 ]
 
 const SuccessStoriesPage = () => {
+  useDocumentMeta({
+    title: 'Success Stories – Real Weight Loss & Health Transformations',
+    description: 'Read real success stories from FitJeeva clients. Inspiring weight loss, diabetes reversal, and PCOS management transformations through personalized clinical nutrition.',
+    canonical: '/success-stories',
+  })
+
   return (
     <div className="flex flex-col bg-white overflow-hidden pb-10">
       <section className="py-12 md:py-20 bg-[#E8F5E9] relative overflow-hidden">

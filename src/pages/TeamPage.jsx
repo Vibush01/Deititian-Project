@@ -1,5 +1,6 @@
 import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.jpg'
 import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
 
@@ -28,6 +29,12 @@ const dummyTeam = [
 ]
 
 const TeamPage = () => {
+  useDocumentMeta({
+    title: 'Our Team – The People Behind FitJeeva',
+    description: 'Meet the dedicated professionals behind FitJeeva. Our operations, customer success, and tech teams work together to ensure your wellness journey is smooth and successful.',
+    canonical: '/team',
+  })
+
   return (
     <div className="flex flex-col bg-white overflow-hidden pb-10">
       <section className="py-12 md:py-20 bg-[#E8F5E9] relative overflow-hidden">

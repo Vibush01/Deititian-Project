@@ -1,0 +1,15 @@
+# FitJeeva - Medical Nutrition Clinic
+# https://www.fitjeeva.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.fitjeeva.com/sitemap.xml
+
+# Disallow admin/private paths
+Disallow: /api/
+Disallow: /admin/
+
+# Crawl-delay (optional, be polite to bots)
+Crawl-delay: 1

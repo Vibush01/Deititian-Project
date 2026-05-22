@@ -8,10 +8,17 @@ import ContactCTA from '../components/sections/ContactCTA'
 import ConsultationForm from '../components/sections/ConsultationForm'
 import { serviceSubPages, serviceCategories } from '../data/servicesData'
 import { siteInfo } from '../data/siteData'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 
 const ServiceSubPage = () => {
   const { slug } = useParams()
   const page = serviceSubPages[slug]
+
+  useDocumentMeta({
+    title: page ? `${page.heroTitle}` : 'Service Not Found',
+    description: page ? page.heroSubtitle : 'The requested service page was not found.',
+    canonical: `/service/${slug}`,
+  })
 
   if (!page) {
     return (

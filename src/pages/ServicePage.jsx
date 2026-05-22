@@ -9,6 +9,7 @@ import ContactCTA from '../components/sections/ContactCTA'
 import ConsultationForm from '../components/sections/ConsultationForm'
 import { serviceCategories } from '../data/servicesData'
 import { siteInfo } from '../data/siteData'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
 
 const categoryIcons = {
@@ -117,6 +118,12 @@ const CategoryDetailSections = () => (
 )
 
 const ServicePage = () => {
+  useDocumentMeta({
+    title: 'Our Services – PCOD, Thyroid, Diabetes & Weight Loss Diet Plans',
+    description: 'Explore FitJeeva\'s expert clinical nutrition services. Personalized diet plans for PCOD/PCOS, thyroid, diabetes, weight loss & lifestyle management. Science-backed, medicine-free nutrition programs.',
+    canonical: '/service',
+  })
+
   return (
     <div className="flex flex-col bg-white overflow-hidden">
       <ServiceHero />

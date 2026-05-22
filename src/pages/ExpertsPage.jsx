@@ -1,5 +1,6 @@
 import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
 
@@ -28,6 +29,12 @@ const dummyExperts = [
 ]
 
 const ExpertsPage = () => {
+  useDocumentMeta({
+    title: 'Our Nutrition Experts – Meet the Clinical Dietitians',
+    description: 'Meet FitJeeva\'s qualified clinical dietitians and nutrition experts. Specialists in PCOS, thyroid, diabetes, sports nutrition & weight management.',
+    canonical: '/experts',
+  })
+
   return (
     <div className="flex flex-col bg-white overflow-hidden pb-10">
       <section className="py-12 md:py-20 bg-[#E8F5E9] relative overflow-hidden">

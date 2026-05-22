@@ -8,6 +8,7 @@ import ContactCTA from '../components/sections/ContactCTA'
 import ConsultationForm from '../components/sections/ConsultationForm'
 import { aboutIntro, philosophySections, coreServices } from '../data/aboutData'
 import { siteInfo } from '../data/siteData'
+import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
 import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.jpg'
@@ -185,6 +186,12 @@ const MediaSpotlight = () => (
 )
 
 const AboutPage = () => {
+  useDocumentMeta({
+    title: 'About Us – Our Story, Philosophy & Mission',
+    description: 'Learn about FitJeeva\'s journey as a premier Medical Nutrition Clinic. Our farm-to-plate philosophy, kitchen-based nutrition approach, and clinical expertise help transform lives through food.',
+    canonical: '/about-us',
+  })
+
   return (
     <div className="flex flex-col bg-white overflow-hidden">
       <AboutHero />
