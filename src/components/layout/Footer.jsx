@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { FaFacebookF, FaYoutube, FaInstagram } from 'react-icons/fa'
 import { siteInfo, socialLinks, footerLinks } from '../../data/siteData'
+import logoImg from '../../assets/images/logo.png'
 
 const Footer = () => {
   return (
@@ -11,18 +12,8 @@ const Footer = () => {
 
           {/* Column 1: Logo + Tagline + Socials */}
           <div className="flex flex-col">
-            <Link to="/" className="inline-block mb-6">
-              <div className="flex items-center gap-2">
-                <span className="text-3xl">🌿</span>
-                <div className="flex flex-col">
-                  <span className="text-2xl font-extrabold text-[#4CAF50] leading-none tracking-tight">
-                    FitJeeva
-                  </span>
-                  <span className="text-[10px] font-bold text-gray-400 tracking-widest uppercase mt-0.5">
-                    Nourish | Transform | Thrive
-                  </span>
-                </div>
-              </div>
+            <Link to="/" className="inline-block mb-6 bg-white p-2 rounded-xl inline-flex w-fit">
+              <img src={logoImg} alt="FitJeeva Logo" className="h-10 md:h-12 w-auto object-contain" />
             </Link>
 
             <p className="text-gray-400 text-sm leading-relaxed mb-8 pr-4">

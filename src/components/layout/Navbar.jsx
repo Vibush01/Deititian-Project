@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FaBars, FaTimes, FaChevronDown, FaHeartbeat, FaStethoscope, FaPills, FaWeight, FaRunning, FaCalendarWeek, FaFireAlt } from 'react-icons/fa'
 import { navLinks } from '../../data/siteData'
 import Button from '../ui/Button'
+import logoImg from '../../assets/images/logo.png'
 
 // Helper for mapping titles to icons
 const getIcon = (title) => {
@@ -45,16 +46,8 @@ const Navbar = () => {
       <nav ref={dropdownRef} className="container-custom flex items-center justify-between h-16 md:h-20">
         {/* Left Column (Logo) */}
         <div className="flex-shrink-0">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl md:text-3xl">🌿</span>
-            <div className="flex flex-col">
-              <span className="text-xl md:text-2xl font-extrabold text-[#2E7D32] leading-none tracking-tight">
-                FitJeeva
-              </span>
-              <span className="text-[10px] md:text-[11px] font-bold text-gray-500 tracking-widest uppercase mt-0.5">
-                Nourish | Transform | Thrive
-              </span>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src={logoImg} alt="FitJeeva Logo" className="h-10 md:h-14 w-auto object-contain" />
           </Link>
         </div>
 
