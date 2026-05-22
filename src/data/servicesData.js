@@ -278,8 +278,8 @@ export const homeExpertiseCards = [
     image: new URL('../assets/images/fitjeeva-clinical.jpg', import.meta.url).href,
   },
   {
-    title: "FitJeeva Academy: Nutrition Education",
-    description: "Empowering future weight loss dietitians through professional education at the FitJeeva Academy. We offer career-focused training on building personalized diet plans and mastering online diet consultation.",
+    title: "Community Health & Nutrition Tips",
+    description: "Stay informed with our expert-curated health posts, seasonal nutrition guides, and wellness insights. From debunking diet myths to sharing millet-based recipes, our community posts empower you to make smarter food choices every day.",
     image: new URL('../assets/images/fitjeeva-clinical.jpg', import.meta.url).href,
   },
   {

@@ -203,7 +203,7 @@ const ClientSpotlight = () => {
   const spotlightStats = [
     { number: "1,00,000+", label: "Lives Transformed" },
     { number: "35,000+", label: "Weight Loss Journeys" },
-    { number: "9+", label: "Clinic Locations" },
+    { number: "Chandigarh", label: "Based in India" },
   ];
 
   return (

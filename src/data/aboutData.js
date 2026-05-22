@@ -49,8 +49,8 @@ export const coreServices = [
   },
   {
     number: 4,
-    title: "FitJeeva Academy",
-    description: "Training center for aspiring health professionals to become certified clinical dietitians with comprehensive curriculum expertise.",
+    title: "Community Wellness Posts",
+    description: "Expert-curated health tips, seasonal nutrition guides, millet-based recipes, and wellness insights to help you make smarter food choices every day.",
     image: new URL('../assets/images/fitjeeva-banner.jpg', import.meta.url).href,
   },
 ]
