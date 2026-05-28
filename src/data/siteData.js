@@ -91,7 +91,7 @@ export const footerLinks = {
 export const statsData = [
   { number: 10, suffix: "+", label: "Coaches" },
   { number: 99.3, suffix: "%", label: "Satisfaction Rate", decimals: 1 },
-  { number: 340, suffix: "+", label: "Users globally" },
-  { number: 4, suffix: "+", label: "Countries Served Globally" },
-  { number: 1200, suffix: "+", label: "Lives Impacted" },
+  { number: 50000, suffix: "+", label: "Happy Clients" },
+  { number: 8, suffix: "+", label: "Countries Served" },
+  { number: 120, suffix: "k+", label: "Lives Impacted" },
 ]
