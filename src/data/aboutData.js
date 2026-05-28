@@ -51,7 +51,7 @@ export const coreServices = [
     number: 4,
     title: "Community Wellness Posts",
     description: "Expert-curated health tips, seasonal nutrition guides, millet-based recipes, and wellness insights to help you make smarter food choices every day.",
-    image: new URL('../assets/images/fitjeeva-banner.jpg', import.meta.url).href,
+    image: new URL('../assets/images/fitjeeva-banner-1.jpg', import.meta.url).href,
   },
 ]
 

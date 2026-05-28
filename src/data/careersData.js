@@ -52,7 +52,7 @@ export const jobPositions = [
 
 export const teamImages = [
   new URL('../assets/images/fitjeeva-clinical.jpg', import.meta.url).href,
-  new URL('../assets/images/fitjeeva-banner.jpg', import.meta.url).href,
+  new URL('../assets/images/fitjeeva-banner-1.jpg', import.meta.url).href,
   new URL('../assets/images/fitjeeva-dietitian.jpg', import.meta.url).href,
   new URL('../assets/images/fitjeeva-millet.jpg', import.meta.url).href,
 ]

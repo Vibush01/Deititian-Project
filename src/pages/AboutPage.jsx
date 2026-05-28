@@ -6,6 +6,7 @@ import ConsultationCTA from '../components/sections/ConsultationCTA'
 import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
 import ConsultationForm from '../components/sections/ConsultationForm'
+import TeamShowcase from '../components/sections/TeamShowcase'
 import { aboutIntro, philosophySections, coreServices } from '../data/aboutData'
 import { siteInfo } from '../data/siteData'
 import useDocumentMeta from '../hooks/useDocumentMeta'
@@ -13,7 +14,7 @@ import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
 import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.jpg'
 import fitjeevaMillet from '../assets/images/fitjeeva-millet.jpg'
-import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
+import fitjeevaBanner from '../assets/images/fitjeeva-banner-1.jpg'
 
 const AboutHero = () => (
   <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
@@ -198,6 +199,7 @@ const AboutPage = () => {
       <SubtitleIntro />
       <PhilosophySection />
       <CoreServicesSection />
+      <TeamShowcase />
       <JoinMissionCTA />
       <ConsultationForm />
       <MediaSpotlight />

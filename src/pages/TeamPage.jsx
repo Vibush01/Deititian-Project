@@ -1,32 +1,6 @@
-import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
+import TeamShowcase from '../components/sections/TeamShowcase'
 import useDocumentMeta from '../hooks/useDocumentMeta'
-import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.jpg'
-import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
-
-const dummyTeam = [
-  {
-    id: 1,
-    name: 'Suresh Kumar',
-    role: 'Customer Success Manager',
-    image: fitjeevaBanner,
-    bio: 'Suresh ensures that every client at FitJeeva receives prompt support, guidance, and a seamless experience throughout their health journey.'
-  },
-  {
-    id: 2,
-    name: 'Priya Desai',
-    role: 'Operations Head',
-    image: fitjeevaHomevisit,
-    bio: 'Priya handles the day-to-day operations, ensuring that all our dietitians and clients are perfectly synced for daily consultations.'
-  },
-  {
-    id: 3,
-    name: 'Amit Patel',
-    role: 'Health Tech Lead',
-    image: fitjeevaBanner,
-    bio: 'Amit leads our digital platform, making sure that your diet plans, recipes, and progress trackers are always accessible and secure.'
-  }
-]
 
 const TeamPage = () => {
   useDocumentMeta({
@@ -47,24 +21,7 @@ const TeamPage = () => {
         </div>
       </section>
 
-      <section className="py-16">
-        <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {dummyTeam.map((member) => (
-              <div key={member.id} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300">
-                <div className="h-64 overflow-hidden">
-                  <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
-                </div>
-                <div className="p-8 text-center">
-                  <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
-                  <p className="text-[#2E7D32] font-bold text-sm mb-4">{member.role}</p>
-                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <TeamShowcase showCTA={false} />
 
       <ConsultationCTA />
     </div>
@@ -72,3 +29,4 @@ const TeamPage = () => {
 }
 
 export default TeamPage
+

@@ -5,6 +5,18 @@ import ss1 from '../assets/images/SS1.JPG'
 import ss2 from '../assets/images/SS2.JPG'
 import ss3 from '../assets/images/SS3.JPG'
 import ss4 from '../assets/images/SS4.JPG'
+import ss5 from '../assets/images/SS5.png'
+import ss6 from '../assets/images/SS6.png'
+import ss7 from '../assets/images/SS7.png'
+import ss8 from '../assets/images/SS8.png'
+import ss9 from '../assets/images/SS9.png'
+import ss10 from '../assets/images/SS10.png'
+import ss11 from '../assets/images/SS11.png'
+import ss12 from '../assets/images/SS12.png'
+import ss13 from '../assets/images/SS13.png'
+import ss14 from '../assets/images/SS14.png'
+import ss15 from '../assets/images/SS15.png'
+import ss16 from '../assets/images/SS16.png'
 
 const stories = [
   {
@@ -33,7 +45,91 @@ const stories = [
     name: 'A New Lifestyle',
     achievement: 'Sustainable Weight Management',
     image: ss4,
-    story: 'It’s not just about losing weight; it’s about maintaining it. FitJeeva taught me how to balance my meals and enjoy my food while still achieving incredible fitness goals.'
+    story: 'It\'s not just about losing weight; it\'s about maintaining it. FitJeeva taught me how to balance my meals and enjoy my food while still achieving incredible fitness goals.'
+  },
+  {
+    id: 5,
+    name: 'Complete Makeover',
+    achievement: 'Stunning Body Transformation',
+    image: ss5,
+    story: 'FitJeeva\'s holistic approach helped me achieve a complete body transformation. With the right nutrition plan, I feel healthier, stronger, and more confident than ever before.'
+  },
+  {
+    id: 6,
+    name: 'Wellness Journey',
+    achievement: 'Healthy Lifestyle Achieved',
+    image: ss6,
+    story: 'Thanks to FitJeeva, I finally understood the science behind healthy eating. Their personalized diet plan made it easy to adopt a sustainable and nourishing lifestyle.'
+  },
+  {
+    id: 7,
+    name: 'Fitness Milestone',
+    achievement: 'Remarkable Progress',
+    image: ss7,
+    story: 'Every milestone felt achievable with FitJeeva by my side. Their expert guidance and constant motivation pushed me to reach fitness goals I never thought possible.'
+  },
+  {
+    id: 8,
+    name: 'Energy Restored',
+    achievement: 'Vitality & Weight Loss',
+    image: ss8,
+    story: 'I was always tired and sluggish. FitJeeva\'s kitchen-based nutrition plan not only helped me lose weight but also restored my energy levels completely.'
+  },
+  {
+    id: 9,
+    name: 'Inspiring Change',
+    achievement: 'Life-Changing Results',
+    image: ss9,
+    story: 'FitJeeva didn\'t just change my body — they changed my entire outlook on food and wellness. I now inspire others in my family to eat healthier too.'
+  },
+  {
+    id: 10,
+    name: 'Confident & Strong',
+    achievement: 'Total Body Transformation',
+    image: ss10,
+    story: 'From feeling self-conscious to walking with confidence — FitJeeva\'s clinical nutrition expertise made all the difference in my transformation journey.'
+  },
+  {
+    id: 11,
+    name: 'Balanced Living',
+    achievement: 'Sustainable Health Goals',
+    image: ss11,
+    story: 'What I love most about FitJeeva is their focus on sustainability. No crash diets, no extremes — just balanced, delicious meals that helped me achieve my health goals.'
+  },
+  {
+    id: 12,
+    name: 'Dream Achieved',
+    achievement: 'Major Weight Loss Milestone',
+    image: ss12,
+    story: 'Reaching my dream weight felt impossible until FitJeeva created a plan that worked with my lifestyle. Their farm-to-plate philosophy truly resonated with me.'
+  },
+  {
+    id: 13,
+    name: 'Healthier & Happier',
+    achievement: 'Overall Wellness Boost',
+    image: ss13,
+    story: 'FitJeeva helped me realize that wellness is not just about the number on the scale. I feel happier, more energetic, and healthier in every aspect of my life.'
+  },
+  {
+    id: 14,
+    name: 'Transformation Champion',
+    achievement: 'Incredible Fitness Journey',
+    image: ss14,
+    story: 'My fitness journey with FitJeeva has been nothing short of incredible. The expert dietitians provided me with a roadmap to success that I could actually follow.'
+  },
+  {
+    id: 15,
+    name: 'New Beginning',
+    achievement: 'Complete Health Overhaul',
+    image: ss15,
+    story: 'FitJeeva gave me a fresh start. Their clinical nutrition approach addressed my health issues at the root, and the results speak for themselves.'
+  },
+  {
+    id: 16,
+    name: 'Living My Best Life',
+    achievement: 'Lasting Transformation',
+    image: ss16,
+    story: 'Thanks to FitJeeva, I\'m living my best life. The transformation has been lasting because they taught me how to make healthy choices every single day.'
   }
 ]
 

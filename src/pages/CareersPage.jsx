@@ -9,7 +9,7 @@ import ContactCTA from '../components/sections/ContactCTA'
 import { careersHero, companyValues, jobPositions, teamImages } from '../data/careersData'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
-import fitjeevaBanner from '../assets/images/fitjeeva-banner.jpg'
+import fitjeevaBanner from '../assets/images/fitjeeva-banner-1.jpg'
 
 const CareersHero = () => (
   <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">

@@ -4,11 +4,11 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import fitjeevaBanner from '../../assets/images/fitjeeva-banner.jpg';
-import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.jpg';
-import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg';
-import fitjeevaHomevisit from '../../assets/images/fitjeeva-homevisit.jpg';
-import fitjeevaMillet from '../../assets/images/fitjeeva-millet.jpg';
+import fitjeevaBanner1 from '../../assets/images/fitjeeva-banner-1.jpg';
+import fitjeevaBanner2 from '../../assets/images/fitjeeva-banner-2.png';
+import fitjeevaBanner3 from '../../assets/images/fitjeeva-banner-3.png';
+import fitjeevaBanner4 from '../../assets/images/fitjeeva-banner-4.png';
+import fitjeevaBanner5 from '../../assets/images/fitjeeva-banner-5.png';
 
 /**
  * FitJeeva Home Hero — Simple image carousel slider.
@@ -16,18 +16,18 @@ import fitjeevaMillet from '../../assets/images/fitjeeva-millet.jpg';
  */
 
 const banners = [
-  { image: fitjeevaBanner, alt: 'FitJeeva — Your Trusted Nutrition Partner' },
-  { image: fitjeevaClinical, alt: 'FitJeeva Clinical Nutrition' },
-  { image: fitjeevaDietitian, alt: 'FitJeeva Online Consultation' },
-  { image: fitjeevaHomevisit, alt: 'FitJeeva Home Visit Service' },
-  { image: fitjeevaMillet, alt: 'FitJeeva Millet Based Diets' },
+  { image: fitjeevaBanner1, alt: 'FitJeeva — Your Trusted Nutrition Partner' },
+  { image: fitjeevaBanner2, alt: 'FitJeeva Clinical Nutrition' },
+  { image: fitjeevaBanner3, alt: 'FitJeeva Online Consultation' },
+  { image: fitjeevaBanner4, alt: 'FitJeeva Home Visit Service' },
+  { image: fitjeevaBanner5, alt: 'FitJeeva Millet Based Diets' },
 ];
 
 const HomeHero = () => {
   return (
-    <section className="w-full relative bg-gray-50">
+    <section className="w-full relative bg-white">
       <Swiper
-        className="hero-swiper w-full h-[40vh] md:h-[60vh] lg:h-[80vh] xl:h-[90vh]"
+        className="hero-swiper w-full"
         modules={[Navigation, Autoplay, Pagination]}
         navigation={true}
         pagination={{ clickable: true }}
@@ -35,14 +35,14 @@ const HomeHero = () => {
         loop={true}
       >
         {banners.map((banner, index) => (
-          <SwiperSlide key={index} className="w-full h-full">
-            <div className="w-full h-full relative">
+          <SwiperSlide key={index} className="w-full">
+            <div className="w-full">
               <img
                 src={banner.image}
                 alt={banner.alt}
                 loading={index === 0 ? 'eager' : 'lazy'}
                 decoding="async"
-                className="w-full h-full object-cover object-center"
+                className="w-full h-auto block"
               />
             </div>
           </SwiperSlide>
