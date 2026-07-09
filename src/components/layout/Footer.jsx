@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom'
 import { FaFacebookF, FaYoutube, FaInstagram } from 'react-icons/fa'
-import { siteInfo, socialLinks, footerLinks } from '../../data/siteData'
+import useSiteSettings from '../../hooks/useSiteSettings'
+import useNavigation from '../../hooks/useNavigation'
 import logoImg from '../../assets/images/logo.png'
 
 const Footer = () => {
+  const { settings } = useSiteSettings()
+  const { footerLinks } = useNavigation()
+  const { socialLinks } = settings
   return (
     <footer className="bg-gray-900 text-white pt-16 md:pt-24 border-t-4 border-[#2E7D32]">
       {/* Main Footer Content */}
@@ -17,7 +21,7 @@ const Footer = () => {
             </Link>
 
             <p className="text-gray-400 text-sm leading-relaxed mb-8 pr-4">
-              {siteInfo.tagline}
+              {settings.tagline}
             </p>
 
             {/* Social Icons */}
@@ -120,7 +124,7 @@ const Footer = () => {
       <div className="bg-[#111] py-6">
         <div className="container-custom flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-center md:text-left text-gray-500 text-sm font-medium">
-            {siteInfo.copyright}
+            {settings.copyright}
           </p>
           <p className="text-center md:text-right text-gray-500 text-sm font-medium">
             Developed by <a href="https://vibush01.netlify.app/" target="_blank" rel="noopener noreferrer" className="text-[#4CAF50] hover:text-white transition-colors">Vivek Kumar</a>

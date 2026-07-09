@@ -1,23 +1,24 @@
 import { FaWhatsapp, FaPhoneAlt, FaCalendarCheck } from 'react-icons/fa'
 import SectionHeading from '../ui/SectionHeading'
 import ContactMethodCard from '../ui/ContactMethodCard'
-import { siteInfo } from '../../data/siteData'
+import useSiteSettings from '../../hooks/useSiteSettings'
 
 const ContactCTA = ({ className = '' }) => {
+  const { settings } = useSiteSettings()
   const contactMethods = [
     {
       icon: <FaWhatsapp />,
       title: 'Whatsapp Us',
       description: 'Schedule a quick chat with an expert counsellor right away to discuss your health goals.',
       ctaText: 'Chat Now',
-      ctaLink: `https://wa.me/${siteInfo.whatsapp}`,
+      ctaLink: `https://wa.me/${settings.whatsapp}`,
     },
     {
       icon: <FaPhoneAlt />,
       title: 'Call Us',
       description: 'Schedule a quick call with an expert counsellor right away to book your appointment and start your journey.',
       ctaText: 'Call now',
-      ctaLink: `tel:${siteInfo.phone.replace(/\s/g, '')}`,
+      ctaLink: `tel:${settings.phone.replace(/\s/g, '')}`,
     },
     {
       icon: <FaCalendarCheck />,

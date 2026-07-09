@@ -1,9 +1,10 @@
 import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
+import { useRecipes } from '../hooks/usePageData'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaMillet from '../assets/images/fitjeeva-millet.jpg'
 
-const dummyRecipes = [
+const defaultRecipes = [
   {
     id: 1,
     title: 'Millet Khichdi',
@@ -34,6 +35,8 @@ const dummyRecipes = [
 ]
 
 const RecipesPage = () => {
+  const { recipes: firestoreRecipes } = useRecipes()
+  const recipes = firestoreRecipes.length > 0 ? firestoreRecipes : defaultRecipes
   useDocumentMeta({
     title: 'Healthy Recipes – Millet, Indian & Diet-Friendly Recipes',
     description: 'Explore healthy, delicious recipes curated by FitJeeva dietitians. Millet khichdi, lentil soups & more for diabetes, PCOS, thyroid & weight loss management.',
@@ -55,7 +58,7 @@ const RecipesPage = () => {
       <section className="py-16">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {dummyRecipes.map((recipe) => (
+            {recipes.map((recipe) => (
               <div key={recipe.id} className="bg-white rounded-3xl shadow-md border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col">
                 <div className="h-48 overflow-hidden relative">
                   <img src={recipe.image} alt={recipe.title} className="w-full h-full object-cover" />

@@ -1,10 +1,11 @@
 import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
+import { useExperts } from '../hooks/usePageData'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
 
-const dummyExperts = [
+const defaultExperts = [
   {
     id: 1,
     name: 'Dr. Anjali Sharma',
@@ -29,6 +30,8 @@ const dummyExperts = [
 ]
 
 const ExpertsPage = () => {
+  const { experts: firestoreExperts } = useExperts()
+  const experts = firestoreExperts.length > 0 ? firestoreExperts : defaultExperts
   useDocumentMeta({
     title: 'Our Nutrition Experts – Meet the Clinical Dietitians',
     description: 'Meet FitJeeva\'s qualified clinical dietitians and nutrition experts. Specialists in PCOS, thyroid, diabetes, sports nutrition & weight management.',
@@ -50,7 +53,7 @@ const ExpertsPage = () => {
       <section className="py-16">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {dummyExperts.map((expert) => (
+            {experts.map((expert) => (
               <div key={expert.id} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300">
                 <div className="h-64 overflow-hidden">
                   <img src={expert.image} alt={expert.name} className="w-full h-full object-cover" />

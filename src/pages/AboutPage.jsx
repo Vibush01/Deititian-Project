@@ -7,8 +7,8 @@ import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
 import ConsultationForm from '../components/sections/ConsultationForm'
 import TeamShowcase from '../components/sections/TeamShowcase'
-import { aboutIntro, philosophySections, coreServices } from '../data/aboutData'
-import { siteInfo } from '../data/siteData'
+import { useAboutData } from '../hooks/usePageData'
+import useSiteSettings from '../hooks/useSiteSettings'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
@@ -16,7 +16,9 @@ import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.jpg'
 import fitjeevaMillet from '../assets/images/fitjeeva-millet.jpg'
 import fitjeevaBanner from '../assets/images/fitjeeva-banner-1.jpg'
 
-const AboutHero = () => (
+const AboutHero = () => {
+  const { aboutIntro } = useAboutData()
+  return (
   <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E8F5E9]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
     <div className="container-custom relative z-10">
@@ -62,8 +64,11 @@ const AboutHero = () => (
     </div>
   </section>
 )
+}
 
-const SubtitleIntro = () => (
+const SubtitleIntro = () => {
+  const { aboutIntro } = useAboutData()
+  return (
   <section className="py-12 md:py-16 bg-white">
     <div className="container-custom max-w-4xl text-center">
       <h2 className="text-2xl md:text-3xl font-extrabold text-[#2E7D32] mb-6 leading-tight">
@@ -75,6 +80,7 @@ const SubtitleIntro = () => (
     </div>
   </section>
 )
+}
 
 const philosophyImages = [
   fitjeevaClinical,
@@ -84,7 +90,9 @@ const philosophyImages = [
   fitjeevaDietitian,
 ]
 
-const PhilosophySection = () => (
+const PhilosophySection = () => {
+  const { philosophySections } = useAboutData()
+  return (
   <section className="py-12 md:py-16 bg-gray-50 border-y border-gray-100">
     <div className="container-custom">
       <div className="text-center mb-12">
@@ -113,8 +121,11 @@ const PhilosophySection = () => (
     </div>
   </section>
 )
+}
 
-const CoreServicesSection = () => (
+const CoreServicesSection = () => {
+  const { coreServices } = useAboutData()
+  return (
   <section className="py-12 md:py-20 bg-white">
     <div className="container-custom">
       <div className="text-center mb-12 md:mb-16">
@@ -145,6 +156,7 @@ const CoreServicesSection = () => (
     </div>
   </section>
 )
+}
 
 const JoinMissionCTA = () => (
   <section className="py-12 md:py-20 bg-[#2E7D32] text-white">

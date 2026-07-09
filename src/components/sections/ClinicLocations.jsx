@@ -1,9 +1,10 @@
 import SectionHeading from '../ui/SectionHeading'
-import { clinicLocations } from '../../data/locationsData'
+import { useLocations } from '../../hooks/usePageData'
 import { FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
 
 const ClinicLocations = ({ className = '' }) => {
-  const location = clinicLocations[0]
+  const { locations } = useLocations()
+  const location = locations[0]
   const mapEmbedUrl = 'https://maps.google.com/maps?q=Chandigarh,+India&t=&z=12&ie=UTF8&iwloc=&output=embed'
 
   return (

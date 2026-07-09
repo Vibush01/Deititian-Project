@@ -1,8 +1,9 @@
 import SectionHeading from '../components/ui/SectionHeading'
-import { siteInfo } from '../data/siteData'
+import useSiteSettings from '../hooks/useSiteSettings'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 
 const PrivacyPolicyPage = () => {
+  const { settings: siteInfo } = useSiteSettings()
   useDocumentMeta({
     title: 'Privacy Policy',
     description: 'Read FitJeeva\'s Privacy Policy. Learn how we collect, use, and protect your personal and medical information when using our nutrition services.',

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { FaUserMd, FaClipboardList, FaHeadset } from 'react-icons/fa'
 import SectionHeading from '../ui/SectionHeading'
 import Button from '../ui/Button'
+import { submitConsultationInquiry } from '../../services/inquiryService'
 import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
 
 const featureBadges = [
@@ -23,16 +24,32 @@ const clinicOptions = [
 
 const ConsultationForm = ({ className = '' }) => {
   const [formData, setFormData] = useState(initialFormState)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    alert('Thank you! Your consultation request has been submitted. We will contact you shortly.')
-    setFormData(initialFormState)
+    setSubmitting(true)
+    try {
+      // Try to save to Firestore
+      if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
+        await submitConsultationInquiry(formData)
+      }
+      setSubmitted(true)
+      setFormData(initialFormState)
+      setTimeout(() => setSubmitted(false), 5000)
+    } catch (error) {
+      console.error('Form submission error:', error)
+      alert('Thank you! Your consultation request has been noted. We will contact you shortly.')
+      setFormData(initialFormState)
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const inputClasses = 'w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/30 focus:border-[#2E7D32] transition-all duration-200'
@@ -183,10 +200,17 @@ const ConsultationForm = ({ className = '' }) => {
                 </div>
               </div>
 
+              {/* Success Message */}
+              {submitted && (
+                <div className="bg-[#E8F5E9] border border-[#2E7D32]/30 text-[#2E7D32] rounded-xl p-4 text-center font-bold text-sm">
+                  ✓ Thank you! Your consultation request has been submitted. We will contact you shortly.
+                </div>
+              )}
+
               {/* Submit Button */}
               <div className="pt-4">
-                <Button type="submit" className="w-full text-lg py-4 shadow-lg shadow-[#2E7D32]/30 hover:shadow-[#2E7D32]/50">
-                  Book Consultation Now
+                <Button type="submit" disabled={submitting} className="w-full text-lg py-4 shadow-lg shadow-[#2E7D32]/30 hover:shadow-[#2E7D32]/50 disabled:opacity-60 disabled:cursor-not-allowed">
+                  {submitting ? 'Submitting...' : 'Book Consultation Now'}
                 </Button>
               </div>
             </form>

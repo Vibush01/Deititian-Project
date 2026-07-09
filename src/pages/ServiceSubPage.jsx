@@ -6,13 +6,15 @@ import ConsultationCTA from '../components/sections/ConsultationCTA'
 import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
 import ConsultationForm from '../components/sections/ConsultationForm'
-import { serviceSubPages, serviceCategories } from '../data/servicesData'
-import { siteInfo } from '../data/siteData'
+import { useServiceSubPage, useServiceCategories } from '../hooks/useServices'
+import useSiteSettings from '../hooks/useSiteSettings'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 
 const ServiceSubPage = () => {
   const { slug } = useParams()
-  const page = serviceSubPages[slug]
+  const { page } = useServiceSubPage(slug)
+  const { categories: serviceCategories } = useServiceCategories()
+  const { settings } = useSiteSettings()
 
   useDocumentMeta({
     title: page ? `${page.heroTitle}` : 'Service Not Found',
@@ -49,7 +51,7 @@ const ServiceSubPage = () => {
                 {page.heroSubtitle}
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button href={`tel:${siteInfo.phone.replace(/\s/g, '')}`} icon={<FaPhoneAlt />} className="bg-[#2E7D32] hover:bg-[#1B5E20]">
+                <Button href={`tel:${settings.phone.replace(/\s/g, '')}`} icon={<FaPhoneAlt />} className="bg-[#2E7D32] hover:bg-[#1B5E20]">
                   Talk to us
                 </Button>
                 <Button to="/contact-us" variant="outline">

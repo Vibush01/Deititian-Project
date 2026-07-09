@@ -1,7 +1,9 @@
 import CounterCard from '../ui/CounterCard'
-import { statsData } from '../../data/siteData'
+import useSiteSettings from '../../hooks/useSiteSettings'
 
-const StatsCounter = ({ stats = statsData, className = '' }) => {
+const StatsCounter = ({ stats: propStats, className = '' }) => {
+  const { settings } = useSiteSettings()
+  const stats = propStats || settings.statsData || []
   return (
     <section className={`py-12 md:py-16 bg-white border-b border-gray-100 ${className}`}>
       <div className="container-custom">

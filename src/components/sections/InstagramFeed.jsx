@@ -1,6 +1,6 @@
 import { FaInstagram } from 'react-icons/fa'
 import SectionHeading from '../ui/SectionHeading'
-import { socialLinks } from '../../data/siteData'
+import useSiteSettings from '../../hooks/useSiteSettings'
 import ip1 from '../../assets/images/IP1.png'
 import ip2 from '../../assets/images/IP2.png'
 import ip3 from '../../assets/images/IP3.png'
@@ -8,10 +8,13 @@ import ip4 from '../../assets/images/IP4.png'
 import ip5 from '../../assets/images/IP5.png'
 import ip6 from '../../assets/images/IP6.png'
 
-const feedImages = [ip1, ip2, ip3, ip4, ip5, ip6]
+const defaultFeedImages = [ip1, ip2, ip3, ip4, ip5, ip6]
 
 
 const InstagramFeed = ({ className = '' }) => {
+  const { settings } = useSiteSettings()
+  const socialLinks = settings.socialLinks || {}
+  const feedImages = defaultFeedImages
   return (
     <section className={`py-16 md:py-24 bg-white ${className}`}>
       <div className="container-custom">

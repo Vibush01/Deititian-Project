@@ -10,7 +10,7 @@ import InstagramFeed from "../components/sections/InstagramFeed";
 import ContactCTA from "../components/sections/ContactCTA";
 import ClinicLocations from "../components/sections/ClinicLocations";
 import ConsultationForm from "../components/sections/ConsultationForm";
-import { homeExpertiseCards } from "../data/servicesData";
+import { useHomeExpertiseCards } from "../hooks/useServices";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 
 /* =========================================================
@@ -153,7 +153,9 @@ const QuickLinkCards = () => (
   </section>
 );
 
-const ExpertiseSection = () => (
+const ExpertiseSection = () => {
+  const { cards: homeExpertiseCards } = useHomeExpertiseCards()
+  return (
   <section className="py-12 md:py-16 bg-gray-50/50 border-y border-gray-100">
     <div className="container-custom">
       <div className="flex flex-col items-center text-center mb-10 md:mb-12">
@@ -198,7 +200,8 @@ const ExpertiseSection = () => (
       </div>
     </div>
   </section>
-);
+)
+};
 
 const ClientSpotlight = () => {
   const spotlightStats = [

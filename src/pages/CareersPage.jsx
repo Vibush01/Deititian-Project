@@ -6,12 +6,14 @@ import StatsCounter from '../components/sections/StatsCounter'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
 import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
-import { careersHero, companyValues, jobPositions, teamImages } from '../data/careersData'
+import { useCareersData } from '../hooks/usePageData'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
 import fitjeevaBanner from '../assets/images/fitjeeva-banner-1.jpg'
 
-const CareersHero = () => (
+const CareersHero = () => {
+  const { careersHero, teamImages } = useCareersData()
+  return (
   <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E8F5E9]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
     <div className="container-custom relative z-10">
@@ -43,6 +45,7 @@ const CareersHero = () => (
     </div>
   </section>
 )
+}
 
 const AwardsSection = () => (
   <section className="py-12 md:py-16 bg-white border-y border-gray-100">
@@ -62,7 +65,9 @@ const AwardsSection = () => (
   </section>
 )
 
-const CompanyValuesSection = () => (
+const CompanyValuesSection = () => {
+  const { companyValues } = useCareersData()
+  return (
   <section className="py-12 md:py-20 bg-gray-50">
     <div className="container-custom">
       <div className="text-center mb-12">
@@ -92,8 +97,10 @@ const CompanyValuesSection = () => (
     </div>
   </section>
 )
+}
 
 const CareerApplicationForm = () => {
+  const { jobPositions } = useCareersData()
   const [formData, setFormData] = useState({
     fullName: '', email: '', phone: '', position: '', message: '',
   })

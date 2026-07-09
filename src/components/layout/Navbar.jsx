@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FaBars, FaTimes, FaChevronDown, FaHeartbeat, FaStethoscope, FaPills, FaWeight, FaRunning, FaCalendarWeek, FaFireAlt } from 'react-icons/fa'
-import { navLinks } from '../../data/siteData'
+import useNavigation from '../../hooks/useNavigation'
 import Button from '../ui/Button'
 import logoImg from '../../assets/images/logo.png'
 
@@ -17,6 +17,7 @@ const getIcon = (title) => {
 }
 
 const Navbar = () => {
+  const { navLinks } = useNavigation()
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState(null)

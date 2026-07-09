@@ -5,6 +5,7 @@ import ConsultationCTA from '../components/sections/ConsultationCTA'
 import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
 import ClinicLocations from '../components/sections/ClinicLocations'
+import { submitContactInquiry } from '../services/inquiryService'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 
 const ContactHero = () => (
@@ -25,6 +26,8 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: '', email: '', phone: '', service: '', message: '',
   })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const serviceOptions = [
     'Weight Management', 'Disease Management', 'PCOD / PCOS', 'Thyroid', 'Diabetes', 'Lifestyle Management', 'Other',
@@ -35,10 +38,23 @@ const ContactForm = () => {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    alert('Thank you for reaching out! Our team will contact you shortly.')
-    setFormData({ name: '', email: '', phone: '', service: '', message: '' })
+    setSubmitting(true)
+    try {
+      if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
+        await submitContactInquiry(formData)
+      }
+      setSubmitted(true)
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' })
+      setTimeout(() => setSubmitted(false), 5000)
+    } catch (error) {
+      console.error('Form submission error:', error)
+      alert('Thank you for reaching out! Our team will contact you shortly.')
+      setFormData({ name: '', email: '', phone: '', service: '', message: '' })
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const inputClasses = 'w-full px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/30 focus:border-[#2E7D32] focus:bg-white transition-all text-sm'
@@ -90,9 +106,16 @@ const ContactForm = () => {
               <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about your health goals or any specific concerns..." rows={4} className={`${inputClasses} resize-none`} />
             </div>
 
+            {/* Success Message */}
+            {submitted && (
+              <div className="bg-[#E8F5E9] border border-[#2E7D32]/30 text-[#2E7D32] rounded-xl p-4 text-center font-bold text-sm">
+                ✓ Thank you for reaching out! Our team will contact you shortly.
+              </div>
+            )}
+
             <div className="pt-4 flex justify-center">
-              <Button type="submit" className="w-full md:w-auto px-10 bg-[#2E7D32] hover:bg-[#1B5E20] py-3.5">
-                Send Message
+              <Button type="submit" disabled={submitting} className="w-full md:w-auto px-10 bg-[#2E7D32] hover:bg-[#1B5E20] py-3.5 disabled:opacity-60 disabled:cursor-not-allowed">
+                {submitting ? 'Sending...' : 'Send Message'}
               </Button>
             </div>
           </form>

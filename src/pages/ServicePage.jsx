@@ -7,8 +7,8 @@ import ConsultationCTA from '../components/sections/ConsultationCTA'
 import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
 import ConsultationForm from '../components/sections/ConsultationForm'
-import { serviceCategories } from '../data/servicesData'
-import { siteInfo } from '../data/siteData'
+import { useServiceCategories } from '../hooks/useServices'
+import useSiteSettings from '../hooks/useSiteSettings'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
 
@@ -18,7 +18,9 @@ const categoryIcons = {
   'heart-pulse': <FaSpa />,
 }
 
-const ServiceHero = () => (
+const ServiceHero = () => {
+  const { settings } = useSiteSettings()
+  return (
   <section className="py-12 md:py-20 bg-gray-50 overflow-hidden relative">
     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#E8F5E9]/50 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
     <div className="container-custom relative z-10">
@@ -34,7 +36,7 @@ const ServiceHero = () => (
             Achieve your health goals with personalized diet plans that identify the root cause of weight gain through expert nutrition and lifestyle corrections provided by India's premier online diet service.
           </p>
           <div>
-            <Button href={`tel:${siteInfo.phone.replace(/\s/g, '')}`} icon={<FaPhoneAlt />} className="bg-[#2E7D32] hover:bg-[#1B5E20]">
+            <Button href={`tel:${settings.phone.replace(/\s/g, '')}`} icon={<FaPhoneAlt />} className="bg-[#2E7D32] hover:bg-[#1B5E20]">
               Talk to us
             </Button>
           </div>
@@ -50,9 +52,11 @@ const ServiceHero = () => (
       </div>
     </div>
   </section>
-)
+)}
 
-const ServiceCategoryCards = () => (
+const ServiceCategoryCards = () => {
+  const { categories: serviceCategories } = useServiceCategories()
+  return (
   <section className="py-12 md:py-20 bg-white">
     <div className="container-custom">
       <SectionHeading
@@ -84,8 +88,11 @@ const ServiceCategoryCards = () => (
     </div>
   </section>
 )
+}
 
-const CategoryDetailSections = () => (
+const CategoryDetailSections = () => {
+  const { categories: serviceCategories } = useServiceCategories()
+  return (
   <section className="py-12 md:py-20 bg-gray-50 border-t border-gray-100">
     <div className="container-custom space-y-16 md:space-y-24">
       {serviceCategories.map((category, idx) => (
@@ -116,6 +123,7 @@ const CategoryDetailSections = () => (
     </div>
   </section>
 )
+}
 
 const ServicePage = () => {
   useDocumentMeta({
