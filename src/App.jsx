@@ -31,6 +31,9 @@ import CareersEditor from './pages/admin/CareersEditor'
 import HomePageEditor from './pages/admin/HomePageEditor'
 import ServicesEditor from './pages/admin/ServicesEditor'
 import ServiceSubPageEditor from './pages/admin/ServiceSubPageEditor'
+import TeamEditor from './pages/admin/TeamEditor'
+import ExpertsEditor from './pages/admin/ExpertsEditor'
+import RecipesEditor from './pages/admin/RecipesEditor'
 
 /**
  * PublicLayout — renders the public site with Navbar + Footer.
@@ -84,6 +87,11 @@ const AdminRoutes = () => (
       
       {/* Careers */}
       <Route path="/careers" element={<CareersEditor />} />
+      
+      {/* Team & Experts */}
+      <Route path="/team" element={<TeamEditor />} />
+      <Route path="/experts" element={<ExpertsEditor />} />
+      <Route path="/recipes" element={<RecipesEditor />} />
       
       {/* Future admin pages will be added here in Steps 8-9 */}
     </Routes>
