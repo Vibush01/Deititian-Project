@@ -29,6 +29,8 @@ import NavigationPage from './pages/admin/NavigationPage'
 import AboutEditorPage from './pages/admin/AboutEditorPage'
 import CareersEditorPage from './pages/admin/CareersEditorPage'
 import HomeEditorPage from './pages/admin/HomeEditorPage'
+import ServicesEditorPage from './pages/admin/ServicesEditorPage'
+import ServiceSubPagesEditor from './pages/admin/ServiceSubPagesEditor'
 
 /**
  * PublicLayout — renders the public site with Navbar + Footer.
@@ -74,7 +76,9 @@ const AdminRoutes = () => (
       <Route path="/about-editor" element={<AboutEditorPage />} />
       <Route path="/careers-editor" element={<CareersEditorPage />} />
       <Route path="/home-editor" element={<HomeEditorPage />} />
-      {/* Future admin pages will be added here in Steps 7-9 */}
+      <Route path="/services-editor" element={<ServicesEditorPage />} />
+      <Route path="/service-sub-pages-editor" element={<ServiceSubPagesEditor />} />
+      {/* Future admin pages will be added here in Steps 8-9 */}
     </Routes>
   </AdminLayout>
 )
