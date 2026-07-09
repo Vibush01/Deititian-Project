@@ -38,6 +38,8 @@ import SuccessStoriesEditor from './pages/admin/SuccessStoriesEditor'
 import LocationsEditor from './pages/admin/LocationsEditor'
 import MediaManager from './pages/admin/MediaManager'
 
+import InquiriesManager from './pages/admin/InquiriesManager'
+
 /**
  * PublicLayout — renders the public site with Navbar + Footer.
  */
@@ -101,7 +103,8 @@ const AdminRoutes = () => (
       <Route path="/locations" element={<LocationsEditor />} />
       <Route path="/media" element={<MediaManager />} />
       
-      {/* Future admin pages will be added here in Steps 9 */}
+      {/* Step 9 Editors */}
+      <Route path="/inquiries" element={<InquiriesManager />} />
     </Routes>
   </AdminLayout>
 )
