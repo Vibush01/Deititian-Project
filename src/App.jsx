@@ -1,8 +1,9 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import ScrollToTop from './components/common/ScrollToTop'
 import BackToTop from './components/common/BackToTop'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
+import { AuthProvider } from './context/AuthContext'
 
 // Page imports
 import HomePage from './pages/HomePage'
@@ -18,38 +19,82 @@ import RecipesPage from './pages/RecipesPage'
 import ExpertsPage from './pages/ExpertsPage'
 import TeamPage from './pages/TeamPage'
 
+// Admin imports
+import AdminLayout from './components/admin/AdminLayout'
+import ProtectedRoute from './components/admin/ProtectedRoute'
+import LoginPage from './pages/admin/LoginPage'
+import DashboardPage from './pages/admin/DashboardPage'
+
+/**
+ * PublicLayout — renders the public site with Navbar + Footer.
+ */
+const PublicLayout = () => (
+  <>
+    <Navbar />
+    <main>
+      <Routes>
+        {/* Main Pages */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about-us" element={<AboutPage />} />
+        <Route path="/service" element={<ServicePage />} />
+        <Route path="/careers" element={<CareersPage />} />
+        <Route path="/contact-us" element={<ContactPage />} />
+        
+        {/* Newly Added Pages */}
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/bmi-calculator" element={<BmiCalculatorPage />} />
+        <Route path="/success-stories" element={<SuccessStoriesPage />} />
+        <Route path="/recipes" element={<RecipesPage />} />
+        <Route path="/experts" element={<ExpertsPage />} />
+        <Route path="/team" element={<TeamPage />} />
+
+        {/* Service Sub-Pages — single dynamic route */}
+        <Route path="/service/:slug" element={<ServiceSubPage />} />
+      </Routes>
+    </main>
+    <Footer />
+    <BackToTop />
+  </>
+)
+
+/**
+ * AdminRoutes — renders admin pages inside AdminLayout with ProtectedRoute.
+ */
+const AdminRoutes = () => (
+  <AdminLayout>
+    <Routes>
+      <Route path="/" element={<DashboardPage />} />
+      {/* Future admin pages will be added here in Steps 5-9 */}
+    </Routes>
+  </AdminLayout>
+)
+
 function App() {
+  const location = useLocation()
+  const isAdminRoute = location.pathname.startsWith('/admin')
+  const isLoginRoute = location.pathname === '/admin/login'
+
   return (
-    <>
+    <AuthProvider>
       <ScrollToTop />
-      <Navbar />
-
-      {/* Main content */}
-      <main>
+      
+      {/* Admin Login — no layout */}
+      {isLoginRoute && (
         <Routes>
-          {/* Main Pages */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about-us" element={<AboutPage />} />
-          <Route path="/service" element={<ServicePage />} />
-          <Route path="/careers" element={<CareersPage />} />
-          <Route path="/contact-us" element={<ContactPage />} />
-          
-          {/* Newly Added Pages */}
-          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="/bmi-calculator" element={<BmiCalculatorPage />} />
-          <Route path="/success-stories" element={<SuccessStoriesPage />} />
-          <Route path="/recipes" element={<RecipesPage />} />
-          <Route path="/experts" element={<ExpertsPage />} />
-          <Route path="/team" element={<TeamPage />} />
-
-          {/* Service Sub-Pages — single dynamic route */}
-          <Route path="/service/:slug" element={<ServiceSubPage />} />
+          <Route path="/admin/login" element={<LoginPage />} />
         </Routes>
-      </main>
+      )}
 
-      <Footer />
-      <BackToTop />
-    </>
+      {/* Admin Panel — AdminLayout + ProtectedRoute */}
+      {isAdminRoute && !isLoginRoute && (
+        <ProtectedRoute>
+          <AdminRoutes />
+        </ProtectedRoute>
+      )}
+
+      {/* Public Site — Navbar + Footer */}
+      {!isAdminRoute && <PublicLayout />}
+    </AuthProvider>
   )
 }
 
