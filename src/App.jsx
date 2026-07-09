@@ -34,6 +34,9 @@ import ServiceSubPageEditor from './pages/admin/ServiceSubPageEditor'
 import TeamEditor from './pages/admin/TeamEditor'
 import ExpertsEditor from './pages/admin/ExpertsEditor'
 import RecipesEditor from './pages/admin/RecipesEditor'
+import SuccessStoriesEditor from './pages/admin/SuccessStoriesEditor'
+import LocationsEditor from './pages/admin/LocationsEditor'
+import MediaManager from './pages/admin/MediaManager'
 
 /**
  * PublicLayout — renders the public site with Navbar + Footer.
@@ -93,7 +96,12 @@ const AdminRoutes = () => (
       <Route path="/experts" element={<ExpertsEditor />} />
       <Route path="/recipes" element={<RecipesEditor />} />
       
-      {/* Future admin pages will be added here in Steps 8-9 */}
+      {/* Step 8 Editors */}
+      <Route path="/success-stories" element={<SuccessStoriesEditor />} />
+      <Route path="/locations" element={<LocationsEditor />} />
+      <Route path="/media" element={<MediaManager />} />
+      
+      {/* Future admin pages will be added here in Steps 9 */}
     </Routes>
   </AdminLayout>
 )

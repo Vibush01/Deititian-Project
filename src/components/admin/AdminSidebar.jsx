@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom'
 import {
   FaTachometerAlt, FaCog, FaCompass, FaFileAlt, FaConciergeBell,
-  FaUsers, FaUserMd, FaUtensils, FaTrophy, FaEnvelope, FaMapMarkerAlt, FaSignOutAlt, FaChevronLeft, FaBriefcase
+  FaUsers, FaUserMd, FaUtensils, FaTrophy, FaEnvelope, FaMapMarkerAlt, FaSignOutAlt, FaChevronLeft, FaBriefcase, FaImage
 } from 'react-icons/fa'
 
 const sidebarLinks = [
@@ -17,6 +17,7 @@ const sidebarLinks = [
   { label: 'Success Stories', path: '/admin/success-stories', icon: <FaTrophy /> },
   { label: 'Inquiries', path: '/admin/inquiries', icon: <FaEnvelope /> },
   { label: 'Locations', path: '/admin/locations', icon: <FaMapMarkerAlt /> },
+  { label: 'Media', path: '/admin/media', icon: <FaImage /> },
 ]
 
 const AdminSidebar = ({ sidebarOpen, setSidebarOpen, collapsed, setCollapsed, onLogout }) => {
