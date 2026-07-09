@@ -24,6 +24,8 @@ import AdminLayout from './components/admin/AdminLayout'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import LoginPage from './pages/admin/LoginPage'
 import DashboardPage from './pages/admin/DashboardPage'
+import SiteSettingsPage from './pages/admin/SiteSettingsPage'
+import NavigationPage from './pages/admin/NavigationPage'
 
 /**
  * PublicLayout — renders the public site with Navbar + Footer.
@@ -64,7 +66,9 @@ const AdminRoutes = () => (
   <AdminLayout>
     <Routes>
       <Route path="/" element={<DashboardPage />} />
-      {/* Future admin pages will be added here in Steps 5-9 */}
+      <Route path="/site-settings" element={<SiteSettingsPage />} />
+      <Route path="/navigation" element={<NavigationPage />} />
+      {/* Future admin pages will be added here in Steps 6-9 */}
     </Routes>
   </AdminLayout>
 )
