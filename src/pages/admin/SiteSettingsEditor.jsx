@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaCog, FaSpinner } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 
-const SiteSettingsPage = () => {
+const SiteSettingsEditor = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
@@ -199,4 +199,4 @@ const SiteSettingsPage = () => {
   )
 }
 
-export default SiteSettingsPage
+export default SiteSettingsEditor

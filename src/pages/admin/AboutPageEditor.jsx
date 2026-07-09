@@ -3,7 +3,7 @@ import { FaSave, FaFileAlt, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage 
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 
-const AboutEditorPage = () => {
+const AboutPageEditor = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
@@ -292,4 +292,4 @@ const AboutEditorPage = () => {
   )
 }
 
-export default AboutEditorPage
+export default AboutPageEditor

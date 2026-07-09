@@ -3,7 +3,7 @@ import { FaSave, FaFileMedical, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaIm
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 
-const ServiceSubPagesEditor = () => {
+const ServiceSubPageEditor = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
@@ -418,4 +418,4 @@ const ServiceSubPagesEditor = () => {
   )
 }
 
-export default ServiceSubPagesEditor
+export default ServiceSubPageEditor

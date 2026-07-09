@@ -9,7 +9,7 @@ const AVAILABLE_ICONS = [
   { id: 'heart-pulse', component: <FaHeartbeat /> }
 ]
 
-const ServicesEditorPage = () => {
+const ServicesEditor = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
@@ -367,4 +367,4 @@ const ServicesEditorPage = () => {
   )
 }
 
-export default ServicesEditorPage
+export default ServicesEditor

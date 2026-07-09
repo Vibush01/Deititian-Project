@@ -8,7 +8,7 @@ import {
 import { collection, query, where, getDocs, orderBy, limit } from 'firebase/firestore'
 import { db } from '../../firebase/config'
 import { COLLECTIONS } from '../../firebase/collections'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../contexts/AuthContext'
 
 const StatCard = ({ icon, label, value, color, to }) => (
   <Link

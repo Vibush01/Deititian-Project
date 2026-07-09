@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaCompass, FaSpinner, FaPlus, FaTrash, FaGripVertical } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 
-const NavigationPage = () => {
+const NavigationEditor = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
@@ -188,4 +188,4 @@ const NavigationPage = () => {
   )
 }
 
-export default NavigationPage
+export default NavigationEditor

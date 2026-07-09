@@ -3,7 +3,7 @@ import ScrollToTop from './components/common/ScrollToTop'
 import BackToTop from './components/common/BackToTop'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
-import { AuthProvider } from './context/AuthContext'
+import { AuthProvider } from './contexts/AuthContext'
 
 // Page imports
 import HomePage from './pages/HomePage'
@@ -24,13 +24,13 @@ import AdminLayout from './components/admin/AdminLayout'
 import ProtectedRoute from './components/admin/ProtectedRoute'
 import LoginPage from './pages/admin/LoginPage'
 import DashboardPage from './pages/admin/DashboardPage'
-import SiteSettingsPage from './pages/admin/SiteSettingsPage'
-import NavigationPage from './pages/admin/NavigationPage'
-import AboutEditorPage from './pages/admin/AboutEditorPage'
-import CareersEditorPage from './pages/admin/CareersEditorPage'
-import HomeEditorPage from './pages/admin/HomeEditorPage'
-import ServicesEditorPage from './pages/admin/ServicesEditorPage'
-import ServiceSubPagesEditor from './pages/admin/ServiceSubPagesEditor'
+import SiteSettingsEditor from './pages/admin/SiteSettingsEditor'
+import NavigationEditor from './pages/admin/NavigationEditor'
+import AboutPageEditor from './pages/admin/AboutPageEditor'
+import CareersEditor from './pages/admin/CareersEditor'
+import HomePageEditor from './pages/admin/HomePageEditor'
+import ServicesEditor from './pages/admin/ServicesEditor'
+import ServiceSubPageEditor from './pages/admin/ServiceSubPageEditor'
 
 /**
  * PublicLayout — renders the public site with Navbar + Footer.
@@ -71,13 +71,20 @@ const AdminRoutes = () => (
   <AdminLayout>
     <Routes>
       <Route path="/" element={<DashboardPage />} />
-      <Route path="/site-settings" element={<SiteSettingsPage />} />
-      <Route path="/navigation" element={<NavigationPage />} />
-      <Route path="/about-editor" element={<AboutEditorPage />} />
-      <Route path="/careers-editor" element={<CareersEditorPage />} />
-      <Route path="/home-editor" element={<HomeEditorPage />} />
-      <Route path="/services-editor" element={<ServicesEditorPage />} />
-      <Route path="/service-sub-pages-editor" element={<ServiceSubPagesEditor />} />
+      <Route path="/site-settings" element={<SiteSettingsEditor />} />
+      <Route path="/navigation" element={<NavigationEditor />} />
+      
+      {/* Pages Content Editors */}
+      <Route path="/pages/home" element={<HomePageEditor />} />
+      <Route path="/pages/about" element={<AboutPageEditor />} />
+      
+      {/* Services Editors */}
+      <Route path="/services" element={<ServicesEditor />} />
+      <Route path="/services/sub-pages" element={<ServiceSubPageEditor />} />
+      
+      {/* Careers */}
+      <Route path="/careers" element={<CareersEditor />} />
+      
       {/* Future admin pages will be added here in Steps 8-9 */}
     </Routes>
   </AdminLayout>

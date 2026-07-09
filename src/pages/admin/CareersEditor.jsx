@@ -3,7 +3,7 @@ import { FaSave, FaBriefcase, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImag
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 
-const CareersEditorPage = () => {
+const CareersEditor = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
@@ -296,4 +296,4 @@ const CareersEditorPage = () => {
   )
 }
 
-export default CareersEditorPage
+export default CareersEditor

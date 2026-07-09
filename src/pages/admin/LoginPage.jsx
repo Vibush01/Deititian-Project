@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaLock, FaEnvelope, FaEye, FaEyeSlash } from 'react-icons/fa'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../contexts/AuthContext'
 
 const LoginPage = () => {
   const [email, setEmail] = useState('')
