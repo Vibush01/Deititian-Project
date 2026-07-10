@@ -11,6 +11,7 @@ import ContactCTA from "../components/sections/ContactCTA";
 import ClinicLocations from "../components/sections/ClinicLocations";
 import ConsultationForm from "../components/sections/ConsultationForm";
 import { useHomeExpertiseCards } from "../hooks/useServices";
+import { useMediaData } from "../hooks/usePageData";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 
 /* =========================================================
@@ -279,6 +280,37 @@ const ClientSpotlight = () => {
   );
 };
 
+const defaultMediaLogos = ["The Times of India", "Hindustan Times", "Health Magazine", "Wellness Daily"];
+
+const MediaSpotlight = () => {
+  const { mediaLogos } = useMediaData();
+  const logos = mediaLogos.length > 0 ? mediaLogos : defaultMediaLogos;
+
+  return (
+    <section className="py-12 md:py-16 bg-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-[#E8F5E9]/30 opacity-50"></div>
+      <div className="container-custom relative z-10">
+        <div className="text-center mb-8">
+          <SectionHeading label="Media Spotlight" title="" />
+          <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold text-gray-900 leading-snug max-w-3xl mx-auto -mt-3">
+            Featured in leading publications for outstanding contributions to clinical nutrition and wellness education.
+          </h3>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 items-center justify-items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+          {logos.map((media, i) => (
+            <div key={i} className="flex items-center justify-center p-3 border border-gray-200 rounded-xl w-full h-20 hover:border-[#2E7D32]/30 hover:bg-[#E8F5E9] transition-all duration-300 cursor-default">
+              <span className="font-black text-gray-400 uppercase tracking-widest text-[10px] md:text-xs text-center">
+                {media}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const HomePage = () => {
   const pageRef = useScrollReveal();
 
@@ -297,27 +329,7 @@ const HomePage = () => {
       <ClientSpotlight />
       <ConsultationForm />
       
-      <section className="py-12 md:py-16 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[#E8F5E9]/30 opacity-50"></div>
-        <div className="container-custom relative z-10">
-          <div className="text-center mb-8">
-            <SectionHeading label="Media Spotlight" title="" />
-            <h3 className="text-lg md:text-xl lg:text-2xl font-extrabold text-gray-900 leading-snug max-w-3xl mx-auto -mt-3">
-              Featured in leading publications for outstanding contributions to clinical nutrition and wellness education.
-            </h3>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 items-center justify-items-center opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
-            {["The Times of India", "Hindustan Times", "Health Magazine", "Wellness Daily"].map((media, i) => (
-              <div key={i} className="flex items-center justify-center p-3 border border-gray-200 rounded-xl w-full h-20 hover:border-[#2E7D32]/30 hover:bg-[#E8F5E9] transition-all duration-300 cursor-default">
-                <span className="font-black text-gray-400 uppercase tracking-widest text-[10px] md:text-xs text-center">
-                  {media}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <MediaSpotlight />
 
       <ConsultationCTA />
       <InstagramFeed />

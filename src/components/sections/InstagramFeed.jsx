@@ -1,6 +1,7 @@
 import { FaInstagram } from 'react-icons/fa'
 import SectionHeading from '../ui/SectionHeading'
 import useSiteSettings from '../../hooks/useSiteSettings'
+import { useMediaData } from '../../hooks/usePageData'
 import ip1 from '../../assets/images/IP1.png'
 import ip2 from '../../assets/images/IP2.png'
 import ip3 from '../../assets/images/IP3.png'
@@ -8,13 +9,25 @@ import ip4 from '../../assets/images/IP4.png'
 import ip5 from '../../assets/images/IP5.png'
 import ip6 from '../../assets/images/IP6.png'
 
-const defaultFeedImages = [ip1, ip2, ip3, ip4, ip5, ip6]
-
+const defaultFeedImages = [
+  { image: ip1, url: '' },
+  { image: ip2, url: '' },
+  { image: ip3, url: '' },
+  { image: ip4, url: '' },
+  { image: ip5, url: '' },
+  { image: ip6, url: '' },
+]
 
 const InstagramFeed = ({ className = '' }) => {
   const { settings } = useSiteSettings()
+  const { instagramPosts } = useMediaData()
   const socialLinks = settings.socialLinks || {}
-  const feedImages = defaultFeedImages
+
+  // Use Firestore data if available, otherwise fall back to hardcoded defaults
+  const feedItems = instagramPosts.length > 0
+    ? instagramPosts.map(post => ({ image: post.image, url: post.url || socialLinks.instagram }))
+    : defaultFeedImages.map(item => ({ ...item, url: socialLinks.instagram }))
+
   return (
     <section className={`py-16 md:py-24 bg-white ${className}`}>
       <div className="container-custom">
@@ -34,16 +47,16 @@ const InstagramFeed = ({ className = '' }) => {
 
         {/* Image Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-4 mt-8 md:mt-12">
-          {feedImages.map((img, index) => (
+          {feedItems.map((item, index) => (
             <a
               key={index}
-              href={socialLinks.instagram}
+              href={item.url || socialLinks.instagram}
               target="_blank"
               rel="noopener noreferrer"
               className="relative aspect-square overflow-hidden group rounded-xl md:rounded-2xl block"
             >
               <img
-                src={img}
+                src={item.image}
                 alt={`Instagram post ${index + 1}`}
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
