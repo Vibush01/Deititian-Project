@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react'
-import { FaSave, FaCog, FaSpinner } from 'react-icons/fa'
+import { FaSave, FaCog, FaSpinner, FaImage, FaTrash } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
+import ImageUploader from '../../components/admin/ImageUploader'
 
 const SiteSettingsEditor = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
+  const [uploadingLogo, setUploadingLogo] = useState(false)
   const [settings, setSettings] = useState({
     siteInfo: {
-      name: '', email: '', phone: '', whatsapp: '', address: '', supportHours: '',
+      name: '', email: '', phone: '', whatsapp: '', address: '', supportHours: '', logoUrl: '',
     },
     socialLinks: {
       facebook: '', instagram: '', linkedin: '', youtube: '',
@@ -177,6 +179,40 @@ const SiteSettingsEditor = () => {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
           <h2 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100">General Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div className="md:col-span-2 flex items-start gap-6 mb-2">
+              <div className="w-32 h-32 rounded-xl border border-gray-200 bg-gray-50 flex items-center justify-center relative overflow-hidden shrink-0">
+                {settings.siteInfo.logoUrl ? (
+                  <>
+                    <img src={settings.siteInfo.logoUrl} alt="Logo" className="w-full h-full object-contain p-2" />
+                    <button 
+                      type="button"
+                      onClick={() => handleInfoChange({ target: { name: 'logoUrl', value: '' } })}
+                      className="absolute top-1 right-1 bg-white/90 text-red-500 hover:bg-red-50 p-1.5 rounded-md shadow-sm opacity-0 hover:opacity-100 transition-opacity"
+                      style={{ opacity: 1 }} // Ensure visible on hover if no group
+                    >
+                      <FaTrash className="text-xs" />
+                    </button>
+                  </>
+                ) : (
+                  <div className="text-gray-400 flex flex-col items-center">
+                    <FaImage className="text-3xl mb-2" />
+                    <span className="text-xs font-bold">No Logo</span>
+                  </div>
+                )}
+              </div>
+              <div>
+                <label className={labelClasses}>Site Logo</label>
+                <p className="text-sm text-gray-500 mb-3">Upload your main brand logo. Best size: 400x120px.</p>
+                <button 
+                  type="button"
+                  onClick={() => setUploadingLogo(true)}
+                  className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-bold text-sm transition-colors"
+                >
+                  {settings.siteInfo.logoUrl ? 'Change Logo' : 'Upload Logo'}
+                </button>
+              </div>
+            </div>
+            
             <div>
               <label className={labelClasses}>Site/Business Name</label>
               <input type="text" name="name" value={settings.siteInfo.name} onChange={handleInfoChange} className={inputClasses} placeholder="FitJeeva" />
@@ -377,6 +413,27 @@ const SiteSettingsEditor = () => {
           </div>
         </div>
       </form>
+
+      {/* Image Upload Modal */}
+      {uploadingLogo && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Site Logo</h3>
+            <ImageUploader 
+              onUpload={(url) => {
+                handleInfoChange({ target: { name: 'logoUrl', value: url } })
+                setUploadingLogo(false)
+              }} 
+            />
+            <button 
+              onClick={() => setUploadingLogo(false)}
+              className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

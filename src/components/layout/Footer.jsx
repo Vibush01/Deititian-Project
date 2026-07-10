@@ -17,7 +17,7 @@ const Footer = () => {
           {/* Column 1: Logo + Tagline + Socials */}
           <div className="flex flex-col">
             <Link to="/" className="inline-block mb-6 bg-white p-2 rounded-xl inline-flex w-fit">
-              <img src={logoImg} alt="FitJeeva Logo" className="h-10 md:h-12 w-auto object-contain" />
+              <img src={settings.siteInfo?.logoUrl || logoImg} alt="FitJeeva Logo" className="h-10 md:h-12 w-auto object-contain" />
             </Link>
 
             <p className="text-gray-400 text-sm leading-relaxed mb-8 pr-4">
