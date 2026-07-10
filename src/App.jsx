@@ -25,7 +25,7 @@ import ProtectedRoute from './components/admin/ProtectedRoute'
 import LoginPage from './pages/admin/LoginPage'
 import DashboardPage from './pages/admin/DashboardPage'
 import SiteSettingsEditor from './pages/admin/SiteSettingsEditor'
-import NavigationEditor from './pages/admin/NavigationEditor'
+
 import AboutPageEditor from './pages/admin/AboutPageEditor'
 import CareersEditor from './pages/admin/CareersEditor'
 import HomePageEditor from './pages/admin/HomePageEditor'
@@ -61,7 +61,6 @@ function App() {
                 <Routes>
                   <Route path="/" element={<DashboardPage />} />
                   <Route path="/site-settings" element={<SiteSettingsEditor />} />
-                  <Route path="/navigation" element={<NavigationEditor />} />
                   
                   {/* Pages Content Editors */}
                   <Route path="/pages/home" element={<HomePageEditor />} />

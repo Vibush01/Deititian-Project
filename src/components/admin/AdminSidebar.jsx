@@ -7,7 +7,6 @@ import {
 const sidebarLinks = [
   { label: 'Dashboard', path: '/admin', icon: <FaTachometerAlt />, end: true },
   { label: 'Site Settings', path: '/admin/site-settings', icon: <FaCog /> },
-  { label: 'Navigation', path: '/admin/navigation', icon: <FaCompass /> },
   { label: 'Pages', path: '/admin/pages/home', icon: <FaFileAlt /> },
   { label: 'Services', path: '/admin/services', icon: <FaConciergeBell /> },
   { label: 'Careers', path: '/admin/careers', icon: <FaBriefcase /> },

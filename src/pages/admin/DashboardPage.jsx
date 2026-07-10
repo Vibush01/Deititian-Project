@@ -81,6 +81,21 @@ const DashboardPage = () => {
   useEffect(() => {
     const fetchDashboardData = async () => {
       if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) {
+        // No Firebase — load counts from hardcoded data
+        try {
+          const { serviceCategories } = await import('../../data/servicesData')
+          const { clinicLocations } = await import('../../data/locationsData')
+          setStats({
+            totalInquiries: 0,
+            newInquiries: 0,
+            totalServices: serviceCategories?.length || 0,
+            totalTeam: 0,
+            totalExperts: 0,
+            totalStories: 0,
+            totalRecipes: 0,
+            totalLocations: clinicLocations?.length || 0,
+          })
+        } catch (e) { /* ignore */ }
         setLoading(false)
         return
       }
@@ -107,15 +122,32 @@ const DashboardPage = () => {
           getDocs(collection(db, COLLECTIONS.LOCATIONS)),
         ])
 
+        // Use Firebase counts, but fallback to hardcoded data if Firebase is empty
+        let svcCount = servicesSnap.size
+        let locCount = locationsSnap.size
+
+        if (svcCount === 0) {
+          try {
+            const { serviceCategories } = await import('../../data/servicesData')
+            svcCount = serviceCategories?.length || 0
+          } catch (e) { /* ignore */ }
+        }
+        if (locCount === 0) {
+          try {
+            const { clinicLocations } = await import('../../data/locationsData')
+            locCount = clinicLocations?.length || 0
+          } catch (e) { /* ignore */ }
+        }
+
         setStats({
           totalInquiries: inquiriesSnap.size,
           newInquiries: newInquiriesSnap.size,
-          totalServices: servicesSnap.size,
+          totalServices: svcCount,
           totalTeam: teamSnap.size,
           totalExperts: expertsSnap.size,
           totalStories: storiesSnap.size,
           totalRecipes: recipesSnap.size,
-          totalLocations: locationsSnap.size,
+          totalLocations: locCount,
         })
 
         // Fetch recent inquiries
@@ -128,6 +160,16 @@ const DashboardPage = () => {
         setRecentInquiries(recentSnap.docs.map((d) => ({ id: d.id, ...d.data() })))
       } catch (error) {
         console.error('Error fetching dashboard data:', error)
+        // Even on error, try to show fallback counts
+        try {
+          const { serviceCategories } = await import('../../data/servicesData')
+          const { clinicLocations } = await import('../../data/locationsData')
+          setStats(prev => ({
+            ...prev,
+            totalServices: serviceCategories?.length || 0,
+            totalLocations: clinicLocations?.length || 0,
+          }))
+        } catch (e) { /* ignore */ }
       } finally {
         setLoading(false)
       }

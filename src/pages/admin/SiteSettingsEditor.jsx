@@ -10,13 +10,13 @@ const SiteSettingsEditor = () => {
   const [uploadingLogo, setUploadingLogo] = useState(false)
   const [settings, setSettings] = useState({
     siteInfo: {
-      name: '', email: '', phone: '', whatsapp: '', address: '', supportHours: '', logoUrl: '',
+      name: 'FitJeeva', email: 'info@fitjeeva.com', phone: '+91 70912 89342', whatsapp: '917091289342', address: 'Chandigarh, India', supportHours: 'Mon-Sat, 9AM-6PM', logoUrl: '',
     },
     socialLinks: {
-      facebook: '', instagram: '', linkedin: '', youtube: '',
+      facebook: 'https://www.facebook.com/fitjeeva', instagram: 'https://www.instagram.com/', linkedin: '', youtube: 'https://www.youtube.com/@fitjeeva',
     },
     statsData: {
-      happyClients: '', successStories: '', clinicLocations: '',
+      happyClients: '50000', successStories: '120', clinicLocations: '1',
     },
     spotlightStats: [
       { number: "1,00,000+", label: "Lives Transformed" },
