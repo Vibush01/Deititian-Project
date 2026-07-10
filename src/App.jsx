@@ -41,99 +41,92 @@ import MediaManager from './pages/admin/MediaManager'
 import InquiriesManager from './pages/admin/InquiriesManager'
 
 /**
- * PublicLayout — renders the public site with Navbar + Footer.
+ * App.jsx - Main Application Component
  */
-const PublicLayout = () => (
-  <>
-    <Navbar />
-    <main>
-      <Routes>
-        {/* Main Pages */}
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about-us" element={<AboutPage />} />
-        <Route path="/service" element={<ServicePage />} />
-        <Route path="/careers" element={<CareersPage />} />
-        <Route path="/contact-us" element={<ContactPage />} />
-        
-        {/* Newly Added Pages */}
-        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="/bmi-calculator" element={<BmiCalculatorPage />} />
-        <Route path="/success-stories" element={<SuccessStoriesPage />} />
-        <Route path="/recipes" element={<RecipesPage />} />
-        <Route path="/experts" element={<ExpertsPage />} />
-        <Route path="/team" element={<TeamPage />} />
-
-        {/* Service Sub-Pages — single dynamic route */}
-        <Route path="/service/:slug" element={<ServiceSubPage />} />
-      </Routes>
-    </main>
-    <Footer />
-    <BackToTop />
-  </>
-)
-
-/**
- * AdminRoutes — renders admin pages inside AdminLayout with ProtectedRoute.
- */
-const AdminRoutes = () => (
-  <AdminLayout>
-    <Routes>
-      <Route path="/" element={<DashboardPage />} />
-      <Route path="/site-settings" element={<SiteSettingsEditor />} />
-      <Route path="/navigation" element={<NavigationEditor />} />
-      
-      {/* Pages Content Editors */}
-      <Route path="/pages/home" element={<HomePageEditor />} />
-      <Route path="/pages/about" element={<AboutPageEditor />} />
-      
-      {/* Services Editors */}
-      <Route path="/services" element={<ServicesEditor />} />
-      <Route path="/services/sub-pages" element={<ServiceSubPageEditor />} />
-      
-      {/* Careers */}
-      <Route path="/careers" element={<CareersEditor />} />
-      
-      {/* Team & Experts */}
-      <Route path="/team" element={<TeamEditor />} />
-      <Route path="/experts" element={<ExpertsEditor />} />
-      <Route path="/recipes" element={<RecipesEditor />} />
-      
-      {/* Step 8 Editors */}
-      <Route path="/success-stories" element={<SuccessStoriesEditor />} />
-      <Route path="/locations" element={<LocationsEditor />} />
-      <Route path="/media" element={<MediaManager />} />
-      
-      {/* Step 9 Editors */}
-      <Route path="/inquiries" element={<InquiriesManager />} />
-    </Routes>
-  </AdminLayout>
-)
-
 function App() {
-  const location = useLocation()
-  const isAdminRoute = location.pathname.startsWith('/admin')
-  const isLoginRoute = location.pathname === '/admin/login'
-
   return (
     <AuthProvider>
       <ScrollToTop />
       
-      {/* Admin Login — no layout */}
-      {isLoginRoute && (
-        <Routes>
-          <Route path="/admin/login" element={<LoginPage />} />
-        </Routes>
-      )}
+      <Routes>
+        {/* Admin Login — no layout */}
+        <Route path="/admin/login" element={<LoginPage />} />
 
-      {/* Admin Panel — AdminLayout + ProtectedRoute */}
-      {isAdminRoute && !isLoginRoute && (
-        <ProtectedRoute>
-          <AdminRoutes />
-        </ProtectedRoute>
-      )}
+        {/* Admin Panel — AdminLayout + ProtectedRoute */}
+        <Route 
+          path="/admin/*" 
+          element={
+            <ProtectedRoute>
+              <AdminLayout>
+                <Routes>
+                  <Route path="/" element={<DashboardPage />} />
+                  <Route path="/site-settings" element={<SiteSettingsEditor />} />
+                  <Route path="/navigation" element={<NavigationEditor />} />
+                  
+                  {/* Pages Content Editors */}
+                  <Route path="/pages/home" element={<HomePageEditor />} />
+                  <Route path="/pages/about" element={<AboutPageEditor />} />
+                  
+                  {/* Services Editors */}
+                  <Route path="/services" element={<ServicesEditor />} />
+                  <Route path="/services/sub-pages" element={<ServiceSubPageEditor />} />
+                  
+                  {/* Careers */}
+                  <Route path="/careers" element={<CareersEditor />} />
+                  
+                  {/* Team & Experts */}
+                  <Route path="/team" element={<TeamEditor />} />
+                  <Route path="/experts" element={<ExpertsEditor />} />
+                  <Route path="/recipes" element={<RecipesEditor />} />
+                  
+                  {/* Step 8 Editors */}
+                  <Route path="/success-stories" element={<SuccessStoriesEditor />} />
+                  <Route path="/locations" element={<LocationsEditor />} />
+                  <Route path="/media" element={<MediaManager />} />
+                  
+                  {/* Step 9 Editors */}
+                  <Route path="/inquiries" element={<InquiriesManager />} />
+                </Routes>
+              </AdminLayout>
+            </ProtectedRoute>
+          } 
+        />
 
-      {/* Public Site — Navbar + Footer */}
-      {!isAdminRoute && <PublicLayout />}
+        {/* Public Site — Navbar + Footer (Catch-all for everything else) */}
+        <Route 
+          path="*" 
+          element={
+            <>
+              <Navbar />
+              <main>
+                <Routes>
+                  {/* Main Pages */}
+                  <Route path="/" element={<HomePage />} />
+                  <Route path="/about-us" element={<AboutPage />} />
+                  <Route path="/service" element={<ServicePage />} />
+                  <Route path="/careers" element={<CareersPage />} />
+                  <Route path="/contact-us" element={<ContactPage />} />
+                  
+                  {/* Newly Added Pages */}
+                  <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                  <Route path="/bmi-calculator" element={<BmiCalculatorPage />} />
+                  <Route path="/success-stories" element={<SuccessStoriesPage />} />
+                  <Route path="/recipes" element={<RecipesPage />} />
+                  <Route path="/experts" element={<ExpertsPage />} />
+                  <Route path="/team" element={<TeamPage />} />
+
+                  {/* Service Sub-Pages — single dynamic route */}
+                  <Route path="/service/:slug" element={<ServiceSubPage />} />
+                  
+                  {/* 404 Fallback for public site can go here if needed */}
+                </Routes>
+              </main>
+              <Footer />
+              <BackToTop />
+            </>
+          } 
+        />
+      </Routes>
     </AuthProvider>
   )
 }
