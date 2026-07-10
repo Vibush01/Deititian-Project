@@ -8,7 +8,7 @@ const SiteSettingsEditor = () => {
   const [saveMessage, setSaveMessage] = useState('')
   const [settings, setSettings] = useState({
     siteInfo: {
-      name: '', email: '', phone: '', address: '', supportHours: '',
+      name: '', email: '', phone: '', whatsapp: '', address: '', supportHours: '',
     },
     socialLinks: {
       facebook: '', instagram: '', linkedin: '', youtube: '',
@@ -27,7 +27,9 @@ const SiteSettingsEditor = () => {
     },
     ctaHeading: "Book a Diet Consultation for Life-Changing Results",
     ctaStat: "35,000+",
-    ctaSubtext: "people have transformed their weight loss journeys with FitJeeva."
+    ctaSubtext: "people have transformed their weight loss journeys with FitJeeva.",
+    contactCtaTitle: "Start Your Transformation: Contact FitJeeva for Expert Guidance",
+    contactCtaSubtitle: "The first step to a healthier you starts here. Book a diet consultation and talk to a diet expert now to begin your transformation. Connect with our team through the channel you love — our responses are always personalised and judgment-free."
   })
 
   // We fetch initial data. We don't necessarily need real-time updates while editing.
@@ -53,6 +55,8 @@ const SiteSettingsEditor = () => {
             ctaHeading: data.ctaHeading || prev.ctaHeading,
             ctaStat: data.ctaStat || prev.ctaStat,
             ctaSubtext: data.ctaSubtext || prev.ctaSubtext,
+            contactCtaTitle: data.contactCtaTitle || prev.contactCtaTitle,
+            contactCtaSubtitle: data.contactCtaSubtitle || prev.contactCtaSubtitle,
           }))
         }
       } catch (error) {
@@ -184,6 +188,10 @@ const SiteSettingsEditor = () => {
             <div>
               <label className={labelClasses}>Contact Phone</label>
               <input type="text" name="phone" value={settings.siteInfo.phone} onChange={handleInfoChange} className={inputClasses} placeholder="+91 1234567890" />
+            </div>
+            <div>
+              <label className={labelClasses}>WhatsApp Number</label>
+              <input type="text" name="whatsapp" value={settings.siteInfo.whatsapp} onChange={handleInfoChange} className={inputClasses} placeholder="911234567890" />
             </div>
             <div>
               <label className={labelClasses}>Support Hours</label>
@@ -336,6 +344,35 @@ const SiteSettingsEditor = () => {
                   className={inputClasses}
                 />
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Contact CTA Settings */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+          <h2 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100 flex items-center gap-2">
+            Contact Call To Action (Contact Page)
+          </h2>
+          <div className="grid grid-cols-1 gap-6">
+            <div>
+              <label className={labelClasses}>Contact CTA Title</label>
+              <input
+                type="text"
+                name="contactCtaTitle"
+                value={settings.contactCtaTitle}
+                onChange={handleSettingsChange}
+                className={inputClasses}
+              />
+            </div>
+            <div>
+              <label className={labelClasses}>Contact CTA Subtitle</label>
+              <textarea
+                name="contactCtaSubtitle"
+                value={settings.contactCtaSubtitle}
+                onChange={handleSettingsChange}
+                className={inputClasses}
+                rows={3}
+              />
             </div>
           </div>
         </div>
