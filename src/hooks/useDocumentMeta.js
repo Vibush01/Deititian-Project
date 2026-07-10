@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import useSiteSettings from './useSiteSettings'
 
 /**
  * useDocumentMeta — Sets page-specific <title>, meta description, and canonical URL.
@@ -10,17 +11,24 @@ import { useEffect } from 'react'
  * @param {string} [options.canonical] - Canonical URL path (e.g. "/about-us")
  */
 const useDocumentMeta = ({ title, description, canonical }) => {
+  const { settings } = useSiteSettings()
+  
   useEffect(() => {
+    // Check for SEO overrides from admin
+    const seoOverride = canonical && settings?.seoMetadata?.[canonical]
+    const finalTitle = seoOverride?.title || title
+    const finalDesc = seoOverride?.description || description
+
     // Update document title
-    const fullTitle = title
+    const fullTitle = finalTitle
       ? `${title} | FitJeeva – Medical Nutrition Clinic`
       : 'FitJeeva | Medical Nutrition Clinic – PCOD, Thyroid, Diabetes & Weight Loss Diet Plans'
     document.title = fullTitle
 
     // Update meta description
     const metaDesc = document.querySelector('meta[name="description"]')
-    if (metaDesc && description) {
-      metaDesc.setAttribute('content', description)
+    if (metaDesc && finalDesc) {
+      metaDesc.setAttribute('content', finalDesc)
     }
 
     // Update OG title
@@ -31,8 +39,8 @@ const useDocumentMeta = ({ title, description, canonical }) => {
 
     // Update OG description
     const ogDesc = document.querySelector('meta[property="og:description"]')
-    if (ogDesc && description) {
-      ogDesc.setAttribute('content', description)
+    if (ogDesc && finalDesc) {
+      ogDesc.setAttribute('content', finalDesc)
     }
 
     // Update Twitter title
@@ -43,8 +51,8 @@ const useDocumentMeta = ({ title, description, canonical }) => {
 
     // Update Twitter description
     const twDesc = document.querySelector('meta[name="twitter:description"]')
-    if (twDesc && description) {
-      twDesc.setAttribute('content', description)
+    if (twDesc && finalDesc) {
+      twDesc.setAttribute('content', finalDesc)
     }
 
     // Update canonical URL
@@ -66,7 +74,7 @@ const useDocumentMeta = ({ title, description, canonical }) => {
     return () => {
       document.title = 'FitJeeva | Medical Nutrition Clinic – PCOD, Thyroid, Diabetes & Weight Loss Diet Plans'
     }
-  }, [title, description, canonical])
+  }, [title, description, canonical, settings])
 }
 
 export default useDocumentMeta

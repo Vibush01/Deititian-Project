@@ -31,7 +31,15 @@ const SiteSettingsEditor = () => {
     ctaStat: "35,000+",
     ctaSubtext: "people have transformed their weight loss journeys with FitJeeva.",
     contactCtaTitle: "Start Your Transformation: Contact FitJeeva for Expert Guidance",
-    contactCtaSubtitle: "The first step to a healthier you starts here. Book a diet consultation and talk to a diet expert now to begin your transformation. Connect with our team through the channel you love — our responses are always personalised and judgment-free."
+    contactCtaSubtitle: "The first step to a healthier you starts here. Book a diet consultation and talk to a diet expert now to begin your transformation. Connect with our team through the channel you love — our responses are always personalised and judgment-free.",
+    seoMetadata: {
+      '/': { title: '', description: '' },
+      '/about': { title: '', description: '' },
+      '/contact-us': { title: '', description: '' },
+      '/team': { title: '', description: '' },
+      '/recipes': { title: '', description: '' },
+      '/experts': { title: '', description: '' }
+    }
   })
 
   // We fetch initial data. We don't necessarily need real-time updates while editing.
@@ -59,6 +67,7 @@ const SiteSettingsEditor = () => {
             ctaSubtext: data.ctaSubtext || prev.ctaSubtext,
             contactCtaTitle: data.contactCtaTitle || prev.contactCtaTitle,
             contactCtaSubtitle: data.contactCtaSubtitle || prev.contactCtaSubtitle,
+            seoMetadata: { ...prev.seoMetadata, ...(data.seoMetadata || {}) },
           }))
         }
       } catch (error) {
@@ -107,6 +116,19 @@ const SiteSettingsEditor = () => {
     setSettings(prev => ({
       ...prev,
       spotlightTestimonial: { ...prev.spotlightTestimonial, [name]: value }
+    }))
+  }
+
+  const handleSeoChange = (path, field, value) => {
+    setSettings(prev => ({
+      ...prev,
+      seoMetadata: {
+        ...prev.seoMetadata,
+        [path]: {
+          ...prev.seoMetadata[path],
+          [field]: value
+        }
+      }
     }))
   }
 
@@ -410,6 +432,40 @@ const SiteSettingsEditor = () => {
                 rows={3}
               />
             </div>
+          </div>
+        </div>
+
+        {/* SEO Settings */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+          <h2 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100">SEO Meta Settings (Per Page)</h2>
+          <div className="space-y-6">
+            {Object.keys(settings.seoMetadata).map((path) => (
+              <div key={path} className="p-4 bg-gray-50 border border-gray-100 rounded-xl">
+                <h3 className="font-bold text-sm text-[#2E7D32] mb-3">Page Path: {path === '/' ? 'Home ( / )' : path}</h3>
+                <div className="grid grid-cols-1 gap-4">
+                  <div>
+                    <label className={labelClasses}>Meta Title Override</label>
+                    <input
+                      type="text"
+                      value={settings.seoMetadata[path].title || ''}
+                      onChange={(e) => handleSeoChange(path, 'title', e.target.value)}
+                      className={inputClasses}
+                      placeholder="Leave blank to use default"
+                    />
+                  </div>
+                  <div>
+                    <label className={labelClasses}>Meta Description Override</label>
+                    <textarea
+                      value={settings.seoMetadata[path].description || ''}
+                      onChange={(e) => handleSeoChange(path, 'description', e.target.value)}
+                      className={inputClasses}
+                      rows={2}
+                      placeholder="Leave blank to use default"
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </form>
