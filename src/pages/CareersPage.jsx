@@ -99,6 +99,28 @@ const CompanyValuesSection = () => {
 )
 }
 
+const JobOpeningsSection = () => {
+  const { jobPositions } = useCareersData()
+  return (
+    <section className="py-12 md:py-16 bg-white border-b border-gray-100">
+      <div className="container-custom">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Current Openings</h2>
+          <p className="text-gray-500 mt-3">Join us in shaping the future of clinical nutrition.</p>
+        </div>
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+          {jobPositions.filter(p => p.toLowerCase() !== 'other').map((position, i) => (
+            <div key={i} className="p-5 rounded-2xl border border-gray-200 hover:border-[#2E7D32] hover:shadow-md transition-all flex items-center justify-between group">
+              <span className="font-bold text-gray-800 group-hover:text-[#2E7D32] transition-colors">{position}</span>
+              <a href="#apply-form" className="text-[#2E7D32] text-sm font-bold opacity-0 group-hover:opacity-100 transition-opacity">Apply Now &rarr;</a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 const CareerApplicationForm = () => {
   const { jobPositions } = useCareersData()
   const [formData, setFormData] = useState({
@@ -188,6 +210,7 @@ const CareersPage = () => {
       <StatsCounter />
       <AwardsSection />
       <CompanyValuesSection />
+      <JobOpeningsSection />
       <CareerApplicationForm />
       <ConsultationCTA />
       <InstagramFeed />

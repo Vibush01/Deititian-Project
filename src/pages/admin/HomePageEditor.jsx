@@ -42,7 +42,13 @@ const HomePageEditor = () => {
 
         // Fetch Expertise Cards
         const cards = await getCollection(COLLECTIONS.HOME_EXPERTISE_CARDS, 'order')
-        setExpertiseCards(cards)
+        if (cards && cards.length > 0) {
+          setExpertiseCards(cards)
+        } else {
+          // Fallback to hardcoded expertise cards
+          const { homeExpertiseCards } = await import('../../data/servicesData')
+          setExpertiseCards(homeExpertiseCards.map((card, idx) => ({ ...card, id: `fallback-${idx}` })))
+        }
       } catch (error) {
         console.error('Failed to fetch home data', error)
       } finally {
