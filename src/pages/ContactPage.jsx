@@ -7,6 +7,7 @@ import ContactCTA from '../components/sections/ContactCTA'
 import ClinicLocations from '../components/sections/ClinicLocations'
 import { submitContactInquiry } from '../services/inquiryService'
 import useDocumentMeta from '../hooks/useDocumentMeta'
+import { useServiceCategories } from '../hooks/useServices'
 
 const ContactHero = () => (
   <section className="py-12 md:py-20 bg-[#2E7D32] text-white relative overflow-hidden">
@@ -29,9 +30,15 @@ const ContactForm = () => {
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
-  const serviceOptions = [
+  const { categories } = useServiceCategories()
+  
+  // Extract titles from Firestore services, or fallback to static list
+  const serviceOptionsStatic = [
     'Weight Management', 'Disease Management', 'PCOD / PCOS', 'Thyroid', 'Diabetes', 'Lifestyle Management', 'Other',
   ]
+  const serviceOptions = categories.length > 0
+    ? [...categories.map(s => s.title).filter(Boolean), 'Other']
+    : serviceOptionsStatic
 
   const handleChange = (e) => {
     const { name, value } = e.target

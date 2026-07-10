@@ -3,6 +3,7 @@ import { FaUserMd, FaClipboardList, FaHeadset } from 'react-icons/fa'
 import SectionHeading from '../ui/SectionHeading'
 import Button from '../ui/Button'
 import { submitConsultationInquiry } from '../../services/inquiryService'
+import { useLocations } from '../../hooks/usePageData'
 import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
 
 const featureBadges = [
@@ -17,12 +18,19 @@ const initialFormState = {
   location: '', clinicLocation: '', consultationDate: '', consultationTime: '',
 }
 
-const clinicOptions = [
+const clinicOptionsStatic = [
   'Chandigarh', 'Mohali', 'Amritsar', 'Jalandhar', 'Ludhiana',
   'Patiala', 'New Delhi', 'Dubai', 'Mumbai',
 ]
 
 const ConsultationForm = ({ className = '' }) => {
+  const { locations } = useLocations()
+  
+  // Extract city names from Firestore locations, or fallback to static list
+  const clinicOptions = locations.length > 0 
+    ? locations.map(loc => loc.city).filter(Boolean)
+    : clinicOptionsStatic
+
   const [formData, setFormData] = useState(initialFormState)
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
