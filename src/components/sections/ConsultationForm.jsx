@@ -4,7 +4,7 @@ import SectionHeading from '../ui/SectionHeading'
 import Button from '../ui/Button'
 import { submitConsultationInquiry } from '../../services/inquiryService'
 import { useLocations } from '../../hooks/usePageData'
-import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
+import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.webp'
 
 const featureBadges = [
   { icon: <FaUserMd className="text-xl" />, label: 'Expert Nutritionists' },

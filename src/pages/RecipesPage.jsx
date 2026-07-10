@@ -2,7 +2,7 @@ import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
 import { useRecipes } from '../hooks/usePageData'
 import useDocumentMeta from '../hooks/useDocumentMeta'
-import fitjeevaMillet from '../assets/images/fitjeeva-millet.jpg'
+import fitjeevaMillet from '../assets/images/fitjeeva-millet.webp'
 
 const defaultRecipes = [
   {

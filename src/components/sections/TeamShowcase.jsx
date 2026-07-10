@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import teamImg from '../../assets/images/team-img.png'
+import teamImg from '../../assets/images/team-img.webp'
 
 const highlights = [
   'Medical Diet Experts',

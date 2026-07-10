@@ -33,25 +33,25 @@ export const coreServices = [
     number: 1,
     title: "Clinical Disease Management & Reversal",
     description: "Specialized, award-winning protocols for chronic conditions including Type 1 & Type 2 Diabetes, PCOD/PCOS, Thyroid disorders, Cardiac health, Nephrology (CKD), Cancer nutrition, and Liver disorders.",
-    image: new URL('../assets/images/fitjeeva-clinical.jpg', import.meta.url).href,
+    image: new URL('../assets/images/fitjeeva-clinical.webp', import.meta.url).href,
   },
   {
     number: 2,
     title: "Personalized Weight Management",
     description: "Sustainable weight balance programs using kitchen-based nutrition methodologies and everyday Indian ingredients that integrate seamlessly into your lifestyle.",
-    image: new URL('../assets/images/fitjeeva-millet.jpg', import.meta.url).href,
+    image: new URL('../assets/images/fitjeeva-millet.webp', import.meta.url).href,
   },
   {
     number: 3,
     title: "Dietitian at Your Doorstep",
     description: "A certified clinical dietitian visits your home for a comprehensive body analysis and private consultation, bringing expertise directly to your kitchen.",
-    image: new URL('../assets/images/fitjeeva-homevisit.jpg', import.meta.url).href,
+    image: new URL('../assets/images/fitjeeva-homevisit.webp', import.meta.url).href,
   },
   {
     number: 4,
     title: "Community Wellness Posts",
     description: "Expert-curated health tips, seasonal nutrition guides, millet-based recipes, and wellness insights to help you make smarter food choices every day.",
-    image: new URL('../assets/images/fitjeeva-banner-1.jpg', import.meta.url).href,
+    image: new URL('../assets/images/fitjeeva-banner-1.webp', import.meta.url).href,
   },
 ]
 

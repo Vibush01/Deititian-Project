@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { FaFacebookF, FaYoutube, FaInstagram } from 'react-icons/fa'
 import useSiteSettings from '../../hooks/useSiteSettings'
 import useNavigation from '../../hooks/useNavigation'
-import logoImg from '../../assets/images/logo.png'
+import logoImg from '../../assets/images/logo.webp'
 
 const Footer = () => {
   const { settings } = useSiteSettings()

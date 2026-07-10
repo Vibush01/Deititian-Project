@@ -50,7 +50,7 @@ export const navLinks = [
       ],
       column3: {
         title: "Success Stories",
-        image: new URL('../assets/images/SS2.JPG', import.meta.url).href,
+        image: new URL('../assets/images/SS2.webp', import.meta.url).href,
         buttons: [
           { label: "Weight Lose Success", path: "/success-stories", type: "primary" },
           { label: "Story Success", path: "/success-stories", type: "green" }

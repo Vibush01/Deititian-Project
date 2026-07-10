@@ -2,8 +2,8 @@ import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
 import { useExperts } from '../hooks/usePageData'
 import useDocumentMeta from '../hooks/useDocumentMeta'
-import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
-import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
+import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.webp'
+import fitjeevaClinical from '../assets/images/fitjeeva-clinical.webp'
 
 const defaultExperts = [
   {

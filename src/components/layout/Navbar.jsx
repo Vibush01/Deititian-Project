@@ -4,7 +4,7 @@ import { FaBars, FaTimes, FaChevronDown, FaHeartbeat, FaStethoscope, FaPills, Fa
 import useNavigation from '../../hooks/useNavigation'
 import useSiteSettings from '../../hooks/useSiteSettings'
 import Button from '../ui/Button'
-import logoImg from '../../assets/images/logo.png'
+import logoImg from '../../assets/images/logo.webp'
 
 // Helper for mapping titles to icons
 const getIcon = (title) => {

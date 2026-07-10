@@ -7,11 +7,11 @@ import 'swiper/css/pagination';
 
 import { useMediaData } from '../../hooks/usePageData';
 
-import fitjeevaBanner1 from '../../assets/images/fitjeeva-banner-1.jpg';
-import fitjeevaBanner2 from '../../assets/images/fitjeeva-banner-2.png';
-import fitjeevaBanner3 from '../../assets/images/fitjeeva-banner-3.png';
-import fitjeevaBanner4 from '../../assets/images/fitjeeva-banner-4.png';
-import fitjeevaBanner5 from '../../assets/images/fitjeeva-banner-5.png';
+import fitjeevaBanner1 from '../../assets/images/fitjeeva-banner-1.webp';
+import fitjeevaBanner2 from '../../assets/images/fitjeeva-banner-2.webp';
+import fitjeevaBanner3 from '../../assets/images/fitjeeva-banner-3.webp';
+import fitjeevaBanner4 from '../../assets/images/fitjeeva-banner-4.webp';
+import fitjeevaBanner5 from '../../assets/images/fitjeeva-banner-5.webp';
 
 /**
  * FitJeeva Home Hero — Simple image carousel slider.

@@ -10,7 +10,7 @@ import ConsultationForm from '../components/sections/ConsultationForm'
 import { useServiceCategories } from '../hooks/useServices'
 import useSiteSettings from '../hooks/useSiteSettings'
 import useDocumentMeta from '../hooks/useDocumentMeta'
-import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
+import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.webp'
 
 const categoryIcons = {
   heart: <FaHeartbeat />,

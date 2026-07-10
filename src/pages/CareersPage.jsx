@@ -8,8 +8,8 @@ import InstagramFeed from '../components/sections/InstagramFeed'
 import ContactCTA from '../components/sections/ContactCTA'
 import { useCareersData } from '../hooks/usePageData'
 import useDocumentMeta from '../hooks/useDocumentMeta'
-import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
-import fitjeevaBanner from '../assets/images/fitjeeva-banner-1.jpg'
+import fitjeevaClinical from '../assets/images/fitjeeva-clinical.webp'
+import fitjeevaBanner from '../assets/images/fitjeeva-banner-1.webp'
 
 const CareersHero = () => {
   const { careersHero, teamImages } = useCareersData()

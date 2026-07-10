@@ -275,21 +275,21 @@ export const homeExpertiseCards = [
   {
     title: "Our Medical Expertise in Clinical Nutrition",
     description: "As a premier medical nutrition clinic, we provide personalized diet plans for PCOD, thyroid, and diabetes management. Our weight loss dietitians and thyroid diet experts utilize millet based diet plans and online diet consultation to deliver science-backed health transformations.",
-    image: new URL('../assets/images/fitjeeva-clinical.jpg', import.meta.url).href,
+    image: new URL('../assets/images/fitjeeva-clinical.webp', import.meta.url).href,
   },
   {
     title: "Community Health & Nutrition Tips",
     description: "Stay informed with our expert-curated health posts, seasonal nutrition guides, and wellness insights. From debunking diet myths to sharing millet-based recipes, our community posts empower you to make smarter food choices every day.",
-    image: new URL('../assets/images/fitjeeva-clinical.jpg', import.meta.url).href,
+    image: new URL('../assets/images/fitjeeva-clinical.webp', import.meta.url).href,
   },
   {
     title: "Healthy Kitchen & Millet Based Diet Plans",
     description: "FitJeeva promotes farm-to-plate eating using Indian staples and home-grown produce. Our medical nutrition clinic integrates these traditional grains into millet based diet plans for sustainable weight loss and clinical wellness.",
-    image: new URL('../assets/images/fitjeeva-millet.jpg', import.meta.url).href,
+    image: new URL('../assets/images/fitjeeva-millet.webp', import.meta.url).href,
   },
   {
     title: "Client Transformations: Real Weight Loss Success Stories",
     description: "1,00,000+ lives transformed through expert online diet consultation and clinical nutrition. Our science-backed personalized diet plans deliver real health results through food.",
-    image: new URL('../assets/images/fitjeeva-homevisit.jpg', import.meta.url).href,
+    image: new URL('../assets/images/fitjeeva-homevisit.webp', import.meta.url).href,
   },
 ]

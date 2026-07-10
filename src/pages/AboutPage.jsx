@@ -10,11 +10,11 @@ import TeamShowcase from '../components/sections/TeamShowcase'
 import { useAboutData } from '../hooks/usePageData'
 import useSiteSettings from '../hooks/useSiteSettings'
 import useDocumentMeta from '../hooks/useDocumentMeta'
-import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.jpg'
-import fitjeevaClinical from '../assets/images/fitjeeva-clinical.jpg'
-import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.jpg'
-import fitjeevaMillet from '../assets/images/fitjeeva-millet.jpg'
-import fitjeevaBanner from '../assets/images/fitjeeva-banner-1.jpg'
+import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.webp'
+import fitjeevaClinical from '../assets/images/fitjeeva-clinical.webp'
+import fitjeevaHomevisit from '../assets/images/fitjeeva-homevisit.webp'
+import fitjeevaMillet from '../assets/images/fitjeeva-millet.webp'
+import fitjeevaBanner from '../assets/images/fitjeeva-banner-1.webp'
 
 const AboutHero = () => {
   const { aboutIntro } = useAboutData()

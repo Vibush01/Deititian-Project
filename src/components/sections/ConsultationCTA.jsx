@@ -1,7 +1,7 @@
 import Button from '../ui/Button'
 import useSiteSettings from '../../hooks/useSiteSettings'
-import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
-import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.jpg'
+import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.webp'
+import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.webp'
 
 const ConsultationCTA = ({ className = '' }) => {
   const { settings } = useSiteSettings()

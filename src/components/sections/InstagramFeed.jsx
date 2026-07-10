@@ -2,12 +2,12 @@ import { FaInstagram } from 'react-icons/fa'
 import SectionHeading from '../ui/SectionHeading'
 import useSiteSettings from '../../hooks/useSiteSettings'
 import { useMediaData } from '../../hooks/usePageData'
-import ip1 from '../../assets/images/IP1.png'
-import ip2 from '../../assets/images/IP2.png'
-import ip3 from '../../assets/images/IP3.png'
-import ip4 from '../../assets/images/IP4.png'
-import ip5 from '../../assets/images/IP5.png'
-import ip6 from '../../assets/images/IP6.png'
+import ip1 from '../../assets/images/IP1.webp'
+import ip2 from '../../assets/images/IP2.webp'
+import ip3 from '../../assets/images/IP3.webp'
+import ip4 from '../../assets/images/IP4.webp'
+import ip5 from '../../assets/images/IP5.webp'
+import ip6 from '../../assets/images/IP6.webp'
 
 const defaultFeedImages = [
   { image: ip1, url: '' },
