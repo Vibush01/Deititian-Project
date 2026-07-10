@@ -28,7 +28,18 @@ const ExpertsEditor = () => {
         return
       }
       const data = await getCollection(COLLECTIONS.EXPERTS, 'order')
-      setExperts(data)
+      if (data && data.length > 0) {
+        setExperts(data)
+      } else {
+        setExperts([{
+          id: 'sample-expert-1',
+          name: 'Vibush',
+          role: 'Chief Clinical Dietitian',
+          specializations: ['PCOS', 'Thyroid', 'Weight Management'],
+          bio: 'Expert in clinical nutrition and lifestyle management.',
+          image: ''
+        }])
+      }
     } catch (error) {
       console.error('Failed to fetch experts', error)
     } finally {

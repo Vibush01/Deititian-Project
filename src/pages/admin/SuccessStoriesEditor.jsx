@@ -28,7 +28,12 @@ const SuccessStoriesEditor = () => {
         return
       }
       const data = await getCollection(COLLECTIONS.SUCCESS_STORIES, 'order')
-      setStories(data)
+      if (data && data.length > 0) {
+        setStories(data)
+      } else {
+        const { defaultStories } = await import('../../pages/SuccessStoriesPage')
+        setStories(defaultStories)
+      }
     } catch (error) {
       console.error('Failed to fetch success stories', error)
     } finally {

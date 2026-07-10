@@ -25,8 +25,19 @@ const ServiceSubPageEditor = () => {
         }
 
         const data = await getCollection(COLLECTIONS.SERVICE_SUB_PAGES)
-        // Since we use ID as slug (e.g. "pcod-pcos"), we track the original id to know if it's new or existing
-        setSubPages(data.map(d => ({ ...d, _originalId: d.id })))
+        if (data && data.length > 0) {
+          // Since we use ID as slug (e.g. "pcod-pcos"), we track the original id to know if it's new or existing
+          setSubPages(data.map(d => ({ ...d, _originalId: d.id })))
+        } else {
+          // Fallback to hardcoded services data
+          const { serviceSubPages } = await import('../../data/servicesData')
+          const fallbackData = Object.keys(serviceSubPages).map(key => ({
+            id: key,
+            _originalId: key,
+            ...serviceSubPages[key]
+          }))
+          setSubPages(fallbackData)
+        }
       } catch (error) {
         console.error('Failed to fetch sub-pages', error)
       } finally {

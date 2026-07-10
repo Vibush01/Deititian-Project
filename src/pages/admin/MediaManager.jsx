@@ -20,10 +20,21 @@ const MediaManager = () => {
         return
       }
       const data = await getDocument(COLLECTIONS.MEDIA, 'main')
-      if (data) {
+      if (data && (data.mediaLogos?.length > 0 || data.instagramPosts?.length > 0)) {
         setMedia({
-          mediaLogos: data.mediaLogos || [],
+          // Ensure strings are mapped to objects if they were saved as strings
+          mediaLogos: (data.mediaLogos || []).map(logo => typeof logo === 'string' ? { name: logo } : logo),
           instagramPosts: data.instagramPosts || []
+        })
+      } else {
+        setMedia({
+          mediaLogos: [
+            { name: "The Times of India" },
+            { name: "Hindustan Times" },
+            { name: "Health Magazine" },
+            { name: "Wellness Daily" }
+          ],
+          instagramPosts: [] // Handled dynamically in components if empty
         })
       }
     } catch (error) {

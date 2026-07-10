@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { FaSave, FaConciergeBell, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage, FaHeart, FaDumbbell, FaHeartbeat } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { FaSave, FaConciergeBell, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage, FaHeart, FaDumbbell, FaHeartbeat, FaEdit } from 'react-icons/fa'
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 
@@ -335,6 +336,17 @@ const ServicesEditor = () => {
                         <input type="text" value={sub.id} onChange={e => handleSubServiceChange(catIndex, subIndex, 'id', e.target.value)} className="w-24 bg-transparent text-xs text-gray-500 border-b border-gray-300 focus:outline-none focus:border-[#2E7D32]" placeholder="slug-id" />
                       </div>
                       <textarea value={sub.description} onChange={e => handleSubServiceChange(catIndex, subIndex, 'description', e.target.value)} rows={2} className="w-full bg-transparent text-sm text-gray-600 focus:outline-none resize-none" placeholder="Short Description" />
+                      
+                      {/* Link to sub-page content editor */}
+                      <div className="mt-2 flex justify-end">
+                        <Link 
+                          to={`/admin/services/sub-pages?slug=${sub.id}`}
+                          className="text-xs bg-white text-[#2E7D32] border border-[#2E7D32]/20 hover:bg-[#E8F5E9] px-3 py-1.5 rounded-lg flex items-center gap-1.5 font-bold transition-colors"
+                        >
+                          <FaEdit /> Edit Full Content
+                        </Link>
+                      </div>
+
                       <button onClick={() => handleRemoveSubService(catIndex, subIndex)} className="absolute right-2 top-2 text-gray-400 hover:text-red-500"><FaTrash size={12} /></button>
                     </div>
                   ))}

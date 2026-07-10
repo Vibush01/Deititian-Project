@@ -19,7 +19,7 @@ import ss14 from '../assets/images/SS14.webp'
 import ss15 from '../assets/images/SS15.webp'
 import ss16 from '../assets/images/SS16.webp'
 
-const defaultStories = [
+export const defaultStories = [
   {
     id: 1,
     name: 'Incredible Transformation',

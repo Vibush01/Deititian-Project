@@ -28,7 +28,19 @@ const RecipesEditor = () => {
         return
       }
       const data = await getCollection(COLLECTIONS.RECIPES, 'order')
-      setRecipes(data)
+      if (data && data.length > 0) {
+        setRecipes(data)
+      } else {
+        setRecipes([{
+          id: 'sample-recipe-1',
+          title: 'High-Protein Moong Dal Chilla',
+          time: '15 mins',
+          for: 'Weight Loss & PCOS',
+          ingredients: ['1 cup Moong Dal (soaked)', '1 green chilli', '1/2 inch ginger', 'Salt to taste', '1/2 tsp cumin seeds'],
+          instructions: '1. Blend soaked dal, chilli, and ginger into a smooth batter.\n2. Add salt and cumin seeds.\n3. Pour a ladle of batter on a hot non-stick pan.\n4. Cook until golden brown on both sides.',
+          image: ''
+        }])
+      }
     } catch (error) {
       console.error('Failed to fetch recipes', error)
     } finally {

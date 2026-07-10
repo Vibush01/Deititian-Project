@@ -311,7 +311,7 @@ const MediaSpotlight = () => {
           {logos.map((media, i) => (
             <div key={i} className="flex items-center justify-center p-3 border border-gray-200 rounded-xl w-full h-20 hover:border-[#2E7D32]/30 hover:bg-[#E8F5E9] transition-all duration-300 cursor-default">
               <span className="font-black text-gray-400 uppercase tracking-widest text-[10px] md:text-xs text-center">
-                {media}
+                {media.name || media}
               </span>
             </div>
           ))}

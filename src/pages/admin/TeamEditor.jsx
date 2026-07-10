@@ -29,7 +29,18 @@ const TeamEditor = () => {
         return
       }
       const data = await getCollection(COLLECTIONS.TEAM, 'order')
-      setTeam(data)
+      if (data && data.length > 0) {
+        setTeam(data)
+      } else {
+        // Fallback team member
+        setTeam([{
+          id: 'sample-team-1',
+          name: 'Vibush',
+          role: 'Founder & Chief Dietitian',
+          bio: 'Expert in clinical nutrition and lifestyle management with over 10 years of experience.',
+          image: ''
+        }])
+      }
     } catch (error) {
       console.error('Failed to fetch team', error)
     } finally {
