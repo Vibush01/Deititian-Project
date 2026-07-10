@@ -15,7 +15,19 @@ const SiteSettingsEditor = () => {
     },
     statsData: {
       happyClients: '', successStories: '', clinicLocations: '',
-    }
+    },
+    spotlightStats: [
+      { number: "1,00,000+", label: "Lives Transformed" },
+      { number: "35,000+", label: "Weight Loss Journeys" },
+      { number: "Chandigarh", label: "Based in India" },
+    ],
+    spotlightTestimonial: {
+      name: "Simran K.",
+      review: "“Lost 18 kg in 4 months with FitJeeva's personalized plan. The diet was entirely home-cooked Indian food. No supplements, no shortcuts!”"
+    },
+    ctaHeading: "Book a Diet Consultation for Life-Changing Results",
+    ctaStat: "35,000+",
+    ctaSubtext: "people have transformed their weight loss journeys with FitJeeva."
   })
 
   // We fetch initial data. We don't necessarily need real-time updates while editing.
@@ -31,9 +43,16 @@ const SiteSettingsEditor = () => {
         if (data) {
           // Merge with default structure to prevent undefined errors
           setSettings(prev => ({
+            ...prev,
+            ...data,
             siteInfo: { ...prev.siteInfo, ...data.siteInfo },
             socialLinks: { ...prev.socialLinks, ...data.socialLinks },
-            statsData: { ...prev.statsData, ...data.statsData }
+            statsData: { ...prev.statsData, ...data.statsData },
+            spotlightStats: data.spotlightStats || prev.spotlightStats,
+            spotlightTestimonial: data.spotlightTestimonial || prev.spotlightTestimonial,
+            ctaHeading: data.ctaHeading || prev.ctaHeading,
+            ctaStat: data.ctaStat || prev.ctaStat,
+            ctaSubtext: data.ctaSubtext || prev.ctaSubtext,
           }))
         }
       } catch (error) {
@@ -66,6 +85,30 @@ const SiteSettingsEditor = () => {
     setSettings(prev => ({
       ...prev,
       statsData: { ...prev.statsData, [name]: value }
+    }))
+  }
+
+  const handleSpotlightStatChange = (index, field, value) => {
+    setSettings(prev => {
+      const newStats = [...prev.spotlightStats]
+      newStats[index] = { ...newStats[index], [field]: value }
+      return { ...prev, spotlightStats: newStats }
+    })
+  }
+
+  const handleTestimonialChange = (e) => {
+    const { name, value } = e.target
+    setSettings(prev => ({
+      ...prev,
+      spotlightTestimonial: { ...prev.spotlightTestimonial, [name]: value }
+    }))
+  }
+
+  const handleSettingsChange = (e) => {
+    const { name, value } = e.target
+    setSettings(prev => ({
+      ...prev,
+      [name]: value
     }))
   }
 
@@ -191,6 +234,108 @@ const SiteSettingsEditor = () => {
             <div>
               <label className={labelClasses}>YouTube URL</label>
               <input type="url" name="youtube" value={settings.socialLinks.youtube} onChange={handleSocialChange} className={inputClasses} placeholder="https://youtube.com/..." />
+            </div>
+          </div>
+        </div>
+
+        {/* Client Spotlight Settings */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+          <h2 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100 flex items-center gap-2">
+            Client Spotlight Settings
+          </h2>
+          <div className="space-y-6">
+            <div>
+              <h3 className="text-sm font-bold text-gray-700 mb-3">Spotlight Stats</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {settings.spotlightStats.map((stat, index) => (
+                  <div key={index} className="p-4 bg-gray-50 rounded-xl border border-gray-100 space-y-3">
+                    <div>
+                      <label className={labelClasses}>Number {index + 1}</label>
+                      <input
+                        type="text"
+                        value={stat.number}
+                        onChange={(e) => handleSpotlightStatChange(index, 'number', e.target.value)}
+                        className={inputClasses}
+                      />
+                    </div>
+                    <div>
+                      <label className={labelClasses}>Label {index + 1}</label>
+                      <input
+                        type="text"
+                        value={stat.label}
+                        onChange={(e) => handleSpotlightStatChange(index, 'label', e.target.value)}
+                        className={inputClasses}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label className={labelClasses}>Testimonial Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={settings.spotlightTestimonial.name}
+                  onChange={handleTestimonialChange}
+                  className={inputClasses}
+                  placeholder="Simran K."
+                />
+              </div>
+              <div>
+                <label className={labelClasses}>Testimonial Review</label>
+                <textarea
+                  name="review"
+                  value={settings.spotlightTestimonial.review}
+                  onChange={handleTestimonialChange}
+                  className={inputClasses}
+                  rows={3}
+                  placeholder="Lost 18 kg in 4 months..."
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Call To Action (CTA) Settings */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+          <h2 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100 flex items-center gap-2">
+            Call To Action (CTA) Settings
+          </h2>
+          <div className="grid grid-cols-1 gap-6">
+            <div>
+              <label className={labelClasses}>CTA Heading</label>
+              <input
+                type="text"
+                name="ctaHeading"
+                value={settings.ctaHeading}
+                onChange={handleSettingsChange}
+                className={inputClasses}
+              />
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className={labelClasses}>CTA Highlight Stat (e.g., 35,000+)</label>
+                <input
+                  type="text"
+                  name="ctaStat"
+                  value={settings.ctaStat}
+                  onChange={handleSettingsChange}
+                  className={inputClasses}
+                />
+              </div>
+              <div>
+                <label className={labelClasses}>CTA Subtext</label>
+                <input
+                  type="text"
+                  name="ctaSubtext"
+                  value={settings.ctaSubtext}
+                  onChange={handleSettingsChange}
+                  className={inputClasses}
+                />
+              </div>
             </div>
           </div>
         </div>

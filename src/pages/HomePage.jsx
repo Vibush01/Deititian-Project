@@ -12,6 +12,7 @@ import ClinicLocations from "../components/sections/ClinicLocations";
 import ConsultationForm from "../components/sections/ConsultationForm";
 import { useHomeExpertiseCards } from "../hooks/useServices";
 import { useMediaData } from "../hooks/usePageData";
+import useSiteSettings from "../hooks/useSiteSettings";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 
 /* =========================================================
@@ -205,11 +206,20 @@ const ExpertiseSection = () => {
 };
 
 const ClientSpotlight = () => {
-  const spotlightStats = [
+  const { settings } = useSiteSettings();
+  
+  const defaultSpotlightStats = [
     { number: "1,00,000+", label: "Lives Transformed" },
     { number: "35,000+", label: "Weight Loss Journeys" },
     { number: "Chandigarh", label: "Based in India" },
   ];
+  
+  const spotlightStats = settings.spotlightStats || defaultSpotlightStats;
+  
+  const testimonial = settings.spotlightTestimonial || {
+    name: "Simran K.",
+    review: "“Lost 18 kg in 4 months with FitJeeva's personalized plan. The diet was entirely home-cooked Indian food. No supplements, no shortcuts!”"
+  };
 
   return (
     <section className="py-12 md:py-16 bg-gradient-to-br from-[#1a1a1a] to-[#2d2d2d] text-white overflow-hidden relative">
@@ -253,17 +263,17 @@ const ClientSpotlight = () => {
             <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 md:p-6 mb-6">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-10 h-10 bg-[#2E7D32] rounded-full flex items-center justify-center text-white font-bold text-base shadow-md">
-                  S
+                  {testimonial.name ? testimonial.name.charAt(0) : "S"}
                 </div>
                 <div>
-                  <span className="block font-bold text-base text-white">Simran K.</span>
+                  <span className="block font-bold text-base text-white">{testimonial.name}</span>
                   <div className="flex gap-1 text-yellow-400 text-xs mt-0.5">
                     {[...Array(5)].map((_, i) => <FaStar key={i} />)}
                   </div>
                 </div>
               </div>
               <p className="text-gray-300 italic leading-relaxed text-xs md:text-sm">
-                “Lost 18 kg in 4 months with FitJeeva's personalized plan. The diet was entirely home-cooked Indian food. No supplements, no shortcuts!”
+                {testimonial.review}
               </p>
             </div>
             

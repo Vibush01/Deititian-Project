@@ -1,8 +1,15 @@
 import Button from '../ui/Button'
+import useSiteSettings from '../../hooks/useSiteSettings'
 import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.jpg'
 import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.jpg'
 
 const ConsultationCTA = ({ className = '' }) => {
+  const { settings } = useSiteSettings()
+  
+  const ctaHeading = settings.ctaHeading || "Book a Diet Consultation for Life-Changing Results"
+  const ctaStat = settings.ctaStat || "35,000+"
+  const ctaSubtext = settings.ctaSubtext || "people have transformed their weight loss journeys with FitJeeva."
+  
   return (
     <section className={`py-12 md:py-20 px-4 md:px-8 ${className}`}>
       <div className="container-custom">
@@ -29,11 +36,11 @@ const ConsultationCTA = ({ className = '' }) => {
             {/* Text Content */}
             <div className="w-full lg:w-1/2 text-center lg:text-left">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-6">
-                Book a Diet Consultation for Life-Changing Results
+                {ctaHeading}
               </h2>
               <p className="text-white/90 text-lg md:text-xl font-medium mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                <span className="font-black text-white bg-white/20 px-2 py-0.5 rounded mr-1">35,000+</span> 
-                people have transformed their weight loss journeys with FitJeeva.
+                <span className="font-black text-white bg-white/20 px-2 py-0.5 rounded mr-1">{ctaStat}</span> 
+                {ctaSubtext}
               </p>
               <div>
                 <Button to="/contact-us" variant="white" className="text-lg md:text-xl py-4 md:py-5 px-10 md:px-12 shadow-xl shadow-black/10">
