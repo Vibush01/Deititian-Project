@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaSave, FaUsers, FaSpinner, FaPlus, FaTrash, FaEdit, FaGripVertical, FaImage } from 'react-icons/fa'
+import { FaSave, FaUsers, FaSpinner, FaPlus, FaTrash, FaEdit, FaGripVertical, FaImage, FaUserMd } from 'react-icons/fa'
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'

@@ -5,15 +5,21 @@ import { FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
 const ClinicLocations = ({ className = '' }) => {
   const { locations } = useLocations()
   const location = locations[0]
-  const mapEmbedUrl = 'https://maps.google.com/maps?q=Chandigarh,+India&t=&z=12&ie=UTF8&iwloc=&output=embed'
+
+  // Guard: if no locations exist at all, don't render
+  if (!location) return null
+
+  // Build map embed URL dynamically from location data
+  const mapQuery = encodeURIComponent(location.address ? `${location.address}, ${location.city}` : location.city || 'Chandigarh, India')
+  const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&t=&z=14&ie=UTF8&iwloc=&output=embed`
 
   return (
     <section className={`py-16 md:py-24 bg-white ${className}`}>
       <div className="container-custom">
         <SectionHeading
           label="Our Location"
-          title="Visit us at our location"
-          subtitle="We are based in Chandigarh, India. Reach out to us to book your consultation today."
+          title={`Visit us at ${location.city || 'our clinic'}`}
+          subtitle={`We are based in ${location.city || 'India'}. Reach out to us to book your consultation today.`}
         />
 
         <div className="mt-12 md:mt-16 flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch">
@@ -34,15 +40,17 @@ const ClinicLocations = ({ className = '' }) => {
                 {location.address}
               </p>
 
-              <div className="flex items-center gap-3 text-gray-800">
-                <FaPhone className="text-gray-400" />
-                <a
-                  href={`tel:${location.phone.replace(/\s/g, '')}`}
-                  className="font-bold text-lg hover:text-[#2E7D32] transition-colors"
-                >
-                  {location.phone}
-                </a>
-              </div>
+              {location.phone && (
+                <div className="flex items-center gap-3 text-gray-800">
+                  <FaPhone className="text-gray-400" />
+                  <a
+                    href={`tel:${location.phone.replace(/\s/g, '')}`}
+                    className="font-bold text-lg hover:text-[#2E7D32] transition-colors"
+                  >
+                    {location.phone}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
 
