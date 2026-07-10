@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaLock, FaEnvelope, FaEye, FaEyeSlash } from 'react-icons/fa'
 import { useAuth } from '../../contexts/AuthContext'
@@ -13,10 +13,14 @@ const LoginPage = () => {
   const navigate = useNavigate()
 
   // If already logged in as admin, redirect
-  if (user && isAdmin) {
-    navigate('/admin', { replace: true })
-    return null
-  }
+  // (We'll just add useEffect up top and handle it here)
+  useEffect(() => {
+    if (user && isAdmin) {
+      navigate('/admin', { replace: true })
+    }
+  }, [user, isAdmin, navigate])
+
+  if (user && isAdmin) return null
 
   const handleSubmit = async (e) => {
     e.preventDefault()

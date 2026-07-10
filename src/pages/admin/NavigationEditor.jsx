@@ -31,6 +31,10 @@ const NavigationEditor = () => {
               explore: data.footerLinks.explore || prev.explore,
             }))
           }
+        } else {
+          const { navLinks: fallbackNav, footerLinks: fallbackFooter } = await import('../../data/siteData')
+          setNavLinks(fallbackNav)
+          setFooterLinks(fallbackFooter)
         }
       } catch (error) {
         console.error('Failed to fetch navigation', error)

@@ -33,6 +33,14 @@ const CareersEditor = () => {
             jobPositions: docData.jobPositions || [],
             teamImages: docData.teamImages || [],
           })
+        } else {
+          const { careersHero, companyValues, jobPositions, teamImages } = await import('../../data/careersData')
+          setData({
+            hero: careersHero,
+            companyValues,
+            jobPositions,
+            teamImages,
+          })
         }
       } catch (error) {
         console.error('Failed to fetch careers data', error)

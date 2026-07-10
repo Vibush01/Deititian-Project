@@ -31,6 +31,9 @@ const AboutPageEditor = () => {
             philosophySections: docData.philosophySections || [],
             coreServices: docData.coreServices || [],
           })
+        } else {
+          const { aboutIntro, philosophySections, coreServices } = await import('../../data/aboutData')
+          setData({ aboutIntro, philosophySections, coreServices })
         }
       } catch (error) {
         console.error('Failed to fetch about data', error)

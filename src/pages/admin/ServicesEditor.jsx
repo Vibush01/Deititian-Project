@@ -26,7 +26,12 @@ const ServicesEditor = () => {
         }
 
         const data = await getCollection(COLLECTIONS.SERVICES, 'order')
-        setCategories(data)
+        if (data && data.length > 0) {
+          setCategories(data)
+        } else {
+          const { serviceCategories } = await import('../../data/servicesData')
+          setCategories(serviceCategories)
+        }
       } catch (error) {
         console.error('Failed to fetch services', error)
       } finally {

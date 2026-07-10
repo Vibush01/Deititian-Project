@@ -25,7 +25,12 @@ const LocationsEditor = () => {
         return
       }
       const data = await getCollection(COLLECTIONS.LOCATIONS, 'order')
-      setLocations(data)
+      if (data && data.length > 0) {
+        setLocations(data)
+      } else {
+        const { clinicLocations } = await import('../../data/locationsData')
+        setLocations(clinicLocations)
+      }
     } catch (error) {
       console.error('Failed to fetch locations', error)
     } finally {
