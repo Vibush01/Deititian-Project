@@ -24,11 +24,13 @@
     <meta property="og:description" content="India's trusted Medical Nutrition Clinic. Expert PCOD, thyroid, diabetes & weight loss diet plans. Personalized clinical nutrition from farm to plate." />
     <meta property="og:site_name" content="FitJeeva" />
     <meta property="og:locale" content="en_IN" />
+    <meta property="og:image" content="https://www.fitjeeva.com/favicon.png" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="FitJeeva | Medical Nutrition Clinic – Personalized Diet Plans" />
     <meta name="twitter:description" content="Expert clinical dietitians for PCOD, thyroid, diabetes & weight loss. Personalized diet plans using Indian food. Book today!" />
+    <meta name="twitter:image" content="https://www.fitjeeva.com/favicon.png" />
 
     <!-- Geo Tags (Local SEO) -->
     <meta name="geo.region" content="IN-CH" />
@@ -92,6 +94,65 @@
         "target": "https://www.fitjeeva.com/service/{search_term_string}",
         "query-input": "required name=search_term_string"
       }
+    }
+    </script>
+
+    <!-- Structured Data: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.fitjeeva.com/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Services",
+        "item": "https://www.fitjeeva.com/service"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "About Us",
+        "item": "https://www.fitjeeva.com/about-us"
+      },{
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Contact",
+        "item": "https://www.fitjeeva.com/contact-us"
+      }]
+    }
+    </script>
+
+    <!-- Structured Data: FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "What is clinical nutrition?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Clinical nutrition involves the study of the relationship between food and a healthy body. More specifically, it is the science of nutrients and how they are digested, absorbed, transported, metabolized, stored, and eliminated by the body."
+        }
+      }, {
+        "@type": "Question",
+        "name": "How does FitJeeva work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FitJeeva provides personalized diet plans based on your unique health goals and medical conditions. Our expert clinical dietitians design plans using everyday Indian food to help manage PCOD, thyroid, diabetes, and weight loss effectively."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Do I need to take supplements?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Our approach focuses on natural, home-cooked Indian food. Supplements are only recommended if there is a severe deficiency that cannot be met through diet alone."
+        }
+      }]
     }
     </script>
   </head>
