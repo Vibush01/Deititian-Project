@@ -85,6 +85,7 @@ export function useMediaData() {
   return {
     mediaLogos: data?.mediaLogos || [],
     instagramPosts: data?.instagramPosts || [],
+    heroBanners: data?.heroBanners || [],
     loading,
   }
 }

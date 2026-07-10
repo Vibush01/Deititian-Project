@@ -12,6 +12,7 @@ const HomePageEditor = () => {
   const [mediaData, setMediaData] = useState({
     mediaLogos: [],
     instagramPosts: [],
+    heroBanners: [],
   })
 
   // Expertise Cards
@@ -35,6 +36,7 @@ const HomePageEditor = () => {
           setMediaData({
             mediaLogos: mediaDoc.mediaLogos || [],
             instagramPosts: mediaDoc.instagramPosts || [],
+            heroBanners: mediaDoc.heroBanners || [],
           })
         }
 
@@ -128,6 +130,15 @@ const HomePageEditor = () => {
     })
   }
 
+  // --- Hero Banners Handlers ---
+  const handleRemoveHeroBanner = (index) => {
+    setMediaData(prev => {
+      const newBanners = [...prev.heroBanners]
+      newBanners.splice(index, 1)
+      return { ...prev, heroBanners: newBanners }
+    })
+  }
+
   // --- Instagram Posts Handlers ---
   const handleInstagramChange = (index, value) => {
     setMediaData(prev => {
@@ -164,6 +175,11 @@ const HomePageEditor = () => {
       setMediaData(prev => ({
         ...prev,
         mediaLogos: [...prev.mediaLogos, url]
+      }))
+    } else if (type === 'heroBanner') {
+      setMediaData(prev => ({
+        ...prev,
+        heroBanners: [...prev.heroBanners, url]
       }))
     } else if (type === 'instagram' && index !== undefined) {
       setMediaData(prev => {
@@ -267,6 +283,40 @@ const HomePageEditor = () => {
         </div>
       </div>
 
+      {/* Hero Banners */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <div className="flex items-center justify-between mb-5 pb-3 border-b border-gray-100">
+          <div>
+            <h2 className="text-lg font-bold text-gray-900">Home Hero Banners</h2>
+            <p className="text-xs text-gray-500 mt-1">Upload up to 5 images for the hero carousel</p>
+          </div>
+          <button 
+            onClick={() => setUploadingTarget({ type: 'heroBanner' })} 
+            disabled={mediaData.heroBanners.length >= 5}
+            className="text-sm font-bold text-[#2E7D32] hover:bg-[#E8F5E9] px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <FaPlus className="text-xs" /> Add Banner
+          </button>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {mediaData.heroBanners.map((img, index) => (
+            <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video bg-gray-50">
+              <img src={img} alt={`Banner ${index}`} className="w-full h-full object-cover" />
+              <button 
+                onClick={() => handleRemoveHeroBanner(index)}
+                className="absolute top-2 right-2 bg-white/90 text-red-500 hover:bg-red-50 p-2 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <FaTrash className="text-xs" />
+              </button>
+            </div>
+          ))}
+        </div>
+        {mediaData.heroBanners.length === 0 && (
+          <p className="text-sm text-gray-500 italic text-center py-4 border-t border-gray-100 mt-2">No hero banners added. Static defaults will be used.</p>
+        )}
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Media Logos */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
@@ -360,7 +410,7 @@ const HomePageEditor = () => {
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
           <div className="bg-white rounded-2xl w-full max-w-md p-6 relative">
             <h3 className="text-lg font-bold text-gray-900 mb-4">
-              Upload {uploadingTarget.type === 'expertise' ? 'Card Image' : uploadingTarget.type === 'mediaLogo' ? 'Media Logo' : 'Instagram Image'}
+              Upload {uploadingTarget.type === 'expertise' ? 'Card Image' : uploadingTarget.type === 'mediaLogo' ? 'Media Logo' : uploadingTarget.type === 'heroBanner' ? 'Hero Banner' : 'Instagram Image'}
             </h3>
             <ImageUploader onUpload={handleImageUpload} />
             <button 

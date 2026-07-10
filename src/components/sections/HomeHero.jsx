@@ -3,6 +3,9 @@ import { Navigation, Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/pagination';
+
+import { useMediaData } from '../../hooks/usePageData';
 
 import fitjeevaBanner1 from '../../assets/images/fitjeeva-banner-1.jpg';
 import fitjeevaBanner2 from '../../assets/images/fitjeeva-banner-2.png';
@@ -15,7 +18,7 @@ import fitjeevaBanner5 from '../../assets/images/fitjeeva-banner-5.png';
  * No overlay text, just clean image cycling.
  */
 
-const banners = [
+const staticBanners = [
   { image: fitjeevaBanner1, alt: 'FitJeeva — Your Trusted Nutrition Partner' },
   { image: fitjeevaBanner2, alt: 'FitJeeva Clinical Nutrition' },
   { image: fitjeevaBanner3, alt: 'FitJeeva Online Consultation' },
@@ -24,6 +27,12 @@ const banners = [
 ];
 
 const HomeHero = () => {
+  const { heroBanners } = useMediaData();
+
+  const banners = heroBanners.length > 0
+    ? heroBanners.map(img => ({ image: img, alt: 'FitJeeva Hero Banner' }))
+    : staticBanners;
+
   return (
     <section className="w-full relative bg-white">
       <Swiper
