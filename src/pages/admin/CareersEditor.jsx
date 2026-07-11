@@ -12,10 +12,12 @@ const CareersEditor = () => {
     companyValues: [],
     jobPositions: [],
     teamImages: [],
+    awardImages: [],
   })
 
   // Track which array image is being edited
   const [uploadingTarget, setUploadingTarget] = useState(null)
+  const [uploadingAwardTarget, setUploadingAwardTarget] = useState(null)
 
   useEffect(() => {
     const fetchCareersData = async () => {
@@ -32,14 +34,16 @@ const CareersEditor = () => {
             companyValues: docData.companyValues || [],
             jobPositions: docData.jobPositions || [],
             teamImages: docData.teamImages || [],
+            awardImages: docData.awardImages || [],
           })
         } else {
-          const { careersHero, companyValues, jobPositions, teamImages } = await import('../../data/careersData')
+          const { careersHero, companyValues, jobPositions, teamImages, awardImages } = await import('../../data/careersData')
           setData({
             hero: careersHero,
             companyValues,
             jobPositions,
             teamImages,
+            awardImages,
           })
         }
       } catch (error) {
@@ -148,6 +152,31 @@ const CareersEditor = () => {
     })
   }
 
+  // --- Award Images Handlers ---
+  const handleAwardImageUpload = (url) => {
+    if (uploadingAwardTarget !== null) {
+      setData(prev => {
+        const newImages = [...(prev.awardImages || [])]
+        newImages[uploadingAwardTarget] = url
+        return { ...prev, awardImages: newImages }
+      })
+      setUploadingAwardTarget(null)
+    } else {
+      setData(prev => ({
+        ...prev,
+        awardImages: [...(prev.awardImages || []), url]
+      }))
+    }
+  }
+
+  const handleRemoveAwardImage = (index) => {
+    setData(prev => {
+      const newImages = [...(prev.awardImages || [])]
+      newImages.splice(index, 1)
+      return { ...prev, awardImages: newImages }
+    })
+  }
+
   const inputClasses = 'w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/50 focus:border-[#2E7D32] transition-colors text-sm'
   const labelClasses = 'block text-sm font-semibold text-gray-700 mb-1.5'
 
@@ -230,26 +259,58 @@ const CareersEditor = () => {
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
           <div className="flex items-center justify-between mb-5 pb-3 border-b border-gray-100">
             <h2 className="text-lg font-bold text-gray-900">Hero Images grid</h2>
-            <button onClick={() => setUploadingTarget('team')} className="text-sm font-bold text-[#2E7D32] hover:bg-[#E8F5E9] px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
+            <button onClick={() => setUploadingTarget('new')} className="text-sm font-bold text-[#2E7D32] hover:bg-[#E8F5E9] px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
               <FaPlus className="text-xs" /> Add Image
             </button>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            {data.teamImages.map((img, index) => (
-              <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 h-28">
-                <img src={img} alt={`Team ${index}`} className="w-full h-full object-cover" />
-                <button 
-                  onClick={() => handleRemoveTeamImage(index)}
-                  className="absolute top-2 right-2 bg-white/90 text-red-500 hover:bg-red-50 p-1.5 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <FaTrash className="text-xs" />
-                </button>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            {(data.teamImages || []).map((img, idx) => (
+              <div key={idx} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video">
+                <img src={img} alt={`Team ${idx}`} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black/50 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button onClick={() => setUploadingTarget(idx)} className="text-white hover:text-[#4CAF50]"><FaImage size={18} /></button>
+                  <button onClick={() => handleRemoveTeamImage(idx)} className="text-white hover:text-red-500"><FaTrash size={18} /></button>
+                </div>
               </div>
             ))}
           </div>
-          {data.teamImages.length === 0 && (
+          {(data.teamImages || []).length === 0 && (
             <p className="text-sm text-gray-500 italic text-center py-4 mt-2 border-t border-gray-100">No images added to the grid.</p>
+          )}
+        </div>
+      </div>
+
+      {/* Award Images */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900">Award Images</h2>
+            <p className="text-sm text-gray-500 mt-1">Images for the "Recognized Excellence" section.</p>
+          </div>
+          <button 
+            onClick={() => setUploadingAwardTarget('new')}
+            disabled={(data.awardImages || []).length >= 4}
+            className="bg-[#2E7D32]/10 text-[#2E7D32] hover:bg-[#2E7D32]/20 px-4 py-2 rounded-lg font-bold text-sm transition-colors flex items-center gap-2 disabled:opacity-50"
+          >
+            <FaPlus /> Add Image
+          </button>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+          {(data.awardImages || []).map((img, idx) => (
+            <div key={idx} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video">
+              <img src={img} alt={`Award ${idx}`} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black/50 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button onClick={() => setUploadingAwardTarget(idx)} className="text-white hover:text-[#4CAF50]"><FaImage size={18} /></button>
+                <button onClick={() => handleRemoveAwardImage(idx)} className="text-white hover:text-red-500"><FaTrash size={18} /></button>
+              </div>
+            </div>
+          ))}
+          {(!data.awardImages || data.awardImages.length === 0) && (
+            <div className="col-span-full py-8 text-center text-gray-400 text-sm italic">
+              No award images added.
+            </div>
           )}
         </div>
       </div>
@@ -286,13 +347,28 @@ const CareersEditor = () => {
       </div>
 
       {/* Image Upload Modal */}
-      {uploadingTarget && (
+      {uploadingTarget !== null && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
           <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Team Grid Image</h3>
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Team Image</h3>
             <ImageUploader onUpload={handleAddTeamImage} />
             <button 
               onClick={() => setUploadingTarget(null)}
+              className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+
+      {uploadingAwardTarget !== null && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Award Image</h3>
+            <ImageUploader onUpload={handleAwardImageUpload} />
+            <button 
+              onClick={() => setUploadingAwardTarget(null)}
               className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm"
             >
               Cancel

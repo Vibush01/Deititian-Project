@@ -3,6 +3,19 @@ import { FaSave, FaImage, FaSpinner, FaPlus, FaTrash, FaInstagram, FaNewspaper, 
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 
+import fitjeevaBanner1 from '../../assets/images/fitjeeva-banner-1.webp'
+import fitjeevaBanner2 from '../../assets/images/fitjeeva-banner-2.webp'
+import fitjeevaBanner3 from '../../assets/images/fitjeeva-banner-3.webp'
+import fitjeevaBanner4 from '../../assets/images/fitjeeva-banner-4.webp'
+import fitjeevaBanner5 from '../../assets/images/fitjeeva-banner-5.webp'
+
+import ip1 from '../../assets/images/IP1.webp'
+import ip2 from '../../assets/images/IP2.webp'
+import ip3 from '../../assets/images/IP3.webp'
+import ip4 from '../../assets/images/IP4.webp'
+import ip5 from '../../assets/images/IP5.webp'
+import ip6 from '../../assets/images/IP6.webp'
+
 const MediaManager = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -35,8 +48,21 @@ const MediaManager = () => {
             { name: "Health Magazine" },
             { name: "Wellness Daily" }
           ],
-          instagramPosts: [], // Handled dynamically in components if empty
-          heroBanners: [],
+          instagramPosts: [
+            { image: ip1, url: '' },
+            { image: ip2, url: '' },
+            { image: ip3, url: '' },
+            { image: ip4, url: '' },
+            { image: ip5, url: '' },
+            { image: ip6, url: '' },
+          ],
+          heroBanners: [
+            fitjeevaBanner1,
+            fitjeevaBanner2,
+            fitjeevaBanner3,
+            fitjeevaBanner4,
+            fitjeevaBanner5,
+          ],
         })
       }
     } catch (error) {

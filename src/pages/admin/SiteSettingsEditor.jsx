@@ -3,6 +3,7 @@ import { FaSave, FaCog, FaSpinner, FaImage, FaTrash } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 import { statsData as defaultStatsData } from '../../data/siteData'
+import logoImg from '../../assets/images/logo.webp'
 
 const SiteSettingsEditor = () => {
   const [loading, setLoading] = useState(true)
@@ -11,7 +12,7 @@ const SiteSettingsEditor = () => {
   const [uploadingLogo, setUploadingLogo] = useState(false)
   const [settings, setSettings] = useState({
     siteInfo: {
-      name: 'FitJeeva', email: 'info@fitjeeva.com', phone: '+91 70912 89342', whatsapp: '917091289342', address: 'Chandigarh, India', supportHours: 'Mon-Sat, 9AM-6PM', logoUrl: '',
+      name: 'FitJeeva', email: 'info@fitjeeva.com', phone: '+91 70912 89342', whatsapp: '917091289342', address: 'Chandigarh, India', logoUrl: logoImg,
     },
     socialLinks: {
       facebook: 'https://www.facebook.com/fitjeeva', instagram: 'https://www.instagram.com/', linkedin: '', youtube: 'https://www.youtube.com/@fitjeeva',
@@ -56,7 +57,11 @@ const SiteSettingsEditor = () => {
           setSettings(prev => ({
             ...prev,
             ...data,
-            siteInfo: { ...prev.siteInfo, ...data.siteInfo },
+            siteInfo: { 
+              ...prev.siteInfo, 
+              ...data.siteInfo,
+              logoUrl: data.siteInfo?.logoUrl || logoImg
+            },
             socialLinks: { ...prev.socialLinks, ...data.socialLinks },
             statsData: Array.isArray(data.statsData) ? data.statsData : defaultStatsData,
             spotlightStats: data.spotlightStats || prev.spotlightStats,
@@ -249,10 +254,6 @@ const SiteSettingsEditor = () => {
             <div>
               <label className={labelClasses}>WhatsApp Number</label>
               <input type="text" name="whatsapp" value={settings.siteInfo.whatsapp} onChange={handleInfoChange} className={inputClasses} placeholder="911234567890" />
-            </div>
-            <div>
-              <label className={labelClasses}>Support Hours</label>
-              <input type="text" name="supportHours" value={settings.siteInfo.supportHours} onChange={handleInfoChange} className={inputClasses} placeholder="Mon-Sat, 9AM-6PM" />
             </div>
             <div className="md:col-span-2">
               <label className={labelClasses}>Primary Address</label>

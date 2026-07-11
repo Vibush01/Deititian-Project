@@ -47,23 +47,27 @@ const CareersHero = () => {
 )
 }
 
-const AwardsSection = () => (
-  <section className="py-12 md:py-16 bg-white border-y border-gray-100">
-    <div className="container-custom">
-      <div className="text-center mb-10">
-        <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Recognized Excellence</h2>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
-        <div className="rounded-3xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-all">
-          <img src={fitjeevaClinical} alt="Award recognition" className="w-full h-64 object-cover" />
+const AwardsSection = () => {
+  const { awardImages } = useCareersData()
+  if (!awardImages || awardImages.length === 0) return null
+
+  return (
+    <section className="py-12 md:py-16 bg-white border-y border-gray-100">
+      <div className="container-custom">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900">Recognized Excellence</h2>
         </div>
-        <div className="rounded-3xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-all">
-          <img src={fitjeevaBanner} alt="Certificate of honour" className="w-full h-64 object-cover" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-4xl mx-auto">
+          {awardImages.map((img, idx) => (
+            <div key={idx} className="rounded-3xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl transition-all">
+              <img src={img} alt={`Award recognition ${idx + 1}`} className="w-full h-64 object-cover" />
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
-)
+    </section>
+  )
+}
 
 const CompanyValuesSection = () => {
   const { companyValues } = useCareersData()
