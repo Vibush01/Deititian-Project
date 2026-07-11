@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaSave, FaImage, FaSpinner, FaPlus, FaTrash, FaInstagram, FaNewspaper } from 'react-icons/fa'
+import { FaSave, FaImage, FaSpinner, FaPlus, FaTrash, FaInstagram, FaNewspaper, FaImages } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 
@@ -7,7 +7,7 @@ const MediaManager = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
-  const [media, setMedia] = useState({ mediaLogos: [], instagramPosts: [] })
+  const [media, setMedia] = useState({ mediaLogos: [], instagramPosts: [], heroBanners: [] })
   
   useEffect(() => {
     fetchMedia()
@@ -24,7 +24,8 @@ const MediaManager = () => {
         setMedia({
           // Ensure strings are mapped to objects if they were saved as strings
           mediaLogos: (data.mediaLogos || []).map(logo => typeof logo === 'string' ? { name: logo } : logo),
-          instagramPosts: data.instagramPosts || []
+          instagramPosts: data.instagramPosts || [],
+          heroBanners: data.heroBanners || [],
         })
       } else {
         setMedia({
@@ -34,7 +35,8 @@ const MediaManager = () => {
             { name: "Health Magazine" },
             { name: "Wellness Daily" }
           ],
-          instagramPosts: [] // Handled dynamically in components if empty
+          instagramPosts: [], // Handled dynamically in components if empty
+          heroBanners: [],
         })
       }
     } catch (error) {
@@ -81,6 +83,12 @@ const MediaManager = () => {
   }
   const removePost = (index) => {
     setMedia(prev => ({ ...prev, instagramPosts: prev.instagramPosts.filter((_, i) => i !== index) }))
+  }
+
+  // --- Handlers for Hero Banners ---
+  const [uploadingBanner, setUploadingBanner] = useState(false)
+  const removeBanner = (index) => {
+    setMedia(prev => ({ ...prev, heroBanners: prev.heroBanners.filter((_, i) => i !== index) }))
   }
 
   const inputClasses = 'w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/50 focus:border-[#2E7D32] transition-colors text-sm'
@@ -157,6 +165,64 @@ const MediaManager = () => {
             <p className="text-sm text-gray-500 italic text-center py-4">No publications added yet.</p>
           )}
         </div>
+      </div>
+
+      {/* Hero Banners */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <FaImages className="text-xl" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-gray-900">Home Hero Banners</h2>
+              <p className="text-xs text-gray-500">Upload up to 5 images for the hero carousel on the home page.</p>
+            </div>
+          </div>
+          <button 
+            onClick={() => setUploadingBanner(true)} 
+            disabled={media.heroBanners.length >= 5}
+            className="text-sm font-bold bg-emerald-50 text-emerald-600 hover:bg-emerald-100 px-4 py-2 rounded-lg transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <FaPlus className="text-xs" /> Add Banner
+          </button>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {media.heroBanners.map((img, index) => (
+            <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video bg-gray-50">
+              <img src={img} alt={`Banner ${index + 1}`} className="w-full h-full object-cover" />
+              <button 
+                onClick={() => removeBanner(index)}
+                className="absolute top-2 right-2 bg-white/90 text-red-500 hover:bg-red-50 p-2 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <FaTrash className="text-xs" />
+              </button>
+            </div>
+          ))}
+        </div>
+        {media.heroBanners.length === 0 && (
+          <p className="text-sm text-gray-500 italic text-center py-4 border-t border-gray-100 mt-2">No hero banners added. Static default images will be used.</p>
+        )}
+
+        {/* Upload Banner Modal */}
+        {uploadingBanner && (
+          <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
+              <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Hero Banner</h3>
+              <ImageUploader onUpload={(url) => {
+                setMedia(prev => ({ ...prev, heroBanners: [...prev.heroBanners, url] }))
+                setUploadingBanner(false)
+              }} />
+              <button 
+                onClick={() => setUploadingBanner(false)}
+                className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Instagram Posts */}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaSave, FaHome, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage, FaInstagram } from 'react-icons/fa'
+import { FaSave, FaHome, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage } from 'react-icons/fa'
 import { getDocument, setDocument, getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 import { Link } from 'react-router-dom'
@@ -318,92 +318,22 @@ const HomePageEditor = () => {
       </div>
 
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Media Logos */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
-          <div className="flex items-center justify-between mb-5 pb-3 border-b border-gray-100">
-            <div>
-              <h2 className="text-lg font-bold text-gray-900">Media Appearances</h2>
-              <p className="text-xs text-gray-500 mt-1">Logos of publications</p>
-            </div>
-            <button onClick={() => setUploadingTarget({ type: 'mediaLogo' })} className="text-sm font-bold text-[#2E7D32] hover:bg-[#E8F5E9] px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
-              <FaPlus className="text-xs" /> Add Logo
-            </button>
-          </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {mediaData.mediaLogos.map((img, index) => (
-              <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 h-20 bg-gray-50 flex items-center justify-center p-2">
-                <img src={img} alt={`Media ${index}`} className="max-w-full max-h-full object-contain" />
-                <button 
-                  onClick={() => handleRemoveMediaLogo(index)}
-                  className="absolute top-1 right-1 bg-white/90 text-red-500 hover:bg-red-50 p-1.5 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <FaTrash className="text-xs" />
-                </button>
-              </div>
-            ))}
-          </div>
-          {mediaData.mediaLogos.length === 0 && (
-            <p className="text-sm text-gray-500 italic text-center py-4 border-t border-gray-100 mt-2">No media logos added.</p>
-          )}
+      {/* Media Redirection Card */}
+      <div className="bg-gradient-to-r from-[#E8F5E9] to-[#F1F8E9] rounded-2xl border border-[#C8E6C9] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+        <div>
+          <h2 className="text-xl font-bold text-[#2E7D32] mb-2 flex items-center gap-2">
+            <FaImage /> Need to edit Hero Banners, Logos, or Instagram Feed?
+          </h2>
+          <p className="text-gray-700 text-sm">
+            All media content for the Home Page (including Hero sliders, "Featured In" logos, and Instagram posts) is managed centrally in the Media Manager.
+          </p>
         </div>
-
-        {/* Instagram Posts */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
-          <div className="flex items-center justify-between mb-5 pb-3 border-b border-gray-100">
-            <div>
-              <h2 className="text-lg font-bold text-gray-900">Instagram Posts</h2>
-              <p className="text-xs text-gray-500 mt-1">Featured IG content</p>
-            </div>
-            <button onClick={handleAddInstagramPost} className="text-sm font-bold text-[#2E7D32] hover:bg-[#E8F5E9] px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1">
-              <FaPlus className="text-xs" /> Add Post
-            </button>
-          </div>
-          
-          <div className="space-y-4">
-            {mediaData.instagramPosts.map((post, index) => (
-              <div key={index} className="flex gap-3 bg-gray-50 p-3 rounded-xl border border-gray-100">
-                <div className="w-16 h-16 rounded-lg border border-gray-200 bg-white relative overflow-hidden shrink-0">
-                  {post.image ? (
-                    <img src={post.image} alt="IG Post" className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-gray-300">
-                      <FaInstagram className="text-2xl" />
-                    </div>
-                  )}
-                  <button 
-                    onClick={() => setUploadingTarget({ type: 'instagram', index })}
-                    className="absolute inset-0 bg-black/40 text-white flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity text-[10px] font-bold"
-                  >
-                    Upload
-                  </button>
-                </div>
-                
-                <div className="flex-1">
-                  <input 
-                    type="url" 
-                    value={post.link} 
-                    onChange={(e) => handleInstagramChange(index, e.target.value)} 
-                    className={`${inputClasses} py-1.5 text-xs h-8 mb-2`} 
-                    placeholder="Instagram URL" 
-                  />
-                  <div className="flex justify-end">
-                    <button 
-                      onClick={() => handleRemoveInstagramPost(index)}
-                      className="text-xs text-red-500 font-bold hover:underline"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-            {mediaData.instagramPosts.length === 0 && (
-              <p className="text-sm text-gray-500 italic text-center py-4">No Instagram posts added.</p>
-            )}
-          </div>
-        </div>
+        <Link 
+          to="/admin/media" 
+          className="shrink-0 bg-white text-[#2E7D32] hover:bg-[#2E7D32] hover:text-white border border-[#2E7D32] px-6 py-3 rounded-xl font-bold transition-colors flex items-center gap-2 text-sm"
+        >
+          Go to Media Manager →
+        </Link>
       </div>
 
       {/* Image Upload Modal */}
