@@ -95,7 +95,7 @@ const MediaManager = () => {
 
   return (
     <div className="max-w-5xl space-y-6 pb-12">
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
         <div>
           <h1 className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
             <FaImage className="text-[#2E7D32]" />

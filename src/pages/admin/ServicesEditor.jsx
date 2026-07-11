@@ -200,7 +200,7 @@ const ServicesEditor = () => {
 
   return (
     <div className="max-w-5xl space-y-6 pb-12">
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
         <div>
           <h1 className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
             <FaConciergeBell className="text-[#2E7D32]" />
@@ -332,8 +332,8 @@ const ServicesEditor = () => {
                   {(category.services || []).map((sub, subIndex) => (
                     <div key={subIndex} className="bg-gray-50 border border-gray-100 rounded-lg p-3 relative pr-10">
                       <div className="flex gap-2 mb-1">
-                        <input type="text" value={sub.title} onChange={e => handleSubServiceChange(catIndex, subIndex, 'title', e.target.value)} className="flex-1 bg-transparent font-bold text-sm focus:outline-none focus:text-[#2E7D32]" placeholder="Sub-service Title" />
-                        <input type="text" value={sub.id} onChange={e => handleSubServiceChange(catIndex, subIndex, 'id', e.target.value)} className="w-24 bg-transparent text-xs text-gray-500 border-b border-gray-300 focus:outline-none focus:border-[#2E7D32]" placeholder="slug-id" />
+                        <input type="text" value={sub.title} onChange={e => handleSubServiceChange(catIndex, subIndex, 'title', e.target.value)} className="flex-1 min-w-0 bg-transparent font-bold text-sm focus:outline-none focus:text-[#2E7D32]" placeholder="Sub-service Title" />
+                        <input type="text" value={sub.id} onChange={e => handleSubServiceChange(catIndex, subIndex, 'id', e.target.value)} className="w-24 shrink-0 bg-transparent text-xs text-gray-500 border-b border-gray-300 focus:outline-none focus:border-[#2E7D32]" placeholder="slug-id" />
                       </div>
                       <textarea value={sub.description} onChange={e => handleSubServiceChange(catIndex, subIndex, 'description', e.target.value)} rows={2} className="w-full bg-transparent text-sm text-gray-600 focus:outline-none resize-none" placeholder="Short Description" />
                       
@@ -368,7 +368,7 @@ const ServicesEditor = () => {
       {/* Image Upload Modal */}
       {uploadingTarget !== null && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Category Hero Image</h3>
             <ImageUploader onUpload={handleImageUpload} />
             <button 

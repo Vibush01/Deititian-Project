@@ -274,7 +274,7 @@ const SiteSettingsEditor = () => {
                   <label className={labelClasses}>Label</label>
                   <input type="text" value={stat.label} onChange={(e) => handleStatArrayChange(index, 'label', e.target.value)} className={inputClasses} placeholder="e.g. Happy Clients" />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <div>
                     <label className={labelClasses}>Number</label>
                     <input type="number" step="any" value={stat.number} onChange={(e) => handleStatArrayChange(index, 'number', parseFloat(e.target.value) || 0)} className={inputClasses} placeholder="e.g. 50000" />
@@ -481,7 +481,7 @@ const SiteSettingsEditor = () => {
       {/* Image Upload Modal */}
       {uploadingLogo && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Site Logo</h3>
             <ImageUploader 
               onUpload={(url) => {

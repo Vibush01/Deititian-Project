@@ -161,7 +161,7 @@ const CareersEditor = () => {
 
   return (
     <div className="max-w-5xl space-y-6">
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
         <div>
           <h1 className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
             <FaBriefcase className="text-[#2E7D32]" />
@@ -235,7 +235,7 @@ const CareersEditor = () => {
             </button>
           </div>
           
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             {data.teamImages.map((img, index) => (
               <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 h-28">
                 <img src={img} alt={`Team ${index}`} className="w-full h-full object-cover" />
@@ -288,7 +288,7 @@ const CareersEditor = () => {
       {/* Image Upload Modal */}
       {uploadingTarget && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Team Grid Image</h3>
             <ImageUploader onUpload={handleAddTeamImage} />
             <button 

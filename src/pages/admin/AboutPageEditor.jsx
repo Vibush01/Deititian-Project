@@ -147,7 +147,7 @@ const AboutPageEditor = () => {
 
   return (
     <div className="max-w-5xl space-y-6">
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-2">
         <div>
           <h1 className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
             <FaFileAlt className="text-[#2E7D32]" />
@@ -279,7 +279,7 @@ const AboutPageEditor = () => {
       {/* Image Upload Modal */}
       {editingImageIndex !== null && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
-          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Feature Image</h3>
             <ImageUploader onUpload={handleServiceImageUpload} />
             <button 
