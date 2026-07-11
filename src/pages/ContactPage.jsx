@@ -8,20 +8,25 @@ import ClinicLocations from '../components/sections/ClinicLocations'
 import { submitContactInquiry } from '../services/inquiryService'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 import { useServiceCategories } from '../hooks/useServices'
+import { useContactPageData } from '../hooks/usePageData'
 
-const ContactHero = () => (
-  <section className="py-12 md:py-20 bg-[#2E7D32] text-white relative overflow-hidden">
-    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
-    <div className="container-custom relative z-10 text-center max-w-4xl mx-auto">
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
-        Let's Start Your Health Journey
-      </h1>
-      <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
-        We're here to help you start your health journey with the right guidance. Contact the FitJeeva team for appointments or support.
-      </p>
-    </div>
-  </section>
-)
+const ContactHero = () => {
+  const { heroTitle, heroSubtitle } = useContactPageData()
+  
+  return (
+    <section className="py-12 md:py-20 bg-[#2E7D32] text-white relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/3"></div>
+      <div className="container-custom relative z-10 text-center max-w-4xl mx-auto">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
+          {heroTitle}
+        </h1>
+        <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
+          {heroSubtitle}
+        </p>
+      </div>
+    </section>
+  )
+}
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({

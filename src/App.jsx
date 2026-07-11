@@ -27,6 +27,8 @@ import DashboardPage from './pages/admin/DashboardPage'
 import SiteSettingsEditor from './pages/admin/SiteSettingsEditor'
 
 import AboutPageEditor from './pages/admin/AboutPageEditor'
+import ContactPageEditor from './pages/admin/ContactPageEditor'
+import PrivacyPolicyEditor from './pages/admin/PrivacyPolicyEditor'
 import CareersEditor from './pages/admin/CareersEditor'
 import HomePageEditor from './pages/admin/HomePageEditor'
 import ServicesEditor from './pages/admin/ServicesEditor'
@@ -64,6 +66,8 @@ function App() {
                   {/* Pages Content Editors */}
                   <Route path="/pages/home" element={<HomePageEditor />} />
                   <Route path="/pages/about" element={<AboutPageEditor />} />
+                  <Route path="/pages/contact" element={<ContactPageEditor />} />
+                  <Route path="/pages/privacy" element={<PrivacyPolicyEditor />} />
                   
                   {/* Services Editors */}
                   <Route path="/services" element={<ServicesEditor />} />

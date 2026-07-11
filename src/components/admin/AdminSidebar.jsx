@@ -1,14 +1,23 @@
-import { Link, NavLink } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import {
   FaTachometerAlt, FaCog, FaCompass, FaFileAlt, FaConciergeBell,
-  FaUsers, FaUserMd, FaUtensils, FaTrophy, FaEnvelope, FaMapMarkerAlt, FaSignOutAlt, FaChevronLeft, FaBriefcase, FaImage
+  FaUsers, FaUserMd, FaUtensils, FaTrophy, FaEnvelope, FaMapMarkerAlt, FaSignOutAlt, FaChevronLeft, FaBriefcase, FaImage, FaChevronDown, FaChevronRight
 } from 'react-icons/fa'
 
 const sidebarLinks = [
   { label: 'Dashboard', path: '/admin', icon: <FaTachometerAlt />, end: true },
   { label: 'Site Settings', path: '/admin/site-settings', icon: <FaCog /> },
-  { label: 'Home Page', path: '/admin/pages/home', icon: <FaFileAlt /> },
-  { label: 'About Page', path: '/admin/pages/about', icon: <FaFileAlt /> },
+  { 
+    label: 'Pages', 
+    icon: <FaFileAlt />, 
+    subLinks: [
+      { label: 'Home Page', path: '/admin/pages/home' },
+      { label: 'About Page', path: '/admin/pages/about' },
+      { label: 'Contact Page', path: '/admin/pages/contact' },
+      { label: 'Privacy Policy', path: '/admin/pages/privacy' },
+    ]
+  },
   { label: 'Services', path: '/admin/services', icon: <FaConciergeBell /> },
   { label: 'Careers', path: '/admin/careers', icon: <FaBriefcase /> },
   { label: 'Team & Experts', path: '/admin/team', icon: <FaUsers /> },
@@ -20,6 +29,22 @@ const sidebarLinks = [
 ]
 
 const AdminSidebar = ({ sidebarOpen, setSidebarOpen, collapsed, setCollapsed, onLogout }) => {
+  const location = useLocation()
+  
+  // Track open state of dropdowns (by label)
+  const [openGroups, setOpenGroups] = useState({
+    'Pages': location.pathname.includes('/admin/pages')
+  })
+
+  const toggleGroup = (label) => {
+    if (collapsed) {
+      setCollapsed(false)
+      setOpenGroups({ [label]: true })
+    } else {
+      setOpenGroups(prev => ({ ...prev, [label]: !prev[label] }))
+    }
+  }
+
   return (
     <>
       {/* Mobile Overlay */}
@@ -68,28 +93,84 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen, collapsed, setCollapsed, on
         {/* Navigation Links */}
         <div className="flex-1 overflow-y-auto py-4 custom-scrollbar">
           <nav className="space-y-1 px-3">
-            {sidebarLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                end={link.end}
-                onClick={() => setSidebarOpen(false)}
-                className={({ isActive }) => `
-                  flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors
-                  ${isActive 
-                    ? 'bg-[#2E7D32] text-white font-medium shadow-md shadow-[#2E7D32]/20' 
-                    : 'text-gray-400 hover:bg-white/10 hover:text-white'
-                  }
-                  ${collapsed ? 'justify-center' : ''}
-                `}
-                title={collapsed ? link.label : ''}
-              >
-                <div className={`${collapsed ? 'text-xl' : 'text-lg'}`}>
-                  {link.icon}
-                </div>
-                {!collapsed && <span>{link.label}</span>}
-              </NavLink>
-            ))}
+            {sidebarLinks.map((link) => {
+              if (link.subLinks) {
+                const isActiveGroup = link.subLinks.some(sub => location.pathname === sub.path)
+                const isOpen = openGroups[link.label]
+                return (
+                  <div key={link.label} className="space-y-1">
+                    <button
+                      onClick={() => toggleGroup(link.label)}
+                      className={`
+                        w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors
+                        ${isActiveGroup && !isOpen
+                          ? 'bg-white/5 text-white font-medium' 
+                          : 'text-gray-400 hover:bg-white/10 hover:text-white'
+                        }
+                        ${collapsed ? 'justify-center' : ''}
+                      `}
+                      title={collapsed ? link.label : ''}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`${collapsed ? 'text-xl' : 'text-lg'} ${isActiveGroup ? 'text-[#4CAF50]' : ''}`}>
+                          {link.icon}
+                        </div>
+                        {!collapsed && <span>{link.label}</span>}
+                      </div>
+                      {!collapsed && (
+                        <div className="text-xs text-gray-500">
+                          {isOpen ? <FaChevronDown /> : <FaChevronRight />}
+                        </div>
+                      )}
+                    </button>
+                    
+                    {isOpen && !collapsed && (
+                      <div className="pl-11 pr-2 py-1 space-y-1">
+                        {link.subLinks.map(sub => (
+                          <NavLink
+                            key={sub.path}
+                            to={sub.path}
+                            onClick={() => setSidebarOpen(false)}
+                            className={({ isActive }) => `
+                              block px-3 py-2 rounded-md text-sm transition-colors
+                              ${isActive 
+                                ? 'bg-[#2E7D32] text-white font-medium shadow-sm shadow-[#2E7D32]/20' 
+                                : 'text-gray-400 hover:bg-white/10 hover:text-white'
+                              }
+                            `}
+                          >
+                            {sub.label}
+                          </NavLink>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )
+              }
+              
+              return (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  end={link.end}
+                  onClick={() => setSidebarOpen(false)}
+                  className={({ isActive }) => `
+                    flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors
+                    ${isActive 
+                      ? 'bg-[#2E7D32] text-white font-medium shadow-md shadow-[#2E7D32]/20' 
+                      : 'text-gray-400 hover:bg-white/10 hover:text-white'
+                    }
+                    ${collapsed ? 'justify-center' : ''}
+                  `}
+                  title={collapsed ? link.label : ''}
+                >
+                  <div className={`${collapsed ? 'text-xl' : 'text-lg'}`}>
+                    {link.icon}
+                  </div>
+                  {!collapsed && <span>{link.label}</span>}
+                </NavLink>
+              )
+            })}
           </nav>
         </div>
 

@@ -11,7 +11,7 @@ import ContactCTA from "../components/sections/ContactCTA";
 import ClinicLocations from "../components/sections/ClinicLocations";
 import ConsultationForm from "../components/sections/ConsultationForm";
 import { useHomeExpertiseCards } from "../hooks/useServices";
-import { useMediaData } from "../hooks/usePageData";
+import { useMediaData, useHomePageData } from "../hooks/usePageData";
 import useSiteSettings from "../hooks/useSiteSettings";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 

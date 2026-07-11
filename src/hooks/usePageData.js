@@ -111,3 +111,28 @@ export function useHomePageData() {
     loading,
   }
 }
+
+/**
+ * Hook to get contact page specific data from Firestore.
+ */
+export function useContactPageData() {
+  const { data, loading } = useFirestoreDoc(COLLECTIONS.PAGES, 'contact')
+  return {
+    heroTitle: data?.heroTitle || 'Get in Touch',
+    heroSubtitle: data?.heroSubtitle || "Whether you're ready to start your journey or just have a few questions, we're here to help.",
+    loading,
+  }
+}
+
+/**
+ * Hook to get privacy policy specific data from Firestore.
+ */
+export function usePrivacyPolicyData() {
+  const { data, loading } = useFirestoreDoc(COLLECTIONS.PAGES, 'privacy')
+  return {
+    heroTitle: data?.heroTitle || 'Privacy Policy',
+    heroSubtitle: data?.heroSubtitle || "At FitJeeva, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or use our services.",
+    sections: data?.sections || null,
+    loading,
+  }
+}
