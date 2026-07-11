@@ -86,8 +86,8 @@ const Navbar = () => {
 
               {/* Mega Menu Dropdown */}
               {link.megaMenu && openDropdown === link.label && (
-                <div className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[1000px] bg-white shadow-2xl border border-gray-100 rounded-xl p-8 z-50">
-                  <div className="grid grid-cols-3 gap-8">
+                <div className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[90vw] max-w-[1000px] lg:w-[850px] xl:w-[1000px] bg-white shadow-2xl border border-gray-100 rounded-xl p-6 xl:p-8 z-50">
+                  <div className="grid grid-cols-2 xl:grid-cols-3 gap-6 xl:gap-8">
                     
                     {/* Column 1: Disease Management */}
                     <div className="border-r border-gray-100 pr-6">
@@ -144,7 +144,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Column 3: Success Stories */}
-                    <div>
+                    <div className="col-span-2 xl:col-span-1 border-t xl:border-t-0 pt-6 xl:pt-0 border-gray-100">
                       <h3 className="font-bold text-lg text-gray-700 border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
                         <FaStethoscope className="text-[#2E7D32]" /> {link.megaMenu.column3.title}
                       </h3>
@@ -192,7 +192,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isMobileOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-lg border-t border-gray-100 p-4 max-h-[calc(100vh-64px)] overflow-y-auto">
+        <div className="lg:hidden fixed top-[64px] md:top-[80px] left-0 w-full h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] bg-white shadow-lg border-t border-gray-100 p-4 overflow-y-auto z-40 pb-24">
           <div className="flex flex-col space-y-2">
             {navLinks.map((link) => (
               <div key={link.label} className="border-b border-gray-100 last:border-0 pb-2">
@@ -206,10 +206,10 @@ const Navbar = () => {
                   </Link>
                   {link.megaMenu && (
                     <button 
-                      onClick={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
-                      className="p-3 text-gray-500 hover:text-[#2E7D32]"
+                      onClick={(e) => { e.preventDefault(); setOpenDropdown(openDropdown === link.label ? null : link.label) }}
+                      className="p-4 -mr-2 text-gray-500 hover:text-[#2E7D32] flex items-center justify-center"
                     >
-                      <FaChevronDown className={`transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
+                      <FaChevronDown className={`text-lg transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
                     </button>
                   )}
                 </div>
