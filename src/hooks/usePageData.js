@@ -8,6 +8,7 @@ import { careersHero, companyValues, jobPositions, teamImages } from '../data/ca
 import { clinicLocations } from '../data/locationsData'
 import { defaultExperts, defaultTeamMembers } from '../data/peopleData'
 import { defaultRecipes } from '../data/recipesData'
+import { defaultSections as defaultPrivacySections } from '../pages/admin/PrivacyPolicyEditor'
 
 /**
  * Hook to get About page data from Firestore with static fallback.
@@ -132,7 +133,7 @@ export function usePrivacyPolicyData() {
   return {
     heroTitle: data?.heroTitle || 'Privacy Policy',
     heroSubtitle: data?.heroSubtitle || "At FitJeeva, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or use our services.",
-    sections: data?.sections || null,
+    sections: data?.sections || defaultPrivacySections,
     loading,
   }
 }

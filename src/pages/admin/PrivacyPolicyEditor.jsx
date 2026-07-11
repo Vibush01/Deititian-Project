@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaShieldAlt, FaSpinner, FaPlus, FaTrash } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 
-const defaultSections = [
+export const defaultSections = [
   {
     title: 'Information We Collect',
     content: 'We may collect the following information when you interact with our website or services:\n- Name, phone number, email address\n- Health-related information shared voluntarily through forms\n- Appointment and consultation details\n- Website usage data (cookies, IP address, browser type)'

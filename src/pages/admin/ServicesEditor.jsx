@@ -17,6 +17,8 @@ const ServicesEditor = () => {
   const [categories, setCategories] = useState([])
   const [itemsToDelete, setItemsToDelete] = useState([])
   const [uploadingTarget, setUploadingTarget] = useState(null) // { index: number }
+  const [uploadingFeatureTarget, setUploadingFeatureTarget] = useState(null) // { catIndex, featIndex }
+  const [uploadingSubServiceTarget, setUploadingSubServiceTarget] = useState(null) // { catIndex, subIndex }
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -28,10 +30,10 @@ const ServicesEditor = () => {
 
         const data = await getCollection(COLLECTIONS.SERVICES, 'order')
         if (data && data.length > 0) {
-          setCategories(data)
+          setCategories(data.map(c => ({ ...c, _docId: c.id })))
         } else {
           const { serviceCategories } = await import('../../data/servicesData')
-          setCategories(serviceCategories)
+          setCategories(serviceCategories.map(c => ({ ...c, _docId: c.id })))
         }
       } catch (error) {
         console.error('Failed to fetch services', error)
@@ -80,13 +82,6 @@ const ServicesEditor = () => {
     }
   }
 
-  // Format incoming data to keep track of firestore document ID vs slug ID
-  useEffect(() => {
-    if (categories.length > 0 && !categories[0]._docId) {
-      setCategories(categories.map(c => ({ ...c, _docId: c.id })))
-    }
-  }, [categories])
-
   const handleCategoryChange = (index, field, value) => {
     setCategories(prev => {
       const newCat = [...prev]
@@ -133,7 +128,7 @@ const ServicesEditor = () => {
     setCategories(prev => {
       const newCat = [...prev]
       if (!newCat[catIndex].features) newCat[catIndex].features = []
-      newCat[catIndex].features.push({ title: 'New Feature', description: '' })
+      newCat[catIndex].features.push({ title: 'New Feature', description: '', image: '' })
       return newCat
     })
   }
@@ -159,7 +154,7 @@ const ServicesEditor = () => {
     setCategories(prev => {
       const newCat = [...prev]
       if (!newCat[catIndex].services) newCat[catIndex].services = []
-      newCat[catIndex].services.push({ id: 'new-sub', title: 'New Sub-Service', description: '' })
+      newCat[catIndex].services.push({ id: 'new-sub', title: 'New Sub-Service', description: '', image: '' })
       return newCat
     })
   }
@@ -184,6 +179,20 @@ const ServicesEditor = () => {
     if (uploadingTarget !== null) {
       handleCategoryChange(uploadingTarget.index, 'image', url)
       setUploadingTarget(null)
+    }
+  }
+
+  const handleFeatureImageUpload = (url) => {
+    if (uploadingFeatureTarget !== null) {
+      handleFeatureChange(uploadingFeatureTarget.catIndex, uploadingFeatureTarget.featIndex, 'image', url)
+      setUploadingFeatureTarget(null)
+    }
+  }
+
+  const handleSubServiceImageUpload = (url) => {
+    if (uploadingSubServiceTarget !== null) {
+      handleSubServiceChange(uploadingSubServiceTarget.catIndex, uploadingSubServiceTarget.subIndex, 'image', url)
+      setUploadingSubServiceTarget(null)
     }
   }
 
@@ -313,8 +322,32 @@ const ServicesEditor = () => {
                 <div className="space-y-3">
                   {(category.features || []).map((feature, featIndex) => (
                     <div key={featIndex} className="bg-gray-50 border border-gray-100 rounded-lg p-3 relative pr-10">
-                      <input type="text" value={feature.title} onChange={e => handleFeatureChange(catIndex, featIndex, 'title', e.target.value)} className="w-full bg-transparent font-bold text-sm mb-1 focus:outline-none focus:text-[#2E7D32]" placeholder="Feature Title" />
-                      <textarea value={feature.description} onChange={e => handleFeatureChange(catIndex, featIndex, 'description', e.target.value)} rows={2} className="w-full bg-transparent text-sm text-gray-600 focus:outline-none resize-none" placeholder="Feature Description" />
+                      <div className="flex gap-3">
+                        <div className="w-16 h-16 shrink-0 rounded-md border border-gray-200 overflow-hidden relative bg-white flex items-center justify-center">
+                          {feature.image ? (
+                            <>
+                              <img src={feature.image} alt="Feature" className="w-full h-full object-cover" />
+                              <button 
+                                onClick={() => handleFeatureChange(catIndex, featIndex, 'image', '')}
+                                className="absolute inset-0 bg-black/40 text-white flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+                              >
+                                <FaTrash size={12} />
+                              </button>
+                            </>
+                          ) : (
+                            <button 
+                              onClick={() => setUploadingFeatureTarget({ catIndex, featIndex })}
+                              className="text-gray-400 hover:text-[#2E7D32]"
+                            >
+                              <FaImage size={20} />
+                            </button>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0 space-y-1.5">
+                          <input type="text" value={feature.title} onChange={e => handleFeatureChange(catIndex, featIndex, 'title', e.target.value)} className="w-full bg-transparent font-bold text-sm focus:outline-none focus:text-[#2E7D32]" placeholder="Feature Title" />
+                          <textarea value={feature.description} onChange={e => handleFeatureChange(catIndex, featIndex, 'description', e.target.value)} rows={2} className="w-full bg-transparent text-sm text-gray-600 focus:outline-none resize-none leading-snug" placeholder="Feature Description" />
+                        </div>
+                      </div>
                       <button onClick={() => handleRemoveFeature(catIndex, featIndex)} className="absolute right-2 top-2 text-gray-400 hover:text-red-500"><FaTrash size={12} /></button>
                     </div>
                   ))}
@@ -331,11 +364,35 @@ const ServicesEditor = () => {
                 <div className="space-y-3">
                   {(category.services || []).map((sub, subIndex) => (
                     <div key={subIndex} className="bg-gray-50 border border-gray-100 rounded-lg p-3 relative pr-10">
-                      <div className="flex gap-2 mb-1">
-                        <input type="text" value={sub.title} onChange={e => handleSubServiceChange(catIndex, subIndex, 'title', e.target.value)} className="flex-1 min-w-0 bg-transparent font-bold text-sm focus:outline-none focus:text-[#2E7D32]" placeholder="Sub-service Title" />
-                        <input type="text" value={sub.id} onChange={e => handleSubServiceChange(catIndex, subIndex, 'id', e.target.value)} className="w-24 shrink-0 bg-transparent text-xs text-gray-500 border-b border-gray-300 focus:outline-none focus:border-[#2E7D32]" placeholder="slug-id" />
+                      <div className="flex gap-3">
+                        <div className="w-16 h-16 shrink-0 rounded-md border border-gray-200 overflow-hidden relative bg-white flex items-center justify-center">
+                          {sub.image ? (
+                            <>
+                              <img src={sub.image} alt="Sub-service" className="w-full h-full object-cover" />
+                              <button 
+                                onClick={() => handleSubServiceChange(catIndex, subIndex, 'image', '')}
+                                className="absolute inset-0 bg-black/40 text-white flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity"
+                              >
+                                <FaTrash size={12} />
+                              </button>
+                            </>
+                          ) : (
+                            <button 
+                              onClick={() => setUploadingSubServiceTarget({ catIndex, subIndex })}
+                              className="text-gray-400 hover:text-[#2E7D32]"
+                            >
+                              <FaImage size={20} />
+                            </button>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0 space-y-1.5">
+                          <div className="flex gap-2">
+                            <input type="text" value={sub.title} onChange={e => handleSubServiceChange(catIndex, subIndex, 'title', e.target.value)} className="flex-1 min-w-0 bg-transparent font-bold text-sm focus:outline-none focus:text-[#2E7D32]" placeholder="Sub-service Title" />
+                            <input type="text" value={sub.id} onChange={e => handleSubServiceChange(catIndex, subIndex, 'id', e.target.value)} className="w-24 shrink-0 bg-transparent text-xs text-gray-500 border-b border-gray-300 focus:outline-none focus:border-[#2E7D32]" placeholder="slug-id" />
+                          </div>
+                          <textarea value={sub.description} onChange={e => handleSubServiceChange(catIndex, subIndex, 'description', e.target.value)} rows={2} className="w-full bg-transparent text-sm text-gray-600 focus:outline-none resize-none leading-snug" placeholder="Short Description" />
+                        </div>
                       </div>
-                      <textarea value={sub.description} onChange={e => handleSubServiceChange(catIndex, subIndex, 'description', e.target.value)} rows={2} className="w-full bg-transparent text-sm text-gray-600 focus:outline-none resize-none" placeholder="Short Description" />
                       
                       {/* Link to sub-page content editor */}
                       <div className="mt-2 flex justify-end">
@@ -369,14 +426,29 @@ const ServicesEditor = () => {
       {uploadingTarget !== null && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
           <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Category Hero Image</h3>
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Hero Image</h3>
             <ImageUploader onUpload={handleImageUpload} />
-            <button 
-              onClick={() => setUploadingTarget(null)}
-              className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm"
-            >
-              Cancel
-            </button>
+            <button onClick={() => setUploadingTarget(null)} className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm">Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {uploadingFeatureTarget !== null && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Feature Image</h3>
+            <ImageUploader onUpload={handleFeatureImageUpload} />
+            <button onClick={() => setUploadingFeatureTarget(null)} className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm">Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {uploadingSubServiceTarget !== null && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Sub-Service Image</h3>
+            <ImageUploader onUpload={handleSubServiceImageUpload} />
+            <button onClick={() => setUploadingSubServiceTarget(null)} className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm">Cancel</button>
           </div>
         </div>
       )}

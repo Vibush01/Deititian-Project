@@ -111,7 +111,7 @@ const PhilosophySection = () => {
               </div>
               <div className="w-full md:w-1/2">
                 <div className="rounded-3xl overflow-hidden shadow-lg border-4 border-white transform transition-transform hover:scale-105 duration-500">
-                  <img src={philosophyImages[i]} alt={section.title} className="w-full h-[300px] object-cover" />
+                  <img src={section.image || philosophyImages[i]} alt={section.title} className="w-full h-[300px] object-cover" />
                 </div>
               </div>
             </div>

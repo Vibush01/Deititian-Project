@@ -37,14 +37,14 @@ export const navLinks = [
         {
           title: "Weight Management",
           items: [
-            { label: "Weight Loss", path: "/service/weight-management", desc: "Achieve sustainable weight loss with our experts who help boost metabolism, burn fat, maintain energy, and improve overall health for long-term results." },
-            { label: "Weight Gain", path: "/service/weight-management", desc: "Our expert-guided approach focuses on muscle building, balanced diet, and sustainable habits to help you gain strength and energy." }
+            { label: "Weight Loss", path: "/service/weight-loss", desc: "Achieve sustainable weight loss with our experts who help boost metabolism, burn fat, maintain energy, and improve overall health for long-term results." },
+            { label: "Weight Gain", path: "/service/weight-gain", desc: "Our expert-guided approach focuses on muscle building, balanced diet, and sustainable habits to help you gain strength and energy." }
           ]
         },
         {
           title: "Lifestyle Management",
           items: [
-            { label: "Healthy Lifestyle", path: "/service/lifestyle-management", desc: "Adopt a healthy lifestyle with personalized nutrition to boost energy, immunity, fitness, and overall well-being for a balanced, sustainable life." }
+            { label: "Healthy Lifestyle", path: "/service/healthy-lifestyle", desc: "Adopt a healthy lifestyle with personalized nutrition to boost energy, immunity, fitness, and overall well-being for a balanced, sustainable life." }
           ]
         }
       ],
@@ -73,7 +73,7 @@ export const footerLinks = {
     { label: "Contact Us", path: "/contact-us" },
   ],
   wellnessPrograms: [
-    { label: "Weight Loss", path: "/service/weight-management" },
+    { label: "Weight Loss", path: "/service/weight-loss" },
     { label: "Hormonal Balance", path: "/service/disease-management" },
     { label: "PCOS & PCOD", path: "/service/pcod-pcos" },
     { label: "Thyroid Health", path: "/service/thyroid" },

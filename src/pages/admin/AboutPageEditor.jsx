@@ -15,6 +15,7 @@ const AboutPageEditor = () => {
   
   // Track which service image is being edited
   const [editingImageIndex, setEditingImageIndex] = useState(null)
+  const [editingPhilosophyImageIndex, setEditingPhilosophyImageIndex] = useState(null)
 
   useEffect(() => {
     const fetchAboutData = async () => {
@@ -84,7 +85,7 @@ const AboutPageEditor = () => {
       ...prev,
       philosophySections: [
         ...prev.philosophySections,
-        { number: prev.philosophySections.length + 1, title: 'New Philosophy', description: '' }
+        { number: prev.philosophySections.length + 1, title: 'New Philosophy', description: '', image: '' }
       ]
     }))
   }
@@ -203,12 +204,37 @@ const AboutPageEditor = () => {
           {data.philosophySections.map((section, index) => (
             <div key={index} className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 group">
               <div className="pt-2"><FaGripVertical className="text-gray-400 cursor-grab" /></div>
-              <div className="flex-1 space-y-3">
-                <div className="flex items-center gap-3">
-                  <span className="font-bold text-[#2E7D32] bg-[#E8F5E9] px-2 py-1 rounded text-xs">{section.number}</span>
-                  <input type="text" value={section.title} onChange={(e) => handlePhilosophyChange(index, 'title', e.target.value)} className={inputClasses} placeholder="Section Title" />
+              <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="md:col-span-2 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <span className="font-bold text-[#2E7D32] bg-[#E8F5E9] px-2 py-1 rounded text-xs">{section.number}</span>
+                    <input type="text" value={section.title} onChange={(e) => handlePhilosophyChange(index, 'title', e.target.value)} className={inputClasses} placeholder="Section Title" />
+                  </div>
+                  <textarea value={section.description} onChange={(e) => handlePhilosophyChange(index, 'description', e.target.value)} rows={3} className={`${inputClasses} resize-none`} placeholder="Section Description" />
                 </div>
-                <textarea value={section.description} onChange={(e) => handlePhilosophyChange(index, 'description', e.target.value)} rows={3} className={`${inputClasses} resize-none`} placeholder="Section Description" />
+                
+                <div className="flex flex-col gap-2 border border-gray-200 rounded-lg p-2 bg-white justify-center items-center relative overflow-hidden h-32 md:h-auto">
+                  {section.image ? (
+                    <>
+                      <img src={section.image} alt="Philosophy" className="absolute inset-0 w-full h-full object-cover opacity-60" />
+                      <button 
+                        onClick={() => handlePhilosophyChange(index, 'image', '')}
+                        className="relative z-10 bg-white/90 text-red-500 hover:bg-red-50 p-2 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
+                        title="Remove Image"
+                      >
+                        <FaTrash className="text-sm" />
+                      </button>
+                    </>
+                  ) : (
+                    <button 
+                      onClick={() => setEditingPhilosophyImageIndex(index)}
+                      className="flex flex-col items-center justify-center gap-2 text-gray-500 hover:text-[#2E7D32] w-full h-full transition-colors"
+                    >
+                      <FaImage className="text-2xl" />
+                      <span className="text-xs font-medium">Add Image</span>
+                    </button>
+                  )}
+                </div>
               </div>
               <button onClick={() => handleRemovePhilosophy(index)} className="text-gray-400 hover:text-red-500 p-2 rounded-lg hover:bg-red-50 transition-colors h-10">
                 <FaTrash />
@@ -276,18 +302,23 @@ const AboutPageEditor = () => {
         </div>
       </div>
 
-      {/* Image Upload Modal */}
+      {/* Upload Modals */}
       {editingImageIndex !== null && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
           <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
             <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Feature Image</h3>
             <ImageUploader onUpload={handleServiceImageUpload} />
-            <button 
-              onClick={() => setEditingImageIndex(null)}
-              className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm"
-            >
-              Cancel
-            </button>
+            <button onClick={() => setEditingImageIndex(null)} className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm">Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {editingPhilosophyImageIndex !== null && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Philosophy Image</h3>
+            <ImageUploader onUpload={handlePhilosophyImageUpload} />
+            <button onClick={() => setEditingPhilosophyImageIndex(null)} className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm">Cancel</button>
           </div>
         </div>
       )}

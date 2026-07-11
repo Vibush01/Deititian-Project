@@ -121,16 +121,23 @@ const ServiceSubPage = () => {
             />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-10">
               {relatedServices.map((service) => (
-                <Link key={service.id} to={service.path} className="group flex flex-col bg-gray-50 p-6 rounded-3xl border border-gray-100 hover:border-[#2E7D32]/30 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-[#2E7D32] transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
-                    {service.description}
-                  </p>
-                  <span className="text-[#2E7D32] font-bold text-sm flex items-center gap-1">
-                    Learn more <FaArrowRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </span>
+                <Link key={service.id} to={service.path} className="group flex flex-col bg-gray-50 rounded-3xl overflow-hidden border border-gray-100 hover:border-[#2E7D32]/30 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  {service.image && (
+                    <div className="h-48 overflow-hidden relative">
+                      <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    </div>
+                  )}
+                  <div className="p-6 flex flex-col flex-grow">
+                    <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-[#2E7D32] transition-colors">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-6 flex-grow leading-relaxed">
+                      {service.description}
+                    </p>
+                    <span className="text-[#2E7D32] font-bold text-sm flex items-center gap-1">
+                      Learn more <FaArrowRight className="text-xs opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </span>
+                  </div>
                 </Link>
               ))}
             </div>

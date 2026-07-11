@@ -139,6 +139,48 @@ export const serviceSubPages = {
       "Kitchen-based nutrition approach",
     ],
   },
+  "weight-loss": {
+    title: "Weight Loss",
+    heroTitle: "Expert Clinical Diet Plans Personalized for Your Weight Loss Goals",
+    heroSubtitle: "Achieve sustainable weight loss with our experts who help boost metabolism, burn fat, maintain energy, and improve overall health for long-term results.",
+    image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=500&fit=crop",
+    sections: [
+      {
+        title: "Sustainable Weight Loss Programs",
+        description: "Our weight loss programs are built on metabolic testing, portion intelligence, and balanced Indian meals. We avoid starvation, crash diets, and extreme workouts. Instead, we focus on improving metabolism, hormonal balance, and gut health while ensuring your body remains nourished and energized throughout the journey.",
+        image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&h=400&fit=crop",
+      },
+    ],
+    benefits: [
+      "Personalized meal plans using everyday Indian ingredients",
+      "Metabolic analysis and optimization",
+      "No crash diets or extreme restrictions",
+      "Regular progress tracking and plan adjustments",
+      "24/7 expert support and guidance",
+      "Kitchen-based nutrition approach",
+    ],
+  },
+  "weight-gain": {
+    title: "Weight Gain",
+    heroTitle: "Healthy Weight Gain Plans",
+    heroSubtitle: "Our expert-guided approach focuses on muscle building, balanced diet, and sustainable habits to help you gain strength and energy.",
+    image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600&h=500&fit=crop",
+    sections: [
+      {
+        title: "Healthy Weight Gain Plans",
+        description: "For those looking to gain weight healthily, our plans focus on muscle building through nutrient-dense meals, proper protein intake, and sustainable eating habits. We create personalized plans that help you gain strength and energy without compromising your overall health.",
+        image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=500&h=400&fit=crop",
+      },
+    ],
+    benefits: [
+      "Muscle building nutrition plans",
+      "Nutrient-dense meal strategies",
+      "Healthy calorie surplus diets",
+      "Strength and energy improvement",
+      "Balanced protein intake",
+      "Sustainable eating habits",
+    ],
+  },
   "disease-management": {
     title: "Disease Management",
     heroTitle: "Specialized Disease Management: Clinical Diet Plans for Recovery",
@@ -247,6 +289,32 @@ export const serviceSubPages = {
     title: "Lifestyle Management",
     heroTitle: "Holistic Lifestyle Management: Transform Your Daily Habits",
     heroSubtitle: "Our lifestyle management programs go beyond diet to transform every aspect of your daily routine — from stress management and sleep optimization to mindful eating and active living.",
+    image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=500&fit=crop",
+    sections: [
+      {
+        title: "Mindful Eating & Nutrition Coaching",
+        description: "Learn to develop a healthy relationship with food through our mindful eating programs. We help you understand hunger cues, make conscious food choices, and develop sustainable eating habits that support long-term health and well-being.",
+        image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=500&h=400&fit=crop",
+      },
+      {
+        title: "Comprehensive Wellness Blueprint",
+        description: "Our lifestyle programs address all pillars of wellness including nutrition, physical activity, sleep quality, stress management, and emotional well-being. We create a personalized wellness blueprint that fits seamlessly into your daily routine.",
+        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=400&fit=crop",
+      },
+    ],
+    benefits: [
+      "Personalized wellness blueprints",
+      "Stress and anxiety management through nutrition",
+      "Sleep quality optimization",
+      "Energy and immunity boosting plans",
+      "Habit stacking and behavioral coaching",
+      "Work-life balance nutrition strategies",
+    ],
+  },
+  "healthy-lifestyle": {
+    title: "Healthy Lifestyle",
+    heroTitle: "Adopt a Healthy Lifestyle with Personalized Nutrition",
+    heroSubtitle: "Adopt a healthy lifestyle with personalized nutrition to boost energy, immunity, fitness, and overall well-being for a balanced, sustainable life.",
     image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&h=500&fit=crop",
     sections: [
       {
