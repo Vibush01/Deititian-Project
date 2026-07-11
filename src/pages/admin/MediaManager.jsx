@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaSave, FaImage, FaSpinner, FaPlus, FaTrash, FaInstagram, FaNewspaper, FaImages } from 'react-icons/fa'
+import { FaSave, FaImage, FaSpinner, FaPlus, FaTrash, FaInstagram, FaNewspaper, FaImages, FaChevronUp, FaChevronDown } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 
@@ -21,11 +21,6 @@ const MediaManager = () => {
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
   const [media, setMedia] = useState({ mediaLogos: [], instagramPosts: [], heroBanners: [] })
-  
-  useEffect(() => {
-    fetchMedia()
-  }, [])
-
   const fetchMedia = async () => {
     try {
       if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) {
@@ -72,6 +67,10 @@ const MediaManager = () => {
     }
   }
 
+  useEffect(() => {
+    fetchMedia()
+  }, [])
+
   const handleSaveAll = async () => {
     setSaving(true)
     setSaveMessage('')
@@ -110,11 +109,33 @@ const MediaManager = () => {
   const removePost = (index) => {
     setMedia(prev => ({ ...prev, instagramPosts: prev.instagramPosts.filter((_, i) => i !== index) }))
   }
+  const movePost = (index, direction) => {
+    setMedia(prev => {
+      const newPosts = [...prev.instagramPosts]
+      if (direction === 'up' && index > 0) {
+        [newPosts[index - 1], newPosts[index]] = [newPosts[index], newPosts[index - 1]]
+      } else if (direction === 'down' && index < newPosts.length - 1) {
+        [newPosts[index + 1], newPosts[index]] = [newPosts[index], newPosts[index + 1]]
+      }
+      return { ...prev, instagramPosts: newPosts }
+    })
+  }
 
   // --- Handlers for Hero Banners ---
   const [uploadingBanner, setUploadingBanner] = useState(false)
   const removeBanner = (index) => {
     setMedia(prev => ({ ...prev, heroBanners: prev.heroBanners.filter((_, i) => i !== index) }))
+  }
+  const moveBanner = (index, direction) => {
+    setMedia(prev => {
+      const newBanners = [...prev.heroBanners]
+      if (direction === 'up' && index > 0) {
+        [newBanners[index - 1], newBanners[index]] = [newBanners[index], newBanners[index - 1]]
+      } else if (direction === 'down' && index < newBanners.length - 1) {
+        [newBanners[index + 1], newBanners[index]] = [newBanners[index], newBanners[index + 1]]
+      }
+      return { ...prev, heroBanners: newBanners }
+    })
   }
 
   const inputClasses = 'w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/50 focus:border-[#2E7D32] transition-colors text-sm'
@@ -218,12 +239,16 @@ const MediaManager = () => {
           {media.heroBanners.map((img, index) => (
             <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video bg-gray-50">
               <img src={img} alt={`Banner ${index + 1}`} className="w-full h-full object-cover" />
-              <button 
-                onClick={() => removeBanner(index)}
-                className="absolute top-2 right-2 bg-white/90 text-red-500 hover:bg-red-50 p-2 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <FaTrash className="text-xs" />
-              </button>
+              <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                <button onClick={() => moveBanner(index, 'up')} disabled={index === 0} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-md disabled:opacity-50"><FaChevronUp className="text-xs" /></button>
+                <button onClick={() => moveBanner(index, 'down')} disabled={index === media.heroBanners.length - 1} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-md disabled:opacity-50"><FaChevronDown className="text-xs" /></button>
+                <button 
+                  onClick={() => removeBanner(index)}
+                  className="w-8 h-8 flex items-center justify-center text-red-500 bg-white shadow-sm hover:bg-red-50 rounded-md transition-colors"
+                >
+                  <FaTrash className="text-xs" />
+                </button>
+              </div>
             </div>
           ))}
         </div>
@@ -271,12 +296,16 @@ const MediaManager = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {media.instagramPosts.map((post, index) => (
             <div key={index} className="bg-gray-50 rounded-xl p-4 border border-gray-200 flex flex-col relative group">
-              <button 
-                onClick={() => removePost(index)} 
-                className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center text-red-500 bg-white shadow-sm hover:bg-red-50 rounded-full transition-colors z-10"
-              >
-                <FaTrash className="text-xs" />
-              </button>
+              <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                <button onClick={() => movePost(index, 'up')} disabled={index === 0} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-full disabled:opacity-50"><FaChevronUp className="text-xs" /></button>
+                <button onClick={() => movePost(index, 'down')} disabled={index === media.instagramPosts.length - 1} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-full disabled:opacity-50"><FaChevronDown className="text-xs" /></button>
+                <button 
+                  onClick={() => removePost(index)} 
+                  className="w-8 h-8 flex items-center justify-center text-red-500 bg-white shadow-sm hover:bg-red-50 rounded-full transition-colors"
+                >
+                  <FaTrash className="text-xs" />
+                </button>
+              </div>
               
               <div className="w-full aspect-square rounded-lg overflow-hidden bg-gray-200 mb-4 border border-gray-200 relative">
                 {post.image ? (

@@ -13,14 +13,17 @@ export const serviceCategories = [
       {
         title: "Root-Cause Healing",
         description: "We focus on identifying and treating the root cause of chronic conditions through therapeutic nutrition, not just managing symptoms.",
+        image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=500&h=400&fit=crop",
       },
       {
         title: "Medicine-Free Protocols",
         description: "Our evidence-based approach uses food as medicine, reducing dependency on medications through science-backed dietary interventions.",
+        image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&h=400&fit=crop",
       },
       {
         title: "Personalized Clinical Plans",
         description: "Every diet plan is customized based on your medical reports, lifestyle, food preferences, and health goals for maximum effectiveness.",
+        image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=500&h=400&fit=crop",
       },
     ],
     services: [
@@ -29,18 +32,21 @@ export const serviceCategories = [
         title: "PCOD / PCOS",
         description: "Our personalized nutrition and lifestyle programs help balance hormones, manage weight, and improve overall well-being.",
         path: "/service/pcod-pcos",
+        image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=500&h=400&fit=crop",
       },
       {
         id: "thyroid",
         title: "Thyroid",
         description: "Manage thyroid effectively with personalized nutrition and lifestyle plans to boost metabolism, balance hormones and enhance energy.",
         path: "/service/thyroid",
+        image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=500&h=400&fit=crop",
       },
       {
         id: "diabetes",
         title: "Diabetes",
         description: "Our expert-guided approach helps control blood sugar, maintain insulin balance, healthy weight and improve overall energy.",
         path: "/service/diabetes",
+        image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=400&fit=crop",
       },
     ],
   },
@@ -56,14 +62,17 @@ export const serviceCategories = [
       {
         title: "Metabolic Optimization",
         description: "We analyze and optimize your metabolism through balanced nutrition, ensuring your body efficiently burns fat while maintaining muscle mass.",
+        image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&h=400&fit=crop",
       },
       {
         title: "Sustainable Results",
         description: "Our kitchen-based approach uses everyday Indian ingredients, making long-term adherence easy and realistic for lasting weight management.",
+        image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=400&fit=crop",
       },
       {
         title: "Holistic Approach",
         description: "Beyond diet, we integrate behavioral coaching, habit stacking, and lifestyle modifications for comprehensive weight wellness.",
+        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=400&fit=crop",
       },
     ],
     services: [
@@ -71,11 +80,13 @@ export const serviceCategories = [
         id: "weight-loss",
         title: "Weight Loss",
         description: "Achieve sustainable weight loss with our experts who help boost metabolism, burn fat, maintain energy, and improve overall health for long-term results.",
+        image: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&h=400&fit=crop",
       },
       {
         id: "weight-gain",
         title: "Weight Gain",
         description: "Our expert-guided approach focuses on muscle building, balanced diet, and sustainable habits to help you gain strength and energy.",
+        image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=500&h=400&fit=crop",
       },
     ],
   },
@@ -91,14 +102,17 @@ export const serviceCategories = [
       {
         title: "Mindful Nutrition",
         description: "Learn to make conscious food choices that nourish your body and mind, developing a healthy relationship with food that lasts a lifetime.",
+        image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=500&h=400&fit=crop",
       },
       {
         title: "Stress & Sleep Management",
         description: "Our holistic approach addresses stress, sleep quality, and emotional well-being as key components of overall health and weight management.",
+        image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=400&fit=crop",
       },
       {
         title: "Active Living Integration",
         description: "We seamlessly integrate physical activity into your daily routine with practical, enjoyable exercise plans that complement your nutrition goals.",
+        image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=500&h=400&fit=crop",
       },
     ],
     services: [
@@ -106,6 +120,7 @@ export const serviceCategories = [
         id: "healthy-lifestyle",
         title: "Healthy Lifestyle",
         description: "Adopt a healthy lifestyle with personalized nutrition to boost energy, immunity, fitness, and overall well-being for a balanced, sustainable life.",
+        image: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=500&h=400&fit=crop",
       },
     ],
   },

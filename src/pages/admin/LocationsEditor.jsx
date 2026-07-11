@@ -14,10 +14,6 @@ const LocationsEditor = () => {
   const [editingItem, setEditingItem] = useState(null)
   const [editingIndex, setEditingIndex] = useState(-1)
   
-  useEffect(() => {
-    fetchLocations()
-  }, [])
-
   const fetchLocations = async () => {
     try {
       if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) {
@@ -37,6 +33,11 @@ const LocationsEditor = () => {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchLocations()
+  }, [])
+
 
   const handleSaveAll = async () => {
     setSaving(true)

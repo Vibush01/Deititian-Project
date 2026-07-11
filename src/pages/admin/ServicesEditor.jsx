@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { FaSave, FaConciergeBell, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage, FaHeart, FaDumbbell, FaHeartbeat, FaEdit } from 'react-icons/fa'
+import { FaSave, FaConciergeBell, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage, FaHeart, FaDumbbell, FaHeartbeat, FaEdit, FaChevronUp, FaChevronDown } from 'react-icons/fa'
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 
@@ -29,10 +29,32 @@ const ServicesEditor = () => {
         }
 
         const data = await getCollection(COLLECTIONS.SERVICES, 'order')
+        const { serviceCategories } = await import('../../data/servicesData')
+        
         if (data && data.length > 0) {
-          setCategories(data.map(c => ({ ...c, _docId: c.id })))
+          // Merge in missing images from defaults so they show up for existing documents
+          const mergedData = data.map(dbCat => {
+            const defaultCat = serviceCategories.find(c => c.id === dbCat.id)
+            if (!defaultCat) return { ...dbCat, _docId: dbCat.id }
+            
+            const features = (dbCat.features || []).map((feat, i) => {
+              if (!feat.image && defaultCat.features && defaultCat.features[i]) {
+                return { ...feat, image: defaultCat.features[i].image }
+              }
+              return feat
+            })
+            
+            const services = (dbCat.services || []).map((sub, i) => {
+              if (!sub.image && defaultCat.services && defaultCat.services[i]) {
+                return { ...sub, image: defaultCat.services[i].image }
+              }
+              return sub
+            })
+            
+            return { ...dbCat, features, services, _docId: dbCat.id }
+          })
+          setCategories(mergedData)
         } else {
-          const { serviceCategories } = await import('../../data/servicesData')
           setCategories(serviceCategories.map(c => ({ ...c, _docId: c.id })))
         }
       } catch (error) {
@@ -149,6 +171,19 @@ const ServicesEditor = () => {
     })
   }
 
+  const handleMoveFeature = (catIndex, featIndex, direction) => {
+    setCategories(prev => {
+      const newCat = [...prev]
+      const features = newCat[catIndex].features
+      if (direction === 'up' && featIndex > 0) {
+        [features[featIndex - 1], features[featIndex]] = [features[featIndex], features[featIndex - 1]]
+      } else if (direction === 'down' && featIndex < features.length - 1) {
+        [features[featIndex + 1], features[featIndex]] = [features[featIndex], features[featIndex + 1]]
+      }
+      return newCat
+    })
+  }
+
   // Sub-services Handlers
   const handleAddSubService = (catIndex) => {
     setCategories(prev => {
@@ -171,6 +206,19 @@ const ServicesEditor = () => {
     setCategories(prev => {
       const newCat = [...prev]
       newCat[catIndex].services.splice(subIndex, 1)
+      return newCat
+    })
+  }
+
+  const handleMoveSubService = (catIndex, subIndex, direction) => {
+    setCategories(prev => {
+      const newCat = [...prev]
+      const services = newCat[catIndex].services
+      if (direction === 'up' && subIndex > 0) {
+        [services[subIndex - 1], services[subIndex]] = [services[subIndex], services[subIndex - 1]]
+      } else if (direction === 'down' && subIndex < services.length - 1) {
+        [services[subIndex + 1], services[subIndex]] = [services[subIndex], services[subIndex + 1]]
+      }
       return newCat
     })
   }
@@ -348,7 +396,11 @@ const ServicesEditor = () => {
                           <textarea value={feature.description} onChange={e => handleFeatureChange(catIndex, featIndex, 'description', e.target.value)} rows={2} className="w-full bg-transparent text-sm text-gray-600 focus:outline-none resize-none leading-snug" placeholder="Feature Description" />
                         </div>
                       </div>
-                      <button onClick={() => handleRemoveFeature(catIndex, featIndex)} className="absolute right-2 top-2 text-gray-400 hover:text-red-500"><FaTrash size={12} /></button>
+                      <div className="absolute right-2 top-2 flex flex-col gap-1 text-gray-400">
+                        <button onClick={() => handleMoveFeature(catIndex, featIndex, 'up')} disabled={featIndex === 0} className="hover:text-gray-700 disabled:opacity-30"><FaChevronUp size={12} /></button>
+                        <button onClick={() => handleMoveFeature(catIndex, featIndex, 'down')} disabled={featIndex === (category.features || []).length - 1} className="hover:text-gray-700 disabled:opacity-30"><FaChevronDown size={12} /></button>
+                        <button onClick={() => handleRemoveFeature(catIndex, featIndex)} className="hover:text-red-500 mt-1"><FaTrash size={12} /></button>
+                      </div>
                     </div>
                   ))}
                   {(!category.features || category.features.length === 0) && <p className="text-xs text-gray-400 italic">No features added.</p>}
@@ -404,7 +456,11 @@ const ServicesEditor = () => {
                         </Link>
                       </div>
 
-                      <button onClick={() => handleRemoveSubService(catIndex, subIndex)} className="absolute right-2 top-2 text-gray-400 hover:text-red-500"><FaTrash size={12} /></button>
+                      <div className="absolute right-2 top-2 flex flex-col gap-1 text-gray-400">
+                        <button onClick={() => handleMoveSubService(catIndex, subIndex, 'up')} disabled={subIndex === 0} className="hover:text-gray-700 disabled:opacity-30"><FaChevronUp size={12} /></button>
+                        <button onClick={() => handleMoveSubService(catIndex, subIndex, 'down')} disabled={subIndex === (category.services || []).length - 1} className="hover:text-gray-700 disabled:opacity-30"><FaChevronDown size={12} /></button>
+                        <button onClick={() => handleRemoveSubService(catIndex, subIndex)} className="hover:text-red-500 mt-1"><FaTrash size={12} /></button>
+                      </div>
                     </div>
                   ))}
                   {(!category.services || category.services.length === 0) && <p className="text-xs text-gray-400 italic">No sub-services added.</p>}

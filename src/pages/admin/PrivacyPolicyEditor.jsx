@@ -1,29 +1,7 @@
 import { useState, useEffect } from 'react'
 import { FaSave, FaShieldAlt, FaSpinner, FaPlus, FaTrash } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
-
-export const defaultSections = [
-  {
-    title: 'Information We Collect',
-    content: 'We may collect the following information when you interact with our website or services:\n- Name, phone number, email address\n- Health-related information shared voluntarily through forms\n- Appointment and consultation details\n- Website usage data (cookies, IP address, browser type)'
-  },
-  {
-    title: 'How We Use Your Information',
-    content: 'The information collected is used to:\n- Schedule consultations and appointments\n- Provide personalized diet and lifestyle guidance\n- Respond to queries and support requests\n- Improve our services and website experience\n- Send updates, reminders, or health-related communication (with consent)'
-  },
-  {
-    title: 'Medical & Health Information',
-    content: 'Any medical or health information shared with us is treated as strictly confidential and is used only for consultation, guidance, and service delivery purposes.'
-  },
-  {
-    title: 'Data Protection & Security',
-    content: 'We implement reasonable security measures to protect your personal and health data against unauthorized access, alteration, or disclosure. However, no internet transmission is entirely secure, and we cannot guarantee absolute data security.'
-  },
-  {
-    title: 'Contact Us',
-    content: 'If you have any questions or concerns regarding this Privacy Policy or your data, please reach out to us via our Contact Page.'
-  }
-]
+import { defaultPrivacySections } from '../../data/privacyData'
 
 const PrivacyPolicyEditor = () => {
   const [loading, setLoading] = useState(true)
@@ -33,7 +11,7 @@ const PrivacyPolicyEditor = () => {
   const [pageData, setPageData] = useState({
     heroTitle: 'Privacy Policy',
     heroSubtitle: 'At FitJeeva, we respect your privacy and are committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or use our services.',
-    sections: defaultSections
+    sections: defaultPrivacySections
   })
 
   useEffect(() => {
@@ -49,7 +27,7 @@ const PrivacyPolicyEditor = () => {
           setPageData(prev => ({
             ...prev,
             ...data,
-            sections: data.sections || defaultSections
+            sections: data.sections || defaultPrivacySections
           }))
         }
       } catch (error) {

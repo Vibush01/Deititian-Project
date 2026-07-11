@@ -17,10 +17,6 @@ const SuccessStoriesEditor = () => {
   
   const [uploadingImage, setUploadingImage] = useState(false)
 
-  useEffect(() => {
-    fetchStories()
-  }, [])
-
   const fetchStories = async () => {
     try {
       if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) {
@@ -40,6 +36,11 @@ const SuccessStoriesEditor = () => {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchStories()
+  }, [])
+
 
   const handleSaveAll = async () => {
     setSaving(true)

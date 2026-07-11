@@ -19,10 +19,6 @@ const TeamEditor = ({ isEmbedded = false }) => {
   // separate image uploader state just for the modal
   const [uploadingImage, setUploadingImage] = useState(false)
 
-  useEffect(() => {
-    fetchTeam()
-  }, [])
-
   const fetchTeam = async () => {
     try {
       if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) {
@@ -42,6 +38,11 @@ const TeamEditor = ({ isEmbedded = false }) => {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchTeam()
+  }, [])
+
 
   const handleSaveAll = async () => {
     setSaving(true)

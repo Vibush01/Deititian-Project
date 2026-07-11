@@ -97,7 +97,7 @@ const DashboardPage = () => {
             totalRecipes: defaultRecipes?.length || 3,
             totalLocations: clinicLocations?.length || 0,
           })
-        } catch (e) { /* ignore */ }
+        } catch { /* ignore */ }
         setLoading(false)
         return
       }
@@ -142,31 +142,31 @@ const DashboardPage = () => {
           try {
             const { clinicLocations } = await import('../../data/locationsData')
             locCount = clinicLocations?.length || 0
-          } catch (e) { /* ignore */ }
+          } catch { /* ignore */ }
         }
         if (teamCount === 0) {
           try {
             const { defaultTeamMembers } = await import('../../data/peopleData')
             teamCount = defaultTeamMembers?.length || 3
-          } catch (e) { teamCount = 3 }
+          } catch { teamCount = 3 }
         }
         if (expCount === 0) {
           try {
             const { defaultExperts } = await import('../../data/peopleData')
             expCount = defaultExperts?.length || 3
-          } catch (e) { expCount = 3 }
+          } catch { expCount = 3 }
         }
         if (recipeCount === 0) {
           try {
             const { defaultRecipes } = await import('../../data/recipesData')
             recipeCount = defaultRecipes?.length || 3
-          } catch (e) { recipeCount = 3 }
+          } catch { recipeCount = 3 }
         }
         if (storyCount === 0) {
           try {
             const { defaultStories } = await import('../../pages/SuccessStoriesPage')
             storyCount = defaultStories?.length || 16
-          } catch (e) { storyCount = 16 }
+          } catch { storyCount = 16 }
         }
 
         setStats({

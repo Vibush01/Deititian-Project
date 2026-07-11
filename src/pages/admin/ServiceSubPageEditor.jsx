@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FaSave, FaFileMedical, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage, FaListUl } from 'react-icons/fa'
-import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
+import { getCollection, setDocument, removeDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
 
 const ServiceSubPageEditor = () => {

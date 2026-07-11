@@ -135,6 +135,13 @@ const AboutPageEditor = () => {
     }
   }
 
+  const handlePhilosophyImageUpload = (url) => {
+    if (editingPhilosophyImageIndex !== null) {
+      handlePhilosophyChange(editingPhilosophyImageIndex, 'image', url)
+      setEditingPhilosophyImageIndex(null)
+    }
+  }
+
   const inputClasses = 'w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/50 focus:border-[#2E7D32] transition-colors text-sm'
   const labelClasses = 'block text-sm font-semibold text-gray-700 mb-1.5'
 

@@ -8,7 +8,7 @@ import { careersHero, companyValues, jobPositions, teamImages } from '../data/ca
 import { clinicLocations } from '../data/locationsData'
 import { defaultExperts, defaultTeamMembers } from '../data/peopleData'
 import { defaultRecipes } from '../data/recipesData'
-import { defaultSections as defaultPrivacySections } from '../pages/admin/PrivacyPolicyEditor'
+import { defaultPrivacySections } from '../data/privacyData'
 
 /**
  * Hook to get About page data from Firestore with static fallback.

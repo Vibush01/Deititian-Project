@@ -14,10 +14,6 @@ const InquiriesManager = () => {
   const [selectedInquiry, setSelectedInquiry] = useState(null)
   const [panelOpen, setPanelOpen] = useState(false)
 
-  useEffect(() => {
-    fetchInquiries()
-  }, [])
-
   const fetchInquiries = async () => {
     try {
       if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) {
@@ -44,6 +40,11 @@ const InquiriesManager = () => {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchInquiries()
+  }, [])
+
 
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this inquiry? This cannot be undone.')) {

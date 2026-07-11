@@ -18,10 +18,6 @@ const RecipesEditor = () => {
   
   const [uploadingImage, setUploadingImage] = useState(false)
 
-  useEffect(() => {
-    fetchRecipes()
-  }, [])
-
   const fetchRecipes = async () => {
     try {
       if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) {
@@ -40,6 +36,11 @@ const RecipesEditor = () => {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    fetchRecipes()
+  }, [])
+
 
   const handleSaveAll = async () => {
     setSaving(true)
