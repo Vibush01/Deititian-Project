@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaCog, FaSpinner, FaImage, FaTrash } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { statsData as defaultStatsData } from '../../data/siteData'
 
 const SiteSettingsEditor = () => {
   const [loading, setLoading] = useState(true)
@@ -15,9 +16,7 @@ const SiteSettingsEditor = () => {
     socialLinks: {
       facebook: 'https://www.facebook.com/fitjeeva', instagram: 'https://www.instagram.com/', linkedin: '', youtube: 'https://www.youtube.com/@fitjeeva',
     },
-    statsData: {
-      happyClients: '50000', successStories: '120', clinicLocations: '1',
-    },
+    statsData: defaultStatsData,
     spotlightStats: [
       { number: "1,00,000+", label: "Lives Transformed" },
       { number: "35,000+", label: "Weight Loss Journeys" },
@@ -59,7 +58,7 @@ const SiteSettingsEditor = () => {
             ...data,
             siteInfo: { ...prev.siteInfo, ...data.siteInfo },
             socialLinks: { ...prev.socialLinks, ...data.socialLinks },
-            statsData: { ...prev.statsData, ...data.statsData },
+            statsData: Array.isArray(data.statsData) ? data.statsData : defaultStatsData,
             spotlightStats: data.spotlightStats || prev.spotlightStats,
             spotlightTestimonial: data.spotlightTestimonial || prev.spotlightTestimonial,
             ctaHeading: data.ctaHeading || prev.ctaHeading,
@@ -95,12 +94,12 @@ const SiteSettingsEditor = () => {
     }))
   }
 
-  const handleStatsChange = (e) => {
-    const { name, value } = e.target
-    setSettings(prev => ({
-      ...prev,
-      statsData: { ...prev.statsData, [name]: value }
-    }))
+  const handleStatArrayChange = (index, field, value) => {
+    setSettings(prev => {
+      const newStats = [...prev.statsData]
+      newStats[index] = { ...newStats[index], [field]: value }
+      return { ...prev, statsData: newStats }
+    })
   }
 
   const handleSpotlightStatChange = (index, field, value) => {
@@ -265,19 +264,28 @@ const SiteSettingsEditor = () => {
         {/* Statistics */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
           <h2 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100">Homepage Statistics</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div>
-              <label className={labelClasses}>Happy Clients</label>
-              <input type="text" name="happyClients" value={settings.statsData.happyClients} onChange={handleStatsChange} className={inputClasses} placeholder="e.g. 10k+" />
-            </div>
-            <div>
-              <label className={labelClasses}>Success Stories</label>
-              <input type="text" name="successStories" value={settings.statsData.successStories} onChange={handleStatsChange} className={inputClasses} placeholder="e.g. 500+" />
-            </div>
-            <div>
-              <label className={labelClasses}>Clinic Locations</label>
-              <input type="text" name="clinicLocations" value={settings.statsData.clinicLocations} onChange={handleStatsChange} className={inputClasses} placeholder="e.g. 10+" />
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {settings.statsData.map((stat, index) => (
+              <div key={index} className="p-4 bg-gray-50 rounded-xl border border-gray-100 space-y-3">
+                <div className="flex justify-between items-center mb-1">
+                  <h3 className="font-bold text-sm text-[#2E7D32]">Stat {index + 1}</h3>
+                </div>
+                <div>
+                  <label className={labelClasses}>Label</label>
+                  <input type="text" value={stat.label} onChange={(e) => handleStatArrayChange(index, 'label', e.target.value)} className={inputClasses} placeholder="e.g. Happy Clients" />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelClasses}>Number</label>
+                    <input type="number" step="any" value={stat.number} onChange={(e) => handleStatArrayChange(index, 'number', parseFloat(e.target.value) || 0)} className={inputClasses} placeholder="e.g. 50000" />
+                  </div>
+                  <div>
+                    <label className={labelClasses}>Suffix</label>
+                    <input type="text" value={stat.suffix || ''} onChange={(e) => handleStatArrayChange(index, 'suffix', e.target.value)} className={inputClasses} placeholder="e.g. +" />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
