@@ -5,7 +5,7 @@ import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'
 import { defaultTeamMembers } from '../../data/peopleData'
 
-const TeamEditor = () => {
+const TeamEditor = ({ isEmbedded = false }) => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
@@ -139,32 +139,47 @@ const TeamEditor = () => {
   }
 
   return (
-    <div className="max-w-5xl space-y-6 pb-12">
-      <div className="flex items-center justify-between mb-2">
-        <div>
-          <h1 className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
-            <FaUsers className="text-[#2E7D32]" />
-            Team Editor
-          </h1>
-          <p className="text-gray-500 text-sm mt-1">Manage team members, roles, and bios.</p>
+    <div className={isEmbedded ? "" : "max-w-4xl"}>
+      {!isEmbedded && (
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
+              <FaUsers className="text-[#2E7D32]" />
+              Team Members
+            </h1>
+            <p className="text-gray-500 text-sm mt-1">Manage the core team displayed on the Team page.</p>
+          </div>
+          <button
+            onClick={handleSaveAll}
+            disabled={saving}
+            className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {saving ? <FaSpinner className="animate-spin" /> : <FaSave />}
+            {saving ? 'Saving...' : 'Save Changes'}
+          </button>
         </div>
-        <button
-          onClick={handleSaveAll}
-          disabled={saving}
-          className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-        >
-          {saving ? <FaSpinner className="animate-spin" /> : <FaSave />}
-          {saving ? 'Saving...' : 'Save All Changes'}
-        </button>
-      </div>
+      )}
+
+      {isEmbedded && (
+        <div className="flex justify-end mb-6">
+          <button
+            onClick={handleSaveAll}
+            disabled={saving}
+            className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {saving ? <FaSpinner className="animate-spin" /> : <FaSave />}
+            {saving ? 'Saving...' : 'Save Changes'}
+          </button>
+        </div>
+      )}
 
       {saveMessage && (
-        <div className={`p-4 rounded-lg font-bold text-sm ${saveMessage.includes('Error') ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-[#E8F5E9] text-[#2E7D32] border border-[#2E7D32]/30'}`}>
+        <div className={`mb-6 p-4 rounded-lg font-bold text-sm ${saveMessage.includes('Error') ? 'bg-red-50 text-red-600 border border-red-200' : 'bg-[#E8F5E9] text-[#2E7D32] border border-[#2E7D32]/30'}`}>
           {saveMessage}
         </div>
       )}
 
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+      <div className={isEmbedded ? "" : "bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8"}>
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
           <h2 className="text-lg font-bold text-gray-900">Team Members List</h2>
           <button onClick={openAddModal} className="text-sm font-bold bg-[#E8F5E9] text-[#2E7D32] hover:bg-[#C8E6C9] px-4 py-2 rounded-lg transition-colors flex items-center gap-2">

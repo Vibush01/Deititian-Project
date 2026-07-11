@@ -31,8 +31,7 @@ import CareersEditor from './pages/admin/CareersEditor'
 import HomePageEditor from './pages/admin/HomePageEditor'
 import ServicesEditor from './pages/admin/ServicesEditor'
 import ServiceSubPageEditor from './pages/admin/ServiceSubPageEditor'
-import TeamEditor from './pages/admin/TeamEditor'
-import ExpertsEditor from './pages/admin/ExpertsEditor'
+import TeamExpertsEditor from './pages/admin/TeamExpertsEditor'
 import RecipesEditor from './pages/admin/RecipesEditor'
 import SuccessStoriesEditor from './pages/admin/SuccessStoriesEditor'
 import LocationsEditor from './pages/admin/LocationsEditor'
@@ -74,8 +73,7 @@ function App() {
                   <Route path="/careers" element={<CareersEditor />} />
                   
                   {/* Team & Experts */}
-                  <Route path="/team" element={<TeamEditor />} />
-                  <Route path="/experts" element={<ExpertsEditor />} />
+                  <Route path="/team" element={<TeamExpertsEditor />} />
                   <Route path="/recipes" element={<RecipesEditor />} />
                   
                   {/* Step 8 Editors */}
