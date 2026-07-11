@@ -69,7 +69,7 @@ const ServiceCategoryCards = () => {
         {serviceCategories.map((category) => (
           <Link key={category.id} to={category.path} className="group bg-gray-50 rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
             <div className="h-48 overflow-hidden relative">
-              <img src={category.image} alt={category.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <img src={category.image} alt={category.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
             <div className="p-6 md:p-8 flex flex-col flex-grow relative bg-white">
@@ -99,7 +99,7 @@ const CategoryDetailSections = () => {
         <div key={category.id} className={`flex flex-col ${idx % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16`}>
           <div className="w-full md:w-1/2">
             <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white transform transition-transform hover:scale-105 duration-500">
-              <img src={category.image} alt={category.title} className="w-full h-[300px] md:h-[400px] object-cover" />
+              <img src={category.image} alt={category.title} loading="lazy" className="w-full h-[300px] md:h-[400px] object-cover" />
             </div>
           </div>
           <div className="w-full md:w-1/2">

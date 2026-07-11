@@ -61,7 +61,7 @@ const ServiceSubPage = () => {
             </div>
             <div className="w-full lg:w-1/2 relative">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white z-10">
-                <img src={page.image} alt={page.title} className="w-full h-auto object-cover" />
+                <img src={page.image} alt={page.title} fetchpriority="high" className="w-full h-auto object-cover" />
               </div>
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#C8E6C9] rounded-full blur-2xl -z-10"></div>
               <div className="absolute -top-6 -right-6 w-40 h-40 bg-[#A5D6A7] rounded-full blur-3xl -z-10"></div>
@@ -76,7 +76,7 @@ const ServiceSubPage = () => {
             <div key={i} className={`flex flex-col ${i % 2 !== 0 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-10 md:gap-16`}>
               <div className="w-full md:w-1/2">
                 <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white transform transition-transform hover:scale-105 duration-500">
-                  <img src={section.image} alt={section.title} className="w-full h-[300px] md:h-[400px] object-cover" />
+                  <img src={section.image} alt={section.title} loading="lazy" className="w-full h-[300px] md:h-[400px] object-cover" />
                 </div>
               </div>
               <div className="w-full md:w-1/2">
@@ -124,7 +124,7 @@ const ServiceSubPage = () => {
                 <Link key={service.id} to={service.path} className="group flex flex-col bg-gray-50 rounded-3xl overflow-hidden border border-gray-100 hover:border-[#2E7D32]/30 hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                   {service.image && (
                     <div className="h-48 overflow-hidden relative">
-                      <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                      <img src={service.image} alt={service.title} loading="lazy" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     </div>
                   )}
                   <div className="p-6 flex flex-col flex-grow">
