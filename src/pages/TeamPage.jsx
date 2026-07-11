@@ -1,8 +1,10 @@
 import ConsultationCTA from '../components/sections/ConsultationCTA'
 import TeamShowcase from '../components/sections/TeamShowcase'
+import { useTeamMembers } from '../hooks/usePageData'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 
 const TeamPage = () => {
+  const { members } = useTeamMembers()
   useDocumentMeta({
     title: 'Our Team – The People Behind FitJeeva',
     description: 'Meet the dedicated professionals behind FitJeeva. Our operations, customer success, and tech teams work together to ensure your wellness journey is smooth and successful.',
@@ -22,6 +24,25 @@ const TeamPage = () => {
       </section>
 
       <TeamShowcase showCTA={false} />
+
+      <section className="py-16 bg-gray-50">
+        <div className="container-custom">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {members.map((member) => (
+              <div key={member.id} className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div className="h-64 overflow-hidden bg-gray-100">
+                  <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                </div>
+                <div className="p-8 text-center">
+                  <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
+                  <p className="text-[#2E7D32] font-bold text-sm mb-4">{member.role}</p>
+                  <p className="text-gray-600 text-sm leading-relaxed">{member.bio}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <ConsultationCTA />
     </div>

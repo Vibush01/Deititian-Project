@@ -5,33 +5,8 @@ import useDocumentMeta from '../hooks/useDocumentMeta'
 import fitjeevaDietitian from '../assets/images/fitjeeva-dietitian.webp'
 import fitjeevaClinical from '../assets/images/fitjeeva-clinical.webp'
 
-const defaultExperts = [
-  {
-    id: 1,
-    name: 'Dr. Anjali Sharma',
-    role: 'Chief Clinical Nutritionist',
-    image: fitjeevaDietitian,
-    bio: 'With over 15 years of experience in clinical nutrition, Dr. Sharma specializes in metabolic disorders and therapeutic diets.'
-  },
-  {
-    id: 2,
-    name: 'Neha Verma',
-    role: 'PCOS & Thyroid Specialist',
-    image: fitjeevaClinical,
-    bio: 'Neha holds a Masters in Food & Nutrition and has successfully helped over 500+ women reverse their hormonal imbalances naturally.'
-  },
-  {
-    id: 3,
-    name: 'Rohan Gupta',
-    role: 'Sports Nutritionist',
-    image: fitjeevaDietitian,
-    bio: 'Rohan specializes in athletic performance and muscle building, creating customized macros for optimal fitness results.'
-  }
-]
-
 const ExpertsPage = () => {
-  const { experts: firestoreExperts } = useExperts()
-  const experts = firestoreExperts.length > 0 ? firestoreExperts : defaultExperts
+  const { experts } = useExperts()
   useDocumentMeta({
     title: 'Our Nutrition Experts – Meet the Clinical Dietitians',
     description: 'Meet FitJeeva\'s qualified clinical dietitians and nutrition experts. Specialists in PCOS, thyroid, diabetes, sports nutrition & weight management.',

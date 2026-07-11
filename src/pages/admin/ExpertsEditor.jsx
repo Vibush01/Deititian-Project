@@ -3,6 +3,7 @@ import { FaSave, FaUserMd, FaSpinner, FaPlus, FaTrash, FaEdit, FaImage } from 'r
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { defaultExperts } from '../../data/peopleData'
 
 const ExpertsEditor = () => {
   const [loading, setLoading] = useState(true)
@@ -31,14 +32,7 @@ const ExpertsEditor = () => {
       if (data && data.length > 0) {
         setExperts(data)
       } else {
-        setExperts([{
-          id: 'sample-expert-1',
-          name: 'Vibush',
-          role: 'Chief Clinical Dietitian',
-          specializations: ['PCOS', 'Thyroid', 'Weight Management'],
-          bio: 'Expert in clinical nutrition and lifestyle management.',
-          image: ''
-        }])
+        setExperts(defaultExperts.map(exp => ({ ...exp, id: `sample-${exp.id}`, specializations: [] })))
       }
     } catch (error) {
       console.error('Failed to fetch experts', error)

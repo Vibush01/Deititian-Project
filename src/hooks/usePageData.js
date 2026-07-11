@@ -6,6 +6,7 @@ import { COLLECTIONS } from '../firebase/collections'
 import { aboutIntro, philosophySections, coreServices } from '../data/aboutData'
 import { careersHero, companyValues, jobPositions, teamImages } from '../data/careersData'
 import { clinicLocations } from '../data/locationsData'
+import { defaultExperts, defaultTeamMembers } from '../data/peopleData'
 
 /**
  * Hook to get About page data from Firestore with static fallback.
@@ -39,7 +40,10 @@ export function useCareersData() {
  */
 export function useTeamMembers() {
   const { data, loading } = useFirestoreCollection(COLLECTIONS.TEAM, 'order')
-  return { members: data, loading }
+  return { 
+    members: data.length > 0 ? data : defaultTeamMembers, 
+    loading 
+  }
 }
 
 /**
@@ -47,7 +51,10 @@ export function useTeamMembers() {
  */
 export function useExperts() {
   const { data, loading } = useFirestoreCollection(COLLECTIONS.EXPERTS, 'order')
-  return { experts: data, loading }
+  return { 
+    experts: data.length > 0 ? data : defaultExperts, 
+    loading 
+  }
 }
 
 /**

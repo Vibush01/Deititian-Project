@@ -3,6 +3,7 @@ import { FaSave, FaUsers, FaSpinner, FaPlus, FaTrash, FaEdit, FaGripVertical, Fa
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { defaultTeamMembers } from '../../data/peopleData'
 
 const TeamEditor = () => {
   const [loading, setLoading] = useState(true)
@@ -33,13 +34,7 @@ const TeamEditor = () => {
         setTeam(data)
       } else {
         // Fallback team member
-        setTeam([{
-          id: 'sample-team-1',
-          name: 'Vibush',
-          role: 'Founder & Chief Dietitian',
-          bio: 'Expert in clinical nutrition and lifestyle management with over 10 years of experience.',
-          image: ''
-        }])
+        setTeam(defaultTeamMembers.map(member => ({ ...member, id: `sample-${member.id}` })))
       }
     } catch (error) {
       console.error('Failed to fetch team', error)

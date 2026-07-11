@@ -85,14 +85,15 @@ const DashboardPage = () => {
         try {
           const { serviceCategories } = await import('../../data/servicesData')
           const { clinicLocations } = await import('../../data/locationsData')
+          const { defaultStories } = await import('../../pages/SuccessStoriesPage')
           setStats({
             totalInquiries: 0,
             newInquiries: 0,
             totalServices: serviceCategories?.length || 0,
-            totalTeam: 0,
-            totalExperts: 0,
-            totalStories: 0,
-            totalRecipes: 0,
+            totalTeam: 1,
+            totalExperts: 1,
+            totalStories: defaultStories?.length || 16,
+            totalRecipes: 1,
             totalLocations: clinicLocations?.length || 0,
           })
         } catch (e) { /* ignore */ }
@@ -125,6 +126,10 @@ const DashboardPage = () => {
         // Use Firebase counts, but fallback to hardcoded data if Firebase is empty
         let svcCount = servicesSnap.size
         let locCount = locationsSnap.size
+        let teamCount = teamSnap.size
+        let expCount = expertsSnap.size
+        let storyCount = storiesSnap.size
+        let recipeCount = recipesSnap.size
 
         if (svcCount === 0) {
           try {
@@ -138,15 +143,24 @@ const DashboardPage = () => {
             locCount = clinicLocations?.length || 0
           } catch (e) { /* ignore */ }
         }
+        if (teamCount === 0) teamCount = 1
+        if (expCount === 0) expCount = 1
+        if (recipeCount === 0) recipeCount = 1
+        if (storyCount === 0) {
+          try {
+            const { defaultStories } = await import('../../pages/SuccessStoriesPage')
+            storyCount = defaultStories?.length || 16
+          } catch (e) { storyCount = 16 }
+        }
 
         setStats({
           totalInquiries: inquiriesSnap.size,
           newInquiries: newInquiriesSnap.size,
           totalServices: svcCount,
-          totalTeam: teamSnap.size,
-          totalExperts: expertsSnap.size,
-          totalStories: storiesSnap.size,
-          totalRecipes: recipesSnap.size,
+          totalTeam: teamCount,
+          totalExperts: expCount,
+          totalStories: storyCount,
+          totalRecipes: recipeCount,
           totalLocations: locCount,
         })
 
@@ -164,10 +178,15 @@ const DashboardPage = () => {
         try {
           const { serviceCategories } = await import('../../data/servicesData')
           const { clinicLocations } = await import('../../data/locationsData')
+          const { defaultStories } = await import('../../pages/SuccessStoriesPage')
           setStats(prev => ({
             ...prev,
             totalServices: serviceCategories?.length || 0,
             totalLocations: clinicLocations?.length || 0,
+            totalTeam: 1,
+            totalExperts: 1,
+            totalStories: defaultStories?.length || 16,
+            totalRecipes: 1,
           }))
         } catch (e) { /* ignore */ }
       } finally {
