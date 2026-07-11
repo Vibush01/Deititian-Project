@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {
-  FaEnvelope, FaUserMd, FaConciergeBell, FaUsers,
-  FaTrophy, FaUtensils, FaMapMarkerAlt, FaArrowRight,
-  FaClock, FaCheckCircle, FaExclamationCircle, FaCog,
+  FaUsers, FaUserMd, FaConciergeBell, FaEnvelope, FaMapMarkerAlt,
+  FaExclamationCircle, FaArrowRight, FaTrophy, FaUtensils, FaCog, FaFileAlt, FaImage, FaClock, FaCheckCircle
 } from 'react-icons/fa'
 import { collection, query, where, getDocs, orderBy, limit } from 'firebase/firestore'
 import { db } from '../../firebase/config'
@@ -341,7 +340,10 @@ const DashboardPage = () => {
           {[
             { label: 'Edit Site Info', to: '/admin/site-settings', icon: <FaCog className="text-sm" /> },
             { label: 'Manage Services', to: '/admin/services', icon: <FaConciergeBell className="text-sm" /> },
+            { label: 'Edit About Page', to: '/admin/pages/about', icon: <FaFileAlt className="text-sm" /> },
+            { label: 'Manage Media', to: '/admin/media', icon: <FaImage className="text-sm" /> },
             { label: 'Add Team Member', to: '/admin/team', icon: <FaUsers className="text-sm" /> },
+            { label: 'Edit Success Stories', to: '/admin/success-stories', icon: <FaTrophy className="text-sm" /> },
             { label: 'View Inquiries', to: '/admin/inquiries', icon: <FaEnvelope className="text-sm" /> },
           ].map((action) => (
             <Link

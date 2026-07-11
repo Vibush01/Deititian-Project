@@ -20,20 +20,13 @@ const HomePageEditor = () => {
   const [pageData, setPageData] = useState({
     quickLinks: defaultQuickLinks
   })
-  
-  // Media data
-  const [mediaData, setMediaData] = useState({
-    mediaLogos: [],
-    instagramPosts: [],
-    heroBanners: [],
-  })
 
   // Expertise Cards
   const [expertiseCards, setExpertiseCards] = useState([])
   const [cardsToDelete, setCardsToDelete] = useState([]) // keep track of deleted IDs
 
   // Uploading state
-  const [uploadingTarget, setUploadingTarget] = useState(null) // { type: 'expertise'|'mediaLogo'|'instagram', index?: number }
+  const [uploadingTarget, setUploadingTarget] = useState(null) // { type: 'expertise', index?: number }
 
   useEffect(() => {
     const fetchHomeData = async () => {
@@ -41,16 +34,6 @@ const HomePageEditor = () => {
         if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) {
           setLoading(false)
           return
-        }
-
-        // Fetch Media
-        const mediaDoc = await getDocument(COLLECTIONS.MEDIA, 'main')
-        if (mediaDoc) {
-          setMediaData({
-            mediaLogos: mediaDoc.mediaLogos || [],
-            instagramPosts: mediaDoc.instagramPosts || [],
-            heroBanners: mediaDoc.heroBanners || [],
-          })
         }
 
         // Fetch Page Data (Quick Links)
@@ -85,10 +68,7 @@ const HomePageEditor = () => {
         // 1. Save Page Data (Quick Links)
         await setDocument(COLLECTIONS.PAGES, 'home', pageData)
 
-        // 2. Save Media
-        await setDocument(COLLECTIONS.MEDIA, 'main', mediaData)
-
-        // 3. Save Expertise Cards
+        // 2. Save Expertise Cards
         // First delete removed cards
         for (const id of cardsToDelete) {
           await removeDocument(COLLECTIONS.HOME_EXPERTISE_CARDS, id)
@@ -158,48 +138,6 @@ const HomePageEditor = () => {
     })
   }
 
-  // --- Media Logos Handlers ---
-  const handleRemoveMediaLogo = (index) => {
-    setMediaData(prev => {
-      const newLogos = [...prev.mediaLogos]
-      newLogos.splice(index, 1)
-      return { ...prev, mediaLogos: newLogos }
-    })
-  }
-
-  // --- Hero Banners Handlers ---
-  const handleRemoveHeroBanner = (index) => {
-    setMediaData(prev => {
-      const newBanners = [...prev.heroBanners]
-      newBanners.splice(index, 1)
-      return { ...prev, heroBanners: newBanners }
-    })
-  }
-
-  // --- Instagram Posts Handlers ---
-  const handleInstagramChange = (index, value) => {
-    setMediaData(prev => {
-      const newPosts = [...prev.instagramPosts]
-      newPosts[index] = { ...newPosts[index], link: value }
-      return { ...prev, instagramPosts: newPosts }
-    })
-  }
-
-  const handleAddInstagramPost = () => {
-    setMediaData(prev => ({
-      ...prev,
-      instagramPosts: [...prev.instagramPosts, { image: '', link: '' }]
-    }))
-  }
-
-  const handleRemoveInstagramPost = (index) => {
-    setMediaData(prev => {
-      const newPosts = [...prev.instagramPosts]
-      newPosts.splice(index, 1)
-      return { ...prev, instagramPosts: newPosts }
-    })
-  }
-
   // --- Global Image Upload Handler ---
   const handleImageUpload = (url) => {
     if (!uploadingTarget) return
@@ -208,22 +146,6 @@ const HomePageEditor = () => {
 
     if (type === 'expertise' && index !== undefined) {
       handleCardChange(index, 'image', url)
-    } else if (type === 'mediaLogo') {
-      setMediaData(prev => ({
-        ...prev,
-        mediaLogos: [...prev.mediaLogos, url]
-      }))
-    } else if (type === 'heroBanner') {
-      setMediaData(prev => ({
-        ...prev,
-        heroBanners: [...prev.heroBanners, url]
-      }))
-    } else if (type === 'instagram' && index !== undefined) {
-      setMediaData(prev => {
-        const newPosts = [...prev.instagramPosts]
-        newPosts[index] = { ...newPosts[index], image: url }
-        return { ...prev, instagramPosts: newPosts }
-      })
     }
 
     setUploadingTarget(null)
@@ -272,7 +194,7 @@ const HomePageEditor = () => {
           <div className="space-y-3">
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
               <span className="font-semibold text-gray-700">1. Hero Banners</span>
-              <span className="text-[#2E7D32] text-xs font-bold bg-[#E8F5E9] px-2 py-1 rounded">Edit Below ↓</span>
+              <Link to="/admin/media" className="text-[#2E7D32] hover:underline font-bold text-xs">Edit in Media Manager →</Link>
             </div>
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
               <span className="font-semibold text-gray-700">2. Stats Counter</span>
@@ -298,7 +220,7 @@ const HomePageEditor = () => {
             </div>
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
               <span className="font-semibold text-gray-700">7. Media Appearances</span>
-              <span className="text-[#2E7D32] text-xs font-bold bg-[#E8F5E9] px-2 py-1 rounded">Edit Below ↓</span>
+              <Link to="/admin/media" className="text-[#2E7D32] hover:underline font-bold text-xs">Edit in Media Manager →</Link>
             </div>
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
               <span className="font-semibold text-gray-700">8. Main Call to Action</span>
@@ -306,7 +228,7 @@ const HomePageEditor = () => {
             </div>
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
               <span className="font-semibold text-gray-700">9. Instagram Feed</span>
-              <span className="text-[#2E7D32] text-xs font-bold bg-[#E8F5E9] px-2 py-1 rounded">Edit Below ↓</span>
+              <Link to="/admin/media" className="text-[#2E7D32] hover:underline font-bold text-xs">Edit in Media Manager →</Link>
             </div>
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
               <span className="font-semibold text-gray-700">10. Clinic Locations</span>
@@ -395,39 +317,6 @@ const HomePageEditor = () => {
         </div>
       </div>
 
-      {/* Hero Banners */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
-        <div className="flex items-center justify-between mb-5 pb-3 border-b border-gray-100">
-          <div>
-            <h2 className="text-lg font-bold text-gray-900">Home Hero Banners</h2>
-            <p className="text-xs text-gray-500 mt-1">Upload up to 5 images for the hero carousel</p>
-          </div>
-          <button 
-            onClick={() => setUploadingTarget({ type: 'heroBanner' })} 
-            disabled={mediaData.heroBanners.length >= 5}
-            className="text-sm font-bold text-[#2E7D32] hover:bg-[#E8F5E9] px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <FaPlus className="text-xs" /> Add Banner
-          </button>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {mediaData.heroBanners.map((img, index) => (
-            <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video bg-gray-50">
-              <img src={img} alt={`Banner ${index}`} className="w-full h-full object-cover" />
-              <button 
-                onClick={() => handleRemoveHeroBanner(index)}
-                className="absolute top-2 right-2 bg-white/90 text-red-500 hover:bg-red-50 p-2 rounded-md shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-              >
-                <FaTrash className="text-xs" />
-              </button>
-            </div>
-          ))}
-        </div>
-        {mediaData.heroBanners.length === 0 && (
-          <p className="text-sm text-gray-500 italic text-center py-4 border-t border-gray-100 mt-2">No hero banners added. Static defaults will be used.</p>
-        )}
-      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Media Logos */}
