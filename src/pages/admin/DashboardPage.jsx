@@ -86,14 +86,16 @@ const DashboardPage = () => {
           const { serviceCategories } = await import('../../data/servicesData')
           const { clinicLocations } = await import('../../data/locationsData')
           const { defaultStories } = await import('../../pages/SuccessStoriesPage')
+          const { defaultExperts, defaultTeamMembers } = await import('../../data/peopleData')
+          const { defaultRecipes } = await import('../../data/recipesData')
           setStats({
             totalInquiries: 0,
             newInquiries: 0,
             totalServices: serviceCategories?.length || 0,
-            totalTeam: 1,
-            totalExperts: 1,
+            totalTeam: defaultTeamMembers?.length || 3,
+            totalExperts: defaultExperts?.length || 3,
             totalStories: defaultStories?.length || 16,
-            totalRecipes: 1,
+            totalRecipes: defaultRecipes?.length || 3,
             totalLocations: clinicLocations?.length || 0,
           })
         } catch (e) { /* ignore */ }
@@ -143,9 +145,24 @@ const DashboardPage = () => {
             locCount = clinicLocations?.length || 0
           } catch (e) { /* ignore */ }
         }
-        if (teamCount === 0) teamCount = 1
-        if (expCount === 0) expCount = 1
-        if (recipeCount === 0) recipeCount = 1
+        if (teamCount === 0) {
+          try {
+            const { defaultTeamMembers } = await import('../../data/peopleData')
+            teamCount = defaultTeamMembers?.length || 3
+          } catch (e) { teamCount = 3 }
+        }
+        if (expCount === 0) {
+          try {
+            const { defaultExperts } = await import('../../data/peopleData')
+            expCount = defaultExperts?.length || 3
+          } catch (e) { expCount = 3 }
+        }
+        if (recipeCount === 0) {
+          try {
+            const { defaultRecipes } = await import('../../data/recipesData')
+            recipeCount = defaultRecipes?.length || 3
+          } catch (e) { recipeCount = 3 }
+        }
         if (storyCount === 0) {
           try {
             const { defaultStories } = await import('../../pages/SuccessStoriesPage')
@@ -179,14 +196,16 @@ const DashboardPage = () => {
           const { serviceCategories } = await import('../../data/servicesData')
           const { clinicLocations } = await import('../../data/locationsData')
           const { defaultStories } = await import('../../pages/SuccessStoriesPage')
+          const { defaultExperts, defaultTeamMembers } = await import('../../data/peopleData')
+          const { defaultRecipes } = await import('../../data/recipesData')
           setStats(prev => ({
             ...prev,
             totalServices: serviceCategories?.length || 0,
             totalLocations: clinicLocations?.length || 0,
-            totalTeam: 1,
-            totalExperts: 1,
+            totalTeam: defaultTeamMembers?.length || 3,
+            totalExperts: defaultExperts?.length || 3,
             totalStories: defaultStories?.length || 16,
-            totalRecipes: 1,
+            totalRecipes: defaultRecipes?.length || 3,
           }))
         } catch (e) { /* ignore */ }
       } finally {

@@ -7,6 +7,7 @@ import { aboutIntro, philosophySections, coreServices } from '../data/aboutData'
 import { careersHero, companyValues, jobPositions, teamImages } from '../data/careersData'
 import { clinicLocations } from '../data/locationsData'
 import { defaultExperts, defaultTeamMembers } from '../data/peopleData'
+import { defaultRecipes } from '../data/recipesData'
 
 /**
  * Hook to get About page data from Firestore with static fallback.
@@ -70,7 +71,10 @@ export function useSuccessStories() {
  */
 export function useRecipes() {
   const { data, loading } = useFirestoreCollection(COLLECTIONS.RECIPES, 'order')
-  return { recipes: data, loading }
+  return { 
+    recipes: data.length > 0 ? data : defaultRecipes, 
+    loading 
+  }
 }
 
 /**
