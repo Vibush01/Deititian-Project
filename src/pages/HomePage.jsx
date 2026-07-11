@@ -118,7 +118,18 @@ const quickLinks = [
   },
 ];
 
-const QuickLinkCards = () => (
+const QuickLinkCards = () => {
+  const { quickLinks: dynamicQuickLinks } = useHomePageData();
+
+  // Merge dynamic text/links with the hardcoded SVGs
+  const finalQuickLinks = dynamicQuickLinks ? quickLinks.map((link, idx) => ({
+    ...link,
+    label: dynamicQuickLinks[idx]?.label || link.label,
+    sublabel: dynamicQuickLinks[idx]?.sublabel || link.sublabel,
+    to: dynamicQuickLinks[idx]?.to || link.to,
+  })) : quickLinks;
+
+  return (
   <section className="py-8 md:py-12 bg-white relative">
     <div className="absolute top-0 right-0 w-64 md:w-96 h-64 md:h-96 bg-[#E8F5E9]/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
     <div className="container-custom relative z-10">
@@ -132,7 +143,7 @@ const QuickLinkCards = () => (
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-        {quickLinks.map((link, idx) => (
+        {finalQuickLinks.map((link, idx) => (
           <Link 
             key={idx} 
             to={link.to}
@@ -153,7 +164,8 @@ const QuickLinkCards = () => (
       </div>
     </div>
   </section>
-);
+  )
+};
 
 const ExpertiseSection = () => {
   const { cards: homeExpertiseCards } = useHomeExpertiseCards()

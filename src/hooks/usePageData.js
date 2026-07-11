@@ -100,3 +100,14 @@ export function useMediaData() {
     loading,
   }
 }
+
+/**
+ * Hook to get home page specific data (e.g. Quick Links) from Firestore.
+ */
+export function useHomePageData() {
+  const { data, loading } = useFirestoreDoc(COLLECTIONS.PAGES, 'home')
+  return {
+    quickLinks: data?.quickLinks || null,
+    loading,
+  }
+}

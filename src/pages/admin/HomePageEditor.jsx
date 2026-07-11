@@ -2,11 +2,24 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaHome, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage, FaInstagram } from 'react-icons/fa'
 import { getDocument, setDocument, getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { Link } from 'react-router-dom'
+
+const defaultQuickLinks = [
+  { label: "PCOD", sublabel: "Hormonal Balance", to: "/service/pcod-pcos" },
+  { label: "Thyroid", sublabel: "Metabolism Care", to: "/service/thyroid" },
+  { label: "Diabetes", sublabel: "Sugar Control", to: "/service/diabetes" },
+  { label: "Explore All", sublabel: "Diet Plans", to: "/service" }
+]
 
 const HomePageEditor = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
+  
+  // Page data
+  const [pageData, setPageData] = useState({
+    quickLinks: defaultQuickLinks
+  })
   
   // Media data
   const [mediaData, setMediaData] = useState({
@@ -40,6 +53,12 @@ const HomePageEditor = () => {
           })
         }
 
+        // Fetch Page Data (Quick Links)
+        const pageDoc = await getDocument(COLLECTIONS.PAGES, 'home')
+        if (pageDoc && pageDoc.quickLinks) {
+          setPageData({ quickLinks: pageDoc.quickLinks })
+        }
+
         // Fetch Expertise Cards
         const cards = await getCollection(COLLECTIONS.HOME_EXPERTISE_CARDS, 'order')
         if (cards && cards.length > 0) {
@@ -63,10 +82,13 @@ const HomePageEditor = () => {
     setSaveMessage('')
     try {
       if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
-        // 1. Save Media
+        // 1. Save Page Data (Quick Links)
+        await setDocument(COLLECTIONS.PAGES, 'home', pageData)
+
+        // 2. Save Media
         await setDocument(COLLECTIONS.MEDIA, 'main', mediaData)
 
-        // 2. Save Expertise Cards
+        // 3. Save Expertise Cards
         // First delete removed cards
         for (const id of cardsToDelete) {
           await removeDocument(COLLECTIONS.HOME_EXPERTISE_CARDS, id)
@@ -97,6 +119,15 @@ const HomePageEditor = () => {
     } finally {
       setSaving(false)
     }
+  }
+
+  // --- Quick Links Handlers ---
+  const handleQuickLinkChange = (index, field, value) => {
+    setPageData(prev => {
+      const newLinks = [...prev.quickLinks]
+      newLinks[index] = { ...newLinks[index], [field]: value }
+      return { ...prev, quickLinks: newLinks }
+    })
   }
 
   // --- Expertise Cards Handlers ---
@@ -233,6 +264,81 @@ const HomePageEditor = () => {
           {saveMessage}
         </div>
       )}
+
+      {/* Home Page Section Map */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 className="text-lg font-bold text-gray-900 mb-4 pb-3 border-b border-gray-100">Home Page Sections Guide</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div className="space-y-3">
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span className="font-semibold text-gray-700">1. Hero Banners</span>
+              <span className="text-[#2E7D32] text-xs font-bold bg-[#E8F5E9] px-2 py-1 rounded">Edit Below ↓</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span className="font-semibold text-gray-700">2. Stats Counter</span>
+              <Link to="/admin/site-settings" className="text-[#2E7D32] hover:underline font-bold text-xs">Edit in Site Settings →</Link>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span className="font-semibold text-gray-700">3. Quick Links</span>
+              <span className="text-[#2E7D32] text-xs font-bold bg-[#E8F5E9] px-2 py-1 rounded">Edit Below ↓</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span className="font-semibold text-gray-700">4. Medical Expertise</span>
+              <span className="text-[#2E7D32] text-xs font-bold bg-[#E8F5E9] px-2 py-1 rounded">Edit Below ↓</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span className="font-semibold text-gray-700">5. Client Spotlight</span>
+              <Link to="/admin/site-settings" className="text-[#2E7D32] hover:underline font-bold text-xs">Edit in Site Settings →</Link>
+            </div>
+          </div>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100 opacity-60">
+              <span className="font-semibold text-gray-700">6. Consultation Form</span>
+              <span className="text-gray-500 text-xs">System Component</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span className="font-semibold text-gray-700">7. Media Appearances</span>
+              <span className="text-[#2E7D32] text-xs font-bold bg-[#E8F5E9] px-2 py-1 rounded">Edit Below ↓</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span className="font-semibold text-gray-700">8. Main Call to Action</span>
+              <Link to="/admin/site-settings" className="text-[#2E7D32] hover:underline font-bold text-xs">Edit in Site Settings →</Link>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span className="font-semibold text-gray-700">9. Instagram Feed</span>
+              <span className="text-[#2E7D32] text-xs font-bold bg-[#E8F5E9] px-2 py-1 rounded">Edit Below ↓</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg border border-gray-100">
+              <span className="font-semibold text-gray-700">10. Clinic Locations</span>
+              <Link to="/admin/locations" className="text-[#2E7D32] hover:underline font-bold text-xs">Edit in Locations →</Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Quick Links */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+        <h2 className="text-lg font-bold text-gray-900 mb-5 pb-3 border-b border-gray-100">Quick Links (Top 4 Cards)</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {pageData.quickLinks.map((link, index) => (
+            <div key={index} className="p-4 bg-gray-50 rounded-xl border border-gray-100 space-y-3">
+              <div className="font-bold text-sm text-[#2E7D32]">Card {index + 1}</div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Label (e.g. PCOD)</label>
+                <input type="text" value={link.label} onChange={(e) => handleQuickLinkChange(index, 'label', e.target.value)} className={inputClasses} />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Sublabel (e.g. Hormonal Balance)</label>
+                <input type="text" value={link.sublabel} onChange={(e) => handleQuickLinkChange(index, 'sublabel', e.target.value)} className={inputClasses} />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-1.5">Link Path (e.g. /service/pcod)</label>
+                <input type="text" value={link.to} onChange={(e) => handleQuickLinkChange(index, 'to', e.target.value)} className={inputClasses} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Expertise Cards */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
