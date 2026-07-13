@@ -167,27 +167,3 @@ export function subscribeToCollection(collectionName, callback, orderByField = n
   })
 }
 
-// ===========================
-// Query Helpers
-// ===========================
-
-/**
- * Query documents with a where clause.
- * @param {string} collectionName
- * @param {string} field
- * @param {string} operator - Firestore operator: "==", "!=", "<", ">", ">=", "<=", "in", "array-contains", etc.
- * @param {*} value
- * @param {string} [orderByField]
- * @param {string} [orderDirection]
- * @returns {Promise<Array<Object>>}
- */
-export async function queryDocuments(collectionName, field, operator, value, orderByField = null, orderDirection = 'asc') {
-  const colRef = collection(db, collectionName)
-  const constraints = [where(field, operator, value)]
-  if (orderByField) {
-    constraints.push(orderBy(orderByField, orderDirection))
-  }
-  const q = query(colRef, ...constraints)
-  const snapshot = await getDocs(q)
-  return snapshot.docs.map((d) => ({ id: d.id, ...d.data() }))
-}

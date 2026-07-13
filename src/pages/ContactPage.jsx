@@ -30,7 +30,7 @@ const ContactHero = () => {
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: '', email: '', phone: '', service: '', message: '',
+    name: '', email: '', phone: '', service: '', message: '', botField: ''
   })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -52,18 +52,42 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // Honeypot check for bots
+    if (formData.botField) {
+      console.warn('Bot detected by honeypot field.')
+      return // Silently reject
+    }
+
+    // Phone validation
+    const phoneRegex = /^[0-9+\-\s()]{10,20}$/
+    if (!phoneRegex.test(formData.phone)) {
+      alert('Please enter a valid phone number (at least 10 digits).')
+      return
+    }
+
+    // Email validation
+    if (formData.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.email)) {
+        alert('Please enter a valid email address.')
+        return
+      }
+    }
+
     setSubmitting(true)
     try {
       if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
-        await submitContactInquiry(formData)
+        const { botField, ...submitData } = formData
+        await submitContactInquiry(submitData)
       }
       setSubmitted(true)
-      setFormData({ name: '', email: '', phone: '', service: '', message: '' })
+      setFormData({ name: '', email: '', phone: '', service: '', message: '', botField: '' })
       setTimeout(() => setSubmitted(false), 5000)
     } catch (error) {
       console.error('Form submission error:', error)
       alert('Thank you for reaching out! Our team will contact you shortly.')
-      setFormData({ name: '', email: '', phone: '', service: '', message: '' })
+      setFormData({ name: '', email: '', phone: '', service: '', message: '', botField: '' })
     } finally {
       setSubmitting(false)
     }
@@ -86,6 +110,12 @@ const ContactForm = () => {
           </div>
 
           <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
+            {/* Honeypot Field (Hidden) */}
+            <div className="hidden" aria-hidden="true">
+              <label>Do not fill this out if you are human:</label>
+              <input type="text" name="botField" value={formData.botField} onChange={handleChange} tabIndex="-1" autoComplete="off" />
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-2">Full Name <span className="text-red-500">*</span></label>

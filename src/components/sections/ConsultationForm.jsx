@@ -16,6 +16,7 @@ const initialFormState = {
   name: '', email: '', phone: '', whatsapp: '', age: '', gender: '',
   weight: '', height: '', hasConcern: 'no', medicalConcern: '',
   location: '', clinicLocation: '', consultationDate: '', consultationTime: '',
+  botField: '' // Honeypot field
 }
 
 const clinicOptionsStatic = [
@@ -42,11 +43,36 @@ const ConsultationForm = ({ className = '' }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    
+    // Honeypot check for bots
+    if (formData.botField) {
+      console.warn('Bot detected by honeypot field.')
+      return // Silently reject
+    }
+
+    // Phone validation
+    const phoneRegex = /^[0-9+\-\s()]{10,20}$/
+    if (!phoneRegex.test(formData.phone)) {
+      alert('Please enter a valid phone number (at least 10 digits).')
+      return
+    }
+
+    // Email validation (if provided)
+    if (formData.email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(formData.email)) {
+        alert('Please enter a valid email address.')
+        return
+      }
+    }
+
     setSubmitting(true)
     try {
       // Try to save to Firestore
       if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
-        await submitConsultationInquiry(formData)
+        // Exclude botField from submission payload
+        const { botField, ...submitData } = formData
+        await submitConsultationInquiry(submitData)
       }
       setSubmitted(true)
       setFormData(initialFormState)
@@ -117,6 +143,12 @@ const ConsultationForm = ({ className = '' }) => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
+              {/* Honeypot Field (Hidden) */}
+              <div className="hidden" aria-hidden="true">
+                <label>Do not fill this out if you are human:</label>
+                <input type="text" name="botField" value={formData.botField} onChange={handleChange} tabIndex="-1" autoComplete="off" />
+              </div>
+
               {/* Row 1 */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>

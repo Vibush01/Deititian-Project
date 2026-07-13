@@ -59,11 +59,3 @@ export function onAuthChange(callback) {
     }
   })
 }
-
-/**
- * Get the currently signed-in user (synchronous — may be null on initial load).
- * @returns {import('firebase/auth').User|null}
- */
-export function getCurrentUser() {
-  return auth.currentUser
-}
