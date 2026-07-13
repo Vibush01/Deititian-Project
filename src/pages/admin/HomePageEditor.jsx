@@ -174,7 +174,7 @@ const HomePageEditor = () => {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+          className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex w-full sm:w-auto justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {saving ? <FaSpinner className="animate-spin" /> : <FaSave />}
           {saving ? 'Saving...' : 'Save Changes'}
@@ -330,7 +330,7 @@ const HomePageEditor = () => {
         </div>
         <Link 
           to="/admin/media" 
-          className="shrink-0 bg-white text-[#2E7D32] hover:bg-[#2E7D32] hover:text-white border border-[#2E7D32] px-6 py-3 rounded-xl font-bold transition-colors flex items-center gap-2 text-sm"
+          className="shrink-0 bg-white text-[#2E7D32] hover:bg-[#2E7D32] hover:text-white border border-[#2E7D32] px-6 py-3 rounded-xl font-bold transition-colors flex w-full sm:w-auto justify-center items-center gap-2 text-sm"
         >
           Go to Media Manager →
         </Link>

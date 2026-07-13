@@ -120,7 +120,7 @@ const InquiriesManager = () => {
         </div>
         <button
           onClick={exportCSV}
-          className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-4 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex items-center gap-2 self-start md:self-auto"
+          className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-4 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex w-full sm:w-auto justify-center items-center gap-2 self-start md:self-auto"
         >
           <FaFileCsv className="text-lg text-green-600" />
           Export CSV

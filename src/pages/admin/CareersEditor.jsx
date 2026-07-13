@@ -201,7 +201,7 @@ const CareersEditor = () => {
         <button
           onClick={handleSave}
           disabled={saving}
-          className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+          className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex w-full sm:w-auto justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
         >
           {saving ? <FaSpinner className="animate-spin" /> : <FaSave />}
           {saving ? 'Saving...' : 'Save Changes'}
@@ -291,7 +291,7 @@ const CareersEditor = () => {
           <button 
             onClick={() => setUploadingAwardTarget('new')}
             disabled={(data.awardImages || []).length >= 4}
-            className="bg-[#2E7D32]/10 text-[#2E7D32] hover:bg-[#2E7D32]/20 px-4 py-2 rounded-lg font-bold text-sm transition-colors flex items-center gap-2 disabled:opacity-50"
+            className="bg-[#2E7D32]/10 text-[#2E7D32] hover:bg-[#2E7D32]/20 px-4 py-2 rounded-lg font-bold text-sm transition-colors flex w-full sm:w-auto justify-center items-center gap-2 disabled:opacity-50"
           >
             <FaPlus /> Add Image
           </button>

@@ -260,7 +260,7 @@ const ServiceSubPageEditor = () => {
           <button
             onClick={handleSave}
             disabled={saving || !activePage}
-            className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-4 py-2 rounded-lg font-bold text-sm shadow-sm transition-colors flex items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+            className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-4 py-2 rounded-lg font-bold text-sm shadow-sm transition-colors flex w-full sm:w-auto justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {saving ? <FaSpinner className="animate-spin" /> : <FaSave />}
             {saving ? 'Saving...' : 'Save All'}
