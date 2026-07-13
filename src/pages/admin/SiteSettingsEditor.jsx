@@ -4,12 +4,14 @@ import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collection
 import ImageUploader from '../../components/admin/ImageUploader'
 import { statsData as defaultStatsData } from '../../data/siteData'
 import logoImg from '../../assets/images/logo.webp'
+import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.webp'
+import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.webp'
 
 const SiteSettingsEditor = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
-  const [uploadingLogo, setUploadingLogo] = useState(false)
+  const [uploadTarget, setUploadTarget] = useState(null)
   const [settings, setSettings] = useState({
     siteInfo: {
       name: 'FitJeeva', email: 'info@fitjeeva.com', phone: '+91 70912 89342', whatsapp: '917091289342', address: 'Chandigarh, India', logoUrl: logoImg,
@@ -30,6 +32,8 @@ const SiteSettingsEditor = () => {
     ctaHeading: "Book a Diet Consultation for Life-Changing Results",
     ctaStat: "35,000+",
     ctaSubtext: "people have transformed their weight loss journeys with FitJeeva.",
+    ctaImageBefore: fitjeevaDietitian,
+    ctaImageAfter: fitjeevaClinical,
     contactCtaTitle: "Start Your Transformation: Contact FitJeeva for Expert Guidance",
     contactCtaSubtitle: "The first step to a healthier you starts here. Book a diet consultation and talk to a diet expert now to begin your transformation. Connect with our team through the channel you love — our responses are always personalised and judgment-free.",
     seoMetadata: {
@@ -69,6 +73,8 @@ const SiteSettingsEditor = () => {
             ctaHeading: data.ctaHeading || prev.ctaHeading,
             ctaStat: data.ctaStat || prev.ctaStat,
             ctaSubtext: data.ctaSubtext || prev.ctaSubtext,
+            ctaImageBefore: data.ctaImageBefore || prev.ctaImageBefore,
+            ctaImageAfter: data.ctaImageAfter || prev.ctaImageAfter,
             contactCtaTitle: data.contactCtaTitle || prev.contactCtaTitle,
             contactCtaSubtitle: data.contactCtaSubtitle || prev.contactCtaSubtitle,
             seoMetadata: { ...prev.seoMetadata, ...(data.seoMetadata || {}) },
@@ -231,7 +237,7 @@ const SiteSettingsEditor = () => {
                 <p className="text-sm text-gray-500 mb-3">Upload your main brand logo. Best size: 400x120px.</p>
                 <button 
                   type="button"
-                  onClick={() => setUploadingLogo(true)}
+                  onClick={() => setUploadTarget('logo')}
                   className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-bold text-sm transition-colors"
                 >
                   {settings.siteInfo.logoUrl ? 'Change Logo' : 'Upload Logo'}
@@ -412,6 +418,50 @@ const SiteSettingsEditor = () => {
                 />
               </div>
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2">
+              <div>
+                <label className={labelClasses}>CTA Image - Before</label>
+                <div className="border border-gray-200 rounded-lg p-2 bg-gray-50 relative overflow-hidden h-32 flex items-center justify-center">
+                  {settings.ctaImageBefore ? (
+                    <>
+                      <img src={settings.ctaImageBefore} alt="CTA Before" className="absolute inset-0 w-full h-full object-cover opacity-80" />
+                      <div className="relative z-10 flex gap-2">
+                        <button type="button" onClick={() => setUploadTarget('ctaBefore')} className="bg-white/90 px-3 py-1.5 text-xs font-bold rounded-md shadow-sm border border-gray-200 hover:bg-white">Change</button>
+                        <button type="button" onClick={() => handleSettingsChange({ target: { name: 'ctaImageBefore', value: '' } })} className="bg-white/90 text-red-500 hover:bg-red-50 p-1.5 rounded-md shadow-sm">
+                          <FaTrash className="text-xs" />
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <button type="button" onClick={() => setUploadTarget('ctaBefore')} className="flex flex-col items-center justify-center text-gray-500 hover:text-[#2E7D32] w-full h-full">
+                      <FaImage className="text-2xl mb-1" />
+                      <span className="text-xs font-medium">Add Before Image</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+              <div>
+                <label className={labelClasses}>CTA Image - After</label>
+                <div className="border border-gray-200 rounded-lg p-2 bg-gray-50 relative overflow-hidden h-32 flex items-center justify-center">
+                  {settings.ctaImageAfter ? (
+                    <>
+                      <img src={settings.ctaImageAfter} alt="CTA After" className="absolute inset-0 w-full h-full object-cover opacity-80" />
+                      <div className="relative z-10 flex gap-2">
+                        <button type="button" onClick={() => setUploadTarget('ctaAfter')} className="bg-white/90 px-3 py-1.5 text-xs font-bold rounded-md shadow-sm border border-gray-200 hover:bg-white">Change</button>
+                        <button type="button" onClick={() => handleSettingsChange({ target: { name: 'ctaImageAfter', value: '' } })} className="bg-white/90 text-red-500 hover:bg-red-50 p-1.5 rounded-md shadow-sm">
+                          <FaTrash className="text-xs" />
+                        </button>
+                      </div>
+                    </>
+                  ) : (
+                    <button type="button" onClick={() => setUploadTarget('ctaAfter')} className="flex flex-col items-center justify-center text-gray-500 hover:text-[#2E7D32] w-full h-full">
+                      <FaImage className="text-2xl mb-1" />
+                      <span className="text-xs font-medium">Add After Image</span>
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -480,18 +530,26 @@ const SiteSettingsEditor = () => {
       </form>
 
       {/* Image Upload Modal */}
-      {uploadingLogo && (
+      {uploadTarget && (
         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
           <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Site Logo</h3>
+            <h3 className="text-lg font-bold text-gray-900 mb-4">
+              {uploadTarget === 'logo' ? 'Upload Site Logo' : 'Upload CTA Image'}
+            </h3>
             <ImageUploader 
               onUpload={(url) => {
-                handleInfoChange({ target: { name: 'logoUrl', value: url } })
-                setUploadingLogo(false)
+                if (uploadTarget === 'logo') {
+                  handleInfoChange({ target: { name: 'logoUrl', value: url } })
+                } else if (uploadTarget === 'ctaBefore') {
+                  handleSettingsChange({ target: { name: 'ctaImageBefore', value: url } })
+                } else if (uploadTarget === 'ctaAfter') {
+                  handleSettingsChange({ target: { name: 'ctaImageAfter', value: url } })
+                }
+                setUploadTarget(null)
               }} 
             />
             <button 
-              onClick={() => setUploadingLogo(false)}
+              onClick={() => setUploadTarget(null)}
               className="mt-4 w-full py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold rounded-xl transition-colors text-sm"
             >
               Cancel

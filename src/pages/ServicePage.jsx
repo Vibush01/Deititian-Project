@@ -44,7 +44,7 @@ const ServiceHero = () => {
 
         <div className="w-full lg:w-1/2 relative">
           <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white z-10">
-            <img src={fitjeevaDietitian} alt="Expert Clinical Diet Plans" fetchpriority="high" className="w-full h-auto object-cover" />
+            <img src={fitjeevaDietitian} alt="Expert Clinical Diet Plans" fetchPriority="high" className="w-full h-auto object-cover" />
           </div>
           <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#C8E6C9] rounded-full blur-2xl -z-10"></div>
           <div className="absolute -top-6 -right-6 w-40 h-40 bg-[#A5D6A7] rounded-full blur-3xl -z-10"></div>

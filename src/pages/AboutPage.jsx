@@ -54,7 +54,7 @@ const AboutHero = () => {
             <img
               src={fitjeevaDietitian}
               alt="FitJeeva Team"
-              fetchpriority="high"
+              fetchPriority="high"
               className="w-full h-auto object-cover"
             />
           </div>

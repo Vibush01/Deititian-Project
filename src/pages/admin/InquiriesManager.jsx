@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FaEnvelope, FaSpinner, FaSearch, FaEye, FaTrash } from 'react-icons/fa'
+import { FaEnvelope, FaSpinner, FaSearch, FaEye, FaTrash, FaFileCsv, FaFilter } from 'react-icons/fa'
 import { getCollection, removeDocument, COLLECTIONS } from '../../firebase/collections'
 import StatusBadge from '../../components/admin/StatusBadge'
 import InquiryDetailPanel from '../../components/admin/InquiryDetailPanel'

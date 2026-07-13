@@ -2,6 +2,19 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaFileAlt, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.webp'
+import fitjeevaMillet from '../../assets/images/fitjeeva-millet.webp'
+import fitjeevaHomevisit from '../../assets/images/fitjeeva-homevisit.webp'
+import fitjeevaBanner from '../../assets/images/fitjeeva-banner-1.webp'
+import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.webp'
+
+const defaultPhilosophyImages = [
+  fitjeevaClinical,
+  fitjeevaMillet,
+  fitjeevaHomevisit,
+  fitjeevaBanner,
+  fitjeevaDietitian,
+]
 
 const AboutPageEditor = () => {
   const [loading, setLoading] = useState(true)
@@ -26,15 +39,34 @@ const AboutPageEditor = () => {
         }
 
         const docData = await getDocument(COLLECTIONS.PAGES, 'about')
+        const { aboutIntro, philosophySections, coreServices } = await import('../../data/aboutData')
+        
         if (docData) {
+          const mergedPhilosophy = (docData.philosophySections || []).map((section, idx) => {
+            if (!section.image) {
+              return { ...section, image: defaultPhilosophyImages[idx] || '' }
+            }
+            return section
+          })
+
+          const mergedServices = (docData.coreServices || []).map((service, idx) => {
+            if (!service.image && coreServices[idx]?.image) {
+              return { ...service, image: coreServices[idx].image }
+            }
+            return service
+          })
+
           setData({
             aboutIntro: docData.aboutIntro || { title: '', subtitle: '', bio: '' },
-            philosophySections: docData.philosophySections || [],
-            coreServices: docData.coreServices || [],
+            philosophySections: mergedPhilosophy,
+            coreServices: mergedServices,
           })
         } else {
-          const { aboutIntro, philosophySections, coreServices } = await import('../../data/aboutData')
-          setData({ aboutIntro, philosophySections, coreServices })
+          const mappedPhilosophy = philosophySections.map((section, idx) => ({
+            ...section,
+            image: defaultPhilosophyImages[idx] || ''
+          }))
+          setData({ aboutIntro, philosophySections: mappedPhilosophy, coreServices })
         }
       } catch (error) {
         console.error('Failed to fetch about data', error)
