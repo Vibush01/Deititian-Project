@@ -26,8 +26,8 @@ service cloud.firestore {
     // 3. All other content collections (siteSettings, pages, team, experts, recipes, etc.)
     // - Anyone can read (for the public website)
     // - Only admins can write (create, update, delete)
-    match /{document=**} {
-      allow read: if true;
+    match /{collection}/{document=**} {
+      allow read: if collection != 'adminUsers' && collection != 'inquiries';
       allow write: if isAdmin();
     }
   }

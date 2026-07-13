@@ -26,7 +26,7 @@ const ConsultationCTA = ({ className = '' }) => {
                   <img src={fitjeevaDietitian} alt="Before transformation" loading="lazy" className="w-40 md:w-56 h-40 md:h-56 object-cover rounded-full border-4 border-white shadow-xl grayscale" />
                   <span className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-white text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-md uppercase tracking-wider">Before</span>
                 </div>
-                <div className="absolute -bottom-8 -right-8 md:-bottom-12 md:-right-12 z-20">
+                <div className="relative z-20">
                   <div className="absolute inset-0 bg-[#A5D6A7] rounded-full blur-xl opacity-60"></div>
                   <img src={fitjeevaClinical} alt="After transformation" loading="lazy" className="w-48 md:w-64 h-48 md:h-64 object-cover rounded-full border-4 border-white shadow-2xl" />
                   <span className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-[#2E7D32] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md uppercase tracking-wider">After</span>

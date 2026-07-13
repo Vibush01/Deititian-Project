@@ -21,7 +21,7 @@ const useDocumentMeta = ({ title, description, canonical }) => {
 
     // Update document title
     const fullTitle = finalTitle
-      ? `${title} | FitJeeva – Medical Nutrition Clinic`
+      ? `${finalTitle} | FitJeeva – Medical Nutrition Clinic`
       : 'FitJeeva | Medical Nutrition Clinic – PCOD, Thyroid, Diabetes & Weight Loss Diet Plans'
     document.title = fullTitle
 
