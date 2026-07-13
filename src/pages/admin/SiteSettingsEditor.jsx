@@ -451,7 +451,7 @@ const SiteSettingsEditor = () => {
             {Object.keys(settings.seoMetadata).map((path) => (
               <div key={path} className="p-4 bg-gray-50 border border-gray-100 rounded-xl">
                 <h3 className="font-bold text-sm text-[#2E7D32] mb-3">Page Path: {path === '/' ? 'Home ( / )' : path}</h3>
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className={labelClasses}>Meta Title Override</label>
                     <input

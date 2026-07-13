@@ -170,8 +170,8 @@ const InquiriesManager = () => {
           </div>
         </div>
 
-        {/* Table Area */}
-        <div className="flex-1 overflow-auto custom-scrollbar">
+        {/* Table Area (Desktop) */}
+        <div className="hidden md:block flex-1 overflow-auto custom-scrollbar">
           <table className="w-full text-left border-collapse min-w-[800px]">
             <thead className="bg-white sticky top-0 z-10 shadow-sm">
               <tr>
@@ -232,6 +232,39 @@ const InquiriesManager = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Card Area (Mobile) */}
+        <div className="md:hidden flex-1 overflow-auto custom-scrollbar p-4 space-y-4 bg-gray-50">
+          {filteredInquiries.length > 0 ? (
+            filteredInquiries.map(inquiry => {
+              const dateStr = inquiry.createdAt?.toDate 
+                ? inquiry.createdAt.toDate().toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' }) 
+                : (inquiry.createdAt ? new Date(inquiry.createdAt).toLocaleDateString() : 'N/A')
+              
+              return (
+                <div key={inquiry.id} className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col gap-3 cursor-pointer active:bg-gray-50" onClick={() => { setSelectedInquiry(inquiry); setPanelOpen(true) }}>
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <div className="font-bold text-gray-900">{inquiry.name}</div>
+                      <div className="text-xs text-gray-500">{inquiry.email}</div>
+                    </div>
+                    <StatusBadge status={inquiry.status} />
+                  </div>
+                  <div className="flex justify-between items-center text-xs mt-1 border-t border-gray-100 pt-3">
+                    <span className="text-gray-500 font-medium">{dateStr}</span>
+                    <span className={`font-bold px-2 py-1 rounded-md ${inquiry.source === 'consultation' ? 'bg-indigo-50 text-indigo-700' : 'bg-gray-100 text-gray-700'}`}>
+                      {inquiry.source === 'consultation' ? 'Consultation' : 'Contact'}
+                    </span>
+                  </div>
+                </div>
+              )
+            })
+          ) : (
+            <div className="text-center py-10 text-gray-500 italic">
+              No inquiries found matching your filters.
+            </div>
+          )}
         </div>
       </div>
 

@@ -372,7 +372,7 @@ const ServicesEditor = () => {
                 <div className="space-y-3">
                   {(category.features || []).map((feature, featIndex) => (
                     <div key={featIndex} className="bg-gray-50 border border-gray-100 rounded-lg p-3 relative pr-10">
-                      <div className="flex gap-3">
+                      <div className="flex flex-col sm:flex-row gap-3">
                         <div className="w-16 h-16 shrink-0 rounded-md border border-gray-200 overflow-hidden relative bg-white flex items-center justify-center">
                           {feature.image ? (
                             <>
@@ -393,7 +393,7 @@ const ServicesEditor = () => {
                             </button>
                           )}
                         </div>
-                        <div className="flex-1 min-w-0 space-y-1.5">
+                        <div className="flex-1 min-w-0 space-y-1.5 w-full">
                           <input type="text" value={feature.title} onChange={e => handleFeatureChange(catIndex, featIndex, 'title', e.target.value)} className="w-full bg-transparent font-bold text-sm focus:outline-none focus:text-[#2E7D32]" placeholder="Feature Title" />
                           <textarea value={feature.description} onChange={e => handleFeatureChange(catIndex, featIndex, 'description', e.target.value)} rows={2} className="w-full bg-transparent text-sm text-gray-600 focus:outline-none resize-none leading-snug" placeholder="Feature Description" />
                         </div>
@@ -418,7 +418,7 @@ const ServicesEditor = () => {
                 <div className="space-y-3">
                   {(category.services || []).map((sub, subIndex) => (
                     <div key={subIndex} className="bg-gray-50 border border-gray-100 rounded-lg p-3 relative pr-10">
-                      <div className="flex gap-3">
+                      <div className="flex flex-col sm:flex-row gap-3">
                         <div className="w-16 h-16 shrink-0 rounded-md border border-gray-200 overflow-hidden relative bg-white flex items-center justify-center">
                           {sub.image ? (
                             <>
@@ -439,10 +439,10 @@ const ServicesEditor = () => {
                             </button>
                           )}
                         </div>
-                        <div className="flex-1 min-w-0 space-y-1.5">
-                          <div className="flex gap-2">
+                        <div className="flex-1 min-w-0 space-y-1.5 w-full">
+                          <div className="flex flex-col sm:flex-row gap-1 sm:gap-2">
                             <input type="text" value={sub.title} onChange={e => handleSubServiceChange(catIndex, subIndex, 'title', e.target.value)} className="flex-1 min-w-0 bg-transparent font-bold text-sm focus:outline-none focus:text-[#2E7D32]" placeholder="Sub-service Title" />
-                            <input type="text" value={sub.id} onChange={e => handleSubServiceChange(catIndex, subIndex, 'id', e.target.value)} className="w-24 shrink-0 bg-transparent text-xs text-gray-500 border-b border-gray-300 focus:outline-none focus:border-[#2E7D32]" placeholder="slug-id" />
+                            <input type="text" value={sub.id} onChange={e => handleSubServiceChange(catIndex, subIndex, 'id', e.target.value)} className="w-full sm:w-24 shrink-0 bg-transparent text-xs text-gray-500 border-b border-gray-300 focus:outline-none focus:border-[#2E7D32]" placeholder="slug-id" />
                           </div>
                           <textarea value={sub.description} onChange={e => handleSubServiceChange(catIndex, subIndex, 'description', e.target.value)} rows={2} className="w-full bg-transparent text-sm text-gray-600 focus:outline-none resize-none leading-snug" placeholder="Short Description" />
                         </div>

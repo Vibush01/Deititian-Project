@@ -235,7 +235,7 @@ const MediaManager = () => {
           </button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {media.heroBanners.map((img, index) => (
             <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video bg-gray-50">
               <img src={img} alt={`Banner ${index + 1}`} className="w-full h-full object-cover" />
@@ -293,7 +293,7 @@ const MediaManager = () => {
           </button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {media.instagramPosts.map((post, index) => (
             <div key={index} className="bg-gray-50 rounded-xl p-4 border border-gray-200 flex flex-col relative group">
               <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
