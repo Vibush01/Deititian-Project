@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import {
-  FaTachometerAlt, FaCog, FaCompass, FaFileAlt, FaConciergeBell,
-  FaUsers, FaUserMd, FaUtensils, FaTrophy, FaEnvelope, FaMapMarkerAlt, FaSignOutAlt, FaChevronLeft, FaBriefcase, FaImage, FaChevronDown, FaChevronRight
+  FaTachometerAlt, FaCog, FaFileAlt, FaConciergeBell,
+  FaUsers, FaUtensils, FaTrophy, FaEnvelope, FaMapMarkerAlt, FaSignOutAlt, FaChevronLeft, FaBriefcase, FaImage, FaChevronDown, FaChevronRight
 } from 'react-icons/fa'
 
 const sidebarGroups = [

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
-import { FaArrowRight, FaNewspaper, FaStar, FaQuoteLeft } from "react-icons/fa";
+import { FaArrowRight, FaStar, FaQuoteLeft } from "react-icons/fa";
 import SectionHeading from "../components/ui/SectionHeading";
 import Button from "../components/ui/Button";
 import HomeHero from "../components/sections/HomeHero";

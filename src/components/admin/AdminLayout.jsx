@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { FaBars, FaTimes } from 'react-icons/fa'
+import { FaBars } from 'react-icons/fa'
 import { useAuth } from '../../contexts/AuthContext'
 import AdminSidebar from './AdminSidebar'
 
