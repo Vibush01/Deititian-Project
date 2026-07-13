@@ -37,16 +37,18 @@ const ServicesEditor = () => {
             const defaultCat = serviceCategories.find(c => c.id === dbCat.id)
             if (!defaultCat) return { ...dbCat, _docId: dbCat.id }
             
-            const features = (dbCat.features || []).map((feat, i) => {
-              if (!feat.image && defaultCat.features && defaultCat.features[i]) {
-                return { ...feat, image: defaultCat.features[i].image }
+            const features = (dbCat.features || []).map(feat => {
+              const defaultFeat = defaultCat.features?.find(f => f.title === feat.title)
+              if (!feat.image && defaultFeat?.image) {
+                return { ...feat, image: defaultFeat.image }
               }
               return feat
             })
             
-            const services = (dbCat.services || []).map((sub, i) => {
-              if (!sub.image && defaultCat.services && defaultCat.services[i]) {
-                return { ...sub, image: defaultCat.services[i].image }
+            const services = (dbCat.services || []).map(sub => {
+              const defaultSub = defaultCat.services?.find(s => s.id === sub.id)
+              if (!sub.image && defaultSub?.image) {
+                return { ...sub, image: defaultSub.image }
               }
               return sub
             })

@@ -17,9 +17,5 @@ export default function useSiteSettings() {
     ...(data || {}),
   }
 
-  // If Firestore has socialLinks/statsData, use those
-  if (data?.socialLinks) settings.socialLinks = data.socialLinks
-  if (data?.statsData) settings.statsData = data.statsData
-
   return { settings, loading }
 }
