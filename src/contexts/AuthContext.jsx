@@ -20,6 +20,22 @@ export function AuthProvider({ children }) {
     }
 
     const unsubscribe = onAuthChange(({ user: fbUser, isAdmin: admin }) => {
+      const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 24 hours
+      const lastActivity = localStorage.getItem('admin_last_activity');
+      const now = Date.now();
+
+      // Check if session has expired
+      if (fbUser && lastActivity && (now - parseInt(lastActivity, 10)) > EXPIRATION_TIME) {
+        logout(); // Auto-logout if inactive for 24 hours
+        return;
+      }
+
+      if (fbUser) {
+        localStorage.setItem('admin_last_activity', now.toString());
+      } else {
+        localStorage.removeItem('admin_last_activity');
+      }
+
       setUser(fbUser)
       setIsAdmin(admin)
       setLoading(false)
@@ -30,10 +46,12 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     const credential = await loginWithEmail(email, password)
+    localStorage.setItem('admin_last_activity', Date.now().toString());
     return credential
   }
 
   const logout = async () => {
+    localStorage.removeItem('admin_last_activity');
     await firebaseLogout()
     setUser(null)
     setIsAdmin(false)
