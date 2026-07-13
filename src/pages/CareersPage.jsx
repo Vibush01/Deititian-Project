@@ -128,18 +128,70 @@ const JobOpeningsSection = () => {
 const CareerApplicationForm = () => {
   const { jobPositions } = useCareersData()
   const [formData, setFormData] = useState({
-    fullName: '', email: '', phone: '', position: '', message: '',
+    fullName: '', email: '', phone: '', position: '', message: '', botField: '',
   })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [formError, setFormError] = useState('')
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+    if (formError) setFormError('')
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    alert('Thank you for applying! Our team will review your application.')
-    setFormData({ fullName: '', email: '', phone: '', position: '', message: '' })
+    setFormError('')
+
+    // Honeypot check for bots
+    if (formData.botField) {
+      console.warn('Bot detected by honeypot field.')
+      return
+    }
+
+    // Name validation
+    if (!formData.fullName.trim()) {
+      setFormError('Please enter your full name.')
+      return
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      setFormError('Please enter a valid email address.')
+      return
+    }
+
+    // Phone validation
+    const phoneRegex = /^[0-9+\-\s()]{10,20}$/
+    if (!phoneRegex.test(formData.phone)) {
+      setFormError('Please enter a valid phone number (at least 10 digits).')
+      return
+    }
+
+    // Position validation
+    if (!formData.position) {
+      setFormError('Please select a position to apply for.')
+      return
+    }
+
+    setSubmitting(true)
+    try {
+      if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
+        const { botField, ...submitData } = formData
+        const { submitCareerApplication } = await import('../services/inquiryService')
+        await submitCareerApplication(submitData)
+      }
+      setSubmitted(true)
+      setFormData({ fullName: '', email: '', phone: '', position: '', message: '', botField: '' })
+      setTimeout(() => setSubmitted(false), 5000)
+    } catch (error) {
+      console.error('Career form submission error:', error)
+      setFormError('Something went wrong. Please try again or email us directly.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const inputClasses = 'w-full px-5 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/30 focus:border-[#2E7D32] focus:bg-white transition-all text-sm'
@@ -155,46 +207,68 @@ const CareerApplicationForm = () => {
             <p className="text-gray-600">Fill in your details and our team will get in touch if your profile matches our requirements.</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {submitted ? (
+            <div className="relative z-10 text-center py-12">
+              <div className="w-16 h-16 bg-[#E8F5E9] rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-[#2E7D32]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Application Submitted!</h3>
+              <p className="text-gray-500 text-sm">Thank you for your interest. Our team will review your application and get in touch soon.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="relative z-10 space-y-6">
+              {/* Honeypot Field (Hidden) */}
+              <div className="hidden" aria-hidden="true">
+                <label>Do not fill this out if you are human:</label>
+                <input type="text" name="botField" value={formData.botField} onChange={handleChange} tabIndex="-1" autoComplete="off" />
+              </div>
+
+              {formError && (
+                <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm font-medium">
+                  {formError}
+                </div>
+              )}
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Full Name <span className="text-red-500">*</span></label>
+                  <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Enter your full name" required className={inputClasses} />
+                </div>
+                <div>
+                  <label className="block text-sm font-bold text-gray-700 mb-2">Email Address <span className="text-red-500">*</span></label>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter your email address" required className={inputClasses} />
+                </div>
+              </div>
+
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Full Name <span className="text-red-500">*</span></label>
-                <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Enter your full name" required className={inputClasses} />
+                <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number <span className="text-red-500">*</span></label>
+                <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Enter your contact number" required className={inputClasses} />
               </div>
+
               <div>
-                <label className="block text-sm font-bold text-gray-700 mb-2">Email Address <span className="text-red-500">*</span></label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Enter your email address" required className={inputClasses} />
+                <label className="block text-sm font-bold text-gray-700 mb-3">Position Applied For <span className="text-red-500">*</span></label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {jobPositions.map((position) => (
+                    <label key={position} className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${formData.position === position ? 'bg-[#E8F5E9] border-[#2E7D32] text-[#2E7D32]' : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300'}`}>
+                      <input type="radio" name="position" value={position} checked={formData.position === position} onChange={handleChange} required className="hidden" />
+                      <span className="font-bold text-sm">{position}</span>
+                    </label>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Phone Number <span className="text-red-500">*</span></label>
-              <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Enter your contact number" required className={inputClasses} />
-            </div>
-
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-3">Position Applied For <span className="text-red-500">*</span></label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {jobPositions.map((position) => (
-                  <label key={position} className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-colors ${formData.position === position ? 'bg-[#E8F5E9] border-[#2E7D32] text-[#2E7D32]' : 'bg-white border-gray-200 text-gray-700 hover:border-gray-300'}`}>
-                    <input type="radio" name="position" value={position} checked={formData.position === position} onChange={handleChange} required className="hidden" />
-                    <span className="font-bold text-sm">{position}</span>
-                  </label>
-                ))}
+              <div>
+                <label className="block text-sm font-bold text-gray-700 mb-2">Why do you want to join us?</label>
+                <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about yourself and why you'd be a great fit..." rows={4} className={`${inputClasses} resize-none`} />
               </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-bold text-gray-700 mb-2">Why do you want to join us?</label>
-              <textarea name="message" value={formData.message} onChange={handleChange} placeholder="Tell us about yourself and why you'd be a great fit..." rows={4} className={`${inputClasses} resize-none`} />
-            </div>
-
-            <div className="pt-4">
-              <Button type="submit" className="w-full bg-[#2E7D32] hover:bg-[#1B5E20] py-3.5">
-                Submit Application
-              </Button>
-            </div>
-          </form>
+              <div className="pt-4">
+                <Button type="submit" disabled={submitting} className="w-full bg-[#2E7D32] hover:bg-[#1B5E20] py-3.5 disabled:opacity-60 disabled:cursor-not-allowed">
+                  {submitting ? 'Submitting...' : 'Submit Application'}
+                </Button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </section>

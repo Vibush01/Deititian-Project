@@ -28,3 +28,21 @@ export async function submitConsultationInquiry(formData) {
     notes: '',
   })
 }
+
+/**
+ * Submit a career application to Firestore.
+ * @param {Object} formData - The form data.
+ * @returns {Promise<string>} - The new document ID.
+ */
+export async function submitCareerApplication(formData) {
+  return addDocument(COLLECTIONS.INQUIRIES, {
+    name: formData.fullName,
+    email: formData.email,
+    phone: formData.phone,
+    service: formData.position,
+    message: formData.message,
+    source: 'career',
+    status: 'new',
+    notes: '',
+  })
+}
