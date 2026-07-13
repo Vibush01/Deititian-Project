@@ -53,12 +53,13 @@ const ExpertsEditor = ({ isEmbedded = false }) => {
         
         // Save (Update/Add) items with their current array order
         for (let i = 0; i < experts.length; i++) {
-          const expert = { ...experts[i], order: i }
-          if (expert.id) {
-            const { id, ...data } = expert
+          const exp = { ...experts[i], order: i }
+          if (exp.id && !String(exp.id).startsWith('sample-') && !String(exp.id).startsWith('temp-')) {
+            const { id, ...data } = exp
             await updateDocument(COLLECTIONS.EXPERTS, id, data)
           } else {
-            await addDocument(COLLECTIONS.EXPERTS, expert)
+            const { id, ...data } = exp
+            await addDocument(COLLECTIONS.EXPERTS, data)
           }
         }
         

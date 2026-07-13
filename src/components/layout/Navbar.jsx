@@ -239,6 +239,18 @@ const Navbar = () => {
                         </ul>
                       </div>
                     ))}
+                    {link.megaMenu.column3 && (
+                      <div>
+                        <h4 className="font-bold text-sm text-[#2E7D32] mb-2">{link.megaMenu.column3.title}</h4>
+                        <ul className="space-y-2 pl-2">
+                          {link.megaMenu.column3.buttons.map(btn => (
+                            <li key={btn.label}>
+                              <Link to={btn.path} onClick={() => setIsMobileOpen(false)} className="text-sm text-gray-600 hover:text-[#2E7D32] block py-1">{btn.label}</Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>

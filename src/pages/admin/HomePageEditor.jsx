@@ -277,7 +277,10 @@ const HomePageEditor = () => {
         <div className="space-y-4">
           {expertiseCards.map((card, index) => (
             <div key={card.id || index} className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 group">
-              <div className="pt-2"><FaGripVertical className="text-gray-400 cursor-grab" /></div>
+              <div className="flex flex-col gap-1 text-gray-300 pt-2">
+                <button onClick={() => moveExpertiseCard(index, -1)} className="hover:text-[#2E7D32]" disabled={index === 0}>▲</button>
+                <button onClick={() => moveExpertiseCard(index, 1)} className="hover:text-[#2E7D32]" disabled={index === expertiseCards.length - 1}>▼</button>
+              </div>
               <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="md:col-span-2 space-y-3">
                   <input type="text" value={card.title} onChange={(e) => handleCardChange(index, 'title', e.target.value)} className={inputClasses} placeholder="Card Title" />

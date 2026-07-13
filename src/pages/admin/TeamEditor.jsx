@@ -57,11 +57,12 @@ const TeamEditor = ({ isEmbedded = false }) => {
         // Save (Update/Add) items with their current array order
         for (let i = 0; i < team.length; i++) {
           const member = { ...team[i], order: i }
-          if (member.id) {
+          if (member.id && !String(member.id).startsWith('sample-') && !String(member.id).startsWith('temp-')) {
             const { id, ...data } = member
             await updateDocument(COLLECTIONS.TEAM, id, data)
           } else {
-            await addDocument(COLLECTIONS.TEAM, member)
+            const { id, ...data } = member
+            await addDocument(COLLECTIONS.TEAM, data)
           }
         }
         

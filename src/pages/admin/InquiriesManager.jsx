@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
-import { FaEnvelope, FaSpinner, FaSearch, FaEye, FaTrash, FaFileCsv, FaFilter } from 'react-icons/fa'
+import { FaEnvelope, FaSpinner, FaSearch, FaEye, FaTrash, FaFileCsv, FaFileExcel, FaFilePdf, FaFilter } from 'react-icons/fa'
+import * as XLSX from 'xlsx'
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import { getCollection, removeDocument, COLLECTIONS } from '../../firebase/collections'
 import StatusBadge from '../../components/admin/StatusBadge'
 import InquiryDetailPanel from '../../components/admin/InquiryDetailPanel'
@@ -87,6 +90,61 @@ const InquiriesManager = () => {
     link.click()
   }
 
+  const exportExcel = () => {
+    if (filteredInquiries.length === 0) return alert('No data to export')
+    
+    const data = filteredInquiries.map(i => {
+      const date = i.createdAt?.toDate ? i.createdAt.toDate().toLocaleDateString() : (i.createdAt ? new Date(i.createdAt).toLocaleDateString() : 'N/A')
+      return {
+        Date: date,
+        Name: i.name || '',
+        Email: i.email || '',
+        Phone: i.phone || '',
+        Source: i.source || '',
+        Service: i.service || '',
+        Status: i.status || 'new',
+        Notes: i.notes || ''
+      }
+    })
+    
+    const worksheet = XLSX.utils.json_to_sheet(data)
+    const workbook = XLSX.utils.book_new()
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Inquiries")
+    XLSX.writeFile(workbook, `inquiries_${new Date().toISOString().split('T')[0]}.xlsx`)
+  }
+
+  const exportPDF = () => {
+    if (filteredInquiries.length === 0) return alert('No data to export')
+    
+    const doc = new jsPDF()
+    doc.text("Inquiries Report", 14, 15)
+    
+    const tableColumn = ["Date", "Name", "Email", "Phone", "Service", "Status"]
+    const tableRows = []
+    
+    filteredInquiries.forEach(i => {
+      const date = i.createdAt?.toDate ? i.createdAt.toDate().toLocaleDateString() : (i.createdAt ? new Date(i.createdAt).toLocaleDateString() : 'N/A')
+      const rowData = [
+        date,
+        i.name || '',
+        i.email || '',
+        i.phone || '',
+        i.service || '',
+        i.status || 'new'
+      ]
+      tableRows.push(rowData)
+    })
+    
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 20,
+      styles: { fontSize: 8 }
+    })
+    
+    doc.save(`inquiries_${new Date().toISOString().split('T')[0]}.pdf`)
+  }
+
   // Filter logic
   const filteredInquiries = inquiries.filter(i => {
     const matchesSearch = 
@@ -118,13 +176,32 @@ const InquiriesManager = () => {
           </h1>
           <p className="text-gray-500 text-sm mt-1">Manage consultation requests and contact form submissions.</p>
         </div>
-        <button
-          onClick={exportCSV}
-          className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-4 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex w-full sm:w-auto justify-center items-center gap-2 self-start md:self-auto"
-        >
-          <FaFileCsv className="text-lg text-green-600" />
-          Export CSV
-        </button>
+        <div className="flex flex-wrap gap-2 w-full sm:w-auto self-start md:self-auto">
+          <button
+            onClick={exportCSV}
+            className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-4 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex justify-center items-center gap-2 flex-1 sm:flex-none"
+            title="Export as CSV"
+          >
+            <FaFileCsv className="text-lg text-blue-600" />
+            CSV
+          </button>
+          <button
+            onClick={exportExcel}
+            className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-4 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex justify-center items-center gap-2 flex-1 sm:flex-none"
+            title="Export as Excel"
+          >
+            <FaFileExcel className="text-lg text-green-600" />
+            Excel
+          </button>
+          <button
+            onClick={exportPDF}
+            className="bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 px-4 py-2.5 rounded-lg font-bold text-sm shadow-sm transition-colors flex justify-center items-center gap-2 flex-1 sm:flex-none"
+            title="Export as PDF"
+          >
+            <FaFilePdf className="text-lg text-red-600" />
+            PDF
+          </button>
+        </div>
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col h-[70vh] min-h-[500px]">

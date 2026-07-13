@@ -135,15 +135,22 @@ const ServicesEditor = () => {
     ])
   }
 
-  const handleRemoveCategory = (index) => {
-    const cat = categories[index]
+  const handleRemoveCategory = (catIndex) => {
+    const cat = categories[catIndex]
     if (cat._docId) {
       setItemsToDelete(prev => [...prev, cat._docId])
     }
+    setCategories(prev => prev.filter((_, i) => i !== catIndex))
+  }
+
+  const moveCategory = (index, direction) => {
+    if ((direction === -1 && index === 0) || (direction === 1 && index === categories.length - 1)) return
     setCategories(prev => {
-      const newCat = [...prev]
-      newCat.splice(index, 1)
-      return newCat
+      const newItems = [...prev]
+      const temp = newItems[index]
+      newItems[index] = newItems[index + direction]
+      newItems[index + direction] = temp
+      return newItems
     })
   }
 
@@ -293,7 +300,10 @@ const ServicesEditor = () => {
         <div key={category._docId || catIndex} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
           <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-100">
             <h2 className="text-xl font-bold text-gray-900 flex items-center gap-3">
-              <FaGripVertical className="text-gray-400 cursor-grab" />
+              <div className="flex flex-col gap-1 text-gray-400">
+                <button onClick={() => moveCategory(catIndex, -1)} className="hover:text-[#2E7D32]" disabled={catIndex === 0}><FaChevronUp size={12} /></button>
+                <button onClick={() => moveCategory(catIndex, 1)} className="hover:text-[#2E7D32]" disabled={catIndex === categories.length - 1}><FaChevronDown size={12} /></button>
+              </div>
               Category: {category.title || 'Untitled'}
             </h2>
             <button onClick={() => handleRemoveCategory(catIndex)} className="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors">

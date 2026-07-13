@@ -81,7 +81,7 @@ const CareersEditor = () => {
     }))
   }
 
-  // --- Company Values Handlers ---
+  // --- Values Handlers ---
   const handleValueChange = (index, field, value) => {
     setData(prev => {
       const newValues = [...prev.companyValues]
@@ -95,7 +95,7 @@ const CareersEditor = () => {
       ...prev,
       companyValues: [
         ...prev.companyValues,
-        { number: String(prev.companyValues.length + 1).padStart(2, '0'), title: 'New Value', description: '' }
+        { number: `0${prev.companyValues.length + 1}`, title: 'New Value', description: 'Description here.' }
       ]
     }))
   }
@@ -104,8 +104,20 @@ const CareersEditor = () => {
     setData(prev => {
       const newValues = [...prev.companyValues]
       newValues.splice(index, 1)
-      newValues.forEach((val, i) => val.number = String(i + 1).padStart(2, '0'))
+      newValues.forEach((val, i) => val.number = `0${i + 1}`)
       return { ...prev, companyValues: newValues }
+    })
+  }
+
+  const moveValue = (index, direction) => {
+    if ((direction === -1 && index === 0) || (direction === 1 && index === data.companyValues.length - 1)) return
+    setData(prev => {
+      const newItems = [...prev.companyValues]
+      const temp = newItems[index]
+      newItems[index] = newItems[index + direction]
+      newItems[index + direction] = temp
+      newItems.forEach((val, i) => val.number = `0${i + 1}`)
+      return { ...prev, companyValues: newItems }
     })
   }
 
@@ -241,8 +253,11 @@ const CareersEditor = () => {
           
           <div className="space-y-3">
             {data.jobPositions.map((position, index) => (
-              <div key={index} className="flex gap-2 items-center">
-                <FaGripVertical className="text-gray-400 cursor-grab" />
+              <div key={index} className="flex gap-2 items-center group">
+                <div className="flex flex-col gap-1 text-gray-300">
+                  <button onClick={() => movePosition(index, -1)} className="hover:text-[#2E7D32]" disabled={index === 0}>▲</button>
+                  <button onClick={() => movePosition(index, 1)} className="hover:text-[#2E7D32]" disabled={index === data.jobPositions.length - 1}>▼</button>
+                </div>
                 <input type="text" value={position} onChange={(e) => handlePositionChange(index, e.target.value)} className={inputClasses} placeholder="Position Name" />
                 <button onClick={() => handleRemovePosition(index)} className="text-gray-400 hover:text-red-500 p-2 rounded-lg hover:bg-red-50 transition-colors shrink-0">
                   <FaTrash />
@@ -327,7 +342,10 @@ const CareersEditor = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {data.companyValues.map((value, index) => (
             <div key={index} className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 group">
-              <div className="pt-2"><FaGripVertical className="text-gray-400 cursor-grab" /></div>
+              <div className="flex flex-col gap-1 text-gray-300 pt-2">
+                <button onClick={() => moveValue(index, -1)} className="hover:text-[#2E7D32]" disabled={index === 0}>▲</button>
+                <button onClick={() => moveValue(index, 1)} className="hover:text-[#2E7D32]" disabled={index === data.companyValues.length - 1}>▼</button>
+              </div>
               <div className="flex-1 space-y-3 min-w-0">
                 <div className="flex items-center gap-3">
                   <span className="font-bold text-[#2E7D32] bg-[#E8F5E9] px-2 py-1 rounded text-xs shrink-0">{value.number}</span>

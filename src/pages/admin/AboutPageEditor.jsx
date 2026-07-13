@@ -160,6 +160,30 @@ const AboutPageEditor = () => {
     })
   }
 
+  const movePhilosophy = (index, direction) => {
+    if ((direction === -1 && index === 0) || (direction === 1 && index === data.philosophySections.length - 1)) return
+    setData(prev => {
+      const newItems = [...prev.philosophySections]
+      const temp = newItems[index]
+      newItems[index] = newItems[index + direction]
+      newItems[index + direction] = temp
+      newItems.forEach((item, i) => item.number = i + 1)
+      return { ...prev, philosophySections: newItems }
+    })
+  }
+
+  const moveService = (index, direction) => {
+    if ((direction === -1 && index === 0) || (direction === 1 && index === data.coreServices.length - 1)) return
+    setData(prev => {
+      const newItems = [...prev.coreServices]
+      const temp = newItems[index]
+      newItems[index] = newItems[index + direction]
+      newItems[index + direction] = temp
+      newItems.forEach((item, i) => item.number = i + 1)
+      return { ...prev, coreServices: newItems }
+    })
+  }
+
   const handleServiceImageUpload = (url) => {
     if (editingImageIndex !== null) {
       handleServiceChange(editingImageIndex, 'image', url)
@@ -242,7 +266,10 @@ const AboutPageEditor = () => {
         <div className="space-y-4">
           {data.philosophySections.map((section, index) => (
             <div key={index} className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 group">
-              <div className="pt-2"><FaGripVertical className="text-gray-400 cursor-grab" /></div>
+              <div className="flex flex-col gap-1 text-gray-300 pt-2">
+                <button onClick={() => movePhilosophy(index, -1)} className="hover:text-[#2E7D32]" disabled={index === 0}>▲</button>
+                <button onClick={() => movePhilosophy(index, 1)} className="hover:text-[#2E7D32]" disabled={index === data.philosophySections.length - 1}>▼</button>
+              </div>
               <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="md:col-span-2 space-y-3">
                   <div className="flex items-center gap-3">
@@ -298,7 +325,10 @@ const AboutPageEditor = () => {
         <div className="space-y-4">
           {data.coreServices.map((service, index) => (
             <div key={index} className="flex gap-4 p-4 bg-gray-50 rounded-xl border border-gray-100 group">
-              <div className="pt-2"><FaGripVertical className="text-gray-400 cursor-grab" /></div>
+              <div className="flex flex-col gap-1 text-gray-300 pt-2">
+                <button onClick={() => moveService(index, -1)} className="hover:text-[#2E7D32]" disabled={index === 0}>▲</button>
+                <button onClick={() => moveService(index, 1)} className="hover:text-[#2E7D32]" disabled={index === data.coreServices.length - 1}>▼</button>
+              </div>
               <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="md:col-span-2 space-y-3">
                   <div className="flex items-center gap-3">

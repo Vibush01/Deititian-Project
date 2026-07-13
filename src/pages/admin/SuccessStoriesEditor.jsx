@@ -53,11 +53,13 @@ const SuccessStoriesEditor = () => {
         
         for (let i = 0; i < stories.length; i++) {
           const story = { ...stories[i], order: i }
-          if (story.id) {
+          // If id is a string and looks like a firebase ID (not numeric and not starting with sample)
+          if (story.id && typeof story.id === 'string' && !story.id.startsWith('sample-') && !story.id.startsWith('temp-') && isNaN(Number(story.id))) {
             const { id, ...data } = story
             await updateDocument(COLLECTIONS.SUCCESS_STORIES, id, data)
           } else {
-            await addDocument(COLLECTIONS.SUCCESS_STORIES, story)
+            const { id, ...data } = story
+            await addDocument(COLLECTIONS.SUCCESS_STORIES, data)
           }
         }
         
