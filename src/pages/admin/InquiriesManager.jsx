@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaEnvelope, FaSpinner, FaSearch, FaEye, FaTrash, FaFileCsv, FaFileExcel, FaFilePdf, FaFilter } from 'react-icons/fa'
 import * as XLSX from 'xlsx'
 import jsPDF from 'jspdf'
-import 'jspdf-autotable'
+import autoTable from 'jspdf-autotable'
 import { getCollection, removeDocument, COLLECTIONS } from '../../firebase/collections'
 import StatusBadge from '../../components/admin/StatusBadge'
 import InquiryDetailPanel from '../../components/admin/InquiryDetailPanel'
@@ -135,7 +135,7 @@ const InquiriesManager = () => {
       tableRows.push(rowData)
     })
     
-    doc.autoTable({
+    autoTable(doc, {
       head: [tableColumn],
       body: tableRows,
       startY: 20,
@@ -158,17 +158,15 @@ const InquiriesManager = () => {
     return matchesSearch && matchesStatus && matchesSource
   })
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <FaSpinner className="text-[#2E7D32] text-3xl animate-spin" />
-      </div>
-    )
-  }
-
   return (
-    <div className="max-w-7xl space-y-6 pb-12">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
+    <div>
+      {loading ? (
+        <div className="flex items-center justify-center py-20">
+          <FaSpinner className="text-[#2E7D32] text-3xl animate-spin" />
+        </div>
+      ) : (
+        <div className="max-w-7xl space-y-6 pb-12">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-2">
         <div>
           <h1 className="text-2xl font-extrabold text-gray-900 flex items-center gap-2">
             <FaEnvelope className="text-[#2E7D32]" />
@@ -183,7 +181,7 @@ const InquiriesManager = () => {
             title="Export as CSV"
           >
             <FaFileCsv className="text-lg text-blue-600" />
-            CSV
+            <span>CSV</span>
           </button>
           <button
             onClick={exportExcel}
@@ -191,7 +189,7 @@ const InquiriesManager = () => {
             title="Export as Excel"
           >
             <FaFileExcel className="text-lg text-green-600" />
-            Excel
+            <span>Excel</span>
           </button>
           <button
             onClick={exportPDF}
@@ -199,7 +197,7 @@ const InquiriesManager = () => {
             title="Export as PDF"
           >
             <FaFilePdf className="text-lg text-red-600" />
-            PDF
+            <span>PDF</span>
           </button>
         </div>
       </div>
@@ -354,6 +352,8 @@ const InquiriesManager = () => {
           fetchInquiries()
         }}
       />
+        </div>
+      )}
     </div>
   )
 }
