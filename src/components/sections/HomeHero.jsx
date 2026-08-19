@@ -29,8 +29,18 @@ const HomeHero = () => {
   const { heroBanners } = useMediaData();
 
   const banners = heroBanners.length > 0
-    ? heroBanners.map(img => ({ image: img, alt: 'FitJeeva Hero Banner' }))
+    ? heroBanners
+        .map(img => {
+          // Handle both string URLs and object entries { url: "..." }
+          const imageUrl = typeof img === 'string' ? img : img?.url;
+          return imageUrl ? { image: imageUrl, alt: 'FitJeeva Hero Banner' } : null;
+        })
+        .filter(Boolean)
     : staticBanners;
+
+  // Fall back to static banners if all dynamic entries were invalid
+  const displayBanners = banners.length > 0 ? banners : staticBanners;
+
 
   return (
     <section className="w-full relative bg-white">
@@ -42,7 +52,7 @@ const HomeHero = () => {
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         loop={true}
       >
-        {banners.map((banner, index) => (
+        {displayBanners.map((banner, index) => (
           <SwiperSlide key={index} className="w-full">
             <div className="w-full">
               <img

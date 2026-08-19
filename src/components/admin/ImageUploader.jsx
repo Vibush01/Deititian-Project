@@ -69,7 +69,7 @@ const ImageUploader = ({
 
       setStatus('done')
       setPreview(result.url)
-      if (onUpload) onUpload(result)
+      if (onUpload) onUpload(result.url)
 
       // Reset status after a brief success indication
       setTimeout(() => setStatus(''), 2000)

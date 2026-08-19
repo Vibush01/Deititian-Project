@@ -238,7 +238,7 @@ const MediaManager = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {media.heroBanners.map((img, index) => (
             <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video bg-gray-50">
-              <img src={img} alt={`Banner ${index + 1}`} className="w-full h-full object-cover" />
+              <img src={typeof img === 'string' ? img : img?.url} alt={`Banner ${index + 1}`} className="w-full h-full object-cover" />
               <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                 <button onClick={() => moveBanner(index, 'up')} disabled={index === 0} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-md disabled:opacity-50"><FaChevronUp className="text-xs" /></button>
                 <button onClick={() => moveBanner(index, 'down')} disabled={index === media.heroBanners.length - 1} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-md disabled:opacity-50"><FaChevronDown className="text-xs" /></button>
@@ -261,8 +261,11 @@ const MediaManager = () => {
           <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
             <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
               <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Hero Banner</h3>
-              <ImageUploader onUpload={(url) => {
-                setMedia(prev => ({ ...prev, heroBanners: [...prev.heroBanners, url] }))
+              <ImageUploader onUpload={(result) => {
+                const imageUrl = typeof result === 'string' ? result : result.url
+                if (imageUrl) {
+                  setMedia(prev => ({ ...prev, heroBanners: [...prev.heroBanners, imageUrl] }))
+                }
                 setUploadingBanner(false)
               }} />
               <button 
@@ -312,13 +315,13 @@ const MediaManager = () => {
                   <img src={post.image} alt="Instagram post" className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center p-4">
-                    <ImageUploader onUpload={(url) => updatePost(index, 'image', url)} />
+                    <ImageUploader onUpload={(result) => updatePost(index, 'image', typeof result === 'string' ? result : result.url)} />
                   </div>
                 )}
                 {post.image && (
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <div className="bg-white p-2 rounded-lg scale-75">
-                      <ImageUploader onUpload={(url) => updatePost(index, 'image', url)} />
+                      <ImageUploader onUpload={(result) => updatePost(index, 'image', typeof result === 'string' ? result : result.url)} />
                     </div>
                   </div>
                 )}
