@@ -3,6 +3,7 @@ import { FaSave, FaTrophy, FaSpinner, FaPlus, FaTrash, FaEdit, FaImage } from 'r
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { isValidUrl } from '../../hooks/usePageData'
 
 const SuccessStoriesEditor = () => {
   const [loading, setLoading] = useState(true)
@@ -53,6 +54,7 @@ const SuccessStoriesEditor = () => {
         
         for (let i = 0; i < stories.length; i++) {
           const story = { ...stories[i], order: i }
+          if (story.image && !isValidUrl(story.image)) delete story.image
           // If id is a string and looks like a firebase ID (not numeric and not starting with sample)
           if (story.id && typeof story.id === 'string' && !story.id.startsWith('sample-') && !story.id.startsWith('temp-') && isNaN(Number(story.id))) {
             const { id, ...data } = story

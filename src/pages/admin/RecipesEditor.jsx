@@ -3,6 +3,7 @@ import { FaSave, FaUtensils, FaSpinner, FaPlus, FaTrash, FaEdit, FaImage } from 
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { isValidUrl } from '../../hooks/usePageData'
 import { defaultRecipes } from '../../data/recipesData'
 
 const RecipesEditor = () => {
@@ -53,11 +54,13 @@ const RecipesEditor = () => {
         
         for (let i = 0; i < recipes.length; i++) {
           const recipe = { ...recipes[i], order: i }
+          if (recipe.image && !isValidUrl(recipe.image)) delete recipe.image
           if (recipe.id) {
             const { id, ...data } = recipe
             await updateDocument(COLLECTIONS.RECIPES, id, data)
           } else {
-            await addDocument(COLLECTIONS.RECIPES, recipe)
+            const { id, ...data } = recipe
+            await addDocument(COLLECTIONS.RECIPES, data)
           }
         }
         

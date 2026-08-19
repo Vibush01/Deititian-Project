@@ -3,6 +3,7 @@ import { FaSave, FaUserMd, FaSpinner, FaPlus, FaTrash, FaEdit, FaImage } from 'r
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { isValidUrl } from '../../hooks/usePageData'
 import { defaultExperts } from '../../data/peopleData'
 
 const ExpertsEditor = ({ isEmbedded = false }) => {
@@ -53,12 +54,13 @@ const ExpertsEditor = ({ isEmbedded = false }) => {
         
         // Save (Update/Add) items with their current array order
         for (let i = 0; i < experts.length; i++) {
-          const exp = { ...experts[i], order: i }
-          if (exp.id && !String(exp.id).startsWith('sample-') && !String(exp.id).startsWith('temp-')) {
-            const { id, ...data } = exp
+          const expert = { ...experts[i], order: i }
+          if (expert.image && !isValidUrl(expert.image)) delete expert.image
+          if (expert.id && !String(expert.id).startsWith('sample-') && !String(expert.id).startsWith('temp-')) {
+            const { id, ...data } = expert
             await updateDocument(COLLECTIONS.EXPERTS, id, data)
           } else {
-            const { id, ...data } = exp
+            const { id, ...data } = expert
             await addDocument(COLLECTIONS.EXPERTS, data)
           }
         }

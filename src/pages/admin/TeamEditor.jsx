@@ -3,6 +3,7 @@ import { FaSave, FaUsers, FaSpinner, FaPlus, FaTrash, FaEdit, FaGripVertical, Fa
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { isValidUrl } from '../../hooks/usePageData'
 import { defaultTeamMembers } from '../../data/peopleData'
 
 const TeamEditor = ({ isEmbedded = false }) => {
@@ -57,6 +58,8 @@ const TeamEditor = ({ isEmbedded = false }) => {
         // Save (Update/Add) items with their current array order
         for (let i = 0; i < team.length; i++) {
           const member = { ...team[i], order: i }
+          // Don't save Vite local paths to Firestore
+          if (member.image && !isValidUrl(member.image)) delete member.image
           if (member.id && !String(member.id).startsWith('sample-') && !String(member.id).startsWith('temp-')) {
             const { id, ...data } = member
             await updateDocument(COLLECTIONS.TEAM, id, data)

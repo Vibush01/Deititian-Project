@@ -54,8 +54,21 @@ const MediaManager = () => {
             { name: "Health Magazine" },
             { name: "Wellness Daily" }
           ],
-          instagramPosts: posts,
-          heroBanners: banners,
+          instagramPosts: posts.length > 0 ? posts : [
+            { image: ip1, url: '' },
+            { image: ip2, url: '' },
+            { image: ip3, url: '' },
+            { image: ip4, url: '' },
+            { image: ip5, url: '' },
+            { image: ip6, url: '' },
+          ],
+          heroBanners: banners.length > 0 ? banners : [
+            fitjeevaBanner1,
+            fitjeevaBanner2,
+            fitjeevaBanner3,
+            fitjeevaBanner4,
+            fitjeevaBanner5,
+          ],
         })
       } else {
         setMedia({
