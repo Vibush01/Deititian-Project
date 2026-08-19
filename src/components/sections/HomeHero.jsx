@@ -43,6 +43,8 @@ const HomeHero = () => {
         pagination={{ clickable: true }}
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         loop={true}
+        observer={true}
+        observeParents={true}
       >
         {banners.map((banner, index) => (
           <SwiperSlide key={index} className="w-full">

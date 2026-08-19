@@ -94,7 +94,8 @@ export function useLocations() {
  * Returns false for Vite module paths, [object Object], empty strings, etc.
  */
 export function isValidUrl(str) {
-  return typeof str === 'string' && str.startsWith('https://')
+  if (typeof str !== 'string') return false;
+  return str.startsWith('https://') || str.startsWith('http://') || str.includes('cloudinary.com');
 }
 
 /**
