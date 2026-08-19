@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaImage, FaSpinner, FaPlus, FaTrash, FaInstagram, FaNewspaper, FaImages, FaChevronUp, FaChevronDown } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { isValidUrl } from '../../hooks/usePageData'
 
 import fitjeevaBanner1 from '../../assets/images/fitjeeva-banner-1.webp'
 import fitjeevaBanner2 from '../../assets/images/fitjeeva-banner-2.webp'
@@ -28,12 +29,33 @@ const MediaManager = () => {
         return
       }
       const data = await getDocument(COLLECTIONS.MEDIA, 'main')
-      if (data && (data.mediaLogos?.length > 0 || data.instagramPosts?.length > 0)) {
+      if (data) {
+        // Load each field independently, filtering invalid entries
+        const logos = (data.mediaLogos || []).map(logo => typeof logo === 'string' ? { name: logo } : logo)
+        
+        // Only keep heroBanners with valid Cloudinary URLs
+        const banners = (data.heroBanners || [])
+          .map(img => typeof img === 'string' ? img : img?.url)
+          .filter(isValidUrl)
+        
+        // Only keep instagram posts with valid Cloudinary image URLs
+        const posts = (data.instagramPosts || []).filter(post => {
+          const imgUrl = typeof post?.image === 'string' ? post.image : post?.image?.url
+          return isValidUrl(imgUrl)
+        }).map(post => ({
+          ...post,
+          image: typeof post.image === 'string' ? post.image : post.image?.url,
+        }))
+
         setMedia({
-          // Ensure strings are mapped to objects if they were saved as strings
-          mediaLogos: (data.mediaLogos || []).map(logo => typeof logo === 'string' ? { name: logo } : logo),
-          instagramPosts: data.instagramPosts || [],
-          heroBanners: data.heroBanners || [],
+          mediaLogos: logos.length > 0 ? logos : [
+            { name: "The Times of India" },
+            { name: "Hindustan Times" },
+            { name: "Health Magazine" },
+            { name: "Wellness Daily" }
+          ],
+          instagramPosts: posts,
+          heroBanners: banners,
         })
       } else {
         setMedia({
@@ -43,21 +65,8 @@ const MediaManager = () => {
             { name: "Health Magazine" },
             { name: "Wellness Daily" }
           ],
-          instagramPosts: [
-            { image: ip1, url: '' },
-            { image: ip2, url: '' },
-            { image: ip3, url: '' },
-            { image: ip4, url: '' },
-            { image: ip5, url: '' },
-            { image: ip6, url: '' },
-          ],
-          heroBanners: [
-            fitjeevaBanner1,
-            fitjeevaBanner2,
-            fitjeevaBanner3,
-            fitjeevaBanner4,
-            fitjeevaBanner5,
-          ],
+          instagramPosts: [],
+          heroBanners: [],
         })
       }
     } catch (error) {
@@ -76,7 +85,15 @@ const MediaManager = () => {
     setSaveMessage('')
     try {
       if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
-        await setDocument(COLLECTIONS.MEDIA, 'main', media)
+        // Only save valid Cloudinary URLs to Firestore — never save Vite local paths
+        const cleanedMedia = {
+          mediaLogos: media.mediaLogos,
+          heroBanners: media.heroBanners.filter(isValidUrl),
+          instagramPosts: media.instagramPosts
+            .filter(post => isValidUrl(post.image))
+            .map(post => ({ image: post.image, url: post.url || '', link: post.link || '' })),
+        }
+        await setDocument(COLLECTIONS.MEDIA, 'main', cleanedMedia)
       }
       setSaveMessage('Media settings saved successfully!')
       setTimeout(() => setSaveMessage(''), 3000)

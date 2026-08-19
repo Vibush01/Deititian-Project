@@ -28,19 +28,11 @@ const staticBanners = [
 const HomeHero = () => {
   const { heroBanners } = useMediaData();
 
+  // useMediaData now only returns valid Cloudinary URLs
+  // If no valid URLs exist, fall back to static banners
   const banners = heroBanners.length > 0
-    ? heroBanners
-        .map(img => {
-          // Handle both string URLs and object entries { url: "..." }
-          const imageUrl = typeof img === 'string' ? img : img?.url;
-          return imageUrl ? { image: imageUrl, alt: 'FitJeeva Hero Banner' } : null;
-        })
-        .filter(Boolean)
+    ? heroBanners.map(url => ({ image: url, alt: 'FitJeeva Hero Banner' }))
     : staticBanners;
-
-  // Fall back to static banners if all dynamic entries were invalid
-  const displayBanners = banners.length > 0 ? banners : staticBanners;
-
 
   return (
     <section className="w-full relative bg-white">
@@ -52,7 +44,7 @@ const HomeHero = () => {
         autoplay={{ delay: 4000, disableOnInteraction: false }}
         loop={true}
       >
-        {displayBanners.map((banner, index) => (
+        {banners.map((banner, index) => (
           <SwiperSlide key={index} className="w-full">
             <div className="w-full">
               <img

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaCog, FaSpinner, FaImage, FaTrash } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { isValidUrl } from '../../hooks/usePageData'
 import { statsData as defaultStatsData } from '../../data/siteData'
 import logoImg from '../../assets/images/logo.webp'
 import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.webp'
@@ -64,7 +65,7 @@ const SiteSettingsEditor = () => {
             siteInfo: { 
               ...prev.siteInfo, 
               ...data.siteInfo,
-              logoUrl: data.siteInfo?.logoUrl || logoImg
+              logoUrl: isValidUrl(data.siteInfo?.logoUrl) ? data.siteInfo.logoUrl : logoImg
             },
             socialLinks: { ...prev.socialLinks, ...data.socialLinks },
             statsData: Array.isArray(data.statsData) ? data.statsData : defaultStatsData,
@@ -73,8 +74,8 @@ const SiteSettingsEditor = () => {
             ctaHeading: data.ctaHeading || prev.ctaHeading,
             ctaStat: data.ctaStat || prev.ctaStat,
             ctaSubtext: data.ctaSubtext || prev.ctaSubtext,
-            ctaImageBefore: data.ctaImageBefore || prev.ctaImageBefore,
-            ctaImageAfter: data.ctaImageAfter || prev.ctaImageAfter,
+            ctaImageBefore: isValidUrl(data.ctaImageBefore) ? data.ctaImageBefore : prev.ctaImageBefore,
+            ctaImageAfter: isValidUrl(data.ctaImageAfter) ? data.ctaImageAfter : prev.ctaImageAfter,
             contactCtaTitle: data.contactCtaTitle || prev.contactCtaTitle,
             contactCtaSubtitle: data.contactCtaSubtitle || prev.contactCtaSubtitle,
             seoMetadata: { ...prev.seoMetadata, ...(data.seoMetadata || {}) },

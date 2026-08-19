@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FaBars, FaTimes, FaChevronDown, FaHeartbeat, FaStethoscope, FaPills, FaWeight, FaRunning, FaCalendarWeek, FaFireAlt } from 'react-icons/fa'
 import useNavigation from '../../hooks/useNavigation'
 import useSiteSettings from '../../hooks/useSiteSettings'
+import { isValidUrl } from '../../hooks/usePageData'
 import Button from '../ui/Button'
 import logoImg from '../../assets/images/logo.webp'
 
@@ -50,7 +51,7 @@ const Navbar = () => {
         {/* Left Column (Logo) */}
         <div className="flex-shrink-0">
           <Link to="/" className="flex items-center">
-            <img src={settings.siteInfo?.logoUrl || logoImg} alt="FitJeeva Logo" className="h-10 md:h-14 w-auto object-contain" />
+            <img src={isValidUrl(settings.siteInfo?.logoUrl) ? settings.siteInfo.logoUrl : logoImg} alt="FitJeeva Logo" className="h-10 md:h-14 w-auto object-contain" />
           </Link>
         </div>
 

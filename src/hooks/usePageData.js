@@ -90,14 +90,41 @@ export function useLocations() {
 }
 
 /**
+ * Check if a string is a valid remote URL (Cloudinary, etc.)
+ * Returns false for Vite module paths, [object Object], empty strings, etc.
+ */
+export function isValidUrl(str) {
+  return typeof str === 'string' && str.startsWith('https://')
+}
+
+/**
  * Hook to get media data from Firestore with static fallback.
+ * Filters out invalid entries (Vite local paths, corrupted data) to prevent
+ * broken images when switching between local dev and production.
  */
 export function useMediaData() {
   const { data, loading } = useFirestoreDoc(COLLECTIONS.MEDIA, 'main')
+
+  // Filter heroBanners: only keep valid Cloudinary URLs
+  const rawBanners = data?.heroBanners || []
+  const validBanners = rawBanners
+    .map(img => typeof img === 'string' ? img : img?.url)
+    .filter(isValidUrl)
+
+  // Filter instagramPosts: only keep entries with valid image URLs
+  const rawPosts = data?.instagramPosts || []
+  const validPosts = rawPosts.filter(post => {
+    const imgUrl = typeof post?.image === 'string' ? post.image : post?.image?.url
+    return isValidUrl(imgUrl)
+  }).map(post => ({
+    ...post,
+    image: typeof post.image === 'string' ? post.image : post.image?.url,
+  }))
+
   return {
     mediaLogos: data?.mediaLogos || [],
-    instagramPosts: data?.instagramPosts || [],
-    heroBanners: data?.heroBanners || [],
+    instagramPosts: validPosts,
+    heroBanners: validBanners,
     loading,
   }
 }

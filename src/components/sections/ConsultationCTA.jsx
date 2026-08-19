@@ -1,5 +1,6 @@
 import Button from '../ui/Button'
 import useSiteSettings from '../../hooks/useSiteSettings'
+import { isValidUrl } from '../../hooks/usePageData'
 import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.webp'
 import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.webp'
 
@@ -9,8 +10,8 @@ const ConsultationCTA = ({ className = '' }) => {
   const ctaHeading = settings.ctaHeading || "Book a Diet Consultation for Life-Changing Results"
   const ctaStat = settings.ctaStat || "35,000+"
   const ctaSubtext = settings.ctaSubtext || "people have transformed their weight loss journeys with FitJeeva."
-  const ctaImageBefore = settings.ctaImageBefore || fitjeevaDietitian
-  const ctaImageAfter = settings.ctaImageAfter || fitjeevaClinical
+  const ctaImageBefore = isValidUrl(settings.ctaImageBefore) ? settings.ctaImageBefore : fitjeevaDietitian
+  const ctaImageAfter = isValidUrl(settings.ctaImageAfter) ? settings.ctaImageAfter : fitjeevaClinical
   
   return (
     <section className={`py-12 md:py-20 px-4 md:px-8 ${className}`}>
