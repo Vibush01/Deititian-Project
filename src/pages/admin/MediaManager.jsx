@@ -17,11 +17,20 @@ import ip4 from '../../assets/images/IP4.webp'
 import ip5 from '../../assets/images/IP5.webp'
 import ip6 from '../../assets/images/IP6.webp'
 
+// Static fallback previews — shown in admin ONLY as read-only previews when no Cloudinary URLs exist
+const STATIC_BANNERS = [fitjeevaBanner1, fitjeevaBanner2, fitjeevaBanner3, fitjeevaBanner4, fitjeevaBanner5]
+const STATIC_POSTS = [
+  { image: ip1, url: '' }, { image: ip2, url: '' }, { image: ip3, url: '' },
+  { image: ip4, url: '' }, { image: ip5, url: '' }, { image: ip6, url: '' },
+]
+
 const MediaManager = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
+  // State only holds Cloudinary URLs — NEVER local Vite import paths
   const [media, setMedia] = useState({ mediaLogos: [], instagramPosts: [], heroBanners: [] })
+
   const fetchMedia = async () => {
     try {
       if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) {
@@ -30,15 +39,13 @@ const MediaManager = () => {
       }
       const data = await getDocument(COLLECTIONS.MEDIA, 'main')
       if (data) {
-        // Load each field independently, filtering invalid entries
         const logos = (data.mediaLogos || []).map(logo => typeof logo === 'string' ? { name: logo } : logo)
-        
-        // Only keep heroBanners with valid Cloudinary URLs
+
+        // Only keep valid Cloudinary URLs — no fallback injection
         const banners = (data.heroBanners || [])
           .map(img => typeof img === 'string' ? img : img?.url)
           .filter(isValidUrl)
-        
-        // Only keep instagram posts with valid Cloudinary image URLs
+
         const posts = (data.instagramPosts || []).filter(post => {
           const imgUrl = typeof post?.image === 'string' ? post.image : post?.image?.url
           return isValidUrl(imgUrl)
@@ -54,21 +61,8 @@ const MediaManager = () => {
             { name: "Health Magazine" },
             { name: "Wellness Daily" }
           ],
-          instagramPosts: posts.length > 0 ? posts : [
-            { image: ip1, url: '' },
-            { image: ip2, url: '' },
-            { image: ip3, url: '' },
-            { image: ip4, url: '' },
-            { image: ip5, url: '' },
-            { image: ip6, url: '' },
-          ],
-          heroBanners: banners.length > 0 ? banners : [
-            fitjeevaBanner1,
-            fitjeevaBanner2,
-            fitjeevaBanner3,
-            fitjeevaBanner4,
-            fitjeevaBanner5,
-          ],
+          instagramPosts: posts.length > 0 ? posts : [...STATIC_POSTS],
+          heroBanners: banners,
         })
       } else {
         setMedia({
@@ -78,7 +72,7 @@ const MediaManager = () => {
             { name: "Health Magazine" },
             { name: "Wellness Daily" }
           ],
-          instagramPosts: [],
+          instagramPosts: [...STATIC_POSTS],
           heroBanners: [],
         })
       }
@@ -93,20 +87,32 @@ const MediaManager = () => {
     fetchMedia()
   }, [])
 
+  // Section-specific save — only writes the changed field to Firestore (merge: true prevents overwriting other fields)
+  const saveBanners = async (banners) => {
+    if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) return
+    await setDocument(COLLECTIONS.MEDIA, 'main', { heroBanners: banners })
+  }
+  const savePosts = async (posts) => {
+    if (!import.meta.env.VITE_FIREBASE_PROJECT_ID) return
+    // Only save posts with valid Cloudinary URLs — never save Vite local paths
+    const validPosts = posts.filter(p => isValidUrl(p.image))
+    await setDocument(COLLECTIONS.MEDIA, 'main', {
+      instagramPosts: validPosts.map(p => ({ image: p.image, url: p.url || '', link: p.link || '' }))
+    })
+  }
+
   const handleSaveAll = async () => {
     setSaving(true)
     setSaveMessage('')
     try {
       if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
-        // Only save valid Cloudinary URLs to Firestore — never save Vite local paths
-        const cleanedMedia = {
+        await setDocument(COLLECTIONS.MEDIA, 'main', {
           mediaLogos: media.mediaLogos,
-          heroBanners: media.heroBanners.filter(isValidUrl),
+          heroBanners: media.heroBanners,
           instagramPosts: media.instagramPosts
-            .filter(post => isValidUrl(post.image))
-            .map(post => ({ image: post.image, url: post.url || '', link: post.link || '' })),
-        }
-        await setDocument(COLLECTIONS.MEDIA, 'main', cleanedMedia)
+            .filter(p => isValidUrl(p.image))
+            .map(p => ({ image: p.image, url: p.url || '', link: p.link || '' })),
+        })
       }
       setSaveMessage('Media settings saved successfully!')
       setTimeout(() => setSaveMessage(''), 3000)
@@ -136,36 +142,38 @@ const MediaManager = () => {
     newPosts[index] = { ...newPosts[index], [field]: val }
     setMedia({ ...media, instagramPosts: newPosts })
   }
-  const removePost = (index) => {
-    setMedia(prev => ({ ...prev, instagramPosts: prev.instagramPosts.filter((_, i) => i !== index) }))
+  const removePost = async (index) => {
+    const newPosts = media.instagramPosts.filter((_, i) => i !== index)
+    setMedia({ ...media, instagramPosts: newPosts })
+    try { await savePosts(newPosts) } catch (e) { console.error('Auto-save failed:', e) }
   }
-  const movePost = (index, direction) => {
-    setMedia(prev => {
-      const newPosts = [...prev.instagramPosts]
-      if (direction === 'up' && index > 0) {
-        [newPosts[index - 1], newPosts[index]] = [newPosts[index], newPosts[index - 1]]
-      } else if (direction === 'down' && index < newPosts.length - 1) {
-        [newPosts[index + 1], newPosts[index]] = [newPosts[index], newPosts[index + 1]]
-      }
-      return { ...prev, instagramPosts: newPosts }
-    })
+  const movePost = async (index, direction) => {
+    const newPosts = [...media.instagramPosts]
+    if (direction === 'up' && index > 0) {
+      [newPosts[index - 1], newPosts[index]] = [newPosts[index], newPosts[index - 1]]
+    } else if (direction === 'down' && index < newPosts.length - 1) {
+      [newPosts[index + 1], newPosts[index]] = [newPosts[index], newPosts[index + 1]]
+    }
+    setMedia({ ...media, instagramPosts: newPosts })
+    try { await savePosts(newPosts) } catch (e) { console.error('Auto-save failed:', e) }
   }
 
   // --- Handlers for Hero Banners ---
   const [uploadingBanner, setUploadingBanner] = useState(false)
-  const removeBanner = (index) => {
-    setMedia(prev => ({ ...prev, heroBanners: prev.heroBanners.filter((_, i) => i !== index) }))
+  const removeBanner = async (index) => {
+    const newBanners = media.heroBanners.filter((_, i) => i !== index)
+    setMedia({ ...media, heroBanners: newBanners })
+    try { await saveBanners(newBanners) } catch (e) { console.error('Auto-save failed:', e) }
   }
-  const moveBanner = (index, direction) => {
-    setMedia(prev => {
-      const newBanners = [...prev.heroBanners]
-      if (direction === 'up' && index > 0) {
-        [newBanners[index - 1], newBanners[index]] = [newBanners[index], newBanners[index - 1]]
-      } else if (direction === 'down' && index < newBanners.length - 1) {
-        [newBanners[index + 1], newBanners[index]] = [newBanners[index], newBanners[index + 1]]
-      }
-      return { ...prev, heroBanners: newBanners }
-    })
+  const moveBanner = async (index, direction) => {
+    const newBanners = [...media.heroBanners]
+    if (direction === 'up' && index > 0) {
+      [newBanners[index - 1], newBanners[index]] = [newBanners[index], newBanners[index - 1]]
+    } else if (direction === 'down' && index < newBanners.length - 1) {
+      [newBanners[index + 1], newBanners[index]] = [newBanners[index], newBanners[index + 1]]
+    }
+    setMedia({ ...media, heroBanners: newBanners })
+    try { await saveBanners(newBanners) } catch (e) { console.error('Auto-save failed:', e) }
   }
 
   const inputClasses = 'w-full px-4 py-2.5 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2E7D32]/50 focus:border-[#2E7D32] transition-colors text-sm'
@@ -266,24 +274,33 @@ const MediaManager = () => {
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {media.heroBanners.map((img, index) => (
-            <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video bg-gray-50">
-              <img src={typeof img === 'string' ? img : img?.url} alt={`Banner ${index + 1}`} className="w-full h-full object-cover" />
-              <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
-                <button onClick={() => moveBanner(index, 'up')} disabled={index === 0} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-md disabled:opacity-50"><FaChevronUp className="text-xs" /></button>
-                <button onClick={() => moveBanner(index, 'down')} disabled={index === media.heroBanners.length - 1} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-md disabled:opacity-50"><FaChevronDown className="text-xs" /></button>
-                <button 
-                  onClick={() => removeBanner(index)}
-                  className="w-8 h-8 flex items-center justify-center text-red-500 bg-white shadow-sm hover:bg-red-50 rounded-md transition-colors"
-                >
-                  <FaTrash className="text-xs" />
-                </button>
+          {media.heroBanners.length > 0 ? (
+            media.heroBanners.map((img, index) => (
+              <div key={index} className="relative group rounded-xl overflow-hidden border border-gray-200 aspect-video bg-gray-50">
+                <img src={typeof img === 'string' ? img : img?.url} alt={`Banner ${index + 1}`} className="w-full h-full object-cover" />
+                <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                  <button onClick={() => moveBanner(index, 'up')} disabled={index === 0} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-md disabled:opacity-50"><FaChevronUp className="text-xs" /></button>
+                  <button onClick={() => moveBanner(index, 'down')} disabled={index === media.heroBanners.length - 1} className="w-8 h-8 flex items-center justify-center text-gray-500 bg-white shadow-sm hover:bg-gray-50 rounded-md disabled:opacity-50"><FaChevronDown className="text-xs" /></button>
+                  <button 
+                    onClick={() => removeBanner(index)}
+                    className="w-8 h-8 flex items-center justify-center text-red-500 bg-white shadow-sm hover:bg-red-50 rounded-md transition-colors"
+                  >
+                    <FaTrash className="text-xs" />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            STATIC_BANNERS.map((img, index) => (
+              <div key={`default-${index}`} className="relative rounded-xl overflow-hidden border border-dashed border-gray-300 aspect-video bg-gray-50 opacity-60">
+                <img src={img} alt={`Default Banner ${index + 1}`} className="w-full h-full object-cover" />
+                <span className="absolute top-2 left-2 bg-gray-800/70 text-white text-[10px] px-2 py-0.5 rounded font-bold">DEFAULT</span>
+              </div>
+            ))
+          )}
         </div>
         {media.heroBanners.length === 0 && (
-          <p className="text-sm text-gray-500 italic text-center py-4 border-t border-gray-100 mt-2">No hero banners added. Static default images will be used.</p>
+          <p className="text-sm text-gray-500 italic text-center py-4 border-t border-gray-100 mt-2">No custom banners uploaded. These default images are shown on the homepage. Upload custom banners to replace them.</p>
         )}
 
         {/* Upload Banner Modal */}
@@ -291,12 +308,21 @@ const MediaManager = () => {
           <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
             <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
               <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Hero Banner</h3>
-              <ImageUploader onUpload={(result) => {
+              <ImageUploader onUpload={async (result) => {
                 const imageUrl = typeof result === 'string' ? result : result.url
-                if (imageUrl) {
-                  setMedia(prev => ({ ...prev, heroBanners: [...prev.heroBanners, imageUrl] }))
+                if (imageUrl && isValidUrl(imageUrl)) {
+                  const newBanners = [...media.heroBanners, imageUrl]
+                  setMedia({ ...media, heroBanners: newBanners })
+                  setUploadingBanner(false)
+                  try {
+                    await saveBanners(newBanners)
+                    setSaveMessage('Banner uploaded & saved!')
+                    setTimeout(() => setSaveMessage(''), 3000)
+                  } catch (err) {
+                    console.error('Auto-save failed:', err)
+                    setSaveMessage('Banner added locally. Click "Save All" to persist.')
+                  }
                 }
-                setUploadingBanner(false)
               }} />
               <button 
                 onClick={() => setUploadingBanner(false)}
@@ -360,7 +386,7 @@ const MediaManager = () => {
               <div className="mt-auto">
                 <input 
                   type="url" 
-                  value={post.link} 
+                  value={post.link || ''} 
                   onChange={e => updatePost(index, 'link', e.target.value)} 
                   className={inputClasses} 
                   placeholder="Instagram Post URL..." 
@@ -368,12 +394,10 @@ const MediaManager = () => {
               </div>
             </div>
           ))}
-          {media.instagramPosts.length === 0 && (
-            <div className="col-span-full py-8 text-center text-sm text-gray-500 italic">
-              No Instagram posts curated yet. Add at least 6 for a full grid.
-            </div>
-          )}
         </div>
+        {media.instagramPosts.length === 0 && (
+          <p className="text-sm text-gray-500 italic text-center py-4 border-t border-gray-100 mt-2">No custom Instagram posts added yet. Default images will be shown on the homepage. Click "+ Add Post" to upload custom images.</p>
+        )}
       </div>
 
     </div>
