@@ -1,6 +1,9 @@
 import useFirestoreDoc from './useFirestoreDoc'
 import useFirestoreCollection from './useFirestoreCollection'
 import { COLLECTIONS } from '../firebase/collections'
+import { isValidUrl } from '../utils/imageUtils'
+
+export { isValidUrl } from '../utils/imageUtils'
 
 // Import static fallback data
 import { aboutIntro, philosophySections, coreServices } from '../data/aboutData'
@@ -89,13 +92,6 @@ export function useLocations() {
   }
 }
 
-/**
- * Check if a string is a valid remote URL (Cloudinary, etc.)
- * Returns false for Vite module paths, [object Object], empty strings, etc.
- */
-export function isValidUrl(str) {
-  return typeof str === 'string' && str.startsWith('https://')
-}
 
 /**
  * Hook to get media data from Firestore with static fallback.
