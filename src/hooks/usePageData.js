@@ -45,10 +45,13 @@ export function useCareersData() {
  */
 export function useTeamMembers() {
   const { data, loading } = useFirestoreCollection(COLLECTIONS.TEAM, 'order')
-  return { 
-    members: data.length > 0 ? data : defaultTeamMembers, 
-    loading 
-  }
+  const members = data.length > 0
+    ? data.map((m, i) => ({
+        ...m,
+        image: isValidUrl(m.image) ? m.image : (defaultTeamMembers[i]?.image || m.image)
+      }))
+    : defaultTeamMembers
+  return { members, loading }
 }
 
 /**
@@ -56,10 +59,13 @@ export function useTeamMembers() {
  */
 export function useExperts() {
   const { data, loading } = useFirestoreCollection(COLLECTIONS.EXPERTS, 'order')
-  return { 
-    experts: data.length > 0 ? data : defaultExperts, 
-    loading 
-  }
+  const experts = data.length > 0
+    ? data.map((e, i) => ({
+        ...e,
+        image: isValidUrl(e.image) ? e.image : (defaultExperts[i]?.image || e.image)
+      }))
+    : defaultExperts
+  return { experts, loading }
 }
 
 /**
@@ -75,10 +81,13 @@ export function useSuccessStories() {
  */
 export function useRecipes() {
   const { data, loading } = useFirestoreCollection(COLLECTIONS.RECIPES, 'order')
-  return { 
-    recipes: data.length > 0 ? data : defaultRecipes, 
-    loading 
-  }
+  const recipes = data.length > 0
+    ? data.map((r, i) => ({
+        ...r,
+        image: isValidUrl(r.image) ? r.image : (defaultRecipes[i]?.image || r.image)
+      }))
+    : defaultRecipes
+  return { recipes, loading }
 }
 
 /**

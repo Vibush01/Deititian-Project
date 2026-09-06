@@ -1,6 +1,7 @@
 import SectionHeading from '../components/ui/SectionHeading'
 import ConsultationCTA from '../components/sections/ConsultationCTA'
 import { useSuccessStories } from '../hooks/usePageData'
+import { isValidUrl } from '../utils/imageUtils'
 import useDocumentMeta from '../hooks/useDocumentMeta'
 import ss1 from '../assets/images/SS1.webp'
 import ss2 from '../assets/images/SS2.webp'
@@ -136,7 +137,12 @@ export const defaultStories = [
 
 const SuccessStoriesPage = () => {
   const { stories: firestoreStories } = useSuccessStories()
-  const stories = firestoreStories.length > 0 ? firestoreStories : defaultStories
+  const stories = firestoreStories.length > 0
+    ? firestoreStories.map((story, i) => ({
+        ...story,
+        image: isValidUrl(story.image) ? story.image : (defaultStories[i]?.image || story.image)
+      }))
+    : defaultStories
   useDocumentMeta({
     title: 'Success Stories – Real Weight Loss & Health Transformations',
     description: 'Read real success stories from FitJeeva clients. Inspiring weight loss, diabetes reversal, and PCOS management transformations through personalized clinical nutrition.',
