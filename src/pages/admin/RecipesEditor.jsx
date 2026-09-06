@@ -27,7 +27,10 @@ const RecipesEditor = () => {
       }
       const data = await getCollection(COLLECTIONS.RECIPES, 'order')
       if (data && data.length > 0) {
-        setRecipes(data)
+        setRecipes(data.map((r, i) => ({
+          ...r,
+          image: isValidUrl(r.image) ? r.image : (defaultRecipes[i]?.image || r.image)
+        })))
       } else {
         setRecipes(defaultRecipes.map(r => ({ ...r, id: String(r.id) })))
       }

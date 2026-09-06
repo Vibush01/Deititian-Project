@@ -31,7 +31,10 @@ const ExpertsEditor = ({ isEmbedded = false }) => {
       }
       const data = await getCollection(COLLECTIONS.EXPERTS, 'order')
       if (data && data.length > 0) {
-        setExperts(data)
+        setExperts(data.map((e, i) => ({
+          ...e,
+          image: isValidUrl(e.image) ? e.image : (defaultExperts[i]?.image || e.image)
+        })))
       } else {
         setExperts(defaultExperts.map(exp => ({ ...exp, id: `sample-${exp.id}`, specializations: [] })))
       }

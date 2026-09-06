@@ -28,7 +28,10 @@ const TeamEditor = ({ isEmbedded = false }) => {
       }
       const data = await getCollection(COLLECTIONS.TEAM, 'order')
       if (data && data.length > 0) {
-        setTeam(data)
+        setTeam(data.map((m, i) => ({
+          ...m,
+          image: isValidUrl(m.image) ? m.image : (defaultTeamMembers[i]?.image || m.image)
+        })))
       } else {
         // Fallback team member
         setTeam(defaultTeamMembers.map(member => ({ ...member, id: `sample-${member.id}` })))

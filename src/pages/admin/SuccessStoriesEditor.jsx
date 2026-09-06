@@ -26,7 +26,11 @@ const SuccessStoriesEditor = () => {
       }
       const data = await getCollection(COLLECTIONS.SUCCESS_STORIES, 'order')
       if (data && data.length > 0) {
-        setStories(data)
+        const { defaultStories } = await import('../../pages/SuccessStoriesPage')
+        setStories(data.map((s, i) => ({
+          ...s,
+          image: isValidUrl(s.image) ? s.image : (defaultStories[i]?.image || s.image)
+        })))
       } else {
         const { defaultStories } = await import('../../pages/SuccessStoriesPage')
         setStories(defaultStories)
