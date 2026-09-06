@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaImage, FaSpinner, FaPlus, FaTrash, FaInstagram, FaNewspaper, FaImages, FaChevronUp, FaChevronDown } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
-import { isValidUrl } from '../../utils/imageUtils'
+import { isValidUrl, extractImageUrl } from '../../utils/imageUtils'
 
 import fitjeevaBanner1 from '../../assets/images/fitjeeva-banner-1.webp'
 import fitjeevaBanner2 from '../../assets/images/fitjeeva-banner-2.webp'
@@ -309,7 +309,7 @@ const MediaManager = () => {
             <div className="bg-white rounded-2xl w-full max-w-md p-6 relative max-h-[90vh] overflow-y-auto">
               <h3 className="text-lg font-bold text-gray-900 mb-4">Upload Hero Banner</h3>
               <ImageUploader onUpload={async (result) => {
-                const imageUrl = typeof result === 'string' ? result : result.url
+                const imageUrl = extractImageUrl(result)
                 if (imageUrl && isValidUrl(imageUrl)) {
                   const newBanners = [...media.heroBanners, imageUrl]
                   setMedia({ ...media, heroBanners: newBanners })
@@ -371,13 +371,13 @@ const MediaManager = () => {
                   <img src={post.image} alt="Instagram post" className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center p-4">
-                    <ImageUploader onUpload={(result) => updatePost(index, 'image', typeof result === 'string' ? result : result.url)} />
+                    <ImageUploader onUpload={(result) => updatePost(index, 'image', extractImageUrl(result))} />
                   </div>
                 )}
                 {post.image && (
                   <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <div className="bg-white p-2 rounded-lg scale-75">
-                      <ImageUploader onUpload={(result) => updatePost(index, 'image', typeof result === 'string' ? result : result.url)} />
+                      <ImageUploader onUpload={(result) => updatePost(index, 'image', extractImageUrl(result))} />
                     </div>
                   </div>
                 )}

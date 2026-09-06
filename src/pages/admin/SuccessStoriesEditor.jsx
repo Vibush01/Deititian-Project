@@ -53,8 +53,7 @@ const SuccessStoriesEditor = () => {
         }
         
         for (let i = 0; i < stories.length; i++) {
-          const story = { ...stories[i], order: i }
-          if (story.image && !isValidUrl(story.image)) delete story.image
+          const story = sanitizeImageFields({ ...stories[i], order: i })
           // If id is a string and looks like a firebase ID (not numeric and not starting with sample)
           if (story.id && typeof story.id === 'string' && !story.id.startsWith('sample-') && !story.id.startsWith('temp-') && isNaN(Number(story.id))) {
             const { id, ...data } = story

@@ -158,7 +158,14 @@ const SiteSettingsEditor = () => {
 
     try {
       if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
-        await setDocument(COLLECTIONS.SITE_SETTINGS, 'main', settings)
+        const cleanSettings = { ...settings }
+        if (cleanSettings.siteInfo?.logoUrl && !isValidUrl(cleanSettings.siteInfo.logoUrl)) {
+          cleanSettings.siteInfo = { ...cleanSettings.siteInfo }
+          delete cleanSettings.siteInfo.logoUrl
+        }
+        if (cleanSettings.ctaImageBefore && !isValidUrl(cleanSettings.ctaImageBefore)) delete cleanSettings.ctaImageBefore
+        if (cleanSettings.ctaImageAfter && !isValidUrl(cleanSettings.ctaImageAfter)) delete cleanSettings.ctaImageAfter
+        await setDocument(COLLECTIONS.SITE_SETTINGS, 'main', cleanSettings)
       }
       setSaveMessage('Settings saved successfully!')
       setTimeout(() => setSaveMessage(''), 3000)

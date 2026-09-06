@@ -53,8 +53,7 @@ const RecipesEditor = () => {
         }
         
         for (let i = 0; i < recipes.length; i++) {
-          const recipe = { ...recipes[i], order: i }
-          if (recipe.image && !isValidUrl(recipe.image)) delete recipe.image
+          const recipe = sanitizeImageFields({ ...recipes[i], order: i })
           if (recipe.id) {
             const { id, ...data } = recipe
             await updateDocument(COLLECTIONS.RECIPES, id, data)
