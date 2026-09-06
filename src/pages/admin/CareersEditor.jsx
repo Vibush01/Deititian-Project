@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaBriefcase, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { isValidUrl } from '../../utils/imageUtils'
 
 const CareersEditor = () => {
   const [loading, setLoading] = useState(true)
@@ -60,7 +61,12 @@ const CareersEditor = () => {
     setSaveMessage('')
     try {
       if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
-        await setDocument(COLLECTIONS.CAREERS, 'main', data)
+        const cleanData = {
+          ...data,
+          teamImages: (data.teamImages || []).filter(img => isValidUrl(img)),
+          awardImages: (data.awardImages || []).filter(img => isValidUrl(img)),
+        }
+        await setDocument(COLLECTIONS.CAREERS, 'main', cleanData)
       }
       setSaveMessage('Careers page content saved successfully!')
       setTimeout(() => setSaveMessage(''), 3000)

@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FaBars, FaTimes, FaChevronDown, FaHeartbeat, FaStethoscope, FaPills, FaWeight, FaRunning, FaCalendarWeek, FaFireAlt } from 'react-icons/fa'
 import useNavigation from '../../hooks/useNavigation'
 import useSiteSettings from '../../hooks/useSiteSettings'
-import { isValidUrl } from '../../hooks/usePageData'
+import { isValidUrl } from '../../utils/imageUtils'
 import Button from '../ui/Button'
 import logoImg from '../../assets/images/logo.webp'
 

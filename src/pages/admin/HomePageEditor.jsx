@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaHome, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage } from 'react-icons/fa'
 import { getDocument, setDocument, getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { sanitizeImageFields } from '../../utils/imageUtils'
 import { Link } from 'react-router-dom'
 
 const defaultQuickLinks = [
@@ -76,7 +77,7 @@ const HomePageEditor = () => {
         
         // Then add or update existing cards, also updating their 'order' based on array index
         for (let i = 0; i < expertiseCards.length; i++) {
-          const card = { ...expertiseCards[i], order: i }
+          const card = sanitizeImageFields({ ...expertiseCards[i], order: i })
           if (card.id) {
             const { id, ...cardData } = card
             await updateDocument(COLLECTIONS.HOME_EXPERTISE_CARDS, id, cardData)

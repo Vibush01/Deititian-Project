@@ -1,6 +1,6 @@
 import Button from '../ui/Button'
 import useSiteSettings from '../../hooks/useSiteSettings'
-import { isValidUrl } from '../../hooks/usePageData'
+import { isValidUrl } from '../../utils/imageUtils'
 import fitjeevaDietitian from '../../assets/images/fitjeeva-dietitian.webp'
 import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.webp'
 

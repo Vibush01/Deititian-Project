@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { FaSave, FaConciergeBell, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage, FaHeart, FaDumbbell, FaHeartbeat, FaEdit, FaChevronUp, FaChevronDown } from 'react-icons/fa'
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { sanitizeImageFields, sanitizeImageArray } from '../../utils/imageUtils'
 
 const AVAILABLE_ICONS = [
   { id: 'heart', component: <FaHeart /> },
@@ -78,9 +79,9 @@ const ServicesEditor = () => {
         }
         
         for (let i = 0; i < categories.length; i++) {
-          const category = { ...categories[i], order: i }
-          // If editing ID directly, we shouldn't overwrite the document ID, but the 'id' field is used for paths.
-          // In Firebase, doc.id is usually auto-generated if we use addDoc, but we can store custom slug in 'id' field.
+          const category = sanitizeImageFields({ ...categories[i], order: i })
+          if (category.features) category.features = sanitizeImageArray(category.features)
+          if (category.services) category.services = sanitizeImageArray(category.services)
           if (category._docId) {
             const { _docId, ...dataToSave } = category
             await updateDocument(COLLECTIONS.SERVICES, _docId, dataToSave)

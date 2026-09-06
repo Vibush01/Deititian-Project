@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaFileAlt, FaSpinner, FaPlus, FaTrash, FaGripVertical, FaImage } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { sanitizeDataForSave } from '../../utils/imageUtils'
 import fitjeevaClinical from '../../assets/images/fitjeeva-clinical.webp'
 import fitjeevaMillet from '../../assets/images/fitjeeva-millet.webp'
 import fitjeevaHomevisit from '../../assets/images/fitjeeva-homevisit.webp'
@@ -82,7 +83,11 @@ const AboutPageEditor = () => {
     setSaveMessage('')
     try {
       if (import.meta.env.VITE_FIREBASE_PROJECT_ID) {
-        await setDocument(COLLECTIONS.PAGES, 'about', data)
+        const cleanData = sanitizeDataForSave(data, {
+          philosophySections: ['image'],
+          coreServices: ['image'],
+        })
+        await setDocument(COLLECTIONS.PAGES, 'about', cleanData)
       }
       setSaveMessage('About page content saved successfully!')
       setTimeout(() => setSaveMessage(''), 3000)

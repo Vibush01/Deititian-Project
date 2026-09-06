@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaFileMedical, FaSpinner, FaPlus, FaTrash, FaImage, FaListUl } from 'react-icons/fa'
 import { getCollection, setDocument, removeDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
+import { sanitizeImageFields, sanitizeImageArray } from '../../utils/imageUtils'
 
 const ServiceSubPageEditor = () => {
   const [loading, setLoading] = useState(true)
@@ -59,7 +60,9 @@ const ServiceSubPageEditor = () => {
         
         // Save existing/new pages
         for (const page of subPages) {
-          const { _originalId, ...dataToSave } = page
+          const cleaned = sanitizeImageFields({ ...page })
+          if (cleaned.benefits) cleaned.benefits = sanitizeImageArray(cleaned.benefits)
+          const { _originalId, ...dataToSave } = cleaned
           
           // We use page.id as the document ID in firestore so URLs like /service/pcod-pcos can easily lookup by ID
           if (!page.id) continue // skip if no slug provided

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { FaSave, FaImage, FaSpinner, FaPlus, FaTrash, FaInstagram, FaNewspaper, FaImages, FaChevronUp, FaChevronDown } from 'react-icons/fa'
 import { getDocument, setDocument, COLLECTIONS } from '../../firebase/collections'
 import ImageUploader from '../../components/admin/ImageUploader'
-import { isValidUrl } from '../../hooks/usePageData'
+import { isValidUrl } from '../../utils/imageUtils'
 
 import fitjeevaBanner1 from '../../assets/images/fitjeeva-banner-1.webp'
 import fitjeevaBanner2 from '../../assets/images/fitjeeva-banner-2.webp'

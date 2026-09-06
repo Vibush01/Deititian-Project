@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { FaFacebookF, FaYoutube, FaInstagram } from 'react-icons/fa'
 import useSiteSettings from '../../hooks/useSiteSettings'
-import { isValidUrl } from '../../hooks/usePageData'
+import { isValidUrl } from '../../utils/imageUtils'
 import useNavigation from '../../hooks/useNavigation'
 import logoImg from '../../assets/images/logo.webp'
 

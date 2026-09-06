@@ -3,7 +3,7 @@ import { FaSave, FaUserMd, FaSpinner, FaPlus, FaTrash, FaEdit, FaImage } from 'r
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'
-import { isValidUrl } from '../../hooks/usePageData'
+import { isValidUrl, sanitizeImageFields } from '../../utils/imageUtils'
 import { defaultExperts } from '../../data/peopleData'
 
 const ExpertsEditor = ({ isEmbedded = false }) => {

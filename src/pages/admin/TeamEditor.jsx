@@ -3,7 +3,7 @@ import { FaSave, FaUsers, FaSpinner, FaPlus, FaTrash, FaEdit, FaGripVertical, Fa
 import { getCollection, addDocument, removeDocument, updateDocument, COLLECTIONS } from '../../firebase/collections'
 import ItemModal from '../../components/admin/ItemModal'
 import ImageUploader from '../../components/admin/ImageUploader'
-import { isValidUrl } from '../../hooks/usePageData'
+import { isValidUrl, sanitizeImageFields } from '../../utils/imageUtils'
 import { defaultTeamMembers } from '../../data/peopleData'
 
 const TeamEditor = ({ isEmbedded = false }) => {
